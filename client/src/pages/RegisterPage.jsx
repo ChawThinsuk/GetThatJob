@@ -23,7 +23,7 @@ function RegisterPage() {
 
   return (
     <ChakraProvider>
-      <UserReg1 />
+      {/* <UserReg1 /> */}
       <UserReg2 />
       <UserReg3 />
     </ChakraProvider>

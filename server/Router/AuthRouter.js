@@ -5,7 +5,7 @@ import { pool } from '../utils/db.js';
 import dotenv from 'dotenv';
 dotenv.config();
 const authRouter = Router();
-
+// test
 authRouter.post('/login', async (req, res) => {
   const { userType, email, password } = req.body;
   const recordName = userType === 'professional' ? 'users' : 'recruiter';

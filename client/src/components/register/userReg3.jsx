@@ -1,22 +1,31 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
 import React from "react";
 import {
+  ChakraProvider,
   Box,
   Button,
   FormControl,
   FormLabel,
   Input,
   Stack,
+  Textarea,
 } from "@chakra-ui/react";
 import { useGlobalContext } from "../../utils/context.jsx";
-import pointingGirl from "../../images/discussing.svg";
+import pointingGirl from "../../assets/register-images/woman-pointing.svg";
 import UploadDiv from "./UploadDiv.jsx";
+
+const customTextStyle = {
+  fontFamily: "Inter",
+  fontSize: "10px",
+  fontStyle: "normal",
+  fontWeight: 400,
+  lineHeight: "normal",
+  letterSpacing: "1.5px",
+  textTransform: "uppercase",
+};
 
 function UserReg3() {
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
   };
 
   return (
@@ -53,7 +62,7 @@ function UserReg3() {
               <div className="mr-4 w-[32px] h-[32px] bg-[#373737] rounded-full text-white text-center font-semibold flex items-center justify-center">
                 2
               </div>
-              <div className="mr-4 text-[16px] ]">
+              <div className="mr-4 text-[16px]">
                 <p className="text-[10px]">PENDING</p>
                 <p>Personal</p>
                 <p>Information</p>
@@ -84,35 +93,43 @@ function UserReg3() {
                     You can complete this information later but we reccomend you
                     to do it now
                   </span>
-                  <FormControl id="email" isRequired>
-                    <FormLabel>TITLE</FormLabel>
+                  <FormControl id="title" maxW="60%" isRequired>
+                    <FormLabel sx={customTextStyle}>TITLE</FormLabel>
                     <Input
                       borderColor="#F48FB1"
-                      type="email"
-                      placeholder="Enter your email address"
+                      type="text"
+                      placeholder="Enter your title"
                     />
                   </FormControl>
-                  <FormControl id="password" isRequired>
-                    <FormLabel>PROFESSIONAL EXPERINCE</FormLabel>
-                    <Input
+                  <FormControl id="experince" w="100%" maxW="lg" isRequired>
+                    <FormLabel sx={customTextStyle}>
+                      PROFESSIONAL EXPERINCE
+                    </FormLabel>
+                    <Textarea
+                      h="80px"
                       borderColor="#F48FB1"
-                      type="password"
-                      placeholder="Enter your password"
+                      type="text"
+                      placeholder="Enter your company info"
                     />
                     <span className="text-[#8E8E8E] text-[12px] lowercase">
-                      +[country code][number]
+                      Between 300 and 2000 characters
                     </span>
                   </FormControl>
-                  <FormControl id="passwordConfirm" isRequired>
-                    <FormLabel>EDUCATION</FormLabel>
-                    <Input
-                      borderColor="#F48FB1"
-                      type="password"
-                      placeholder="Enter your password"
-                    />
+                  <Textarea
+                    h="80px"
+                    borderColor="#F48FB1"
+                    type="text"
+                    placeholder="Enter your educational info"
+                  />
+                  <FormControl id="eduInfo" isRequired>
+                    <FormLabel sx={customTextStyle}>EDUCATION</FormLabel>
                   </FormControl>
                 </Stack>
+                <p className="text-[#616161] text-[10px] tracking-[1.5px] uppercase my-2">
+                  Upload/Update your CV
+                </p>
                 <UploadDiv />
+                <p className="mt-2 text-[#8E8E8E]">Only PDF. Max size 5MB</p>
                 <center>
                   <Button
                     px={5}

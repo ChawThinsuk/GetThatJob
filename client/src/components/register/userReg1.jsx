@@ -1,7 +1,7 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
 import React from "react";
 import {
+  ChakraProvider,
+  Textarea,
   Box,
   Button,
   FormControl,
@@ -10,12 +10,22 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useGlobalContext } from "../../utils/context.jsx";
-import pointingGirl from "../../images/discussing.svg";
+import pointingGirl from "../../assets/register-images/woman-pointing.svg";
 
 function UserReg1() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
+  };
+
+  const customTextStyle = {
+    fontFamily: "Inter",
+    fontSize: "10px",
+    fontStyle: "normal",
+    fontWeight: 400,
+    lineHeight: "normal",
+    letterSpacing: "1.5px",
+    textTransform: "uppercase",
   };
 
   return (
@@ -80,7 +90,7 @@ function UserReg1() {
               <form onSubmit={handleSubmit}>
                 <Stack spacing={4}>
                   <FormControl id="email" isRequired>
-                    <FormLabel>Email Address</FormLabel>
+                    <FormLabel sx={customTextStyle}>Email Address</FormLabel>
                     <Input
                       borderColor="#F48FB1"
                       type="email"
@@ -88,7 +98,7 @@ function UserReg1() {
                     />
                   </FormControl>
                   <FormControl id="password" isRequired>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel sx={customTextStyle}>Password</FormLabel>
                     <Input
                       borderColor="#F48FB1"
                       type="password"
@@ -96,7 +106,9 @@ function UserReg1() {
                     />
                   </FormControl>
                   <FormControl id="passwordConfirm" isRequired>
-                    <FormLabel>Password Confirmation</FormLabel>
+                    <FormLabel sx={customTextStyle}>
+                      Password Confirmation
+                    </FormLabel>
                     <Input
                       borderColor="#F48FB1"
                       type="password"

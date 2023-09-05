@@ -1,7 +1,7 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
 import React from "react";
 import {
+  ChakraProvider,
+  Textarea,
   Box,
   Button,
   FormControl,
@@ -10,13 +10,23 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useGlobalContext } from "../../utils/context.jsx";
-import pointingGirl from "../../images/discussing.svg";
+import pointingGirl from "../../assets/register-images/woman-pointing.svg";
 import UploadDiv from "./UploadDiv.jsx";
 
 function Recruiter2() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
+  };
+
+  const customTextStyle = {
+    fontFamily: "Inter",
+    fontSize: "10px",
+    fontStyle: "normal",
+    fontWeight: 400,
+    lineHeight: "normal",
+    letterSpacing: "1.5px",
+    textTransform: "uppercase",
   };
 
   return (
@@ -58,6 +68,7 @@ function Recruiter2() {
                 <p>Information</p>
               </div>
             </div>
+
             <Box
               w="100%"
               maxW="lg"
@@ -70,38 +81,45 @@ function Recruiter2() {
               className=""
             >
               <form onSubmit={handleSubmit}>
-                <Stack spacing={4}>
+                <Stack spacing={4} mb={2}>
                   <span className="text-[#616161] text-[10px] tracking-[1.5px] uppercase">
                     You can complete this information later but we reccomend you
                     to do it now
                   </span>
-                  <FormControl id="email" isRequired>
-                    <FormLabel>Company Website</FormLabel>
+                  <FormControl id="companyWebsite" isRequired>
+                    <FormLabel sx={customTextStyle}>Company Website</FormLabel>
                     <Input
+                      w="70%"
                       borderColor="#F48FB1"
-                      type="email"
-                      placeholder="Enter your email address"
+                      type="url"
+                      placeholder="Enter your company url"
                     />
                   </FormControl>
-                  <FormControl id="password" isRequired>
-                    <FormLabel>About the company</FormLabel>
-                    <Input
+                  <FormControl id="companyInfo" isRequired>
+                    <FormLabel sx={customTextStyle}>
+                      About the company
+                    </FormLabel>
+                    <Textarea
+                      h="80px"
                       borderColor="#F48FB1"
-                      type="password"
-                      placeholder="Enter your password"
+                      type="text"
+                      placeholder="Enter your company info"
                     />
-                    <span className="text-[#8E8E8E] text-[12px] lowercase">
-                      +[country code][number]
+                    <span className="text-[#8E8E8E] text-[12px]">
+                      Between 100 and 2000 characters
                     </span>
                   </FormControl>
-
-                  <p className="mb-3">Upload the company logo</p>
                 </Stack>
+                <p className="mb-3 text-[#616161] text-[10px] tracking-[1.5px] uppercase my-2">
+                  Upload the company logo
+                </p>
                 <UploadDiv />
+                <p className="mt-2 text-[#8E8E8E]">Only PDF. Max size 5MB</p>
                 <center>
                   <Button
                     mt={8}
                     mr={5}
+                    mb={8}
                     px={5}
                     py={5}
                     type="submit"
@@ -118,6 +136,7 @@ function Recruiter2() {
                     px={5}
                     py={5}
                     mt={8}
+                    mb={8}
                     type="submit"
                     bg="#F48FB1"
                     variant="solid"

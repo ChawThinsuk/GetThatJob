@@ -1,7 +1,7 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
 import React from "react";
 import {
+  ChakraProvider,
+  Textarea,
   Box,
   Button,
   FormControl,
@@ -10,7 +10,17 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useGlobalContext } from "../../utils/context.jsx";
-import pointingGirl from "../../images/discussing.svg";
+import pointingGirl from "../../assets/register-images/woman-pointing.svg";
+
+const customTextStyle = {
+  fontFamily: "Inter",
+  fontSize: "10px",
+  fontStyle: "normal",
+  fontWeight: 400,
+  lineHeight: "normal",
+  letterSpacing: "1.5px",
+  textTransform: "uppercase",
+};
 
 function UserReg2() {
   const handleSubmit = (e) => {
@@ -83,39 +93,39 @@ function UserReg2() {
                     You can complete this information later but we reccomend you
                     to do it now
                   </span>
-                  <FormControl id="email" isRequired>
-                    <FormLabel>NAME</FormLabel>
+                  <FormControl id="name" isRequired>
+                    <FormLabel sx={customTextStyle}>NAME</FormLabel>
                     <Input
                       borderColor="#F48FB1"
-                      type="email"
-                      placeholder="Enter your email address"
+                      type="name"
+                      placeholder="Enter your name"
                     />
                   </FormControl>
-                  <FormControl id="password" isRequired>
-                    <FormLabel>Phone</FormLabel>
+                  <FormControl id="phone" isRequired>
+                    <FormLabel sx={customTextStyle}>Phone</FormLabel>
                     <Input
                       borderColor="#F48FB1"
-                      type="password"
-                      placeholder="Enter your password"
+                      type="tel"
+                      placeholder="Enter your phonenumber"
                     />
                     <span className="text-[#8E8E8E] text-[12px] lowercase">
                       +[country code][number]
                     </span>
                   </FormControl>
-                  <FormControl id="passwordConfirm" isRequired>
-                    <FormLabel>BIRTHDATE</FormLabel>
+                  <FormControl id="birthDate" isRequired>
+                    <FormLabel sx={customTextStyle}>BIRTHDATE</FormLabel>
                     <Input
                       borderColor="#F48FB1"
-                      type="password"
+                      type="date"
                       placeholder="Enter your password"
                     />
                   </FormControl>
                   <FormControl id="passwordConfirm" isRequired>
-                    <FormLabel>Linkedin url</FormLabel>
+                    <FormLabel sx={customTextStyle}>Linkedin url</FormLabel>
                     <Input
                       borderColor="#F48FB1"
-                      type="password"
-                      placeholder="Enter your password"
+                      type="url"
+                      placeholder="Enter Linkedin Url"
                     />
                   </FormControl>
                 </Stack>

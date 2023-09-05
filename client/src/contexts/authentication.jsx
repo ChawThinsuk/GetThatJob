@@ -38,12 +38,18 @@ function AuthProvider(props) {
 
   const register = async (data) => {};
 
-  const logout = () => {};
+  const logout = () => {
+    localStorage.removeItem("token");
+    setState({...state, user_id: null, error: null})
+  };
+
 
   const isAuthenticated = Boolean(localStorage.getItem('token'));
 
   return (
-    <AuthContext.Provider value={{ login, state, isAuthenticated }}>
+    <AuthContext.Provider
+      value={{state, login, logout, isAuthenticated}}
+    >
       {props.children}
     </AuthContext.Provider>
   );

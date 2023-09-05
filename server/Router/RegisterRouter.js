@@ -22,8 +22,11 @@ registerRouter.post("/users", async (req, res) => {
     data.user_password = await bcrypt.hash(data.user_password, salt);
     const isUnique = await pool.query(`SELECT user_email FROM users WHERE user_email = $1`, [data.user_email])
     if (!isUnique.rows[0]) {
+    const isUnique = await pool.query(`SELECT user_id FROM users WHERE user_email = $1`, [data.user_email])
+    if (!isUnique.rows[0]) {
         const results = await pool.query(
             `INSERT INTO users (user_email,user_password,created_at,update_at) VALUES ($1, $2, now(), null)`, [data.user_email,data.user_password]
+            `INSERT INTO users VALUES ($1, $2, now(), null)`, [data.user_email,data.user_password]
           );
           return res.json({
             message: "Created users successfully",
@@ -50,9 +53,13 @@ registerRouter.post("/users-profile", async (req, res) => {
     };
     const isUnique = await pool.query(`SELECT user_email FROM users WHERE user_email = $1`, [data.user_email]);
     if (!isUnique.rows[0]) {
+    const isUnique = await pool.query(`SELECT * FROM user_profile WHERE user_id = $1`, [data.user_profile_id])
+    if (!isUnique) {
     const results =
       await pool.query(`INSERT INTO user_profile (username,phone,birthdate,linkedin,experience,education,cv,created_at,update_at,user_id) VALUES ($1, $2,
         $3,$4,$5,$6,$7,now(),null,$8)`, [data.username,data.phone,data.birthdate,data.linkedin,data.experience,data.education,data.cv,data.user_id]);
+      await pool.query(`INSERT INTO user_profile VALUES ($1, $2,
+        $3,$4,$5,$6,$7,$8,now(),null`, [data.user_profile_id,data.username,data.phone,data.birthdate,data.linkedin,data.experience,data.education,data.cv]);
     return res.json({
       message: "Created users-profile Successfully",
     });
@@ -125,6 +132,13 @@ registerRouter.post("/companies-information", async (req,res) => {
 
 
 export default registerRouter;
+// {
+//   "user_profile_id":"25",
+//   "username":"test@gmail.com",
+//   "phone":"Pass",
+//   "birthday":"25/04/2541",
+  
+// }
 
 
 

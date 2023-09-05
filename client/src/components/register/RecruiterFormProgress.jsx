@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   ChakraProvider,
-  Textarea,
   Box,
   Button,
   FormControl,
@@ -9,8 +8,6 @@ import {
   Input,
   Stack,
 } from "@chakra-ui/react";
-import { useGlobalContext } from "../../utils/context.jsx";
-import pointingGirl from "../../assets/register-images/woman-pointing.svg";
 
 const customTextStyle = {
   fontFamily: "Inter",
@@ -22,45 +19,23 @@ const customTextStyle = {
   textTransform: "uppercase",
 };
 
-function Recruiter1() {
+function RecruiterFormProgress() {
+  const [companyName, setCompanyName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Handle form submission logic here
   };
-
-  const [userType, setUserType] = useState("PROFESSIONAL");
 
   return (
     <div className="flex w-full mt-10">
       {/* Left */}
-      <div className="flex flex-col w-[50%] items-end font-[Inter]">
-        <div className="flex flex-col w-[80%] font-[Montserrat] mb-[32px]">
-          <h2 className="text-[48px] mb-[16px]">Good choice!</h2>
-          <h4 className="text-[20px]">Create a new account as...</h4>
-        </div>
+      <div className="flex flex-col w-[100%] items-end font-[Inter]">
         {/* Register */}
         <div div className="flex flex-col w-[80%] ">
-          <div className="flex mb-[32px]">
-            <button
-              className={`border-b-2 m-1 ${
-                userType === "PROFESSIONAL"
-                  ? "border-[#F48FB1] text-[14px] text-black"
-                  : "border-[#BDBDBD] text-[14px] text-[#8E8E8E]"
-              } `}
-              onClick={() => setUserType("PROFESSIONAL")}
-            >
-              PROFESSIONAL
-            </button>
-            <button
-              className={`border-b-2 m-1 ${
-                userType === "RECRUITER"
-                  ? "border-[#F48FB1] text-[14px] text-black"
-                  : "border-[#BDBDBD] text-[14px] text-[#8E8E8E]"
-              } `}
-              onClick={() => setUserType("RECRUITER")}
-            >
-              RECRUITER
-            </button>
-          </div>
           <div className="flex">
             <div className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] rounded-full text-white text-center font-semibold flex items-center justify-center">
               1
@@ -98,6 +73,10 @@ function Recruiter1() {
                     borderColor="#F48FB1"
                     type="name"
                     placeholder="Enter your company name"
+                    value={companyName}
+                    onChange={(event) => {
+                      setCompanyName(event.target.value);
+                    }}
                   />
                 </FormControl>
                 <FormControl id="email" isRequired>
@@ -106,6 +85,10 @@ function Recruiter1() {
                     borderColor="#F48FB1"
                     type="email"
                     placeholder="Enter your email address"
+                    value={email}
+                    onChange={(event) => {
+                      setEmail(event.target.value);
+                    }}
                   />
                 </FormControl>
                 <FormControl id="password" isRequired>
@@ -114,6 +97,10 @@ function Recruiter1() {
                     borderColor="#F48FB1"
                     type="password"
                     placeholder="Enter your password"
+                    value={password}
+                    onChange={(event) => {
+                      setPassword(event.target.value);
+                    }}
                   />
                 </FormControl>
                 <FormControl id="passwordConfirm" isRequired>
@@ -124,6 +111,10 @@ function Recruiter1() {
                     borderColor="#F48FB1"
                     type="password"
                     placeholder="Enter your password"
+                    value={passwordConfirmation}
+                    onChange={(event) => {
+                      setPasswordConfirmation(event.target.value);
+                    }}
                   />
                 </FormControl>
               </Stack>
@@ -149,11 +140,8 @@ function Recruiter1() {
         </div>
       </div>
       {/* Right */}
-      <div className="flex w-[50%] justify-center items-end">
-        <img src={pointingGirl} alt="" width="50%" />
-      </div>
     </div>
   );
 }
 
-export default Recruiter1;
+export default RecruiterFormProgress;

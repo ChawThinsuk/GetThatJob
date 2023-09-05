@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import uploadlogo from "../../assets/register-images/pdf-upload.svg";
 
-const UploadDiv = () => {
+const UploadPdf = () => {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (e) => {
@@ -37,7 +37,7 @@ const UploadDiv = () => {
         className="cursor-pointer flex items-center justify-center w-[160px] h-auto p-[13px] rounded-xl bg-[#F48FB1] text-white hover:bg-pink-600 transition duration-300"
       >
         <img src={uploadlogo} className="pr-2" alt="logo" />
-        {selectedFile ? selectedFile.name : "Choose a file"}
+        Choose a file
       </label>
       {selectedFile && (
         <div className="mt-2">
@@ -58,4 +58,4 @@ const UploadDiv = () => {
   );
 };
 
-export default UploadDiv;
+export default UploadPdf;

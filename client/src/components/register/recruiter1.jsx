@@ -11,9 +11,8 @@ import {
 } from "@chakra-ui/react";
 import { useGlobalContext } from "../../utils/context.jsx";
 import pointingGirl from "../../images/discussing.svg";
-import UploadDiv from "./UploadDiv.jsx";
 
-function UserReg3() {
+function Recruiter1() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
@@ -42,7 +41,7 @@ function UserReg3() {
               </button>
             </div>
             <div className="flex">
-              <div className="mr-4 w-[32px] h-[32px] bg-[#373737] rounded-full text-white text-center font-semibold flex items-center justify-center">
+              <div className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] rounded-full text-white text-center font-semibold flex items-center justify-center">
                 1
               </div>
               <div className="mr-4 text-[16px]">
@@ -50,21 +49,13 @@ function UserReg3() {
                 <p>Login</p>
                 <p>Information</p>
               </div>
-              <div className="mr-4 w-[32px] h-[32px] bg-[#373737] rounded-full text-white text-center font-semibold flex items-center justify-center">
+              <div className="mr-4 w-[32px] h-[32px] bg-[#E1E2E1] rounded-full text-white text-center font-semibold flex items-center justify-center">
                 2
               </div>
               <div className="mr-4 text-[16px] ]">
-                <p className="text-[10px]">PENDING</p>
-                <p>Personal</p>
+                <p className="text-[10px]">IN PROGRESS</p>
+                <p>Company</p>
                 <p>Information</p>
-              </div>
-              <div className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] rounded-full text-white text-center font-semibold flex items-center justify-center">
-                3
-              </div>
-              <div className="text-[16px] text-[#8E8E8E]">
-                <p className="text-[10px]">PENDING</p>
-                <p>Login</p>
-                <p>Professional</p>
               </div>
             </div>
             <Box
@@ -80,12 +71,16 @@ function UserReg3() {
             >
               <form onSubmit={handleSubmit}>
                 <Stack spacing={4}>
-                  <span className="text-[#616161] text-[10px] tracking-[1.5px] uppercase">
-                    You can complete this information later but we reccomend you
-                    to do it now
-                  </span>
                   <FormControl id="email" isRequired>
-                    <FormLabel>TITLE</FormLabel>
+                    <FormLabel>Company Name</FormLabel>
+                    <Input
+                      borderColor="#F48FB1"
+                      type="email"
+                      placeholder="Enter your company name"
+                    />
+                  </FormControl>
+                  <FormControl id="email" isRequired>
+                    <FormLabel>Email</FormLabel>
                     <Input
                       borderColor="#F48FB1"
                       type="email"
@@ -93,18 +88,15 @@ function UserReg3() {
                     />
                   </FormControl>
                   <FormControl id="password" isRequired>
-                    <FormLabel>PROFESSIONAL EXPERINCE</FormLabel>
+                    <FormLabel>Password</FormLabel>
                     <Input
                       borderColor="#F48FB1"
                       type="password"
                       placeholder="Enter your password"
                     />
-                    <span className="text-[#8E8E8E] text-[12px] lowercase">
-                      +[country code][number]
-                    </span>
                   </FormControl>
                   <FormControl id="passwordConfirm" isRequired>
-                    <FormLabel>EDUCATION</FormLabel>
+                    <FormLabel>Password Confirmation</FormLabel>
                     <Input
                       borderColor="#F48FB1"
                       type="password"
@@ -112,52 +104,15 @@ function UserReg3() {
                     />
                   </FormControl>
                 </Stack>
-                <UploadDiv />
                 <center>
                   <Button
-                    px={5}
-                    py={5}
-                    mr={5}
                     mt={8}
-                    mb={10}
                     type="submit"
                     bg="#F48FB1"
                     variant="solid"
                     size="sm"
                     fontSize="md"
                     color="white"
-                    borderRadius="16px"
-                  >
-                    &lt; PREVIOUS
-                  </Button>
-                  <Button
-                    mt={8}
-                    mr={5}
-                    mb={10}
-                    px={5}
-                    py={5}
-                    type="submit"
-                    borderColor="#F48FB1"
-                    variant="outline"
-                    size="sm"
-                    fontSize="md"
-                    textColor="#616161"
-                    borderRadius="16px"
-                  >
-                    SKIP THIS!
-                  </Button>
-                  <Button
-                    px={5}
-                    py={5}
-                    mt={8}
-                    mb={10}
-                    type="submit"
-                    bg="#F48FB1"
-                    variant="solid"
-                    size="sm"
-                    fontSize="md"
-                    color="white"
-                    borderRadius="16px"
                   >
                     NEXT &gt;
                   </Button>
@@ -175,4 +130,4 @@ function UserReg3() {
   );
 }
 
-export default UserReg3;
+export default Recruiter1;

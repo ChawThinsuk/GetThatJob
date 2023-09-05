@@ -13,7 +13,7 @@ import { useGlobalContext } from "../../utils/context.jsx";
 import pointingGirl from "../../images/discussing.svg";
 import UploadDiv from "./UploadDiv.jsx";
 
-function UserReg3() {
+function Recruiter2() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
@@ -31,18 +31,17 @@ function UserReg3() {
           {/* Register */}
           <div div className="flex flex-col w-[80%] ">
             <div className="flex mb-[32px]">
-              <button className="text-[14px] mr-2 mb-4 relative font-medium">
-                PROFESSIONAL
-                <span className="absolute bottom-[-6px] left-0 w-full h-[2px] bg-[#F48FB1]"></span>
-              </button>
-
               <button className="text-[14px] mr-2 mb-4 relative text-[#8E8E8E] font-medium">
-                RECRUITER
+                PROFESSIONAL
                 <span className="absolute bottom-[-6px] left-0 w-full h-[2px] bg-[#BDBDBD]"></span>
+              </button>
+              <button className="text-[14px] mr-2 mb-4 relative font-medium">
+                RECRUITER
+                <span className="absolute bottom-[-6px] left-0 w-full h-[2px] bg-[#F48FB1]"></span>
               </button>
             </div>
             <div className="flex">
-              <div className="mr-4 w-[32px] h-[32px] bg-[#373737] rounded-full text-white text-center font-semibold flex items-center justify-center">
+              <div className="mr-4 w-[32px] h-[32px] bg-[#616161] rounded-full text-white text-center font-semibold flex items-center justify-center">
                 1
               </div>
               <div className="mr-4 text-[16px]">
@@ -50,21 +49,13 @@ function UserReg3() {
                 <p>Login</p>
                 <p>Information</p>
               </div>
-              <div className="mr-4 w-[32px] h-[32px] bg-[#373737] rounded-full text-white text-center font-semibold flex items-center justify-center">
+              <div className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] rounded-full text-white text-center font-semibold flex items-center justify-center">
                 2
               </div>
               <div className="mr-4 text-[16px] ]">
-                <p className="text-[10px]">PENDING</p>
-                <p>Personal</p>
+                <p className="text-[10px]">IN PROGRESS</p>
+                <p>Company</p>
                 <p>Information</p>
-              </div>
-              <div className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] rounded-full text-white text-center font-semibold flex items-center justify-center">
-                3
-              </div>
-              <div className="text-[16px] text-[#8E8E8E]">
-                <p className="text-[10px]">PENDING</p>
-                <p>Login</p>
-                <p>Professional</p>
               </div>
             </div>
             <Box
@@ -85,7 +76,7 @@ function UserReg3() {
                     to do it now
                   </span>
                   <FormControl id="email" isRequired>
-                    <FormLabel>TITLE</FormLabel>
+                    <FormLabel>Company Website</FormLabel>
                     <Input
                       borderColor="#F48FB1"
                       type="email"
@@ -93,7 +84,7 @@ function UserReg3() {
                     />
                   </FormControl>
                   <FormControl id="password" isRequired>
-                    <FormLabel>PROFESSIONAL EXPERINCE</FormLabel>
+                    <FormLabel>About the company</FormLabel>
                     <Input
                       borderColor="#F48FB1"
                       type="password"
@@ -103,37 +94,14 @@ function UserReg3() {
                       +[country code][number]
                     </span>
                   </FormControl>
-                  <FormControl id="passwordConfirm" isRequired>
-                    <FormLabel>EDUCATION</FormLabel>
-                    <Input
-                      borderColor="#F48FB1"
-                      type="password"
-                      placeholder="Enter your password"
-                    />
-                  </FormControl>
+
+                  <p className="mb-3">Upload the company logo</p>
                 </Stack>
                 <UploadDiv />
                 <center>
                   <Button
-                    px={5}
-                    py={5}
-                    mr={5}
-                    mt={8}
-                    mb={10}
-                    type="submit"
-                    bg="#F48FB1"
-                    variant="solid"
-                    size="sm"
-                    fontSize="md"
-                    color="white"
-                    borderRadius="16px"
-                  >
-                    &lt; PREVIOUS
-                  </Button>
-                  <Button
                     mt={8}
                     mr={5}
-                    mb={10}
                     px={5}
                     py={5}
                     type="submit"
@@ -150,7 +118,6 @@ function UserReg3() {
                     px={5}
                     py={5}
                     mt={8}
-                    mb={10}
                     type="submit"
                     bg="#F48FB1"
                     variant="solid"
@@ -175,4 +142,4 @@ function UserReg3() {
   );
 }
 
-export default UserReg3;
+export default Recruiter2;

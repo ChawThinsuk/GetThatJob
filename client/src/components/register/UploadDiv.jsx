@@ -53,7 +53,7 @@ const UploadDiv = () => {
       )}
       {selectedFile === null && (
         <div className="mt-2">
-          <p>No file selected.</p>
+          <p>No file choosen</p>
         </div>
       )}
       {selectedFile === null && (
@@ -67,13 +67,6 @@ const UploadDiv = () => {
       >
         Only PDF. Max size 5MB
       </label>
-      <button
-        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4"
-        onClick={handleSubmit}
-        disabled={!selectedFile}
-      >
-        Submit
-      </button>
     </div>
   );
 };

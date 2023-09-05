@@ -17,11 +17,11 @@ function RegisterPage() {
   return (
     <ChakraProvider>
       <Navbar />
-      {/* <UserReg1 /> */}
-      {/* <UserReg2 /> */}
+      <UserReg1 />
+      <UserReg2 />
       <UserReg3 />
-      {/* <Recruiter1 /> */}
-      {/* <Recruiter2 /> */}
+      <Recruiter1 />
+      <Recruiter2 />
     </ChakraProvider>
   );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ChakraProvider,
   Textarea,
@@ -15,7 +15,6 @@ import pointingGirl from "../../assets/register-images/woman-pointing.svg";
 function UserReg1() {
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
   };
 
   const customTextStyle = {
@@ -27,6 +26,10 @@ function UserReg1() {
     letterSpacing: "1.5px",
     textTransform: "uppercase",
   };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [userType, setUserType] = useState("PROFESSIONAL");
 
   return (
     <ChakraProvider>
@@ -40,14 +43,25 @@ function UserReg1() {
           {/* Register */}
           <div div className="flex flex-col w-[80%] ">
             <div className="flex mb-[32px]">
-              <button className="text-[14px] mr-2 mb-4 relative font-medium">
+              <button
+                className={`border-b-2 m-1 ${
+                  userType === "PROFESSIONAL"
+                    ? "border-[#F48FB1] text-[14px] text-black"
+                    : "border-[#BDBDBD] text-[14px] text-[#8E8E8E]"
+                } `}
+                onClick={() => setUserType("PROFESSIONAL")}
+              >
                 PROFESSIONAL
-                <span className="absolute bottom-[-6px] left-0 w-full h-[2px] bg-[#F48FB1]"></span>
               </button>
-
-              <button className="text-[14px] mr-2 mb-4 relative text-[#8E8E8E] font-medium">
+              <button
+                className={`border-b-2 m-1 ${
+                  userType === "RECRUITER"
+                    ? "border-[#F48FB1] text-[14px] text-black"
+                    : "border-[#BDBDBD] text-[14px] text-[#8E8E8E]"
+                } `}
+                onClick={() => setUserType("RECRUITER")}
+              >
                 RECRUITER
-                <span className="absolute bottom-[-6px] left-0 w-full h-[2px] bg-[#BDBDBD]"></span>
               </button>
             </div>
             <div className="flex">
@@ -95,6 +109,9 @@ function UserReg1() {
                       borderColor="#F48FB1"
                       type="email"
                       placeholder="Enter your email address"
+                      onChange={(event) => {
+                        setEmail(event.target.value);
+                      }}
                     />
                   </FormControl>
                   <FormControl id="password" isRequired>
@@ -103,6 +120,9 @@ function UserReg1() {
                       borderColor="#F48FB1"
                       type="password"
                       placeholder="Enter your password"
+                      onChange={(event) => {
+                        setPassword(event.target.value);
+                      }}
                     />
                   </FormControl>
                   <FormControl id="passwordConfirm" isRequired>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ChakraProvider,
   Textarea,
@@ -13,21 +13,22 @@ import { useGlobalContext } from "../../utils/context.jsx";
 import pointingGirl from "../../assets/register-images/woman-pointing.svg";
 import UploadDiv from "./UploadDiv.jsx";
 
+const customTextStyle = {
+  fontFamily: "Inter",
+  fontSize: "10px",
+  fontStyle: "normal",
+  fontWeight: 400,
+  lineHeight: "normal",
+  letterSpacing: "1.5px",
+  textTransform: "uppercase",
+};
+
 function Recruiter2() {
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
   };
 
-  const customTextStyle = {
-    fontFamily: "Inter",
-    fontSize: "10px",
-    fontStyle: "normal",
-    fontWeight: 400,
-    lineHeight: "normal",
-    letterSpacing: "1.5px",
-    textTransform: "uppercase",
-  };
+  const [userType, setUserType] = useState("PROFESSIONAL");
 
   return (
     <ChakraProvider>
@@ -41,13 +42,25 @@ function Recruiter2() {
           {/* Register */}
           <div div className="flex flex-col w-[80%] ">
             <div className="flex mb-[32px]">
-              <button className="text-[14px] mr-2 mb-4 relative text-[#8E8E8E] font-medium">
+              <button
+                className={`border-b-2 m-1 ${
+                  userType === "PROFESSIONAL"
+                    ? "border-[#F48FB1] text-[14px] text-black"
+                    : "border-[#BDBDBD] text-[14px] text-[#8E8E8E]"
+                } `}
+                onClick={() => setUserType("PROFESSIONAL")}
+              >
                 PROFESSIONAL
-                <span className="absolute bottom-[-6px] left-0 w-full h-[2px] bg-[#BDBDBD]"></span>
               </button>
-              <button className="text-[14px] mr-2 mb-4 relative font-medium">
+              <button
+                className={`border-b-2 m-1 ${
+                  userType === "RECRUITER"
+                    ? "border-[#F48FB1] text-[14px] text-black"
+                    : "border-[#BDBDBD] text-[14px] text-[#8E8E8E]"
+                } `}
+                onClick={() => setUserType("RECRUITER")}
+              >
                 RECRUITER
-                <span className="absolute bottom-[-6px] left-0 w-full h-[2px] bg-[#F48FB1]"></span>
               </button>
             </div>
             <div className="flex">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ChakraProvider,
   Textarea,
@@ -28,6 +28,8 @@ function UserReg2() {
     // Handle form submission logic here
   };
 
+  const [userType, setUserType] = useState("PROFESSIONAL");
+
   return (
     <ChakraProvider>
       <div className="flex w-full">
@@ -40,14 +42,25 @@ function UserReg2() {
           {/* Register */}
           <div div className="flex flex-col w-[80%] ">
             <div className="flex mb-[32px]">
-              <button className="text-[14px] mr-2 mb-4 relative font-medium">
+              <button
+                className={`border-b-2 m-1 ${
+                  userType === "PROFESSIONAL"
+                    ? "border-[#F48FB1] text-[14px] text-black"
+                    : "border-[#BDBDBD] text-[14px] text-[#8E8E8E]"
+                } `}
+                onClick={() => setUserType("PROFESSIONAL")}
+              >
                 PROFESSIONAL
-                <span className="absolute bottom-[-6px] left-0 w-full h-[2px] bg-[#F48FB1]"></span>
               </button>
-
-              <button className="text-[14px] mr-2 mb-4 relative text-[#8E8E8E] font-medium">
+              <button
+                className={`border-b-2 m-1 ${
+                  userType === "RECRUITER"
+                    ? "border-[#F48FB1] text-[14px] text-black"
+                    : "border-[#BDBDBD] text-[14px] text-[#8E8E8E]"
+                } `}
+                onClick={() => setUserType("RECRUITER")}
+              >
                 RECRUITER
-                <span className="absolute bottom-[-6px] left-0 w-full h-[2px] bg-[#BDBDBD]"></span>
               </button>
             </div>
             <div className="flex">

@@ -10,7 +10,7 @@ function Section2() {
         display="flex"
         flexDirection="column"
         backgroundColor="#BF5F82"
-        width="55rem"
+        width="71rem"
         height="29.5rem"
         padding="4rem 7.5rem"
         justifyContent="center"

@@ -3,29 +3,28 @@ import { Box } from "@chakra-ui/react";
 
 function Footer() {
   return (
-    <Box
-      display="flex"
-      padding="0rem 7.5rem"
-      flexDirection="column"
-      alignItems="flex-start"
-      backgroundColor="#E1E2E1"
-    >
-      <Text
+    <>
+      <Box
         display="flex"
-        width="75rem"
-        padding="1rem 1.9375rem"
-        justifyContent="space-between"
-        alignItems="flex-start"
-        fontSize="0.875rem"
-        fontStyle="normal"
-        fontWeight="500"
-        lineHeight="1.125rem"
-        letterSpacing="0.00625rem"
-        color="#373737"
+        padding="0rem 7.5rem"
+        flexDirection="column"
+        alignItems="center"
+        backgroundColor="#E1E2E1"
+        textAlign="center"
       >
-        © 2021 - Get That Job
-      </Text>
-    </Box>
+        <Text
+          display="flex"
+          width="75rem"
+          padding="1rem 1.9375rem"
+          justifyContent="center"
+          alignItems="center"
+          fontSize="0.875rem"
+          fontStyle="normal"
+        >
+          © 2021 - Get That Job
+        </Text>
+      </Box>
+    </>
   );
 }
 export default Footer;

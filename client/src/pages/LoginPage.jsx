@@ -16,11 +16,6 @@ function LoginPage() {
             password,
             userType,
         });
-        console.log({
-            email,
-            password,
-            userType,
-        })
     };
     return (
         <div>        

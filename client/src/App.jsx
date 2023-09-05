@@ -13,9 +13,9 @@ function App() {
   const auth = useAuth();
   return (
   <ChakraProvider>
-    <QueryClientProvider client={queryClient}>
+    {/* <QueryClientProvider client={queryClient}> */}
       {auth.isAuthenticated ? <AuthenticatedApp /> : <UnauthenticatedApp />}
-    </QueryClientProvider>
+    {/* </QueryClientProvider> */}
   </ChakraProvider>
   )
 }

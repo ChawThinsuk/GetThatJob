@@ -6,7 +6,7 @@ import authRouter from "./Router/AuthRouter.js"
 
 async function init() {
   const app = express();
-  const PORT = process.env.PORT || 6000;
+  const PORT = process.env.PORT || 4000;
 
   app.use(bodyParser.json());
   app.use(cors());

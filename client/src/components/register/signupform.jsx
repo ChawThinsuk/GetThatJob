@@ -1,15 +1,6 @@
 import React, { useState } from "react";
-import {
-  ChakraProvider,
-  Textarea,
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Stack,
-} from "@chakra-ui/react";
-import { useGlobalContext } from "../../utils/context.jsx";
+
+import { useGlobalContext } from "../../contexts/registerContext.jsx";
 import pointingGirl from "../../assets/register-images/woman-pointing.svg";
 import SelectType from "./selectUserType.jsx";
 import TalentFormProgress from "./TalentFormProgress.jsx";
@@ -23,18 +14,30 @@ function Professional() {
     e.preventDefault();
   };
 
-  const [userType, setUserType] = useState("PROFESSIONAL");
+  const { registerPage, userType, recruiterRegisterPage } = useGlobalContext();
+
+  // page = x
 
   return (
     <div className="flex w-full mt-10">
       {/* Left */}
       <div className="flex flex-col w-[50%] font-[Inter]">
         <SelectType />
-        <TalentFormProgress />
-        <TalentFormProgress2 />
-        <TalentFormProgress3 />
-        <RecruiterFormProgress />
-        <RecruiterFormProgress2 />
+        {userType === "PROFESSIONAL" && registerPage === 1 && (
+          <TalentFormProgress />
+        )}
+        {userType === "PROFESSIONAL" && registerPage === 2 && (
+          <TalentFormProgress2 />
+        )}
+        {userType === "PROFESSIONAL" && registerPage === 3 && (
+          <TalentFormProgress3 />
+        )}
+        {userType === "RECRUITER" && recruiterRegisterPage === 1 && (
+          <RecruiterFormProgress />
+        )}
+        {userType === "RECRUITER" && recruiterRegisterPage === 2 && (
+          <RecruiterFormProgress2 />
+        )}
       </div>
       {/* Right */}
       <div className="flex w-[50%] justify-center items-end">

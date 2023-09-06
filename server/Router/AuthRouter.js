@@ -8,12 +8,16 @@ const authRouter = Router();
 // test
 authRouter.post('/login', async (req, res) => {
   const { userType, email, password } = req.body;
-  const recordName = userType === 'PROFESSIONAL' ? 'users' : 'recruiters';
-  const idField = userType === 'PROFESSIONAL' ? 'user_id' : 'recruiter_id';
+  const recordName =
+    userType === 'PROFESSIONAL' ? 'professionals' : 'recruiters';
+  const idField =
+    userType === 'PROFESSIONAL' ? 'professional_id' : 'recruiter_id';
   const emailField =
-    userType === 'PROFESSIONAL' ? 'user_email' : 'recruiter_email';
+    userType === 'PROFESSIONAL' ? 'professional_email' : 'recruiter_email';
   const passwordlField =
-    userType === 'PROFESSIONAL' ? 'user_password' : 'recruiter_password';
+    userType === 'PROFESSIONAL'
+      ? 'professional_password'
+      : 'recruiter_password';
 
   try {
     let userData = await pool.query(

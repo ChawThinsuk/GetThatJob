@@ -8,6 +8,7 @@ export const HomepageRecruiter = () => {
   const { state } = useAuth();
   return (
     <div className='grid grid-cols-[12%_88%] w-screen min-h-screen '>
+
       <NavbarHomepage userType={state.userType} />
       <Routes>
         <Route path='/' element={<JobPosting />} />
@@ -15,6 +16,7 @@ export const HomepageRecruiter = () => {
         <Route path='/recruitprofile' element={<RecruiterProfile />} />
         <Route path='*' element={<JobPosting />} />
       </Routes>
+
     </div>
   );
 };

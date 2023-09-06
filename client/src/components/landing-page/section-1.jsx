@@ -8,6 +8,7 @@ import item7Img from "./landing-page-items/item7.svg";
 import item8Img from "./landing-page-items/item8.svg";
 import { Button } from "@chakra-ui/react";
 import { Box, Flex } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 const section1Item = [
   {
@@ -80,20 +81,22 @@ function Section1() {
         in no time. We promise you! Just give us the money and we <br />
         will take care of it.
       </Box>
-      <Button
-        bg="#F48FB1"
-        textAlign="center"
-        textColor="white"
-        fontSize="0.875rem"
-        fontStyle="normal"
-        fontWeight="500"
-        lineHeight="1.5rem"
-        letterSpacing="0.07813rem"
-        padding="1rem 1.5rem"
-        borderRadius="1rem"
-      >
-        CREATE AN ACCOUNT NOW
-      </Button>
+      <Link to="/register">
+        <Button
+          bg="#F48FB1"
+          textAlign="center"
+          textColor="white"
+          fontSize="0.875rem"
+          fontStyle="normal"
+          fontWeight="500"
+          lineHeight="1.5rem"
+          letterSpacing="0.07813rem"
+          padding="1rem 1.5rem"
+          borderRadius="1rem"
+        >
+          CREATE AN ACCOUNT NOW
+        </Button>
+      </Link>
       <Flex align="flex-end" gap="1rem">
         {section1Item.map((item) => (
           <div key={item.name} className={item.size}>

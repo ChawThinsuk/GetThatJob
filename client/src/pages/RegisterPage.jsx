@@ -4,9 +4,11 @@ import { useGlobalContext } from "../contexts/registerContext.jsx";
 import Navbar from "../components/navbar.jsx";
 import SignupForm from "../components/register/signupform.jsx";
 
+
 function RegisterPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
+    userRegister();
   };
 
   return (

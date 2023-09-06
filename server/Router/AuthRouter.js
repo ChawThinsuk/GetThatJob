@@ -8,7 +8,7 @@ const authRouter = Router();
 // test
 authRouter.post('/login', async (req, res) => {
   const { userType, email, password } = req.body;
-  const recordName = userType === 'PROFESSIONAL' ? 'users' : 'recruiter';
+  const recordName = userType === 'PROFESSIONAL' ? 'users' : 'recruiters';
   const idField = userType === 'PROFESSIONAL' ? 'user_id' : 'recruiter_id';
   const emailField =
     userType === 'PROFESSIONAL' ? 'user_email' : 'recruiter_email';

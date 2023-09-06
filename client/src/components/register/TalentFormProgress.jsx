@@ -10,30 +10,18 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-const customTextStyle = {
-  fontFamily: "Inter",
-  fontSize: "10px",
-  fontStyle: "normal",
-  fontWeight: 400,
-  lineHeight: "normal",
-  letterSpacing: "1.5px",
-  textTransform: "uppercase",
-};
+import { useGlobalContext } from "../../contexts/registerContext.jsx";
 
 function TalentFormProgress() {
+  const { registerPage, setRegisterPage, customTextStyle } = useGlobalContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-  };
-
   return (
-    <div className="flex flex-col w-full items-center font-[Inter]">
+    <div className="flex flex-col w-full items-center font-[Inter] ml-12">
       {/* Register */}
-      <div className="flex">
+      <div className="flex items-start ">
         <div className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] rounded-full text-white text-center font-semibold flex items-center justify-center">
           1
         </div>
@@ -59,8 +47,8 @@ function TalentFormProgress() {
           <Text>Professional</Text>
         </div>
       </div>
-      <Box w="100%" maxW="lg" mt={10} borderRadius="md">
-        <form onSubmit={handleSubmit}>
+      <Box w="100%" maxW="sm" mt={10} borderRadius="md" mr="10">
+        <form>
           <Stack spacing={4}>
             <FormControl id="email" isRequired>
               <FormLabel sx={customTextStyle}>Email Address</FormLabel>
@@ -102,12 +90,15 @@ function TalentFormProgress() {
           <center>
             <Button
               mt={8}
-              type="submit"
+              type="button"
               bg="#F48FB1"
               variant="solid"
               size="sm"
               fontSize="md"
               color="white"
+              onClick={() => {
+                setRegisterPage(registerPage + 1);
+              }}
             >
               NEXT &gt;
             </Button>

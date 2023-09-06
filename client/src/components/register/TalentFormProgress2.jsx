@@ -9,18 +9,10 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-
-const customTextStyle = {
-  fontFamily: "Inter",
-  fontSize: "10px",
-  fontStyle: "normal",
-  fontWeight: 400,
-  lineHeight: "normal",
-  letterSpacing: "1.5px",
-  textTransform: "uppercase",
-};
+import { useGlobalContext } from "../../contexts/registerContext.jsx";
 
 function TalentFormProgress2() {
+  const { registerPage, setRegisterPage, customTextStyle } = useGlobalContext();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [birthDate, setBirthDate] = useState("");
@@ -32,7 +24,7 @@ function TalentFormProgress2() {
 
   return (
     <ChakraProvider>
-      <div className="flex flex-col w-full items-center font-[Inter]">
+      <div className="flex flex-col w-full items-center font-[Inter] ml-12">
         {/* Register */}
         <div className="flex">
           <div className="mr-4 w-[32px] h-[32px] bg-[#616161] rounded-full text-white text-center font-semibold flex items-center justify-center">
@@ -60,7 +52,7 @@ function TalentFormProgress2() {
             <p>Professional</p>
           </div>
         </div>
-        <Box w="100%" maxW="lg" mt={10} borderRadius="md">
+        <Box w="100%" maxW="lg" mt={10} borderRadius="md" ml={20}>
           <form onSubmit={handleSubmit}>
             <Stack spacing={4}>
               <span className="text-[#616161] text-[10px] tracking-[1.5px] uppercase">
@@ -146,6 +138,9 @@ function TalentFormProgress2() {
                 fontSize="md"
                 color="white"
                 borderRadius="16px"
+                onClick={() => {
+                  setRegisterPage(registerPage + 1);
+                }}
               >
                 NEXT &gt;
               </Button>

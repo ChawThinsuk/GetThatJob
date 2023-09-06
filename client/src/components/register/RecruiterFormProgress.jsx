@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  ChakraProvider,
   Box,
   Button,
   FormControl,
@@ -8,34 +7,28 @@ import {
   Input,
   Stack,
 } from "@chakra-ui/react";
-
-const customTextStyle = {
-  fontFamily: "Inter",
-  fontSize: "10px",
-  fontStyle: "normal",
-  fontWeight: 400,
-  lineHeight: "normal",
-  letterSpacing: "1.5px",
-  textTransform: "uppercase",
-};
+import { useGlobalContext } from "../../contexts/registerContext";
 
 function RecruiterFormProgress() {
+  const { recruiterRegisterPage, setRecruiterRegisterPage, customTextStyle } =
+    useGlobalContext();
   const [companyName, setCompanyName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [recruiterEmail, setRecruiterEmail] = useState("");
+  const [recruiterPassword, setRecruiterPassword] = useState("");
+  const [recruiterpasswordConfirmation, setRecruiterPasswordConfirmation] =
+    useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
+    setRecruiterRegisterPage(recruiterRegisterPage + 1);
   };
 
   return (
-    <div className="flex w-full mt-10">
+    <div className="flex w-full">
       {/* Left */}
       <div className="flex flex-col w-[100%] items-end font-[Inter]">
         {/* Register */}
-        <div div className="flex flex-col w-[80%] ">
+        <div className="flex flex-col w-[80%] ">
           <div className="flex">
             <div className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] rounded-full text-white text-center font-semibold flex items-center justify-center">
               1
@@ -67,7 +60,7 @@ function RecruiterFormProgress() {
           >
             <form onSubmit={handleSubmit}>
               <Stack spacing={4}>
-                <FormControl id="name" isRequired>
+                <FormControl id="companyName" isRequired>
                   <FormLabel sx={customTextStyle}>Company Name</FormLabel>
                   <Input
                     borderColor="#F48FB1"
@@ -79,31 +72,31 @@ function RecruiterFormProgress() {
                     }}
                   />
                 </FormControl>
-                <FormControl id="email" isRequired>
+                <FormControl id="recruiterEmail" isRequired>
                   <FormLabel sx={customTextStyle}>Email</FormLabel>
                   <Input
                     borderColor="#F48FB1"
                     type="email"
                     placeholder="Enter your email address"
-                    value={email}
+                    value={recruiterEmail}
                     onChange={(event) => {
-                      setEmail(event.target.value);
+                      setRecruiterEmail(event.target.value);
                     }}
                   />
                 </FormControl>
-                <FormControl id="password" isRequired>
+                <FormControl id="recruiterPassword" isRequired>
                   <FormLabel sx={customTextStyle}>Password</FormLabel>
                   <Input
                     borderColor="#F48FB1"
                     type="password"
                     placeholder="Enter your password"
-                    value={password}
+                    value={recruiterPassword}
                     onChange={(event) => {
-                      setPassword(event.target.value);
+                      setRecruiterPassword(event.target.value);
                     }}
                   />
                 </FormControl>
-                <FormControl id="passwordConfirm" isRequired>
+                <FormControl id="recruiterPasswordConfirm" isRequired>
                   <FormLabel sx={customTextStyle}>
                     Password Confirmation
                   </FormLabel>
@@ -111,9 +104,9 @@ function RecruiterFormProgress() {
                     borderColor="#F48FB1"
                     type="password"
                     placeholder="Enter your password"
-                    value={passwordConfirmation}
+                    value={recruiterpasswordConfirmation}
                     onChange={(event) => {
-                      setPasswordConfirmation(event.target.value);
+                      setRecruiterPasswordConfirmation(event.target.value);
                     }}
                   />
                 </FormControl>

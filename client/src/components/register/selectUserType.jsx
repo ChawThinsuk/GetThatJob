@@ -1,26 +1,18 @@
 import React, { useState } from "react";
-import {
-  ChakraProvider,
-  Textarea,
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Stack,
-} from "@chakra-ui/react";
+import { useGlobalContext } from "../../contexts/registerContext";
 
 function SelectType() {
-  const [userType, setUserType] = useState("PROFESSIONAL");
+  // const [userType, setUserType] = useState("PROFESSIONAL");
+  const { userType, setUserType } = useGlobalContext();
 
   return (
-    <div className="flex flex-col w-[100%] items-end font-[Inter]">
+    <div className="flex flex-col w-[100%] items-end font-[Inter] mb-[32px]">
       <div className="flex flex-col w-[80%] font-[Montserrat] mb-[32px]">
         <h2 className="text-[48px] mb-[16px]">Good choice!</h2>
         <h4 className="text-[20px]">Create a new account as...</h4>
       </div>
       {/* Register */}
-      <div div className="flex flex-col w-[80%] ">
+      <div className="flex flex-col w-[80%] ">
         <div className="flex">
           <button
             className={`border-b-2 m-1 ${

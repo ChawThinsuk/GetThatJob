@@ -31,11 +31,11 @@ function RecruiterFormProgress2() {
   };
 
   return (
-    <div className="flex w-full mt-10">
+    <div className="flex w-full">
       {/* Left */}
       <div className="flex flex-col w-[100%] items-end font-[Inter]">
         {/* Register */}
-        <div div className="flex flex-col w-[80%] ">
+        <div className="flex flex-col w-[80%] ">
           <div className="flex">
             <div
               className="mr-4 w-[32px] h-[32px] bg-[#616161] rounded-full

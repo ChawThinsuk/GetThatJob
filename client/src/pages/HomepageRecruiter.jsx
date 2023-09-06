@@ -4,7 +4,7 @@ export const HomepageRecruiter = () => {
   const { state } = useAuth();
   return (
     <div className='grid grid-cols-[12%_88%] w-screen min-h-screen '>
-      <NavbarHomepage userType={state.userType} />
+      <NavbarHomepage />
       <div className=' bg-amber-200'>Recruiter</div>
     </div>
   );

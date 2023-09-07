@@ -24,8 +24,7 @@ function RecruiterFormProgress() {
     setRecruiterPasswordConfirmation,
   } = useGlobalContext();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     setRecruiterRegisterPage(recruiterRegisterPage + 1);
   };
 
@@ -36,7 +35,10 @@ function RecruiterFormProgress() {
         {/* Register */}
         <div className="flex flex-col w-[80%] ">
           <div className="flex">
-            <div className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] rounded-full text-white text-center font-semibold flex items-center justify-center">
+            <div
+              className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] rounded-full
+             text-white text-center font-semibold flex items-center justify-center"
+            >
               1
             </div>
             <div className="mr-4 text-[16px]">

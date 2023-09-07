@@ -13,14 +13,22 @@ import UploadPdf from "./UploadPdf";
 import { useGlobalContext } from "../../contexts/registerContext.jsx";
 
 function TalentFormProgress3() {
-  const { registerPage, setRegisterPage, customTextStyle } = useGlobalContext();
-  const [title, setTitle] = useState("");
-  const [professionalExperience, setProfessionalExperience] = useState("");
-  const [educationalInfo, setEducationalInfo] = useState("");
+  const {
+    registerPage,
+    setRegisterPage,
+    customTextStyle,
+    title,
+    setTitle,
+    professionalExperience,
+    setProfessionalExperience,
+    educationalInfo,
+    setEducationalInfo,
+    handleSubmit,
+  } = useGlobalContext();
 
-  const handleSubmit = (e) => {
+  let handleRegister = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
+    handleSubmit();
   };
 
   return (
@@ -53,7 +61,7 @@ function TalentFormProgress3() {
         </div>
       </div>
       <Box w="100%" maxW="lg" mt={10} borderRadius="md" ml={20}>
-        <form onSubmit={handleSubmit}>
+        <form>
           <Stack spacing={4}>
             <span className="text-[#616161] text-[10px] tracking-[1.5px] uppercase">
               You can complete this information later, but we recommend you to
@@ -115,7 +123,7 @@ function TalentFormProgress3() {
               mr={5}
               mt={8}
               mb={10}
-              type="submit"
+              type="button"
               bg="#F48FB1"
               variant="solid"
               size="sm"
@@ -134,7 +142,7 @@ function TalentFormProgress3() {
               mb={10}
               px={5}
               py={5}
-              type="submit"
+              type="button"
               borderColor="#F48FB1"
               variant="outline"
               size="sm"
@@ -156,7 +164,7 @@ function TalentFormProgress3() {
               fontSize="md"
               color="white"
               borderRadius="16px"
-              onClick={() => {}}
+              onClick={handleRegister}
             >
               FINISH &gt;
             </Button>

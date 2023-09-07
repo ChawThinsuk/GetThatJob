@@ -10,24 +10,23 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import UploadPdf from "./UploadPdf";
-
-const customTextStyle = {
-  fontFamily: "Inter",
-  fontSize: "10px",
-  fontStyle: "normal",
-  fontWeight: 400,
-  lineHeight: "normal",
-  letterSpacing: "1.5px",
-  textTransform: "uppercase",
-};
+import { useGlobalContext } from "../../contexts/registerContext";
 
 function RecruiterFormProgress2() {
-  const [companyWebsite, setCompanyWebsite] = useState("");
-  const [aboutCompany, setAboutCompany] = useState("");
+  const {
+    recruiterRegisterPage,
+    setRecruiterRegisterPage,
+    customTextStyle,
+    companyWebsite,
+    setCompanyWebsite,
+    aboutCompany,
+    setAboutCompany,
+    handleSubmit,
+  } = useGlobalContext();
 
-  const handleSubmit = (e) => {
+  let handleRegister = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
+    handleSubmit();
   };
 
   return (
@@ -61,7 +60,7 @@ function RecruiterFormProgress2() {
             </div>
           </div>
           <Box w="100%" maxW="lg" mt={10} borderRadius="md">
-            <form onSubmit={handleSubmit}>
+            <form>
               <Stack spacing={4} mb={2}>
                 <span className="text-[#616161] text-[10px] tracking-[1.5px] uppercase">
                   You can complete this information later but we recommend you
@@ -131,6 +130,7 @@ function RecruiterFormProgress2() {
                   fontSize="md"
                   color="white"
                   borderRadius="16px"
+                  onClick={handleRegister}
                 >
                   FINISH &gt;
                 </Button>

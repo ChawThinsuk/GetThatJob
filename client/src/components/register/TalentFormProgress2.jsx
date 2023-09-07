@@ -12,15 +12,19 @@ import {
 import { useGlobalContext } from "../../contexts/registerContext.jsx";
 
 function TalentFormProgress2() {
-  const { registerPage, setRegisterPage, customTextStyle } = useGlobalContext();
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [birthDate, setBirthDate] = useState("");
-  const [linkedinUrl, setLinkedinUrl] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const {
+    registerPage,
+    setRegisterPage,
+    customTextStyle,
+    name,
+    setName,
+    phone,
+    setPhone,
+    birthDate,
+    setBirthDate,
+    linkedinUrl,
+    setLinkedinUrl,
+  } = useGlobalContext();
 
   return (
     <ChakraProvider>
@@ -53,7 +57,7 @@ function TalentFormProgress2() {
           </div>
         </div>
         <Box w="100%" maxW="lg" mt={10} borderRadius="md" ml={20}>
-          <form onSubmit={handleSubmit}>
+          <form>
             <Stack spacing={4}>
               <span className="text-[#616161] text-[10px] tracking-[1.5px] uppercase">
                 You can complete this information later but we recommend you to
@@ -117,7 +121,7 @@ function TalentFormProgress2() {
                 mr={5}
                 px={5}
                 py={5}
-                type="submit"
+                type="button"
                 borderColor="#F48FB1"
                 variant="outline"
                 size="sm"
@@ -131,7 +135,7 @@ function TalentFormProgress2() {
                 px={5}
                 py={5}
                 mt={8}
-                type="submit"
+                type="button"
                 bg="#F48FB1"
                 variant="solid"
                 size="sm"

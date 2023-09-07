@@ -10,13 +10,19 @@ import {
 import { useGlobalContext } from "../../contexts/registerContext";
 
 function RecruiterFormProgress() {
-  const { recruiterRegisterPage, setRecruiterRegisterPage, customTextStyle } =
-    useGlobalContext();
-  const [companyName, setCompanyName] = useState("");
-  const [recruiterEmail, setRecruiterEmail] = useState("");
-  const [recruiterPassword, setRecruiterPassword] = useState("");
-  const [recruiterpasswordConfirmation, setRecruiterPasswordConfirmation] =
-    useState("");
+  const {
+    recruiterRegisterPage,
+    setRecruiterRegisterPage,
+    customTextStyle,
+    companyName,
+    setCompanyName,
+    recruiterEmail,
+    setRecruiterEmail,
+    recruiterPassword,
+    setRecruiterPassword,
+    recruiterpasswordConfirmation,
+    setRecruiterPasswordConfirmation,
+  } = useGlobalContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,17 +53,7 @@ function RecruiterFormProgress() {
               <p>Information</p>
             </div>
           </div>
-          <Box
-            w="100%"
-            maxW="lg"
-            // mx="auto"
-            mt={10}
-            // p={4}
-            // borderWidth={1}
-            borderRadius="md"
-            // boxShadow="md"
-            className=""
-          >
+          <Box w="100%" maxW="lg" mt={10} borderRadius="md">
             <form onSubmit={handleSubmit}>
               <Stack spacing={4}>
                 <FormControl id="companyName" isRequired>

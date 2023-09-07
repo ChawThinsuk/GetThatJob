@@ -76,17 +76,16 @@ const ContextProvider = ({ children }) => {
           birthdate: birthDate,
           linkedin: linkedinUrl,
           experince: professionalExperience,
+          education: educationalInfo,
           cv: data.path,
         };
 
         console.log(professionalData);
 
-        // const response = await axios.post(
-        //   "http://localhost:4000/professional",
-        //   professionalData
-        // );
-
-        console.log("Registration successful");
+        const response = await axios.post(
+          "http://localhost:4000/users/register-professional",
+          professionalData
+        );
       }
       if (userType === "RECRUITER") {
         const { data, error } = await supabase.storage
@@ -118,6 +117,7 @@ const ContextProvider = ({ children }) => {
 
         console.log("Registration successful");
       }
+      console.log(response.data.message);
     } catch (error) {
       console.log("Registration error", error);
     }

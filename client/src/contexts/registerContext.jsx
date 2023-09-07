@@ -50,10 +50,7 @@ const ContextProvider = ({ children }) => {
   // handle submit
 
   const handleSubmit = async () => {
-    // const supabase = createClient(
-    //   import.meta.env.SUPERBASE_URL,
-    //   import.meta.env.SUPERBASE_SECRET
-    // );
+
 
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -67,7 +64,6 @@ const ContextProvider = ({ children }) => {
             cacheControl: "3600",
             upsert: false,
           });
-
         const professionalData = {
           professional_email: email,
           professional_password: password,
@@ -75,17 +71,16 @@ const ContextProvider = ({ children }) => {
           phone: phone,
           birthdate: birthDate,
           linkedin: linkedinUrl,
+          title: title,
           experience: professionalExperience,
           education: educationalInfo,
           cv: data.path,
         };
-
-        console.log(professionalData);
-
         const response = await axios.post(
           "http://localhost:4000/users/register-professional",
           professionalData
         );
+        console.log(response.data)
       }
       if (userType === "RECRUITER") {
         const { data, error } = await supabase.storage
@@ -98,9 +93,9 @@ const ContextProvider = ({ children }) => {
         const urlPath = supabase.storage.from("files").getPublicUrl(data.path);
 
         const recruiterData = {
-          company_name: companyName,
           recruiter_email: recruiterEmail,
           recruiter_password: recruiterPassword,
+          company_name: companyName,          
           company_website: companyWebsite,
           company_description: aboutCompany,
           logo: urlPath.data.publicUrl,
@@ -108,14 +103,13 @@ const ContextProvider = ({ children }) => {
 
         console.log(recruiterData);
 
-        // const response = await axios.post(
-        //   "http://localhost:4000/professional",
-        //   professionalData
-        // );
-
+        const response = await axios.post(
+          "http://localhost:4000/users/register-recruiter",
+          recruiterData
+        );
         console.log("Registration successful");
       }
-      console.log(response.data.message);
+      console.log(response.data);
     } catch (error) {
       console.log("Registration error", error);
     }

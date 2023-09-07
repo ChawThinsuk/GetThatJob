@@ -1,11 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import jobRouter from './Router/JobRouter.js';
-import professionalRouter from './Router/ProfessionalRouter.js';
-import recruiterRouter from './Router/RecruiterRouter.js';
 import authRouter from './Router/AuthRouter.js';
 import { protect } from './middlewares/protect.js';
+import RegisterRouter from './Router/RegisterRouter.js';
 
 async function init() {
   const app = express();
@@ -14,12 +12,10 @@ async function init() {
   app.use(bodyParser.json());
   app.use(cors());
   app.use(express.json());
-  app.use('/job', jobRouter);
-  app.use('/professional', professionalRouter);
-  app.use('/recruiter', recruiterRouter);
+  app.use('/users',RegisterRouter)
   app.use('/auth', authRouter);
 
-  app.get('/', [protect], (req, res) => {
+  app.get('/', (req, res) => {
     return res.json({
       message: 'Hello',
     });

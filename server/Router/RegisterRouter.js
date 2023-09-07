@@ -30,13 +30,14 @@ RegisterRouter.post("/register-professional", async (req, res) => {
     let professional_id = Number(results.rows[0].professional_id)
     // insert data profile
     await pool.query(
-      `INSERT INTO professionals_profile (username,phone,birthdate,linkedin,experience,education,cv,created_at,update_at,professional_id) VALUES ($1, $2,
-          $3,$4,$5,$6,$7,now(),null,$8)`,
+      `INSERT INTO professionals_profile (username,phone,birthdate,linkedin,title,experience,education,cv,created_at,update_at,professional_id) VALUES ($1, $2,
+          $3,$4,$5,$6,$7,$8,now(),null,$9)`,
       [
         data.username,
         data.phone,
         data.birthdate,
         data.linkedin,
+        data.title,
         data.experience,
         data.education,
         data.cv,
@@ -111,6 +112,7 @@ async function validateDataProfile (data) {
     !data.phone ||
     !data.birthdate ||
     !data.linkedin ||
+    !data.title ||
     !data.experience ||
     !data.education ||
     !data.cv 

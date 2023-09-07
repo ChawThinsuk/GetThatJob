@@ -69,13 +69,13 @@ const ContextProvider = ({ children }) => {
           });
 
         const professionalData = {
-          professional_email: recruiterEmail,
+          professional_email: email,
           professional_password: password,
           username: name,
           phone: phone,
           birthdate: birthDate,
           linkedin: linkedinUrl,
-          experince: professionalExperience,
+          experience: professionalExperience,
           education: educationalInfo,
           cv: data.path,
         };
@@ -95,9 +95,7 @@ const ContextProvider = ({ children }) => {
             upsert: false,
           });
 
-        const urlPath = await supabase.storage
-          .from("files")
-          .getPublicUrl(data.path);
+        const urlPath = supabase.storage.from("files").getPublicUrl(data.path);
 
         const recruiterData = {
           company_name: companyName,

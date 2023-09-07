@@ -73,12 +73,11 @@ RegisterRouter.post("/register-recruiter", async (req, res) => {
       `INSERT INTO recruiters (recruiter_email,recruiter_password,created_at,updated_at) VALUES ($1,$2,now(),NULL) RETURNING recruiter_id`,
       [data.recruiter_email,bcryptPassword]); 
     let recruiter_id = Number(results.rows[0].recruiter_id);
-    console.log(recruiter_id)
-    await pool.query(`INSERT INTO companies_information (company_email,company_name,company_website,company_description,created_at,updated_at,recruiter_id) VALUES ($1,$2,$3,$4,now(),NULL,$5)`,
-     [data.company_email,
-      data.company_name,
+    await pool.query(`INSERT INTO companies_information (company_name,company_website,company_description,created_at,updated_at,logo,recruiter_id) VALUES ($1,$2,$3,now(),NULL,$4,$5)`,
+     [data.company_name,
       data.company_website,
       data.company_description,
+      data.logo,
       recruiter_id]);
     return (res.json({
       message: "Create success"
@@ -141,15 +140,8 @@ async function validateRecruiter (data) {
   }
 };
 async function validateCompaniesInformation (data) {
-  if (!data.company_email || !data.company_name || !data.company_website || !data.company_description) {
+  if (!data.company_name || !data.company_website || !data.company_description || !data.logo ) {
     return "please check your body of API";
-  };
-  const isUniqueEmail = await pool.query(
-    `SELECT company_email FROM companies_information WHERE company_email = $1`,
-    [data.company_email]
-  );
-  if (isUniqueEmail.rows[0]) {
-    return "This email already use";
   };
   const isUniqueName = await pool.query(`SELECT company_name FROM companies_information WHERE company_name = $1`,[data.company_name]);
   if (isUniqueName.rows[0]) {

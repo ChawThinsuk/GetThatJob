@@ -14,8 +14,8 @@ async function init() {
   app.use(express.json());
   app.use('/users',RegisterRouter)
   app.use('/auth', authRouter);
-
   app.get('/', (req, res) => {
+
     return res.json({
       message: 'Hello',
     });

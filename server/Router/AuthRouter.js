@@ -15,7 +15,7 @@ authRouter.post("/login", async (req, res) => {
   const emailField =
     userType === "PROFESSIONAL" ? "professional_email" : "recruiter_email";
   const passwordlField =
-    professionalType === "PROFESSIONAL"
+    userType === "PROFESSIONAL"
       ? "professional_password"
       : "recruiter_password";
   try {
@@ -32,7 +32,7 @@ authRouter.post("/login", async (req, res) => {
       password,
       userData[passwordlField]
     );
-
+      console.log(isValidPassword)
     if (!isValidPassword) {
       return res.status(401).json({ message: "Invalid password" });
     }
@@ -44,6 +44,7 @@ authRouter.post("/login", async (req, res) => {
       process.env.SECRET_KEY,
       { expiresIn: "90000000" }
     );
+    console.log(token)
     return res.status(200).json({ message: "Login success", token });
   } catch (error) {
     return res.status(500).json({ message: error });

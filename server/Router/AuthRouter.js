@@ -39,6 +39,7 @@ authRouter.post("/login", async (req, res) => {
     const token = jwt.sign(
       {
         id: userData[idField],
+        userType: userType,
       },
       process.env.SECRET_KEY,
       { expiresIn: "90000000" }

@@ -1,12 +1,17 @@
-import { Routes, Route } from "react-router-dom";
-import { useAuth } from "../contexts/authentication";
-
+import { Routes, Route } from 'react-router-dom';
+import { useAuth } from '../contexts/authentication';
+import { HomepageProfessional } from './HomepageProfessional';
+import { HomepageRecruiter } from './HomepageRecruiter';
 function AuthenticatedApp() {
-  const {state} = useAuth()
-  console.log(state)
+  const { state } = useAuth();
+  console.log(state);
   return (
-    <div className="App">
-      <p>Hello</p>
+    <div className='App'>
+      {state.userType === 'PROFESSIONAL' ? (
+        <HomepageProfessional />
+      ) : (
+        <HomepageRecruiter />
+      )}
     </div>
   );
 }

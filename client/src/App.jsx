@@ -5,6 +5,7 @@ import UnauthenticatedApp from "./pages/UnauthenticatedApp.jsx";
 import { useAuth } from "./contexts/authentication";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 
+
 const queryClient = new QueryClient();
 
 function App() {

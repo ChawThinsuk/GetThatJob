@@ -1,9 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import registerRouter from './Router/RegisterRouter.js';
 import authRouter from './Router/AuthRouter.js';
 import { protect } from './middlewares/protect.js';
+import RegisterRouter from './Router/RegisterRouter.js';
+
 async function init() {
   const app = express();
   const PORT = process.env.PORT || 4000;
@@ -11,10 +12,10 @@ async function init() {
   app.use(bodyParser.json());
   app.use(cors());
   app.use(express.json());
-  app.use('/register', registerRouter);
+  app.use('/users',RegisterRouter)
   app.use('/auth', authRouter);
+  app.get('/', (req, res) => {
 
-  app.get('/', [protect], (req, res) => {
     return res.json({
       message: 'Hello',
     });

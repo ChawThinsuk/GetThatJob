@@ -35,8 +35,11 @@ function RecruiterFormProgress2() {
       <div className="flex flex-col w-[100%] items-end font-[Inter]">
         {/* Register */}
         <div className="flex flex-col w-[80%] ">
-          <div className="flex">
+          <div className="flex cursor-pointer">
             <div
+              onClick={() => {
+                setRecruiterRegisterPage(recruiterRegisterPage - 1);
+              }}
               className="mr-4 w-[32px] h-[32px] bg-[#616161] rounded-full
                text-white text-center font-semibold flex items-center justify-center"
             >
@@ -48,6 +51,9 @@ function RecruiterFormProgress2() {
               <p>Information</p>
             </div>
             <div
+              onClick={() => {
+                setRegisterPage(registerPage - 1);
+              }}
               className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] rounded-full
                text-white text-center font-semibold flex items-center justify-center"
             >

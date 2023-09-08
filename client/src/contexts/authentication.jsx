@@ -52,3 +52,5 @@ function AuthProvider(props) {
 const useAuth = () => React.useContext(AuthContext);
 
 export { AuthProvider, useAuth };
+
+//{userData,recruiterData}

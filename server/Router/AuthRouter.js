@@ -28,11 +28,11 @@ authRouter.post("/login", async (req, res) => {
     if (!userData) {
       return res.status(404).json({ message: "Invalid email" });
     }
-    // const isValidPassword = await bcrypt.compare(
-    //   password,
-    //   userData[passwordlField]
-    // );
-    const isValidPassword = password === userData[passwordlField];
+    const isValidPassword = await bcrypt.compare(
+      password,
+      userData[passwordlField]
+    );
+
     if (!isValidPassword) {
       return res.status(401).json({ message: "Invalid password" });
     }

@@ -1,6 +1,7 @@
 import { createContext, useState, useContext } from "react";
 import axios from "axios";
 import { createClient } from "@supabase/supabase-js";
+import { useNavigate } from "react-router-dom";
 
 // dotenv.config();
 
@@ -8,6 +9,7 @@ const UserContext = createContext();
 
 const ContextProvider = ({ children }) => {
   // chakra style
+  const navigate = useNavigate();
   const customTextStyle = {
     fontFamily: "Inter",
     fontSize: "10px",
@@ -50,8 +52,6 @@ const ContextProvider = ({ children }) => {
   // handle submit
 
   const handleSubmit = async () => {
-
-
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
     const supabase = createClient(supabaseUrl, supabaseAnonKey);
@@ -60,7 +60,7 @@ const ContextProvider = ({ children }) => {
       if (userType === "PROFESSIONAL") {
         const { data, error } = await supabase.storage
           .from("files")
-          .upload(`professionalcv/${cv.name}`, cv, {
+          .upload(`professionalcv/${Date.now()}${cv.name}`, cv, {
             cacheControl: "3600",
             upsert: false,
           });
@@ -80,12 +80,13 @@ const ContextProvider = ({ children }) => {
           "http://localhost:4000/users/register-professional",
           professionalData
         );
-        console.log(response.data)
+        console.log(response.data);
+        navigate("/login");
       }
       if (userType === "RECRUITER") {
         const { data, error } = await supabase.storage
           .from("files")
-          .upload(`companyicon/${logo.name}`, logo, {
+          .upload(`companyicon/${Date.now()}${logo.name}`, logo, {
             cacheControl: "3600",
             upsert: false,
           });
@@ -95,7 +96,7 @@ const ContextProvider = ({ children }) => {
         const recruiterData = {
           recruiter_email: recruiterEmail,
           recruiter_password: recruiterPassword,
-          company_name: companyName,          
+          company_name: companyName,
           company_website: companyWebsite,
           company_description: aboutCompany,
           logo: urlPath.data.publicUrl,
@@ -108,6 +109,7 @@ const ContextProvider = ({ children }) => {
           recruiterData
         );
         console.log("Registration successful");
+        navigate("/login");
       }
       console.log(response.data);
     } catch (error) {

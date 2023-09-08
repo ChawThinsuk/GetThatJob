@@ -34,7 +34,7 @@ function RecruiterFormProgress() {
       <div className="flex flex-col w-[100%] items-end font-[Inter]">
         {/* Register */}
         <div className="flex flex-col w-[80%] ">
-          <div className="flex">
+          <div className="flex cursor-pointer">
             <div
               className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] rounded-full
              text-white text-center font-semibold flex items-center justify-center"
@@ -46,7 +46,12 @@ function RecruiterFormProgress() {
               <p>Login</p>
               <p>Information</p>
             </div>
-            <div className="mr-4 w-[32px] h-[32px] bg-[#E1E2E1] rounded-full text-white text-center font-semibold flex items-center justify-center">
+            <div
+              onClick={() => {
+                setRecruiterRegisterPage(recruiterRegisterPage + 1);
+              }}
+              className="mr-4 w-[32px] h-[32px] bg-[#E1E2E1] rounded-full text-white text-center font-semibold flex items-center justify-center"
+            >
               2
             </div>
             <div className="mr-4 text-[16px] ]">

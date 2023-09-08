@@ -32,8 +32,13 @@ function TalentFormProgress2() {
       <div className="flex flex-col w-full items-end font-[Inter] ">
         {/* Register */}
         <div className="flex flex-col w-[80%]">
-          <div className="flex">
-            <div className="mr-4 w-[32px] h-[32px] bg-[#616161] rounded-full text-white text-center font-semibold flex items-center justify-center">
+          <div className="flex cursor-pointer">
+            <div
+              onClick={() => {
+                setRegisterPage(registerPage - 1);
+              }}
+              className="mr-4 w-[32px] h-[32px] bg-[#373737] rounded-full text-white text-center font-semibold flex items-center justify-center"
+            >
               1
             </div>
             <div className="mr-4 text-[16px]">
@@ -49,7 +54,12 @@ function TalentFormProgress2() {
               <p>Personal</p>
               <p>Information</p>
             </div>
-            <div className="mr-4 w-[32px] h-[32px] bg-[#E1E2E1] rounded-full text-white text-center font-semibold flex items-center justify-center">
+            <div
+              onClick={() => {
+                setRegisterPage(registerPage + 1);
+              }}
+              className="mr-4 w-[32px] h-[32px] bg-[#E1E2E1] rounded-full text-white text-center font-semibold flex items-center justify-center"
+            >
               3
             </div>
             <div className="text-[16px] text-[#8E8E8E]">

@@ -31,10 +31,10 @@ function TalentFormProgress() {
       <div className="flex flex-col w-[100%] items-end font-[Inter]">
         {/* Register */}
         <div className="flex flex-col w-[80%] ">
-          <div className="flex">
+          <div className="flex cursor-pointer">
             <div
               className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] rounded-full
-           text-white text-center font-semibold flex items-center justify-center"
+           text-white text-center font-semibold flex items-center justify-center "
             >
               1
             </div>
@@ -43,7 +43,12 @@ function TalentFormProgress() {
               <Text>Login</Text>
               <Text>Information</Text>
             </div>
-            <div className="mr-4 w-[32px] h-[32px] bg-[#E1E2E1] rounded-full text-white text-center font-semibold flex items-center justify-center">
+            <div
+              onClick={() => {
+                setRegisterPage(registerPage + 1);
+              }}
+              className="mr-4 w-[32px] h-[32px] bg-[#E1E2E1] rounded-full text-white text-center font-semibold flex items-center justify-center"
+            >
               2
             </div>
             <div className="mr-4 text-[16px] text-[#8E8E8E]">
@@ -51,10 +56,20 @@ function TalentFormProgress() {
               <Text>Personal</Text>
               <Text>Information</Text>
             </div>
-            <div className="mr-4 w-[32px] h-[32px] bg-[#E1E2E1] rounded-full text-white text-center font-semibold flex items-center justify-center">
+            <div
+              onClick={() => {
+                setRegisterPage(registerPage + 2);
+              }}
+              className="mr-4 w-[32px] h-[32px] bg-[#E1E2E1] rounded-full text-white text-center font-semibold flex items-center justify-center"
+            >
               3
             </div>
-            <div className="text-[16px] text-[#8E8E8E]">
+            <div
+              onClick={() => {
+                setRegisterPage(registerPage + 2);
+              }}
+              className="text-[16px] text-[#8E8E8E]"
+            >
               <Text className="text-[10px]">PENDING</Text>
               <Text>Login</Text>
               <Text>Professional</Text>

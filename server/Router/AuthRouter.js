@@ -15,7 +15,7 @@ authRouter.post("/login", async (req, res) => {
   const emailField =
     userType === "PROFESSIONAL" ? "professional_email" : "recruiter_email";
   const passwordlField =
-    professionalType === "PROFESSIONAL"
+    userType === "PROFESSIONAL"
       ? "professional_password"
       : "recruiter_password";
   try {
@@ -28,17 +28,18 @@ authRouter.post("/login", async (req, res) => {
     if (!userData) {
       return res.status(404).json({ message: "Invalid email" });
     }
-    // const isValidPassword = await bcrypt.compare(
-    //   password,
-    //   userData[passwordlField]
-    // );
-    const isValidPassword = password === userData[passwordlField];
+    const isValidPassword = await bcrypt.compare(
+      password,
+      userData[passwordlField]
+    );
+      console.log(isValidPassword)
     if (!isValidPassword) {
       return res.status(401).json({ message: "Invalid password" });
     }
     const token = jwt.sign(
       {
         id: userData[idField],
+        userType: userType,
       },
       process.env.SECRET_KEY,
       { expiresIn: "90000000" }

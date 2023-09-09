@@ -11,8 +11,6 @@ const getState = () => {
 function AuthProvider(props) {
   const [state, setState] = useState(getState());
 
-
-
   const login = async (data) => {
     try {
       const response = await axios.post(
@@ -30,13 +28,10 @@ function AuthProvider(props) {
     }
   };
 
-  const register = async (data) => {};
-
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('state');
     setState({ ...state, id: null, userType: null });
-
   };
 
   const isAuthenticated = Boolean(localStorage.getItem('token'));
@@ -48,9 +43,7 @@ function AuthProvider(props) {
   );
 }
 
-// this is a hook that consume AuthContext
 const useAuth = () => React.useContext(AuthContext);
 
 export { AuthProvider, useAuth };
 
-//{userData,recruiterData}

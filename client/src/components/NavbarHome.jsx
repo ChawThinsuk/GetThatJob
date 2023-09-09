@@ -1,4 +1,4 @@
-import { useAuth } from '../contexts/authentication';
+import { useAuth } from '../contexts/Authorization';
 import icon from '../assets/gtj-logo 1.svg';
 import search from '../../img/search.png';
 import paper from '../../img/paper.png';
@@ -57,7 +57,7 @@ export const NavbarHomepage = () => {
           className='flex flex-rows justify-start items-center w-full h-[48px] p-4 hover:cursor-pointer'
           onClick={() => {
             logout();
-            navigate('/');
+            navigate('/login');
           }}
         >
           <img src={logoutlogo} className='p-2' />

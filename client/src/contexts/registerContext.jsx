@@ -2,7 +2,7 @@ import { createContext, useState, useContext } from "react";
 import axios from "axios";
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
-
+import { useToast } from "@chakra-ui/react";
 // dotenv.config();
 
 const UserContext = createContext();
@@ -19,6 +19,25 @@ const ContextProvider = ({ children }) => {
     letterSpacing: "1.5px",
     textTransform: "uppercase",
   };
+
+  function ToastExample() {
+    const toast = useToast();
+    return (
+      <Button
+        onClick={() =>
+          toast({
+            title: "Account created.",
+            description: "We've created your account for you.",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          })
+        }
+      >
+        Show Toast
+      </Button>
+    );
+  }
 
   // register page context
   const [userType, setUserType] = useState("PROFESSIONAL");
@@ -82,6 +101,7 @@ const ContextProvider = ({ children }) => {
         );
         console.log(response.data);
         navigate("/login");
+        ToastExample();
       }
       if (userType === "RECRUITER") {
         const { data, error } = await supabase.storage
@@ -110,6 +130,7 @@ const ContextProvider = ({ children }) => {
         );
         console.log("Registration successful");
         navigate("/login");
+        ToastExample();
       }
       console.log(response.data);
     } catch (error) {

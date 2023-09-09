@@ -4,8 +4,8 @@ import bcrypt from 'bcrypt';
 import { pool } from '../utils/db.js';
 import dotenv from 'dotenv';
 dotenv.config();
-const authRouter = Router();
 
+const authRouter = Router();
 authRouter.post('/login', async (req, res) => {
   const { userType, email, password } = req.body;
   try {

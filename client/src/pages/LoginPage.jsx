@@ -2,12 +2,12 @@ import { useState } from 'react';
 import man from '../../img/man.png';
 import { useAuth } from '../contexts/Authorization';
 import Navbar from '../components/navbar';
-
+import { Spinner } from '@chakra-ui/react';
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState('PROFESSIONAL');
-  const { login } = useAuth();
+  const { login, loading } = useAuth();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -18,7 +18,18 @@ function LoginPage() {
     });
   };
   return (
-    <div>
+    <div className='relative'>
+      {loading && (
+        <div className='absolute z-50 w-screen h-screen opacity-80 bg-white flex justify-center items-center'>
+          <Spinner
+            thickness='4px'
+            speed='0.65s'
+            emptyColor='gray.200'
+            color='#F48FB1'
+            size='xl'
+          />
+        </div>
+      )}
       <Navbar />
       <div className='flex flex-row justify-center items-start bg-[#F5F5F6] w-srceen h-[1000px] gap-[60px] pt-[200px]'>
         <form className='ml-[150px] mr-[60px]' onSubmit={handleSubmit}>
@@ -83,7 +94,7 @@ function LoginPage() {
           <div className='mt-2 flex flex-row justify-end'>
             <button
               type='submit'
-              className='rounded-[16px] bg-[#F48FB1] text-white text-[16px] w-[80px] h-[40px]'
+              className='rounded-[16px] bg-[#F48FB1] text-white text-[16px] w-[80px] h-[40px] hover:bg-[#d77696]'
             >
               LOGIN
             </button>

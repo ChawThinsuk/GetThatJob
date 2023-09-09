@@ -8,7 +8,6 @@ import RegisterRouter from './Router/RegisterRouter.js';
 async function init() {
   const app = express();
   const PORT = process.env.PORT || 4000;
-
   app.use(bodyParser.json());
   app.use(cors());
   app.use(express.json());

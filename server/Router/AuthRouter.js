@@ -44,7 +44,6 @@ authRouter.post("/login", async (req, res) => {
       process.env.SECRET_KEY,
       { expiresIn: "90000000" }
     );
-    console.log(token)
     return res.status(200).json({ message: "Login success", token });
   } catch (error) {
     return res.status(500).json({ message: error });

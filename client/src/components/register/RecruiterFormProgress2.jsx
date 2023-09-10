@@ -106,7 +106,9 @@ function RecruiterFormProgress2() {
                 Upload the company logo
               </p>
               <UploadPdf />
-              <p className="mt-2 text-[#8E8E8E]">Only PDF. Max size 5MB</p>
+              <p className="mt-2 text-[#8E8E8E]">
+                Only JPG,JPEG,PNG. Max size 5MB
+              </p>
               <center>
                 <Button
                   mt={8}

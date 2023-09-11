@@ -23,20 +23,21 @@ function AuthProvider(props) {
       );
       setLoading(false);
       const token = response.data.token;
-      localStorage.setItem('token', token);
       const userDataFromToken = jwtDecode(token);
+      //Save token and data in local storage
+      localStorage.setItem('token', token);
       localStorage.setItem('state', JSON.stringify(userDataFromToken));
       setState(getState());
     } catch (error) {
+      setLoading(false);
       console.log('error', error);
-      setState({ ...state, error, loading: false });
     }
   };
 
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('state');
-    setState({ ...state, id: null, userType: null });
+    setState({ ...state, userID: null, userType: null });
   };
 
   const isAuthenticated = Boolean(localStorage.getItem('token'));

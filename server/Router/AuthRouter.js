@@ -11,7 +11,7 @@ authRouter.post('/login', async (req, res) => {
   try {
     // query data from users record and check for existance of email
     let userData = await pool.query(
-      `SELECT * FROM users WHERE email = $1 AND usertype = $2`,
+      `SELECT * FROM users WHERE email = $1 AND user_type = $2`,
       [email, userType]
     );
     userData = userData.rows[0];
@@ -24,10 +24,10 @@ authRouter.post('/login', async (req, res) => {
     if (!isValidPassword) {
       return res.status(401).json({ message: 'Invalid password' });
     }
-    // Tokeen generate with sign id and userType data
+    // Token generation with signing userID and userType data
     const token = jwt.sign(
       {
-        id: userData.user_id,
+        userID: userData.user_id,
         userType: userType,
       },
       process.env.SECRET_KEY,

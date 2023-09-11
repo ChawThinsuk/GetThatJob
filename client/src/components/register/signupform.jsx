@@ -19,7 +19,7 @@ function Professional() {
   // page = x
 
   return (
-    <div className="flex w-full mt-10">
+    <div className="flex w-full h-[50rem] mt-10">
       {/* Left */}
       <div className="flex flex-col w-[50%] font-[Inter]">
         <SelectType />
@@ -40,7 +40,7 @@ function Professional() {
         )}
       </div>
       {/* Right */}
-      <div className="flex w-[50%] justify-center items-end">
+      <div className="flex w-[50%]  justify-center items-end">
         <img src={pointingGirl} alt="" width="50%" />
       </div>
     </div>

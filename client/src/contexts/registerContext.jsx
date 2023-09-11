@@ -2,7 +2,7 @@ import { createContext, useState, useContext } from "react";
 import axios from "axios";
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
-
+import { useToast } from "@chakra-ui/react";
 // dotenv.config();
 
 const UserContext = createContext();
@@ -10,6 +10,7 @@ const UserContext = createContext();
 const ContextProvider = ({ children }) => {
   // chakra style
   const navigate = useNavigate();
+  const toast = useToast();
   const customTextStyle = {
     fontFamily: "Inter",
     fontSize: "10px",
@@ -64,6 +65,7 @@ const ContextProvider = ({ children }) => {
             cacheControl: "3600",
             upsert: false,
           });
+
         const professionalData = {
           professional_email: email,
           professional_password: password,
@@ -76,13 +78,28 @@ const ContextProvider = ({ children }) => {
           education: educationalInfo,
           cv: data.path,
         };
+
         const response = await axios.post(
           "http://localhost:4000/users/register-professional",
           professionalData
         );
+
         console.log(response.data);
-        navigate("/login");
+
+        toast({
+          title: "Account created.",
+          description: "We've created your account for you.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+
+        // Add a delay before navigating to the login page
+        setTimeout(() => {
+          navigate("/login");
+        }, 3500); // 3500 milliseconds = 3.5 seconds
       }
+
       if (userType === "RECRUITER") {
         const { data, error } = await supabase.storage
           .from("files")
@@ -108,10 +125,22 @@ const ContextProvider = ({ children }) => {
           "http://localhost:4000/users/register-recruiter",
           recruiterData
         );
+
         console.log("Registration successful");
-        navigate("/login");
+
+        toast({
+          title: "Account created.",
+          description: "We've created your account for you.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+
+        // Add a delay before navigating to the login page
+        setTimeout(() => {
+          navigate("/login");
+        }, 3500); // 3500 milliseconds = 3.5 seconds
       }
-      console.log(response.data);
     } catch (error) {
       console.log("Registration error", error);
     }

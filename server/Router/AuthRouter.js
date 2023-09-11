@@ -19,8 +19,7 @@ authRouter.post('/login', async (req, res) => {
       return res.status(404).json({ message: 'Invalid email' });
     }
     // compare password with bcrypt
-    const isValidPassword = password === userData.password;
-    // const isValidPassword = await bcrypt.compare(password, userData.password);
+    const isValidPassword = await bcrypt.compare(password, userData.password);
     if (!isValidPassword) {
       return res.status(401).json({ message: 'Invalid password' });
     }

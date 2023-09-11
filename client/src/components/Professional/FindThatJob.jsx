@@ -1,5 +1,5 @@
-import find from "../../../img/find.png";
-import money from "../../../img/money.png";
+import find from "../../assets/FindThatJob/find.svg";
+import money from "../../assets/FindThatJob/money.svg";
 import { useEffect, useState } from "react";
 export const FindThatJob = ()=>{
   const [job, setJob] = useState()

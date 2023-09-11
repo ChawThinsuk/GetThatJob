@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import man from '../../img/man.png';
+import man from '../assets/man.svg';
 import { useAuth } from '../contexts/Authorization';
 import Navbar from '../components/navbar';
 import { Spinner } from '@chakra-ui/react';

@@ -5,6 +5,7 @@ import './index.css';
 import { ContextProvider } from '../src/contexts/registerContext.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './contexts/Authorization.jsx';
+import { ProProvider } from './contexts/Professional.jsx';
 import jwtInterceptor from './utils/jwtIntercepter.jsx';
 import { QueryClient, QueryClientProvider} from 'react-query';
 
@@ -15,9 +16,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <ContextProvider>
-            <App />
-          </ContextProvider>
+          <ProProvider>
+            <ContextProvider>
+              <App />
+            </ContextProvider>
+          </ProProvider>
         </AuthProvider>
       </QueryClientProvider>
     </BrowserRouter>

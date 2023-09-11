@@ -1,8 +1,6 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { useGlobalContext } from "../contexts/registerContext.jsx";
-import Navbar from "../components/navbar.jsx";
-import SignupForm from "../components/register/signupform.jsx";
+import { ChakraProvider } from '@chakra-ui/react';
+import Navbar from '../components/navbar.jsx';
+import SignupForm from '../components/register/signupform.jsx';
 
 function RegisterPage() {
   return (

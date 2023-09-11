@@ -1,5 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
-import { useAuth } from '../contexts/authentication';
+import { useAuth } from '../contexts/Authorization';
 import { HomepageProfessional } from './HomepageProfessional';
 import { HomepageRecruiter } from './HomepageRecruiter';
 function AuthenticatedApp() {

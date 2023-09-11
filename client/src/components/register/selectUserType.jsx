@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useGlobalContext } from "../../contexts/registerContext";
 
 function SelectType() {
-  // const [userType, setUserType] = useState("PROFESSIONAL");
   const { userType, setUserType } = useGlobalContext();
 
   return (

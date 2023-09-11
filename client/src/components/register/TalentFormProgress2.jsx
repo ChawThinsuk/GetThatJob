@@ -8,6 +8,9 @@ import {
   Input,
   Stack,
   Text,
+  InputGroup,
+  InputLeftAddon,
+  FormHelperText,
 } from "@chakra-ui/react";
 import { useGlobalContext } from "../../contexts/registerContext.jsx";
 
@@ -89,18 +92,23 @@ function TalentFormProgress2() {
                 </FormControl>
                 <FormControl id="phone" isRequired>
                   <FormLabel sx={customTextStyle}>Phone</FormLabel>
-                  <Input
-                    borderColor="#F48FB1"
-                    type="tel"
-                    placeholder="Enter your phone number"
-                    value={phone}
-                    onChange={(event) => {
-                      setPhone(event.target.value);
-                    }}
-                  />
-                  <span className="text-[#8E8E8E] text-[12px] lowercase">
+                  <InputGroup>
+                    <InputLeftAddon children="+66" />
+                    <Input
+                      borderColor="#F48FB1"
+                      type="tel"
+                      placeholder="Enter your phone number"
+                      value={phone}
+                      maxLength={9}
+                      onChange={(event) => {
+                        setPhone(event.target.value);
+                      }}
+                      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                    />
+                  </InputGroup>
+                  <FormHelperText className="text-[#8E8E8E] text-[12px] lowercase">
                     +[country code][number]
-                  </span>
+                  </FormHelperText>
                 </FormControl>
                 <FormControl id="birthDate" isRequired>
                   <FormLabel sx={customTextStyle}>BIRTHDATE</FormLabel>

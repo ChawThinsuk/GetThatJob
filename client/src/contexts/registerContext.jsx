@@ -67,8 +67,9 @@ const ContextProvider = ({ children }) => {
           });
 
         const professionalData = {
-          professional_email: email,
-          professional_password: password,
+          email: email,
+          password: password,
+          user_type: userType,
           username: name,
           phone: phone,
           birthdate: birthDate,
@@ -111,8 +112,9 @@ const ContextProvider = ({ children }) => {
         const urlPath = supabase.storage.from("files").getPublicUrl(data.path);
 
         const recruiterData = {
-          recruiter_email: recruiterEmail,
-          recruiter_password: recruiterPassword,
+          email: recruiterEmail,
+          password: recruiterPassword,
+          user_type: userType,
           company_name: companyName,
           company_website: companyWebsite,
           company_description: aboutCompany,

@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import uploadlogo from "../../assets/register-images/pdf-upload.svg";
 import { useGlobalContext } from "../../contexts/registerContext";
+import { useToast } from "@chakra-ui/react";
 
 const UploadPdf = () => {
   const { cv, setCv, logo, setLogo, userType } = useGlobalContext();
+  const [selectedFileName, setSelectedFileName] = useState(null);
+  const toast = useToast();
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -11,29 +14,51 @@ const UploadPdf = () => {
       if (file) {
         if (file.type === "application/pdf" && file.size <= 5 * 1024 * 1024) {
           setCv(file);
+          setSelectedFileName(file.name);
         } else {
           setCv(null);
+          setSelectedFileName(null);
+          toast({
+            title: "Wrong file type or size",
+            description: "Please upload a PDF file under 5MB.",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
         }
+      } else {
+        // No file selected, clear the selected file and file name
+        setCv(null);
+        setSelectedFileName(null);
       }
     }
     if (userType === "RECRUITER") {
       if (file) {
-        if (file.size <= 5 * 1024 * 1024) {
+        // Check for allowed file types (JPG and PNG)
+        if (
+          /(jpg|jpeg|png)$/i.test(file.type) &&
+          file.size <= 5 * 1024 * 1024
+        ) {
           setLogo(file);
+          setSelectedFileName(file.name);
         } else {
           setLogo(null);
+          setSelectedFileName(null);
+          toast({
+            title: "Wrong file type or size",
+            description: "Please upload a JPG or PNG file under 5MB.",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
         }
+      } else {
+        // No file selected, clear the selected file and file name
+        setLogo(null);
+        setSelectedFileName(null);
       }
     }
   };
-
-  // const handleSubmit = () => {
-  //   // Handle the file submission logic here
-  //   if (selectedFile) {
-  //     console.log(`Uploading file: ${selectedFile.name}`);
-  //     // You can send the file to a server or perform any other action here
-  //   }
-  // };
 
   return (
     <div className="mx-auto bg-white rounded-lg flex">
@@ -42,46 +67,73 @@ const UploadPdf = () => {
         id="pdf-upload"
         className="hidden"
         onChange={handleFileChange}
+        accept={
+          userType === "PROFESSIONAL"
+            ? ".pdf"
+            : userType === "RECRUITER"
+            ? ".jpg,.jpeg,.png"
+            : undefined // Allow any file type if not specified
+        }
       />
       <label
         htmlFor="pdf-upload"
         className="cursor-pointer flex items-center justify-center w-[160px] h-auto p-[13px] rounded-xl bg-[#F48FB1] text-white hover:bg-pink-600 transition duration-300"
       >
         <img src={uploadlogo} className="pr-2" alt="logo" />
-        Choose a file
+        {userType === "PROFESSIONAL"
+          ? "Choose a file"
+          : userType === "RECRUITER"
+          ? "Choose a file"
+          : "Choose a file"}
       </label>
+
+      {selectedFileName ? (
+        <div className="mt-4 ml-4">
+          <p>File selected: {selectedFileName}</p>
+        </div>
+      ) : (
+        <div className="ml-4 mt-3">
+          <p>No file chosen</p>
+        </div>
+      )}
 
       {cv && (
         <div className="mt-2">
-          <p>File selected: {cv}</p>
+          <p>File selected: {cv.name}</p>
         </div>
       )}
-      {cv === null && (
+      {cv === null && userType === "PROFESSIONAL" && (
         <div className="ml-4 mt-3">
-          <p>No file choosen</p>
+          <p>No file chosen</p>
         </div>
       )}
-      {cv === null && (
+      {/* {cv === null && (
         <div id="file-error" className="text-red-600 mt-2 hidden">
-          Invalid file. Please choose a PDF file under 5MB.
+          {userType === "PROFESSIONAL"
+            ? "Invalid file. Please choose a PDF file under 5MB."
+            : userType === "RECRUITER"
+            ? "Invalid file. Please choose a JPG or PNG file under 5MB."
+            : "Invalid file. Please choose a valid file under 5MB."}
         </div>
-      )}
+      )} */}
 
       {logo && (
         <div className="mt-2">
-          <p>File selected: {logo}</p>
+          <p>File selected: {logo.name}</p>
         </div>
       )}
-      {logo === null && (
+      {logo === null && userType === "RECRUITER" && (
         <div className="ml-4 mt-3">
-          <p>No file choosen</p>
+          <p>No file chosen</p>
         </div>
       )}
-      {logo === null && (
+      {/* {logo === null && (
         <div id="file-error" className="text-red-600 mt-2 hidden">
-          Invalid file. Please choose a PDF file under 5MB.
+          {userType === "RECRUITER"
+            ? "Invalid file. Please choose a JPG or PNG file under 5MB."
+            : "Invalid file. Please choose a valid file under 5MB."}
         </div>
-      )}
+      )} */}
     </div>
   );
 };

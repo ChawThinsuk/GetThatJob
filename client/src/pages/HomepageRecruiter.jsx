@@ -1,6 +1,6 @@
 import { NavbarHomepage } from '../components/NavbarHome';
 import { Routes, Route } from 'react-router-dom';
-import { useAuth } from '../contexts/authentication';
+import { useAuth } from '../contexts/Authorization';
 import { CreateNewJob } from '../components/Recruiter/CreateNewJob';
 import { JobPosting } from '../components/Recruiter/JobPosting';
 import { RecruiterProfile } from '../components/Recruiter/RecruiterProfile';

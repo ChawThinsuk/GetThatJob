@@ -1,5 +1,5 @@
 import { NavbarHomepage } from '../components/NavbarHome';
-import { useAuth } from '../contexts/authentication';
+import { useAuth } from '../contexts/Authorization';
 import { Routes, Route } from 'react-router-dom';
 import { FindThatJob } from '../components/Professional/FindThatJob';
 import { Following } from '../components/Professional/Following';

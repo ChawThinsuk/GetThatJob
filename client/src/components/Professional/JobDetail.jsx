@@ -27,15 +27,15 @@ export const JobDetail = () => {
             <img src='../../../img/user.png' className='w-[80px] h-[80px]' />
             <div>
               <p className='text-[24px] font-[Montserrat]'>The companay name</p>
-              <div className='flex items-center gap-[4px]'>
+              <div className='flex items-center gap-[4px] w-[120px] hover:cursor-pointer '>
                 <img src={followOn} className='w-[40px] h-[40px]' />
-                <p className='text-[14px]  text-[#616161] font-[Inter] font-[400] tracking-[1.25px]'>
+                <p className=' text-[14px]  text-[#616161] font-[Inter] font-[400] tracking-[1.25px]'>
                   Following
                 </p>
               </div>
             </div>
           </div>
-          <button className='flex items-center justify-center gap-[8px] bg-[#F48FB1] w-[173px] h-[56px] py-[16px] px-[20px] rounded-[16px]'>
+          <button className='flex items-center justify-center gap-[8px] bg-[#F48FB1] hover:bg-[#e786a6] w-[173px] h-[56px] py-[16px] px-[20px] rounded-[16px] transition-all duration-300'>
             <img src={applyicon} className='w-[24px] h-[24px]' />
             <p className='text-[14px] text-white font-[Inter] tracking-[1.25px] '>
               APPLY NOW
@@ -159,7 +159,7 @@ export const JobDetail = () => {
             })}
           </div>
           <div className='flex justify-center mt-5'>
-            <button className='flex items-center justify-center gap-[8px] bg-[#F48FB1] w-[173px] h-[56px] py-[16px] px-[20px] rounded-[16px]'>
+            <button className='flex items-center justify-center gap-[8px] bg-[#F48FB1] hover:bg-[#e786a6] w-[173px] h-[56px] py-[16px] px-[20px] rounded-[16px] transition-all duration-300'>
               <img src={applyicon} className='w-[24px] h-[24px]' />
               <p className='text-[14px] text-white font-[Inter] tracking-[1.25px] '>
                 APPLY NOW

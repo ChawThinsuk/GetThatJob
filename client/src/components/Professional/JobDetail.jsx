@@ -5,10 +5,10 @@ import { JobHeader } from './JobHeader';
 import { usePro } from '../../contexts/Professional';
 import { useQuery } from 'react-query';
 import { Spinner } from '@chakra-ui/react';
-
 export const JobDetail = () => {
   const { getSingleJob } = usePro();
   const { id } = useParams();
+  // --------------------------------------Data fetching using react-query----------------------------------------------------
   const { data, isLoading, error } = useQuery(['job', id], () =>
     getSingleJob(id)
   );
@@ -47,7 +47,6 @@ export const JobDetail = () => {
       </div>
     );
   }
-
   if (!data.data.job) {
     return (
       <div className='absolute w-screen h-screen flex flex-col items-center pt-20'>
@@ -70,10 +69,9 @@ export const JobDetail = () => {
       </div>
     );
   }
-
+  // destructure data
   let { company_description, job_position, job_mandatory, job_optional } =
     data.data.job;
-
   return (
     <div className='flex flex-col w-full min-h-screen bg-[#F5F5F6] pt-8 pl-[10%] pr-[10%] pb-[40px]'>
       <Link to='/'>
@@ -83,7 +81,7 @@ export const JobDetail = () => {
         </button>
       </Link>
       <div className='flex flex-col mt-[10px]'>
-        <JobHeader />
+        <JobHeader data={data.data.job} />
         {/*------------------------------------------------------Job Detail Section-----------------------------------------------*/}
         <section className='flex flex-col mt-[54px] px-[16px] gap-[16px]'>
           <div className='flex flex-col gap-[8px]'>

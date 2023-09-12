@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-
+import axios from 'axios';
 const ProContext = React.createContext();
 
 function ProProvider(props) {
-    const [type, setType] = useState("Hello")
-    
-    return (
-        <ProContext.Provider
-        value={{type, setType}}
-        >
-            {props.children}
-        </ProContext.Provider>
-    );
+  const getSingleJob = async (id) => {
+    return axios.get(`http://localhost:4000/pro/job/${id}`);
+  };
+
+  return (
+    <ProContext.Provider value={{ getSingleJob }}>
+      {props.children}
+    </ProContext.Provider>
+  );
 }
 
 const usePro = () => React.useContext(ProContext);

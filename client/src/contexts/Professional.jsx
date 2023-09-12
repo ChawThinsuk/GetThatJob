@@ -15,16 +15,19 @@ const dayAgo = (date) => {
   const timeDifferent = currentDate - createDate;
   return Math.floor(timeDifferent / (1000 * 60 * 60 * 24));
 };
-const getJobs = async ({category}) => {
-try {
-setIsLoading(true);
-const result = await axios.get(`http://localhost:4000/big?test=${category}&id=1`);
-setJobs(result.data.data.rows);
-console.log(result.data);
-setIsLoading(false);
-}catch(error){
-console.log("error", error)
-}
+const getJobs = async ({ category }) => {
+  try {
+    setIsLoading(true);
+    const result = await axios.get(
+      `http://localhost:4000/big?test=${category}&id=1`
+    );
+    setJobs(result.data.data.rows);
+    console.log(result.data);
+    setIsLoading(false);
+  } catch (error) {
+    console.log("error", error);
+  }
+};
 }
 return (
 <ProContext.Provider
@@ -33,7 +36,6 @@ value={{jobs, setJobs, getJobs, isLoading, getSingleJob, dayAgo}}
 {props.children}
 </ProContext.Provider>
 );
-}
 
 const usePro = () => React.useContext(ProContext);
 

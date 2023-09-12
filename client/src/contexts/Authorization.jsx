@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import jwtDecode from 'jwt-decode';
-import { useQuery } from 'react-query';
 import axios from 'axios';
 
 const AuthContext = React.createContext();

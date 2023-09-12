@@ -1,12 +1,79 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import leftArrow from '../../assets/pro2/leftArrow.svg';
 import applyicon from '../../assets/pro2/applyicon.svg';
 import { JobHeader } from './JobHeader';
+import { usePro } from '../../contexts/Professional';
+import { useQuery } from 'react-query';
+import { Spinner } from '@chakra-ui/react';
 
 export const JobDetail = () => {
-  let text =
-    '- Lorem ipsum dolor sit amet, consectetur adipiscing elit. - Aeneanaliquam turpis eget egestas porta. - Quisque tristique nuncut sempretium bibendum. - Phasellus sit amet turpis laoreet, mattis elitut, luctus ligula. - Nullam blandit arcu eget justohendreritfinibus.';
-  const paragraph = text.split('- ').filter(Boolean);
+  const { getSingleJob } = usePro();
+  const { id } = useParams();
+  const { data, isLoading, error } = useQuery(['job', id], () =>
+    getSingleJob(id)
+  );
+  if (isLoading) {
+    return (
+      <div className='w-screen h-screen opacity-80 bg-white flex justify-center items-center'>
+        <Spinner
+          thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='#F48FB1'
+          size='xl'
+        />
+      </div>
+    );
+  }
+  if (error) {
+    return (
+      <div className='absolute w-screen h-screen flex flex-col items-center pt-20'>
+        <h1 className='text-[3rem] font-bold text-[#373737] '>
+          Something wrong
+        </h1>
+        <div className='flex mt-5 gap-10'>
+          <Link to='/'>
+            <h1 className=' text-blue-700 text-[1.2rem] underline hover:cursor-pointer hover:text-blue-800'>
+              Back to homepage
+            </h1>
+          </Link>
+          <h1
+            className=' text-blue-700 text-[1.2rem] underline hover:cursor-pointer hover:text-blue-800'
+            onClick={() => window.location.reload(true)}
+          >
+            Retry
+          </h1>
+        </div>
+      </div>
+    );
+  }
+
+  if (!data.data.job) {
+    return (
+      <div className='absolute w-screen h-screen flex flex-col items-center pt-20'>
+        <h1 className='text-[3rem] font-bold text-[#373737] '>
+          JOB NOT FOUNDED
+        </h1>
+        <div className='flex mt-5 gap-10'>
+          <Link to='/'>
+            <h1 className=' text-blue-700 text-[1.2rem] underline hover:cursor-pointer hover:text-blue-800'>
+              Back to homepage
+            </h1>
+          </Link>
+          <h1
+            className=' text-blue-700 text-[1.2rem] underline hover:cursor-pointer hover:text-blue-800'
+            onClick={() => window.location.reload(true)}
+          >
+            Retry
+          </h1>
+        </div>
+      </div>
+    );
+  }
+
+  let { company_description, job_position, job_mandatory, job_optional } =
+    data.data.job;
+
   return (
     <div className='flex flex-col w-full min-h-screen bg-[#F5F5F6] pt-8 pl-[10%] pr-[10%] pb-[40px]'>
       <Link to='/'>
@@ -24,17 +91,7 @@ export const JobDetail = () => {
               About The company name SA
             </h1>
             <p className='w-[760px] text-[16px] text-[#373737] font-[400] font-[Inter] leading-[24px] tracking-[0.5px]'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Pellentesque porta nunc viverra velit tincidunt, non vehicula
-              augue vehicula. Donec viverra luctus nisl, sed vehicula ligula.
-              Vivamus maximus metus a magna fermentum ullamcorper. Phasellus
-              ultrices vestibulum ligula ut pellentesque. Quisque quis congue
-              quam. Nunc porttitor risus lorem, in blandit augue iaculis vitae.
-              Cras sit amet fringilla neque. Fusce ac elit ut quam ultrices
-              bibendum. Curabitur vitae dignissim quam. Suspendisse aliquet
-              massa id orci volutpat ullamcorper. Nunc at ante sem. Etiam
-              elementum, mi eget aliquam lobortis, elit libero tempus ex, vel
-              pretium nisi risus ac augue.
+              {company_description}
             </p>
           </div>
           <div className='flex flex-col gap-[8px]'>
@@ -42,48 +99,46 @@ export const JobDetail = () => {
               About the job position
             </h1>
             <p className='w-[760px] text-[16px] text-[#373737] font-[400] font-[Inter] leading-[24px] tracking-[0.5px]'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              quis diam fringilla, luctus lectus dictum, volutpat lacus. Vivamus
-              lacinia felis ut mauris lacinia elementum. Sed faucibus dapibus
-              egestas. Etiam dolor neque, posuere at purus cursus, molestie
-              eleifend lacus. Aenean eu diam eu enim commodo accumsan ut sit
-              amet odio. Nam maximus varius leo, et porttitor ante sodales ut.
-              Pellentesque euismod commodo nunc ut tincidunt. Sed fringilla nunc
-              leo, a euismod ipsum aliquet placerat. Integer suscipit semper mi,
-              sit amet mollis augue mollis in. Proin vestibulum accumsan elit,
-              id pellentesque diam fermentum eget. Aliquam mattis quis quam ut
-              faucibus. Duis finibus nulla nec enim eleifend dapibus.
+              {job_position}
             </p>
           </div>
           <div className='flex flex-col  gap-[3px]'>
             <h1 className='text-[24px] text-[#BF5F82] font-[400] font-[Montserrat] mb-[5px]'>
               Mandatory Requirements
             </h1>
-            {paragraph.map((text, index) => {
-              return (
-                <p
-                  className='w-[760px] text-[16px] text-[#373737] font-[400] font-[Inter]  tracking-[0.5px]'
-                  key={index}
-                >
-                  - {text}
-                </p>
-              );
-            })}
+            {job_mandatory &&
+              job_mandatory
+                .split('- ')
+                .filter(Boolean)
+                .map((text, index) => {
+                  return (
+                    <p
+                      className='w-[760px] text-[16px] text-[#373737] font-[400] font-[Inter]  tracking-[0.5px]'
+                      key={index}
+                    >
+                      - {text}
+                    </p>
+                  );
+                })}
           </div>{' '}
           <div className='flex flex-col gap-[3px]'>
             <h1 className='text-[24px] text-[#BF5F82] font-[400] font-[Montserrat] mb-[5px]'>
               Optional Requirements
             </h1>
-            {paragraph.map((text, index) => {
-              return (
-                <p
-                  className='w-[760px] text-[16px] text-[#373737] font-[400] font-[Inter] tracking-[0.5px]'
-                  key={index}
-                >
-                  - {text}
-                </p>
-              );
-            })}
+            {job_optional &&
+              job_optional
+                .split('- ')
+                .filter(Boolean)
+                .map((text, index) => {
+                  return (
+                    <p
+                      className='w-[760px] text-[16px] text-[#373737] font-[400] font-[Inter] tracking-[0.5px]'
+                      key={index}
+                    >
+                      - {text}
+                    </p>
+                  );
+                })}
           </div>
           <div className='flex justify-center mt-5'>
             <button className='flex items-center justify-center gap-[8px] bg-[#F48FB1] hover:bg-[#de7b9c] w-[173px] h-[56px] py-[16px] px-[20px] rounded-[16px] transition-all duration-300'>

@@ -7,7 +7,7 @@ proRouter.get('/job/:id', async (req, res) => {
   try {
     const jobID = Number(id);
     const job = await pool.query(
-      'SELECT * FROM jobs INNER JOIN recruiters ON recruiters.recruiter_id = jobs.recruiter_id WHERE jobs.job_id = $1',
+      'SELECT *,jobs.created_at AS job_created_at FROM jobs INNER JOIN recruiters ON recruiters.recruiter_id = jobs.recruiter_id WHERE jobs.job_id = $1',
       [jobID]
     );
     if (!job.rows[0]) {

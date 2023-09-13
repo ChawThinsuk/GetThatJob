@@ -12,6 +12,7 @@ export const JobDetail = () => {
   const { data, isLoading, error } = useQuery(['job', id], () =>
     getSingleJob(id)
   );
+  //------------Loading-----------
   if (isLoading) {
     return (
       <div className='w-screen h-screen opacity-80 bg-white flex justify-center items-center'>
@@ -25,6 +26,7 @@ export const JobDetail = () => {
       </div>
     );
   }
+  //------------Error-----------
   if (error) {
     return (
       <div className='absolute w-screen h-screen flex flex-col items-center pt-20'>
@@ -47,6 +49,7 @@ export const JobDetail = () => {
       </div>
     );
   }
+  //------------No data case-----------
   if (!data.data.job) {
     return (
       <div className='absolute w-screen h-screen flex flex-col items-center pt-20'>
@@ -70,8 +73,13 @@ export const JobDetail = () => {
     );
   }
   // destructure data
-  let { company_description, job_position, job_mandatory, job_optional } =
-    data.data.job;
+  let {
+    company_description,
+    job_position,
+    job_mandatory,
+    job_optional,
+    job_id,
+  } = data.data.job;
   return (
     <div className='flex flex-col w-full min-h-screen bg-[#F5F5F6] pt-8 pl-[10%] pr-[10%] pb-[40px]'>
       <Link to='/'>
@@ -81,7 +89,7 @@ export const JobDetail = () => {
         </button>
       </Link>
       <div className='flex flex-col mt-[10px]'>
-        <JobHeader data={data.data.job} />
+        <JobHeader data={data.data.job} page='jobDetail' />
         {/*------------------------------------------------------Job Detail Section-----------------------------------------------*/}
         <section className='flex flex-col mt-[54px] px-[16px] gap-[16px]'>
           <div className='flex flex-col gap-[8px]'>
@@ -139,12 +147,14 @@ export const JobDetail = () => {
                 })}
           </div>
           <div className='flex justify-center mt-5'>
-            <button className='flex items-center justify-center gap-[8px] bg-[#F48FB1] hover:bg-[#de7b9c] w-[173px] h-[56px] py-[16px] px-[20px] rounded-[16px] transition-all duration-300'>
-              <img src={applyicon} className='w-[24px] h-[24px]' />
-              <p className='text-[14px] text-white font-[Inter] tracking-[1.25px] '>
-                APPLY NOW
-              </p>
-            </button>
+            <Link to={`/apply/${job_id}`}>
+              <button className='flex items-center justify-center gap-[8px] bg-[#F48FB1] hover:bg-[#de7b9c] w-[173px] h-[56px] py-[16px] px-[20px] rounded-[16px] transition-all duration-300'>
+                <img src={applyicon} className='w-[24px] h-[24px]' />
+                <p className='text-[14px] text-white font-[Inter] tracking-[1.25px] '>
+                  APPLY NOW
+                </p>
+              </button>
+            </Link>
           </div>
         </section>
       </div>

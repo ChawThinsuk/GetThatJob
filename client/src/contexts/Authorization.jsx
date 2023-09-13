@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 const AuthContext = React.createContext();
 // set state to localstorage
 const getState = () => {
@@ -10,6 +10,7 @@ const getState = () => {
 };
 
 function AuthProvider(props) {
+  const navigate = useNavigate();
   const [state, setState] = useState(getState());
   const [loading, setLoading] = useState(false);
 
@@ -27,6 +28,7 @@ function AuthProvider(props) {
       localStorage.setItem('token', token);
       localStorage.setItem('state', JSON.stringify(userDataFromToken));
       setState(getState());
+      navigate('/');
     } catch (error) {
       setLoading(false);
       console.log('error', error);

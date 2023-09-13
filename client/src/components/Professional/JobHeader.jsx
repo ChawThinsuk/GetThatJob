@@ -5,10 +5,20 @@ import followOn from '../../assets/pro2/followOn.svg';
 import followOff from '../../assets/pro2/followOff.svg';
 import time from '../../assets/pro2/time.svg';
 import applyicon from '../../assets/pro2/applyicon.svg';
+import { Link } from 'react-router-dom';
 import { usePro } from '../../contexts/Professional';
-
+import { useAuth } from '../../contexts/Authorization';
+import { useEffect } from 'react';
 export const JobHeader = (props) => {
-  const { dayAgo } = usePro();
+  const { state } = useAuth();
+  const {
+    getJobFollowStatus,
+    dayAgo,
+    jobFollow,
+    setJobFollow,
+    updateJobFollowStatus,
+    addJobProfessionalData,
+  } = usePro();
   const {
     logo,
     company_name,
@@ -18,29 +28,80 @@ export const JobHeader = (props) => {
     salary_max,
     salary_min,
     job_created_at,
+    job_id,
   } = props.data;
+
+  useEffect(() => {
+    getJobFollowStatus(state.userID, job_id);
+  }, []);
+
+  const handleChangeStatus = () => {
+    if (jobFollow) {
+      let data = {
+        job_professional_id: jobFollow.job_professional_id,
+        job_professional_follow: !jobFollow.job_user_following,
+      };
+      updateJobFollowStatus(data);
+      setJobFollow({
+        ...jobFollow,
+        job_user_following: !jobFollow.job_user_following,
+      });
+    } else {
+      let data = {
+        userID: state.userID,
+        job_id: job_id,
+      };
+      addJobProfessionalData(data);
+      setJobFollow({ job_user_following: true });
+      getJobFollowStatus(state.userID, job_id);
+    }
+  };
+
   return (
-    <div>
+    <div className='w-[960px]'>
       {/*---------------------------------------------------------Company Logo Section-------------------------------------------*/}
       <section className='flex justify-between mt-[16px]'>
         <div className='flex  gap-[16px]'>
           <img src={logo} className='w-[80px] h-[80px]' />
           <div>
             <p className='text-[24px] font-[Montserrat]'>{company_name}</p>
-            <div className='flex items-center gap-[4px] w-[120px] hover:cursor-pointer '>
-              <img src={followOn} className='w-[40px] h-[40px]' />
+            <div
+              className='flex items-center gap-[4px] w-[120px] hover:cursor-pointer '
+              onClick={handleChangeStatus}
+            >
+              <img
+                src={
+                  jobFollow && jobFollow.job_user_following
+                    ? followOn
+                    : followOff
+                }
+                className='w-[40px] h-[40px]'
+              />
               <p className=' text-[14px]  text-[#616161] font-[Inter] font-[400] tracking-[1.25px]'>
-                Following
+                {jobFollow && jobFollow.job_user_following
+                  ? ' Following'
+                  : 'Follow'}
               </p>
             </div>
           </div>
         </div>
-        <button className='flex items-center justify-center gap-[8px] bg-[#F48FB1] hover:bg-[#de7b9c] w-[173px] h-[56px] py-[16px] px-[20px] rounded-[16px] transition-all duration-300'>
-          <img src={applyicon} className='w-[24px] h-[24px]' />
-          <p className='text-[14px] text-white font-[Inter] tracking-[1.25px] '>
-            APPLY NOW
-          </p>
-        </button>
+        {props.page === 'jobDetail' ? (
+          <Link to={`/apply/${job_id}`}>
+            <button className='flex items-center justify-center gap-[8px] bg-[#F48FB1] hover:bg-[#de7b9c] w-[173px] h-[56px] py-[16px] px-[20px] rounded-[16px] transition-all duration-300'>
+              <img src={applyicon} className='w-[24px] h-[24px]' />
+              <p className='text-[14px] text-white font-[Inter] tracking-[1.25px] '>
+                APPLY NOW
+              </p>
+            </button>
+          </Link>
+        ) : (
+          <button className='flex items-center justify-center gap-[8px] bg-[#F48FB1] hover:bg-[#de7b9c] w-[173px] h-[56px] py-[16px] px-[20px] rounded-[16px] transition-all duration-300'>
+            <img src={applyicon} className='w-[24px] h-[24px]' />
+            <p className='text-[14px] text-white font-[Inter] tracking-[1.25px] '>
+              Coming Soon
+            </p>
+          </button>
+        )}
       </section>
       {/*------------------------------------------------------Job Title Section-----------------------------------------------*/}
       <section className='flex flex-col items-center mt-[10px]'>

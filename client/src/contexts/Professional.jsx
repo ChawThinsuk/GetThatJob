@@ -6,6 +6,7 @@ const ProContext = React.createContext();
 function ProProvider(props) {
   const [jobs, setJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [jobFollow, setJobFollow] = useState(null);
   const getSingleJob = async (id) => {
     return axios.get(`http://localhost:4000/pro/job/${id}`);
   };
@@ -15,6 +16,7 @@ function ProProvider(props) {
     const timeDifferent = currentDate - createDate;
     return Math.floor(timeDifferent / (1000 * 60 * 60 * 24));
   };
+  
   const getJobs = async (input) => {
     const { searchTerm, category, type } = input;
     try {
@@ -33,10 +35,50 @@ function ProProvider(props) {
       console.log("error", error);
     }
   };
-
+  
+  const getJobFollowStatus = async (userID, job_id) => {
+    try {
+      const jobFollowStatus = await axios.get(
+        `http://localhost:4000/pro/follow/job`,
+        {
+          params: { userID: userID, job_id: job_id },
+        }
+      );
+      setJobFollow(jobFollowStatus.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const updateJobFollowStatus = async (data) => {
+    // data need 2 keys job_professional_id and job_professional_follow
+    try {
+      axios.put(`http://localhost:4000/pro/follow/job`, { data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addJobProfessionalData = async (data) => {
+    try {
+      await axios.post(`http://localhost:4000/pro/jobpro`, { data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <ProContext.Provider
-      value={{ jobs, setJobs, getJobs, isLoading, getSingleJob, dayAgo }}
+      value={{
+        jobs,
+        setJobs, 
+        getJobs, 
+        isLoading,    
+        getSingleJob,
+        dayAgo,
+        getJobFollowStatus,
+        jobFollow,
+        setJobFollow,
+        updateJobFollowStatus,
+        addJobProfessionalData,
+      }}
     >
       {props.children}
     </ProContext.Provider>

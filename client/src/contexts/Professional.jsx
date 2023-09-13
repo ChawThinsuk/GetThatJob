@@ -26,9 +26,32 @@ function ProProvider(props) {
       console.log(error);
     }
   };
+  const updateJobFollowStatus = async (data) => {
+    // data need 2 keys job_professional_id and job_professional_follow
+    try {
+      axios.put(`http://localhost:4000/pro/follow/job`, { data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addJobProfessionalData = async (data) => {
+    try {
+      await axios.post(`http://localhost:4000/pro/jobpro`, { data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <ProContext.Provider
-      value={{ getSingleJob, dayAgo, getJobFollowStatus, jobFollow }}
+      value={{
+        getSingleJob,
+        dayAgo,
+        getJobFollowStatus,
+        jobFollow,
+        setJobFollow,
+        updateJobFollowStatus,
+        addJobProfessionalData,
+      }}
     >
       {props.children}
     </ProContext.Provider>

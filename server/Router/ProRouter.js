@@ -1,7 +1,8 @@
-import { Router } from 'express';
+import { Router, query } from 'express';
 import { pool } from '../utils/db.js';
 
 const proRouter = Router();
+//Get singleJob
 proRouter.get('/job/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -21,4 +22,22 @@ proRouter.get('/job/:id', async (req, res) => {
   }
 });
 
+// job following Status
+proRouter.get('/follow/job', async (req, res) => {
+  const userID = req.query.userID;
+  const jobID = req.query.job_id;
+  try {
+    const companyFollow = await pool.query(
+      'SELECT jobs_professional.job_professional_id, jobs_professional.job_user_following FROM jobs_professional INNER JOIN professionals ON professionals.professional_id = jobs_professional.professional_id WHERE professionals.user_id = $1 AND jobs_professional.job_id = $2',
+      [userID, jobID]
+    );
+    console.log(companyFollow.rows[0]);
+    return res.json({
+      message: 'get following status complete',
+      data: companyFollow.rows[0],
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error });
+  }
+});
 export default proRouter;

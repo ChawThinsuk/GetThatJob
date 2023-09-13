@@ -6,9 +6,11 @@ import followOff from '../../assets/pro2/followOff.svg';
 import time from '../../assets/pro2/time.svg';
 import applyicon from '../../assets/pro2/applyicon.svg';
 import { usePro } from '../../contexts/Professional';
-
+import { useAuth } from '../../contexts/Authorization';
+import { useEffect } from 'react';
 export const JobHeader = (props) => {
-  const { dayAgo } = usePro();
+  const { state } = useAuth();
+  const { getJobFollowStatus, dayAgo, jobFollow } = usePro();
   const {
     logo,
     company_name,
@@ -18,9 +20,14 @@ export const JobHeader = (props) => {
     salary_max,
     salary_min,
     job_created_at,
+    job_id,
   } = props.data;
+  useEffect(() => {
+    getJobFollowStatus(state.userID, job_id);
+  }, []);
+  console.log(jobFollow);
   return (
-    <div>
+    <div className='w-[960px'>
       {/*---------------------------------------------------------Company Logo Section-------------------------------------------*/}
       <section className='flex justify-between mt-[16px]'>
         <div className='flex  gap-[16px]'>
@@ -28,9 +35,18 @@ export const JobHeader = (props) => {
           <div>
             <p className='text-[24px] font-[Montserrat]'>{company_name}</p>
             <div className='flex items-center gap-[4px] w-[120px] hover:cursor-pointer '>
-              <img src={followOn} className='w-[40px] h-[40px]' />
+              <img
+                src={
+                  jobFollow && jobFollow.job_user_following
+                    ? followOn
+                    : followOff
+                }
+                className='w-[40px] h-[40px]'
+              />
               <p className=' text-[14px]  text-[#616161] font-[Inter] font-[400] tracking-[1.25px]'>
-                Following
+                {jobFollow && jobFollow.job_user_following
+                  ? ' Following'
+                  : 'Follow'}
               </p>
             </div>
           </div>

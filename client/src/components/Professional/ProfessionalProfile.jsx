@@ -1,3 +1,5 @@
+import EditUser from "./EditUser";
+
 export const ProfessionalProfile = () => {
-  return <h1>ProfessionalProfile</h1>;
+  return <EditUser />;
 };

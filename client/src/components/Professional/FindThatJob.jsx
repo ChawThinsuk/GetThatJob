@@ -3,7 +3,8 @@ import money from "../../assets/FindThatJob/money.svg";
 import manufacturing from "../../assets/pro2/category.svg";
 import calendar from "../../assets/pro2/calendar.svg";
 import small from "../../assets/pro2/money.svg";
-import follow from "../../assets/pro2/followOff.svg";
+import followOff from "../../assets/pro2/followOff.svg";
+import followOn from '../../assets/pro2/followOn.svg';
 import { useEffect, useState } from "react";
 import { usePro } from "../../contexts/Professional";
 import { Link } from "react-router-dom";
@@ -13,10 +14,12 @@ export const FindThatJob = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState("");
   const [type, setType] = useState("");
+  const [minSalary, setMinSalary] = useState("");
+  const [maxSalary, setMaxSalary] = useState("");
   const { jobs, setJobs, getJobs, isLoading } = usePro();
   useEffect(() => {
-    getJobs({ searchTerm, category, type });
-  }, [searchTerm, category, type]);
+    getJobs({ searchTerm, category, type, minSalary, maxSalary });
+  }, [searchTerm, category, type, minSalary, maxSalary]);
 
   return (
     <div className="flex flex-col justify-start items-center w-full min-h-srceen pr-[100px] pl-[100px] pt-[50px] font-[Inter] bg-[#F5F5F6]">
@@ -77,6 +80,7 @@ export const FindThatJob = () => {
                   type="text"
                   placeholder="min"
                   className="w-[58px] h-[20px] flex flex-col justify-center text-[14px] p-[8px] leading-6 outline-none"
+                  onChange={(e) => setMinSalary(e.target.value)}
                 />
               </div>
               <p>-</p>
@@ -86,6 +90,7 @@ export const FindThatJob = () => {
                   type="text"
                   placeholder="max"
                   className="w-[58px] h-[20px] flex flex-col justify-center text-[14px] p-[8px] leading-6 outline-none"
+                  onChange={(e) => setMaxSalary(e.target.value)}
                 />
               </div>
             </div>
@@ -151,7 +156,7 @@ export const FindThatJob = () => {
                   <div className="flex flex-row justify-between w-[258px] h-[40px] pt-[4px]">
                     <div className="w-[109px] h-[40px] flex flex-row justify-between items-center">
                       <div className="w-[40px] h-[40px] p-[8px] gap-[10px]">
-                        <img src={follow} className="w-[24px] h-[24px]" />
+                        <img src={followOff} className="w-[24px] h-[24px]" />
                       </div>
                       <button>FOLLOW</button>
                     </div>

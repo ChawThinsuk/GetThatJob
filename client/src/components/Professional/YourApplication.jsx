@@ -1,17 +1,90 @@
 import { JobHeader } from "./JobHeader";
 import { Textarea } from "@chakra-ui/react";
 import { Text, Box } from "@chakra-ui/react";
-import { Radio, RadioGroup, Stack, Button, Flex } from "@chakra-ui/react";
+import {
+  Radio,
+  RadioGroup,
+  Stack,
+  Button,
+  Flex,
+  Link,
+  Spinner,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { EmailIcon } from "@chakra-ui/icons";
-import { color } from "framer-motion";
+import { useParams } from "react-router-dom";
+import { useQuery } from "react-query";
+import { usePro } from "../../contexts/Professional";
 
 export const YourApplication = () => {
   const [value, setValue] = useState("1");
   const [cvChosen, setCvChosen] = useState(false);
   const [cvFileName, setCvFileName] = useState("No file chosen");
   const [isChecked, setChecked] = useState(true);
+  const { id } = useParams();
+  const { getSingleJob } = usePro();
 
+  const { data, isLoading, error } = useQuery(["job", id], () =>
+    getSingleJob(id)
+  );
+
+  if (isLoading) {
+    return (
+      <div className="w-screen h-screen opacity-80 bg-white flex justify-center items-center">
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="#F48FB1"
+          size="xl"
+        />
+      </div>
+    );
+  }
+  if (error) {
+    return (
+      <div className="absolute w-screen h-screen flex flex-col items-center pt-20">
+        <h1 className="text-[3rem] font-bold text-[#373737] ">
+          Something wrong
+        </h1>
+        <div className="flex mt-5 gap-10">
+          <Link to="/">
+            <h1 className=" text-blue-700 text-[1.2rem] underline hover:cursor-pointer hover:text-blue-800">
+              Back to homepage
+            </h1>
+          </Link>
+          <h1
+            className=" text-blue-700 text-[1.2rem] underline hover:cursor-pointer hover:text-blue-800"
+            onClick={() => window.location.reload(true)}
+          >
+            Retry
+          </h1>
+        </div>
+      </div>
+    );
+  }
+  if (!data.data.job) {
+    return (
+      <div className="absolute w-screen h-screen flex flex-col items-center pt-20">
+        <h1 className="text-[3rem] font-bold text-[#373737] ">
+          JOB NOT FOUNDED
+        </h1>
+        <div className="flex mt-5 gap-10">
+          <Link to="/">
+            <h1 className=" text-blue-700 text-[1.2rem] underline hover:cursor-pointer hover:text-blue-800">
+              Back to homepage
+            </h1>
+          </Link>
+          <h1
+            className=" text-blue-700 text-[1.2rem] underline hover:cursor-pointer hover:text-blue-800"
+            onClick={() => window.location.reload(true)}
+          >
+            Retry
+          </h1>
+        </div>
+      </div>
+    );
+  }
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
@@ -33,7 +106,7 @@ export const YourApplication = () => {
       gap="3.375rem"
       alignSelf="stretch"
     >
-      <JobHeader />
+      <JobHeader data={data.data.job} />
       <Box
         display="flex"
         flexDirection="column"
@@ -69,6 +142,7 @@ export const YourApplication = () => {
           >
             SEND YOUR CV UPDATED
           </Text>
+          {/* ... */}
           <RadioGroup
             onChange={setValue}
             value={value}
@@ -89,6 +163,7 @@ export const YourApplication = () => {
               </Radio>
             </Stack>
           </RadioGroup>
+          {/* ... */}
         </Box>
         <Box
           display="flex"

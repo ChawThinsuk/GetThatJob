@@ -57,7 +57,7 @@ proRouter.post('/jobpro', async (req, res) => {
       [userID]
     );
     const addJobProfessional = await pool.query(
-      'INSERT INTO jobs_professional (job_user_following,job_user_application,professional_id,job_id,created_at,updated_at) VALUES ($1,$2,$3,$4,$5)',
+      'INSERT INTO jobs_professional (job_user_following,job_user_application,professional_id,job_id,created_at,updated_at) VALUES ($1,$2,$3,$4,$5,$6)',
       [
         true,
         false,

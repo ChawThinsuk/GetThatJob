@@ -1,8 +1,9 @@
 import { Router } from "express";
 import { pool } from "../utils/db.js";
+import { protect } from "../middlewares/protect.js";
 
 const bigRouter = Router();
-
+bigRouter.use(protect)
 bigRouter.get("/", async (req, res) => {
   const searchTerm = req.query.searchTerm;
   const category = req.query.category;
@@ -13,7 +14,7 @@ bigRouter.get("/", async (req, res) => {
   console.log(data);
   const queryParams = [];
   const queryParts = [
-    "SELECT jobs.job_id, jobs.job_title, jobs.job_category, jobs.salary_min, jobs.salary_max, jobs.job_type, jobs.job_position, jobs.job_mandatory, jobs.job_optional, jobs.created_at, recruiters.company_name, recruiters.logo FROM jobs INNER JOIN recruiters ON jobs.recruiter_id = recruiters.recruiter_id  WHERE 1 = 1",
+    "SELECT jobs.job_id, jobs.job_title, jobs.job_category, jobs.salary_min, jobs.salary_max, jobs.job_type, jobs.job_position, jobs.job_mandatory, jobs.job_optional, jobs.created_at, recruiters.company_name, recruiters.logo FROM jobs INNER JOIN recruiters ON jobs.recruiter_id = recruiters.recruiter_id WHERE 1 = 1",
   ];
 
   if (searchTerm) {

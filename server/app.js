@@ -5,6 +5,7 @@ import authRouter from "./Router/AuthRouter.js";
 import { protect } from "./middlewares/protect.js";
 import RegisterRouter from "./Router/RegisterRouter.js";
 import ChawRouter from "./Router/ChawRouter.js";
+import AooRouter from "./Router/AooRouter.js";
 
 async function init() {
   const app = express();
@@ -15,6 +16,7 @@ async function init() {
   app.use("/users", RegisterRouter);
   app.use("/auth", authRouter);
   app.use("/chaw", ChawRouter);
+  app.use("/aoo", AooRouter);
   app.get("/", (req, res) => {
     return res.json({
       message: "Hello",

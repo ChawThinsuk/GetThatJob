@@ -23,56 +23,45 @@ AooRouter.get("/:id", async (req, res) => {
   }
 });
 
-AooRouter.post("/:id", async (req, res) => {
+AooRouter.put("/:id", async (req, res) => {
   const user_id = req.params.id;
-  // const {
-  //   email,
-  //   name,
-  //   phone,
-  //   birthDate,
-  //   linkedinUrl,
-  //   title,
-  //   professionalExperience,
-  //   educationalInfo,
-  //   cv,
-  // } = req.body;
-
-  const email = req.body.email;
-  const name = req.body.name;
-  const phone = req.body.phone;
-  const birthDate = req.body.birthDate;
-  const linkedinUrl = req.body.linkedinUrl;
-  const title = req.body.title;
-  const professionalExperience = req.body.professionalExperience;
-  const educationalInfo = req.body.educationalInfo;
-  const cv = req.body.cv;
-
+  const data = req.body;
+  // const email = data.email;
+  // const username = data.username;
+  // const phone = req.body.phone;
+  // const birthdate = req.body.birthdate;
+  // const linkedin = req.body.linkedin;
+  // const title = req.body.title;
+  // const experience = req.body.experience;
+  // const education = req.body.education;
+  // const cv = req.body.cv;
   try {
     // Update the user's professional profile data in the database using SQL UPDATE statements
     await pool.query(
       `
       UPDATE professionals
       SET
-        username = $2,
-        phone = $3,
-        birthdate = $4,
-        linkedin = $5,
-        title = $6,
-        experience = $7,
-        education = $8,
-        cv = $9
-      WHERE user_id = $1;
+        username = $1,
+        phone = $2,
+        birthdate = $3,
+        linkedin = $4,
+        title = $5,
+        experience = $6,
+        education = $7,
+        cv = $8,
+        updated_at = NOW()
+      WHERE user_id = $9;
       `,
       [
-        user_id,
-        name,
-        phone,
-        birthDate,
-        linkedinUrl,
-        title,
-        professionalExperience,
-        educationalInfo,
-        cv,
+        data.username,
+        data.phone,
+        data.birthdate,
+        data.linkedin,
+        data.title,
+        data.experience,
+        data.education,
+        data.cv,
+        data.user_id,
       ]
     );
 
@@ -80,20 +69,20 @@ AooRouter.post("/:id", async (req, res) => {
       `
       UPDATE users
       SET
-        email = $2
-      WHERE user_id = $1;
+        email = $1,
+        updated_at = NOW()
+      WHERE user_id = $2;
       `,
-      [user_id, email]
+      [email, user_id]
     );
 
     return res.json({
       message: "Professional profile updated successfully",
     });
   } catch (error) {
-    console.error("Error updating profile:", error); // Log the error
-    return res.status(500).json({
-      message:
-        "An error occurred while updating your profile. Please try again later.",
+    // console.error("Error updating profile:", error); // Log the error
+    return res.json({
+      message: "hello",
       error: error.message, // Include the error message in the response
     });
   }

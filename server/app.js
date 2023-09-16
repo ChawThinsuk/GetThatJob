@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import authRouter from './Router/AuthRouter.js';
 import { protect } from './middlewares/protect.js';
 import RegisterRouter from './Router/RegisterRouter.js';
+import ChawRouter from './Router/ChawRouter.js';
 
 async function init() {
   const app = express();
@@ -13,6 +14,7 @@ async function init() {
   app.use(express.json());
   app.use('/users', RegisterRouter);
   app.use('/auth', authRouter);
+  app.use('/chaw',ChawRouter)
   app.get('/', (req, res) => {
     return res.json({
       message: 'Hello',

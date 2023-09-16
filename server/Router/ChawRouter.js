@@ -90,7 +90,7 @@ ChawRouter.post("/getcandidate", async (req, res) => {
       });
     }
     const results = await pool.query(query.queryCandidate, [data.job_id]);
-    console.log(results)
+    console.log(results);
     return res.json({
       data: results.rows,
     });

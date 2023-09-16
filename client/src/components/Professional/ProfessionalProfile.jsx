@@ -1,5 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -12,37 +12,79 @@ import {
   InputGroup,
   InputLeftAddon,
   FormHelperText,
+  useToast,
 } from "@chakra-ui/react";
 import { useGlobalContext } from "../../contexts/registerContext.jsx";
 import UploadPdf from "../register/UploadPdf.jsx";
+import { useAuth } from "../../contexts/Authorization.jsx";
+import axios from "axios";
+import uploadlogo from "../../assets/register-images/pdf-upload.svg";
 
 export function ProfessionalProfile() {
-  const {
-    email,
-    setEmail,
-    password,
-    setPassword,
-    passwordConfirmation,
-    setPasswordConfirmation,
-    registerPage,
-    setRegisterPage,
-    profFormStyle,
-    name,
-    setName,
-    phone,
-    setPhone,
-    birthDate,
-    setBirthDate,
-    linkedinUrl,
-    setLinkedinUrl,
-    title,
-    setTitle,
-    professionalExperience,
-    setProfessionalExperience,
-    educationalInfo,
-    setEducationalInfo,
-    handleSubmit,
-  } = useGlobalContext();
+  const { profFormStyle, userType } = useGlobalContext();
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  const [linkedinUrl, setlinkedinUrl] = useState("");
+  const [title, setTitle] = useState("");
+  const [professionalExperience, setProfessionalExperience] = useState("");
+  const [educationalInfo, setEducationalInfo] = useState("");
+  const [cv, setCv] = useState("");
+  const [selectedFileName, setSelectedFileName] = useState(null);
+
+  const toast = useToast();
+  const { state } = useAuth();
+  // console.log(state.userID);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (userType === "PROFESSIONAL") {
+      if (file) {
+        if (file.type === "application/pdf" && file.size <= 5 * 1024 * 1024) {
+          setCv(file);
+          setSelectedFileName(file.name);
+        } else {
+          setCv(null);
+          setSelectedFileName(null);
+          toast({
+            title: "Wrong file type or size",
+            description: "Please upload a PDF file under 5MB.",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+      } else {
+        // No file selected, clear the selected file and file name
+        setCv(null);
+        setSelectedFileName(null);
+      }
+    }
+  };
+
+  const getProfProfile = async () => {
+    const response = await axios.get(
+      `http://localhost:4000/aoo/${state.userID}`
+    );
+    const isoDate = response.data.data.birthdate;
+    const formattedDate = isoDate.slice(0, 10);
+
+    setEmail(response.data.data.email);
+    setName(response.data.data.username);
+    setPhone(response.data.data.phone);
+    setBirthDate(formattedDate);
+    setlinkedinUrl(response.data.data.linkedin);
+    setTitle(response.data.data.title);
+    setProfessionalExperience(response.data.data.experience);
+    setEducationalInfo(response.data.data.education);
+    setCv(response.data.data.cv);
+    setSelectedFileName(response.data.data.cv);
+  };
+
+  useEffect(() => {
+    getProfProfile();
+  }, []);
 
   return (
     <ChakraProvider>
@@ -147,7 +189,7 @@ export function ProfessionalProfile() {
                     placeholder="Enter Linkedin URL"
                     value={linkedinUrl}
                     onChange={(event) => {
-                      setLinkedinUrl(event.target.value);
+                      setlinkedinUrl(event.target.value);
                     }}
                   />
                 </FormControl>
@@ -214,7 +256,54 @@ export function ProfessionalProfile() {
               Upload / Update Your CV
             </p>
             <div>
-              <UploadPdf />
+              {/* <UploadPdf /> */}
+              <div className="mx-auto bg-white rounded-lg flex">
+                <input
+                  type="file"
+                  id="pdf-upload"
+                  className="hidden"
+                  onChange={handleFileChange}
+                  accept={
+                    userType === "PROFESSIONAL"
+                      ? ".pdf"
+                      : userType === "RECRUITER"
+                      ? ".jpg,.jpeg,.png"
+                      : undefined // Allow any file type if not specified
+                  }
+                />
+                <label
+                  htmlFor="pdf-upload"
+                  className="cursor-pointer flex items-center justify-center w-[160px] h-auto p-[13px] rounded-xl bg-[#F48FB1] text-white hover:bg-pink-600 transition duration-300"
+                >
+                  <img src={uploadlogo} className="pr-2" alt="logo" />
+                  {userType === "PROFESSIONAL"
+                    ? "Choose a file"
+                    : userType === "RECRUITER"
+                    ? "Choose a file"
+                    : "Choose a file"}
+                </label>
+
+                {selectedFileName ? (
+                  <div className="mt-4 ml-4">
+                    <p>File selected: {selectedFileName}</p>
+                  </div>
+                ) : (
+                  <div className="ml-4 mt-3">
+                    <p>No file chosen</p>
+                  </div>
+                )}
+
+                {/* {cv && (
+                  <div className="mt-2">
+                    <p>File selected: {cv.name}</p>
+                  </div>
+                )} */}
+                {cv === null && userType === "PROFESSIONAL" && (
+                  <div className="ml-4 mt-3">
+                    <p>No file chosen</p>
+                  </div>
+                )}
+              </div>
             </div>
 
             <p className="mt-2 text-[#8E8E8E] text-[16px]">

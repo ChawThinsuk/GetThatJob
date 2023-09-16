@@ -18,7 +18,6 @@ import UploadPdf from "../register/UploadPdf.jsx";
 
 export function RecruiterProfile() {
   const {
-    customTextStyle,
     profFormStyle,
     companyName,
     setCompanyName,

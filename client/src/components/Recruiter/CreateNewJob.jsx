@@ -11,9 +11,9 @@ import {
   CSSReset,
 } from "@chakra-ui/react";
 import { useGlobalContext } from "../../contexts/registerContext.jsx";
-import SalaryRangeInput from "../Professional/createComponent/SalaryRange.jsx";
-import JobCategorySelect from "../Professional/createComponent/JobCategory.jsx";
-import JobType from "../Professional/createComponent/JobType.jsx";
+import SalaryRangeInput from "../Recruiter/createComponent/SalaryRange.jsx";
+import JobCategorySelect from "../Recruiter/createComponent/JobCategory.jsx";
+import JobType from "../Recruiter/createComponent/JobType.jsx";
 
 export function CreateNewJob() {
   const { profFormStyle } = useGlobalContext();

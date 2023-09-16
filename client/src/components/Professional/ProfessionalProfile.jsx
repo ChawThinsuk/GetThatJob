@@ -80,11 +80,54 @@ export function ProfessionalProfile() {
     setEducationalInfo(response.data.data.education);
     setCv(response.data.data.cv);
     setSelectedFileName(response.data.data.cv);
+    // console.log(response.data.message);
   };
 
   useEffect(() => {
     getProfProfile();
   }, []);
+
+  const handleSaveChanges = async () => {
+    try {
+      // Prepare the updated profile data object
+      const updatedProfileData = {
+        email: email,
+        name: name,
+        phone: phone,
+        birthDate: birthDate,
+        linkedinUrl: linkedinUrl,
+        title: title,
+        professionalExperience: professionalExperience,
+        educationalInfo: educationalInfo,
+        cv: cv,
+      };
+
+      // Make a POST request to update the profile data
+      await axios.post(
+        `http://localhost:4000/aoo/${state.userID}`,
+        updatedProfileData
+      );
+
+      // Display a success message to the user
+      toast({
+        title: "Profile updated successfully",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (error) {
+      // Handle any errors that may occur during the update process
+      console.error("Error updating profile:", error);
+      toast({
+        title: "Error updating profile",
+        description:
+          "An error occurred while updating your profile. Please try again later.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  };
 
   return (
     <ChakraProvider>
@@ -316,13 +359,14 @@ export function ProfessionalProfile() {
               h="53px"
               mt={8}
               mb={8}
-              type="submit"
+              type="button"
               bg="#F48FB1"
               variant="solid"
               size="sm"
               fontSize="19px"
               color="white"
               borderRadius="19px"
+              onClick={handleSaveChanges}
             >
               SAVE CHANGES
             </Button>

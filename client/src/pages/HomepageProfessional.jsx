@@ -17,7 +17,7 @@ export const HomepageProfessional = () => {
         <Route path="/:id" element={<JobDetail />} />
         <Route path="/follow" element={<Following />} />
         <Route path="/proprofile" element={<ProfessionalProfile />} />
-        <Route path="/apply/:id" element={<YourApplication />} />
+        <Route path="/apply/:job_id" element={<YourApplication />} />
         <Route path="*" element={<FindThatJob />} />
       </Routes>
     </div>

@@ -1,11 +1,12 @@
-import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import authRouter from './Router/AuthRouter.js';
-import bigRouter from './Router/BigRouter.js';
-import { protect } from './middlewares/protect.js';
-import RegisterRouter from './Router/RegisterRouter.js';
-import proRouter from './Router/ProRouter.js';
+import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import authRouter from "./Router/AuthRouter.js";
+import bigRouter from "./Router/BigRouter.js";
+import { protect } from "./middlewares/protect.js";
+import RegisterRouter from "./Router/RegisterRouter.js";
+import proRouter from "./Router/ProRouter.js";
+import taRouter from "./Router/TaRouter.js";
 
 async function init() {
   const app = express();
@@ -13,13 +14,14 @@ async function init() {
   app.use(bodyParser.json());
   app.use(cors());
   app.use(express.json());
-  app.use('/users', RegisterRouter);
-  app.use('/auth', authRouter);
-  app.use('/pro', proRouter);
-  app.use('/big', bigRouter);
-  app.get('/', (req, res) => {
+  app.use("/users", RegisterRouter);
+  app.use("/auth", authRouter);
+  app.use("/pro", proRouter);
+  app.use("/big", bigRouter);
+  app.use("/ta", taRouter);
+  app.get("/", (req, res) => {
     return res.json({
-      message: 'Hello',
+      message: "Hello",
     });
   });
 

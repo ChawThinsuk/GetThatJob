@@ -1,8 +1,10 @@
 import { Router, query } from 'express';
 import { pool } from '../utils/db.js';
-
+import { protect } from '../middlewares/protect.js';
 const proRouter = Router();
 //Get singleJob
+proRouter.use(protect);
+
 proRouter.get('/job/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -21,7 +23,7 @@ proRouter.get('/job/:id', async (req, res) => {
     return res.status(500).json({ message: error });
   }
 });
-// job following Status
+//Get Job Following Status
 proRouter.get('/follow/job', async (req, res) => {
   const userID = req.query.userID;
   const jobID = req.query.job_id;
@@ -38,7 +40,7 @@ proRouter.get('/follow/job', async (req, res) => {
     return res.status(500).json({ message: error });
   }
 });
-// Update Follow Job
+//Update Job Follow
 proRouter.put('/follow/job', async (req, res) => {
   const { job_professional_id, job_professional_follow } = req.body.data;
   const updateFollow = await pool.query(
@@ -48,8 +50,8 @@ proRouter.put('/follow/job', async (req, res) => {
   return res.status(200).json({ message: 'Update complete' });
 });
 
-//add Job_professional data
-proRouter.post('/jobpro', async (req, res) => {
+//Create Job_professional Data (FOLLOW)
+proRouter.post('/jobpro/follow', async (req, res) => {
   const { userID, job_id } = req.body.data;
   try {
     const professionalID = await pool.query(
@@ -57,7 +59,7 @@ proRouter.post('/jobpro', async (req, res) => {
       [userID]
     );
     const addJobProfessional = await pool.query(
-      'INSERT INTO jobs_professional (job_user_following,job_user_application,professional_id,job_id,created_at,updated_at) VALUES ($1,$2,$3,$4,$5)',
+      'INSERT INTO jobs_professional (job_user_following,job_user_application,professional_id,job_id,created_at,updated_at) VALUES ($1,$2,$3,$4,$5,$6)',
       [
         true,
         false,

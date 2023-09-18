@@ -53,7 +53,6 @@ export const JobHeader = (props) => {
       };
       addJobProfessionalData(data);
       setJobFollow({ job_user_following: true });
-      getJobFollowStatus(state.userID, job_id);
     }
   };
 

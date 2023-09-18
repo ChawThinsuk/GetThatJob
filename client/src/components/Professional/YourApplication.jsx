@@ -1,6 +1,6 @@
 import { JobHeader } from "./JobHeader";
 import { Textarea } from "@chakra-ui/react";
-import { Text, Box } from "@chakra-ui/react";
+import { Text, Box, useToast } from "@chakra-ui/react";
 import {
   Radio,
   RadioGroup,
@@ -17,6 +17,8 @@ import { useQuery } from "react-query";
 import { usePro } from "../../contexts/Professional";
 import Axios from "axios";
 import { useAuth } from "../../contexts/Authorization";
+import axios from "axios";
+
 export const YourApplication = () => {
   const [value, setValue] = useState("1");
   const [cvChosen, setCvChosen] = useState(false);
@@ -26,6 +28,38 @@ export const YourApplication = () => {
   const [experienceData, setExperienceData] = useState("");
   const [cvData, setCvData] = useState("You did not uploaded your CV");
   const { state } = useAuth();
+  const [interestingData, setInterestingData] = useState("");
+  const toast = useToast();
+
+  const handleSubmit = async () => {
+    try {
+      const submitProfileData = {
+        job_user_cv: cvData,
+        job_user_experience: experienceData,
+        job_user_interesting: interestingData,
+      };
+
+      await axios.put(
+        `http://localhost:4000/ta/users/${state.userID}/jobs/${job_id}`,
+        submitProfileData
+      );
+
+      toast({
+        title: "Profile submitted successfully",
+        status: "success",
+        duration: 5000,
+        isCloseable: true,
+      });
+    } catch (error) {
+      console.error("Error submit profile");
+      toast({
+        title: "An error occured while submit your profile, Please try again",
+        status: "error",
+        duration: 5000,
+        isCloseable: true,
+      });
+    }
+  };
 
   useEffect(() => {
     const apiUrl = `http://localhost:4000/ta/users/${state.userID}`;
@@ -307,6 +341,8 @@ export const YourApplication = () => {
             letterSpacing="0.01563rem"
             textTransform="uppercase"
             color="#373737"
+            value={interestingData}
+            onChange={(e) => setInterestingData(e.target.value)}
           />
           <Text
             fontFamily="Inter"
@@ -338,6 +374,7 @@ export const YourApplication = () => {
           lineHeight="1.5rem"
           letterSpacing="0.07813rem"
           textTransform="uppercase"
+          onClick={handleSubmit}
         >
           {" "}
           SEND APPLICATION

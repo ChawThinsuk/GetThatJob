@@ -18,12 +18,14 @@ function ProProvider(props) {
   };
 
   const getJobs = async (input) => {
-    const { searchTerm, category, type } = input;
+    const { searchTerm, category, type, minSalary, maxSalary } = input;
     try {
       const params = new URLSearchParams();
-      params.append('searchTerm', searchTerm);
-      params.append('category', category);
-      params.append('type', type);
+      params.append("searchTerm", searchTerm);
+      params.append("category", category);
+      params.append("type", type);
+      params.append("minSalary", minSalary);
+      params.append("maxSalary", maxSalary);
       setIsLoading(true);
       const result = await axios.get(
         `http://localhost:4000/big?${params.toString()}`

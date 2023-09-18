@@ -57,15 +57,15 @@ export const JobHeader = (props) => {
   };
 
   return (
-    <div className='w-[960px]'>
+    <div className='1280px'>
       {/*---------------------------------------------------------Company Logo Section-------------------------------------------*/}
-      <section className='flex justify-between mt-[16px]'>
-        <div className='flex  gap-[16px]'>
-          <img src={logo} className='w-[80px] h-[80px]' />
+      <section className='flex justify-between mt-[21.3344px]'>
+        <div className='flex  gap-[21.3344px]'>
+          <img src={logo} className='w-[106.672px] h-[106.672px]' />
           <div>
-            <p className='text-[24px] font-[Montserrat]'>{company_name}</p>
+            <p className='text-[32.0016px] font-[Montserrat]'>{company_name}</p>
             <div
-              className='flex items-center gap-[4px] w-[120px] hover:cursor-pointer '
+              className='flex items-center gap-[5.334px] w-[160.008px] hover:cursor-pointer '
               onClick={handleChangeStatus}
             >
               <img
@@ -74,9 +74,9 @@ export const JobHeader = (props) => {
                     ? followOn
                     : followOff
                 }
-                className='w-[40px] h-[40px]'
+                className='w-[53.336px] h-[53.336px]'
               />
-              <p className=' text-[14px]  text-[#616161] font-[Inter] font-[400] tracking-[1.25px]'>
+              <p className=' text-[18.668px]  text-[#616161] font-[Inter] font-[400] tracking-[1.667px]'>
                 {jobFollow && jobFollow.job_user_following
                   ? ' Following'
                   : 'Follow'}
@@ -86,30 +86,30 @@ export const JobHeader = (props) => {
         </div>
         {props.page === 'jobDetail' ? (
           <Link to={`/apply/${job_id}`}>
-            <button className='flex items-center justify-center gap-[8px] bg-[#F48FB1] hover:bg-[#de7b9c] w-[173px] h-[56px] py-[16px] px-[20px] rounded-[16px] transition-all duration-300'>
-              <img src={applyicon} className='w-[24px] h-[24px]' />
-              <p className='text-[14px] text-white font-[Inter] tracking-[1.25px] '>
+            <button className='flex items-center justify-center gap-[10.667px] bg-[#F48FB1] hover:bg-[#de7b9c] w-[230.678px] h-[74.67px] py-[21.3344px] px-[26.668px] rounded-[21.3344px] transition-all duration-300'>
+              <img src={applyicon} className='w-[32.0016px] h-[32.0016px]' />
+              <p className='text-[18.668px] text-white font-[Inter] tracking-[1.667px] '>
                 APPLY NOW
               </p>
             </button>
           </Link>
         ) : (
-          <button className='flex items-center justify-center gap-[8px] bg-[#F48FB1] hover:bg-[#de7b9c] w-[173px] h-[56px] py-[16px] px-[20px] rounded-[16px] transition-all duration-300'>
-            <img src={applyicon} className='w-[24px] h-[24px]' />
-            <p className='text-[14px] text-white font-[Inter] tracking-[1.25px] '>
+          <button className='flex items-center justify-center gap-[10.667px] bg-[#F48FB1] hover:bg-[#de7b9c] w-[230.678px] h-[74.67px] py-[21.3344px] px-[26.668px] rounded-[21.3344px] transition-all duration-300'>
+            <img src={applyicon} className='w-[32.0016px] h-[32.0016px]' />
+            <p className='text-[18.668px] text-white font-[Inter] tracking-[1.667px] '>
               Coming Soon
             </p>
           </button>
         )}
       </section>
       {/*------------------------------------------------------Job Title Section-----------------------------------------------*/}
-      <section className='flex flex-col items-center mt-[10px]'>
+      <section className='flex flex-col items-center mt-[13.334px]'>
         <h1 className='text-[48px] text-[#373737] font-[400] font-[Montserrat] '>
           {job_title.toUpperCase()}
         </h1>
-        <div className='flex gap-[4px]'>
-          <img src={time} className='w-[15px] h-[15px]' />
-          <p className='text-[10px] font-[Inter] tracking-[1.5px]'>
+        <div className='flex gap-[5.334px]'>
+          <img src={time} className='w-[20.001px] h-[20.001px]' />
+          <p className='text-[13.334px] font-[Inter] tracking-[2.001px]'>
             posted{' '}
             {dayAgo(job_created_at) === 0
               ? 'Today'
@@ -119,36 +119,36 @@ export const JobHeader = (props) => {
           </p>
         </div>
         {/*boxes div*/}
-        <div className='flex gap-[32px] mt-[20px]'>
-          <div className='flex flex-col items-center w-[281px] h-[77px] pt-[8px] pb-[16px] px-[32px] border-[1px] border-[#BF5F82] bg-white rounded-[8px] shadow-pro2'>
-            <p className='text-[16px] text-[#616161] font-[400] font-[Montserrat] tracking-[0.15px]'>
+        <div className='flex gap-[42.669px] mt-[26.668px]'>
+          <div className='flex flex-col items-center min-w-[374.685px] h-[102.672px] pt-[10.667px] pb-[21.3344px] px-[42.669px] border-[1.3334px] border-[#BF5F82] bg-white rounded-[10.667px] shadow-pro2'>
+            <p className='text-[21.3344px] text-[#616161] font-[400] font-[Montserrat] tracking-[0.2001px]'>
               Category
             </p>
             <div className='flex items-center gap-2 '>
-              <img src={category} className='w-[29px] h-[29px]' />
-              <p className='text-[24px] text-[#373737] font-[400] font-[Montserrat]'>
+              <img src={category} className='w-[38.669px] h-[38.669px]' />
+              <p className='text-[32.0016px] text-[#373737] font-[400] font-[Montserrat]'>
                 {job_category}
               </p>
             </div>
           </div>
-          <div className='flex flex-col items-center w-[208px] h-[77px] pt-[8px] pb-[16px] px-[28px] border-[1px] border-[#BF5F82] bg-white rounded-[8px] shadow-pro2'>
-            <p className='text-[16px] text-[#616161] font-[400] font-[Montserrat] tracking-[0.15px]'>
+          <div className='flex flex-col items-center w-[277.347px] h-[102.671px] pt-[10.667px] pb-[21.3344px] px-[37.335px] border-[1.3334px] border-[#BF5F82] bg-white rounded-[10.667px] shadow-pro2'>
+            <p className='text-[21.3344px] text-[#616161] font-[400] font-[Montserrat] tracking-[0.2001px]'>
               Type
             </p>
             <div className='flex items-center gap-2 '>
-              <img src={calendar} className='w-[29px] h-[29px]' />
-              <p className='text-[24px] text-[#373737] font-[400] font-[Montserrat]'>
+              <img src={calendar} className='w-[38.669px] h-[38.669px]' />
+              <p className='text-[32.0016px] text-[#373737] font-[400] font-[Montserrat]'>
                 {job_type}
               </p>
             </div>
           </div>
-          <div className='flex flex-col items-center min-w-[280px] h-[77px] pt-[8px] pb-[16px] px-[32px] border-[1px] border-[#BF5F82] bg-white rounded-[8px] shadow-pro2'>
-            <p className='text-[16px] text-[#616161] font-[400] font-[Montserrat] tracking-[0.15px]'>
+          <div className='flex flex-col items-center min-w-[106.672px] h-[102.671px] pt-[10.667px] pb-[21.3344px] px-[42.669px] border-[1.3334px] border-[#BF5F82] bg-white rounded-[10.667px] shadow-pro2'>
+            <p className='text-[21.3344px] text-[#616161] font-[400] font-[Montserrat] tracking-[0.2001px]'>
               Salary
             </p>
             <div className='flex items-center gap-2 '>
-              <img src={money} className='w-[29px] h-[29px]' />
-              <p className='text-[24px] text-[#373737] font-[400] font-[Montserrat]'>
+              <img src={money} className='w-[38.669px] h-[38.669px]' />
+              <p className='text-[32.0016px] text-[#373737] font-[400] font-[Montserrat]'>
                 {salary_min} - {salary_max}
               </p>
             </div>

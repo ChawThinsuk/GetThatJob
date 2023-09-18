@@ -108,7 +108,7 @@ const ContextProvider = ({ children }) => {
             cacheControl: "3600",
             upsert: false,
           });
-
+          
         const urlPath = supabase.storage.from("files").getPublicUrl(data.path);
 
         const recruiterData = {

@@ -71,6 +71,26 @@ export function CreateNewJob() {
     }
   };
 
+  const handleMandatoryChange = (event) => {
+    const value = event.target.value;
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      setJobMandatory(value + ",\n");
+    } else {
+      setJobMandatory(value);
+    }
+  };
+
+  const handleOptionalChange = (event) => {
+    const value = event.target.value;
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      setJobOptional(value + ",\n");
+    } else {
+      setJobOptional(value);
+    }
+  };
+
   return (
     <ChakraProvider>
       <div className="flex flex-col pl-[160px] font-[Inter]">
@@ -144,9 +164,8 @@ export function CreateNewJob() {
                     type="text"
                     placeholder="List each mandatory requirement in a new line"
                     value={job_mandatory}
-                    onChange={(event) => {
-                      setJobMandatory(event.target.value);
-                    }}
+                    onChange={handleMandatoryChange}
+                    onKeyDown={handleMandatoryChange}
                   />
                 </FormControl>
                 <FormControl id="experience" w="100%" maxW="lg" isRequired>
@@ -160,9 +179,8 @@ export function CreateNewJob() {
                     type="text"
                     placeholder="List each optional requirement in a new line"
                     value={job_optional}
-                    onChange={(event) => {
-                      setJobOptional(event.target.value);
-                    }}
+                    onChange={handleOptionalChange}
+                    onKeyDown={handleOptionalChange}
                   />
                 </FormControl>
               </Stack>

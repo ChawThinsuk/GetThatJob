@@ -10,24 +10,43 @@ import {
   Link,
   Spinner,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { EmailIcon } from "@chakra-ui/icons";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { usePro } from "../../contexts/Professional";
-
+import Axios from "axios";
+import { useAuth } from "../../contexts/Authorization";
 export const YourApplication = () => {
   const [value, setValue] = useState("1");
   const [cvChosen, setCvChosen] = useState(false);
   const [cvFileName, setCvFileName] = useState("No file chosen");
-  const [isChecked, setChecked] = useState(true);
-  const { id } = useParams();
+  const { job_id } = useParams();
   const { getSingleJob } = usePro();
+  const [experienceData, setExperienceData] = useState("");
+  const [cvData, setCvData] = useState("You did not uploaded your CV");
+  const { state } = useAuth();
 
-  const { data, isLoading, error } = useQuery(["job", id], () =>
-    getSingleJob(id)
+  useEffect(() => {
+    const apiUrl = `http://localhost:4000/ta/users/${state.userID}`;
+
+    Axios.get(apiUrl)
+      .then((res) => {
+        const { experience } = res.data.data;
+        const { cv } = res.data.data;
+        console.log(res.data.data);
+        setExperienceData(experience);
+        setCvData(cv);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  const { data, isLoading, error } = useQuery(["job", job_id], () =>
+    getSingleJob(job_id)
   );
-
+  console.log(experienceData);
   if (isLoading) {
     return (
       <div className="w-screen h-screen opacity-80 bg-white flex justify-center items-center">
@@ -153,14 +172,11 @@ export const YourApplication = () => {
             lineHeight="1.25rem"
             letterSpacing="0.01563rem"
             color="#616161"
+            colorScheme="customRadio1"
           >
             <Stack direction="row">
-              <Radio value="1" onClick={() => setChecked(true)}>
-                Use current CV
-              </Radio>
-              <Radio value="2" onClick={() => setChecked(false)}>
-                Upload new CV
-              </Radio>
+              <Radio value="1">Use current CV</Radio>
+              <Radio value="2">Upload new CV</Radio>
             </Stack>
           </RadioGroup>
           {/* ... */}
@@ -186,14 +202,19 @@ export const YourApplication = () => {
               textColor="white"
               _hover={{ bg: "#de7b9c" }}
               onClick={() => document.getElementById("cvInput").click()}
-              isDisabled={isChecked}
+              isDisabled={value === "1"}
             >
               Choose a File
             </Button>
-            <Text color="#616161">
-              {" "}
-              {cvChosen ? cvFileName : "No file chosen"}
-            </Text>
+            {value === "1" ? (
+              <Text color="#616161">
+                {cvData ? cvData : "You did not uploaded your CV"}
+              </Text>
+            ) : (
+              <Text color="#616161">
+                {cvChosen ? cvFileName : "No file chosen"}
+              </Text>
+            )}
           </Flex>
           <input
             type="file"
@@ -248,6 +269,8 @@ export const YourApplication = () => {
             letterSpacing="0.01563rem"
             textTransform="uppercase"
             color="#373737"
+            value={experienceData}
+            onChange={(e) => setExperienceData(e.target.value)}
           />
         </Box>
         <Box

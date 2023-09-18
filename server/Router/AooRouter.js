@@ -26,17 +26,12 @@ AooRouter.get("/:id", async (req, res) => {
 AooRouter.put("/:id", async (req, res) => {
   const user_id = req.params.id;
   const data = req.body;
-  // const email = data.email;
-  // const username = data.username;
-  // const phone = req.body.phone;
-  // const birthdate = req.body.birthdate;
-  // const linkedin = req.body.linkedin;
-  // const title = req.body.title;
-  // const experience = req.body.experience;
-  // const education = req.body.education;
-  // const cv = req.body.cv;
+
   try {
-    // Update the user's professional profile data in the database using SQL UPDATE statements
+    // Start a transaction
+    await pool.query("BEGIN");
+
+    // Update the user's professional profile data
     await pool.query(
       `
       UPDATE professionals
@@ -61,10 +56,11 @@ AooRouter.put("/:id", async (req, res) => {
         data.experience,
         data.education,
         data.cv,
-        data.user_id,
+        user_id,
       ]
     );
 
+    // Update the user's email address
     await pool.query(
       `
       UPDATE users
@@ -73,17 +69,23 @@ AooRouter.put("/:id", async (req, res) => {
         updated_at = NOW()
       WHERE user_id = $2;
       `,
-      [email, user_id]
+      [data.email, user_id]
     );
+
+    // Commit the transaction
+    await pool.query("COMMIT");
 
     return res.json({
       message: "Professional profile updated successfully",
     });
   } catch (error) {
-    // console.error("Error updating profile:", error); // Log the error
-    return res.json({
-      message: "hello",
-      error: error.message, // Include the error message in the response
+    // Rollback the transaction in case of an error
+    await pool.query("ROLLBACK");
+
+    console.error("Error updating profile:", error);
+    return res.status(500).json({
+      message: "An error occurred while updating the profile",
+      error: error.message,
     });
   }
 });

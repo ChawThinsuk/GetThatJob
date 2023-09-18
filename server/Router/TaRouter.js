@@ -23,36 +23,48 @@ taRouter.get("/users/:id", async (req, res) => {
 taRouter.put("/users/:user_id/jobs/:job_id", async (req, res) => {
   const { user_id, job_id } = req.params;
   const checkingQuery = `
-  SELECT job_user_cv, job_user_experience, job_user_interesting FROM jobs_professional 
+  SELECT * FROM jobs_professional 
   INNER JOIN jobs ON jobs_professional.job_id = jobs.job_id INNER JOIN professionals 
   ON jobs_professional.professional_id = professionals.professional_id WHERE professionals.user_id = ${user_id} AND jobs.job_id =${job_id}`;
 
   try {
     const data = await pool.query(checkingQuery);
+    console.log(req.body);
 
-    const userCV = data.rows[0].job_user_cv;
-    const userExp = data.rows[0].job_user_experience;
-    const userInt = data.rows[0].job_user_interesting;
-    console.log(userCV);
-    console.log("123543");
-    if (userCV === null || userExp === null || userInt === null) {
-      const insertQuery = `
+    if (data.rows[0]) {
+      const updateQuery = `
       UPDATE jobs_professional
       SET
-        job_user_cv = 'updated_cv_value',
-        job_user_experience = 'updated_experience_value',
-        job_user_interesting = 'updated_interesting_value'
+        job_user_cv = $1,
+        job_user_experience = $2,
+        job_user_interesting = $3,
+        updated_at = CURRENT_TIMESTAMP
       WHERE
-        user_id = ${user_id}
-        AND job_id = ${job_id}
-      
-      `;
+        job_professional_id = $4
+    `;
 
-      await pool.query(insertQuery, [userCV, userExp, userInt]);
+      await pool.query(updateQuery, [
+        req.body.job_user_cv,
+        req.body.job_user_experience,
+        req.body.job_user_interesting,
+        data.rows[0].job_professional_id,
+      ]);
 
-      return res.status(200).json({ message: "Data has been inserted" });
+      return res.status(200).json({ message: "Data has been Updated" });
     } else {
-      return res.status(200).json({ message: "Data already exists" });
+      const professionalIdQuery = await pool.query(
+        `SELECT professional_id FROM professionals WHERE user_id = ${user_id}`
+      );
+      const insertQuery = `INSERT INTO jobs_professional (job_user_application, job_user_cv, job_user_experience, job_user_interesting, job_id, professional_id, created_at) VALUES ($1, $2, $3, $4, $5, $6, CURRENT_TIMESTAMP)`;
+      await pool.query(insertQuery, [
+        true,
+        req.body.job_user_cv,
+        req.body.job_user_experience,
+        req.body.job_user_interesting,
+        job_id,
+        professionalIdQuery.rows[0].professional_id,
+      ]);
+      return res.status(200).json({ message: "Add data success" });
     }
   } catch (error) {
     console.error(error);

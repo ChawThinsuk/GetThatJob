@@ -34,8 +34,8 @@ function LoginPage() {
         </div>
       )}
       <Navbar />
-      {page === 'otp' && <Otp />}
-      {page === 'changePass' && <ChangePass />}
+      {page === 'otp' && <Otp props={{ setEmail, email, setPage }} />}
+      {page === 'changePass' && <ChangePass email={email} />}
       {page === 'resetSuccess' && <ResetSuccess />}
       {page === 'login' && (
         <div className='flex flex-row justify-center items-start bg-[#F5F5F6] w-srceen h-[1000px] gap-[60px] pt-[200px]'>

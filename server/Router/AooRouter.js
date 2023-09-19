@@ -10,7 +10,7 @@ AooRouter.get("/:id", async (req, res) => {
       "select * from professionals inner join users on professionals.user_id = users.user_id where users.user_id=$1",
       [user_id]
     );
-    // console.log(result);
+    // console.log(result.rows[0]);
     return res.json({
       data: result.rows[0],
       message: "Get Professional profile successfully",

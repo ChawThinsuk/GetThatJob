@@ -14,6 +14,7 @@ import {
   FormHelperText,
   useToast,
 } from "@chakra-ui/react";
+import { createClient } from "@supabase/supabase-js";
 import { useGlobalContext } from "../../contexts/registerContext.jsx";
 import UploadPdf from "../register/UploadPdf.jsx";
 import { useAuth } from "../../contexts/Authorization.jsx";
@@ -31,44 +32,20 @@ export function ProfessionalProfile() {
   const [professionalExperience, setProfessionalExperience] = useState("");
   const [educationalInfo, setEducationalInfo] = useState("");
   const [cv, setCv] = useState("");
+  const [newCv, setNewCv] = useState("");
   const [selectedFileName, setSelectedFileName] = useState(null);
+  const [selectedNewFileName, setSelectedNewFileName] = useState(null);
   const [formattedUpdatedTime, setFormattedUpdatedTime] = useState(""); // Declare formattedDate2 in the component's state
-  // console.log(cv);
 
   const toast = useToast();
   const { state } = useAuth();
   // console.log(state.userID);
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (userType === "PROFESSIONAL") {
-      if (file) {
-        if (file.type === "application/pdf" && file.size <= 5 * 1024 * 1024) {
-          setCv(file);
-          setSelectedFileName(file.name);
-        } else {
-          setCv(null);
-          setSelectedFileName(null);
-          toast({
-            title: "Wrong file type or size",
-            description: "Please upload a PDF file under 5MB.",
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-          });
-        }
-      } else {
-        // No file selected, clear the selected file and file name
-        setCv(null);
-        setSelectedFileName(null);
-      }
-    }
-  };
-
   const getProfProfile = async () => {
     const response = await axios.get(
       `http://localhost:4000/aoo/${state.userID}`
     );
+    // console.log(state.userID);
     const isoDate = response.data.data.birthdate;
     const formattedDate = isoDate.slice(0, 10);
 
@@ -89,16 +66,57 @@ export function ProfessionalProfile() {
     setCv(response.data.data.cv);
     console.log(response.data.data.cv);
     setSelectedFileName(response.data.data.cv);
-    setFormattedUpdatedTime(newFormattedUpdatedTime);
+    setFormattedUpdatedTime(newFormattedUpdatedTime); // Define newFormattedUpdatedTime here
   };
 
   useEffect(() => {
     getProfProfile();
   }, []);
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (userType === "PROFESSIONAL") {
+      if (file) {
+        if (file.type === "application/pdf" && file.size <= 5 * 1024 * 1024) {
+          setNewCv(file);
+          console.log(file);
+          setSelectedNewFileName(file.name);
+        } else {
+          setNewCv(null);
+          setSelectedNewFileName(null);
+          toast({
+            title: "Wrong file type or size",
+            description: "Please upload a PDF file under 5MB.",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+      } else {
+        // No file selected, clear the selected file and file name
+        setCv(null);
+        setSelectedFileName(null);
+      }
+    }
+  };
+
   const handleSaveChanges = async () => {
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    console.log(cv);
     try {
-      // Prepare the updated profile data object
+      const { data, error: professionalError } = await supabase.storage
+        .from("files")
+        .upload(`professionalcv/${Date.now()}${newCv.name}`, newCv, {
+          cacheControl: "3600",
+          upsert: false,
+        });
+
+      if (professionalError) {
+        throw professionalError; // Throw the error to trigger the catch block
+      }
+
       const updatedProfileData = {
         email: email,
         username: name,
@@ -108,8 +126,10 @@ export function ProfessionalProfile() {
         title: title,
         experience: professionalExperience,
         education: educationalInfo,
-        cv: cv,
+        cv: data.path,
       };
+
+      console.log(updatedProfileData.cv);
 
       // Make a PUT request to update the profile data
       await axios.put(
@@ -332,8 +352,23 @@ export function ProfessionalProfile() {
                     : "Choose a file"}
                 </label>
 
-                {selectedFileName ? (
-                  <div className="mt-4 ml-4">
+                {/* {selectedFileName ? (
+                  <div className="m-2 ml-4">
+                    <p>File selected: {selectedFileName}</p>
+                    <p>New CV : {selectedNewFileName}</p>
+                  </div>
+                ) : (
+                  <div className="ml-4 mt-3">
+                    <p>No file chosen</p>
+                  </div>
+                )} */}
+
+                {selectedNewFileName ? (
+                  <div className="m-2 ml-4">
+                    <p>File selected: {selectedNewFileName}</p>
+                  </div>
+                ) : selectedFileName ? (
+                  <div className="m-2 ml-4">
                     <p>File selected: {selectedFileName}</p>
                   </div>
                 ) : (
@@ -341,7 +376,6 @@ export function ProfessionalProfile() {
                     <p>No file chosen</p>
                   </div>
                 )}
-
                 {/* {cv && (
                   <div className="mt-2">
                     <p>File selected: {cv.name}</p>

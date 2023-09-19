@@ -33,6 +33,7 @@ export function ProfessionalProfile() {
   const [cv, setCv] = useState("");
   const [selectedFileName, setSelectedFileName] = useState(null);
   const [formattedUpdatedTime, setFormattedUpdatedTime] = useState(""); // Declare formattedDate2 in the component's state
+  // console.log(cv);
 
   const toast = useToast();
   const { state } = useAuth();
@@ -86,6 +87,7 @@ export function ProfessionalProfile() {
     setProfessionalExperience(response.data.data.experience);
     setEducationalInfo(response.data.data.education);
     setCv(response.data.data.cv);
+    console.log(response.data.data.cv);
     setSelectedFileName(response.data.data.cv);
     setFormattedUpdatedTime(newFormattedUpdatedTime);
   };

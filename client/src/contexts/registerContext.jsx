@@ -3,7 +3,7 @@ import axios from "axios";
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
-// dotenv.config();
+import { cssVar } from "@chakra-ui/theme-tools";
 
 const UserContext = createContext();
 
@@ -47,7 +47,7 @@ const ContextProvider = ({ children }) => {
   const [title, setTitle] = useState("");
   const [professionalExperience, setProfessionalExperience] = useState("");
   const [educationalInfo, setEducationalInfo] = useState("");
-  const [cv, setCv] = useState(null);
+  const [cv, setCv] = useState({});
 
   // recruiter context
 
@@ -66,15 +66,20 @@ const ContextProvider = ({ children }) => {
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
     const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    let error; // Declare error variable here
 
     try {
       if (userType === "PROFESSIONAL") {
-        const { data, error } = await supabase.storage
+        const { data, error: professionalError } = await supabase.storage
           .from("files")
           .upload(`professionalcv/${Date.now()}${cv.name}`, cv, {
             cacheControl: "3600",
             upsert: false,
           });
+
+        if (professionalError) {
+          error = professionalError; // Assign error if professionalError is defined
+        }
 
         const professionalData = {
           email: email,
@@ -89,6 +94,7 @@ const ContextProvider = ({ children }) => {
           education: educationalInfo,
           cv: data.path,
         };
+        console.log(professionalData);
 
         const response = await axios.post(
           "http://localhost:4000/users/register-professional",
@@ -112,12 +118,18 @@ const ContextProvider = ({ children }) => {
       }
 
       if (userType === "RECRUITER") {
-        const { data, error } = await supabase.storage
+        const { data, error: recruiterError } = await supabase.storage
           .from("files")
           .upload(`companyicon/${Date.now()}${logo.name}`, logo, {
             cacheControl: "3600",
             upsert: false,
           });
+
+        if (recruiterError) {
+          error = recruiterError; // Assign error if recruiterError is defined
+        }
+
+        console.log(error); // Log error here
 
         const urlPath = supabase.storage.from("files").getPublicUrl(data.path);
 

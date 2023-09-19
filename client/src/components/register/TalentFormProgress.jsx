@@ -117,6 +117,25 @@ function TalentFormProgress() {
                   />
                 </FormControl>
               </Stack>
+              <center>
+                <Button
+                  px={5}
+                  py={5}
+                  mt={8}
+                  type="button"
+                  bg="#F48FB1"
+                  variant="solid"
+                  size="sm"
+                  fontSize="md"
+                  color="white"
+                  borderRadius="16px"
+                  onClick={() => {
+                    setRegisterPage(registerPage + 1);
+                  }}
+                >
+                  NEXT &gt;
+                </Button>
+              </center>
             </form>
           </Box>
         </div>

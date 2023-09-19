@@ -15,6 +15,7 @@ const UploadPdf = () => {
         if (file.type === "application/pdf" && file.size <= 5 * 1024 * 1024) {
           setCv(file);
           setSelectedFileName(file.name);
+          console.log(file.name);
         } else {
           setCv(null);
           setSelectedFileName(null);

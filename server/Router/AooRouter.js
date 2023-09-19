@@ -143,6 +143,7 @@ AooRouter.put("/getrecruiter/:id", async (req, res) => {
   const company_name = req.body.company_name;
   const company_website = req.body.company_website;
   const company_description = req.body.company_description;
+  const logo = req.body.logo;
 
   try {
     // Update the recruiter's profile data in the database
@@ -154,6 +155,7 @@ AooRouter.put("/getrecruiter/:id", async (req, res) => {
         company_name = $3,
         company_website = $4,
         company_description = $5,
+        logo = $6,
         updated_at = NOW()
       WHERE user_id = $1;
       `,
@@ -163,6 +165,7 @@ AooRouter.put("/getrecruiter/:id", async (req, res) => {
         company_name,
         company_website,
         company_description,
+        logo,
       ]
     );
 

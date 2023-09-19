@@ -14,6 +14,7 @@ import {
   Textarea,
   useToast,
 } from "@chakra-ui/react";
+import { createClient } from "@supabase/supabase-js";
 import { useGlobalContext } from "../../contexts/registerContext.jsx";
 import axios from "axios";
 import UploadPdf from "../register/UploadPdf.jsx";
@@ -32,13 +33,15 @@ export function RecruiterProfile() {
   const [logo, setLogo] = useState("");
   const [selectedFileName, setSelectedFileName] = useState(null);
   const [formattedUpdatedTime, setFormattedUpdatedTime] = useState("");
+  const [newLogo, setNewLogo] = useState("");
+  const [selectedLogoFileName, setSelectedLogoFileName] = useState(null);
+
   const { state } = useAuth();
   const toast = useToast();
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Check for allowed file types (JPG and PNG)
       if (/(jpg|jpeg|png)$/i.test(file.type) && file.size <= 5 * 1024 * 1024) {
         setLogo(file);
         setSelectedFileName(file.name);
@@ -98,17 +101,56 @@ export function RecruiterProfile() {
     }
   };
 
+  const handleLogoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (/(jpg|jpeg|png)$/i.test(file.type) && file.size <= 5 * 1024 * 1024) {
+        setNewLogo(file);
+        setSelectedLogoFileName(file.name);
+      } else {
+        setNewLogo(null);
+        setSelectedLogoFileName(null);
+        toast({
+          title: "Wrong file type or size",
+          description: "Please upload a JPG or PNG file under 5MB.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    } else {
+      // No file selected, clear the selected file and file name
+      setLogo(null);
+      setSelectedLogoFileName(null);
+    }
+  };
+
   const handleSaveChanges = async () => {
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
     try {
-      // Prepare the updated profile data object
+      const { data, error: recError } = await supabase.storage
+        .from("files")
+        .upload(`companyicon/${Date.now()}${newLogo.name}`, newLogo, {
+          cacheControl: "3600",
+          upsert: false,
+        });
+
+      const urlPath = supabase.storage.from("files").getPublicUrl(data.path);
+
+      if (recError) {
+        throw recError; // Throw the error to trigger the catch block
+      }
+
       const updatedRecData = {
         company_email: recruiterEmail,
         company_name: companyName,
         company_website: companyWebsite,
         company_description: aboutCompany,
+        logo: urlPath.data.publicUrl,
       };
 
-      // Make a PUT request to update the profile data
       await axios.put(
         `http://localhost:4000/aoo/getrecruiter/${state.userID}`,
         updatedRecData
@@ -158,7 +200,7 @@ export function RecruiterProfile() {
                     type="file"
                     id="pdf-upload"
                     className="hidden"
-                    onChange={handleFileChange}
+                    onChange={handleLogoChange}
                     accept=".jpg,.jpeg,.png"
                   />
                   <label
@@ -169,18 +211,30 @@ export function RecruiterProfile() {
                     Choose a file
                   </label>
 
-                  {selectedFileName ? (
-                    <div className="mt-4 ml-4">
+                  {/* {selectedLogoFileName ? (
+                    <div className="m-2 ml-4">
+                      <p>Logo selected: {selectedLogoFileName}</p>
+                    </div>
+                  ) : selectedFileName ? (
+                    <div className="m-2 ml-4">
+                      <p>Logo selected: {selectedFileName}</p>
+                    </div>
+                  ) : (
+                    <div className="ml-4 mt-3">
+                      <p>No logo chosen</p>
+                    </div>
+                  )} */}
+
+                  {selectedLogoFileName || selectedFileName ? (
+                    <div className="m-2 ml-4">
                       <p>
-                        File selected:{" "}
-                        {selectedFileName.substring(
-                          selectedFileName.length - 12
-                        )}
+                        Selected:
+                        {selectedLogoFileName || selectedFileName.slice(-10)}
                       </p>
                     </div>
                   ) : (
                     <div className="ml-4 mt-3">
-                      <p>No file chosen</p>
+                      <p>No logo chosen</p>
                     </div>
                   )}
                 </div>

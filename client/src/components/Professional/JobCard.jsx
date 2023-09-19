@@ -55,7 +55,7 @@ const JobCard = (prop) => {
       key={job.job_id}
       className="w-[390px] h-[227px] rounded-[8px] border-[1px] border-[#E1E2E1] bg-[#FFFFFF] flex justify-center items-center mr-[16px] shadow-pro1"
     >
-      <div className="w-[345px] h-[185px] flex flex-col justify-between items-center">
+      <div className="w-[345px] h-[195px] flex flex-col justify-between items-center">
         <div className="flex flex-row w-[345px] h-[110px] gap-[10px]">
           <img src={job.logo} className="w-[100px] h-[100px]" />
           <div className="flex flex-col w-[230px] h-[110px]">
@@ -65,12 +65,15 @@ const JobCard = (prop) => {
                 {job.job_category}
               </p>
             </div>
-            <div className="flex flex-col w-[230px] h-[64px]">
-              <p className="text-[24px] text-[#373737] w-[230px] h-[38px]">
+            <div className="flex flex-col w-[230px] h-[86px]">
+              <p className="text-[24px] text-[#373737] w-[230px] h-[32px]">
                 {job.job_title}
               </p>
-              <p className="text-[18px] text-[#616161] w-[230px] h-[24px]">
+              <p className="text-[20px] text-[#616161] w-[230px] h-[24px]">
                 {job.company_name}
+              </p>
+              <p className="text-[14px] text-[#616161] w-[230px] h-[24px] mt-[6px]">
+                {job.job_location}
               </p>
             </div>
             <div className="flex flex-row justify-between items-center w-[230px] h-[27px] pt-[4px]">

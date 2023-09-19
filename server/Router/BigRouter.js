@@ -10,17 +10,18 @@ bigRouter.get("/", async (req, res) => {
   const type = req.query.type;
   const minSalary = req.query.minSalary;
   const maxSalary = req.query.maxSalary;
+  const location = req.query.location;
   const data = req.query;
   console.log(data);
   const queryParams = [];
   const queryParts = [
-    "SELECT jobs.job_id, jobs.job_title, jobs.job_category, jobs.salary_min, jobs.salary_max, jobs.job_type, jobs.job_position, jobs.job_mandatory, jobs.job_optional, jobs.created_at, recruiters.company_name, recruiters.logo FROM jobs INNER JOIN recruiters ON jobs.recruiter_id = recruiters.recruiter_id WHERE 1 = 1",
+    "SELECT jobs.job_id, jobs.job_title, jobs.job_category, jobs.salary_min, jobs.salary_max, jobs.job_type, jobs.job_position, jobs.job_mandatory, jobs.job_optional, jobs.created_at, jobs.job_location, recruiters.company_name, recruiters.logo FROM jobs INNER JOIN recruiters ON jobs.recruiter_id = recruiters.recruiter_id WHERE 1 = 1",
   ];
 
   if (searchTerm) {
     queryParams.push(searchTerm);
     queryParts.push(
-      "AND UPPER(job_title) ~ UPPER($1) OR UPPER(job_category) ~ UPPER($1) OR UPPER(company_name) ~ UPPER($1) OR UPPER(job_type) ~ UPPER($1)"
+      "AND UPPER(job_title) ~ UPPER($1) OR UPPER(job_category) ~ UPPER($1) OR UPPER(company_name) ~ UPPER($1) OR UPPER(job_type) ~ UPPER($1) OR UPPER(job_location) ~ UPPER($1)"
     );
   }
 
@@ -44,6 +45,10 @@ bigRouter.get("/", async (req, res) => {
     queryParts.push("AND salary_max <= $" + queryParams.length);
   }
 
+  if (location) {
+    queryParams.push(location);
+    queryParts.push("AND job_location ~ $" + queryParams.length);
+  }
   // queryParts.push(`LIMIT $${queryParams.length + 1} OFFSET $${queryParams.length + 2}`);
   // queryParams.push(PAGE_SIZE, offset);
 

@@ -159,7 +159,10 @@ export const YourApplication = () => {
       gap="3.375rem"
       alignSelf="stretch"
     >
-      <JobHeader data={data.data.job} />
+      <JobHeader
+        data={data.data.job}
+        state={{ cvData, experienceData, interestingData }}
+      />
       <Box
         display="flex"
         flexDirection="column"

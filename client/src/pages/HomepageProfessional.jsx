@@ -6,6 +6,7 @@ import { Following } from "../components/Professional/Following";
 import { ProfessionalProfile } from "../components/Professional/ProfessionalProfile";
 import { YourApplication } from "../components/Professional/YourApplication";
 import { JobDetail } from "../components/Professional/JobDetail";
+import { ApplicationList } from "../components/Professional/ApplicationList";
 
 export const HomepageProfessional = () => {
   const { state } = useAuth();
@@ -17,6 +18,7 @@ export const HomepageProfessional = () => {
         <Route path="/:id" element={<JobDetail />} />
         <Route path="/follow" element={<Following />} />
         <Route path="/proprofile" element={<ProfessionalProfile />} />
+        <Route path="/apply" element={<ApplicationList />} />
         <Route path="/apply/:job_id" element={<YourApplication />} />
         <Route path="*" element={<FindThatJob />} />
       </Routes>

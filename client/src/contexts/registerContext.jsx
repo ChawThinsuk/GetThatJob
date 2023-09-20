@@ -147,7 +147,6 @@ const ContextProvider = ({ children }) => {
       console.log("Registration error", error);
     }
   };
-
   return (
     <UserContext.Provider
       value={{

@@ -1,25 +1,40 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  CloseJobButton,
+  ClosedJobButton,
+  formatNumber,
+  formatDate,
+} from "./Recruiter-1-2-Component";
 
-function JobDetailBox() {
-  const [item, setItemm] = useState([{ data: "asd" }, { data: "asd" }]);
+function JobDetailBox(props) {
+  const [item, setItem] = useState({ active: 0 });
+  const data = props.datas;
+  let minSalary = formatNumber(data.salary_min);
+  minSalary = minSalary.replace(/\.0+/, ".0");
+  let maxSalary = formatNumber(data.salary_max);
+  maxSalary = maxSalary.replace(/\.0+/, ".0");
   const handleToggleActive = () => {
     let newActive = item.active === 1 ? 0 : 1;
-    setItemm({ ...item, active: newActive });
+    setItem({ ...item, active: newActive });
   };
+
+  let mandatory = data.job_mandatory.split(",");
+  let optional = data.job_optional.split(",");
   return (
     <div
-      className={`flex flex-col w-full mt-[16px] justify-between rounded-[8px]  pr-[16px] shadow-sm group  ${
+      className={`flex flex-col w-[1258.72px] mt-[21.33px] justify-between items-start rounded-[8px] shadow-md group ${
         item.active === 1 ? `is-active bg-white` : ` duration-500`
       }`}
     >
       <div
-        className={`flex flex-row w-full h-[80px] justify-between items-center rounded-[8px] shadow-sm pr-[21.3px]`}
+        className={`flex flex-row w-full h-[100px] justify-between items-center rounded-[8px] duration-500`}
       >
         <div className="flex flex-col pl-[21.3px]">
-          <p className="text-[26.6px] font-[Montserrat] font-medium">
-            The job title
+          <p className="text-[21px] font-[Montserrat] font-medium">
+            {data.job_title}
           </p>
-          <div className="flex flex-row gap-3 text-[16px]">
+          <div className="flex flex-row gap-3 text-[13px]">
             <div className="flex flex-row items-center">
               <svg
                 width="15"
@@ -36,7 +51,7 @@ function JobDetailBox() {
                   />
                 </g>
               </svg>
-              <p className="pl-[4px] text-[#8E8E8E]">Manufactoring</p>
+              <p className="pl-[4px] text-[#8E8E8E]">{data.job_category}</p>
             </div>
             <div className="flex flex-row items-center">
               <svg
@@ -54,7 +69,7 @@ function JobDetailBox() {
                   />
                 </g>
               </svg>
-              <p className="pl-[4px] text-[#8E8E8E]">Full time</p>
+              <p className="pl-[4px] text-[#8E8E8E]">{data.job_type}</p>
             </div>
             <div className="flex flex-row items-center">
               <svg
@@ -72,12 +87,14 @@ function JobDetailBox() {
                   />
                 </g>
               </svg>
-              <p className="pl-[4px] text-[#8E8E8E]">2.0k-2.5k</p>
+              <p className="pl-[4px] text-[#8E8E8E]">
+                {minSalary}-{maxSalary}
+              </p>
             </div>
           </div>
         </div>
-        <div className="flex flex-row items-center gap-10 text-center text-[#616161] text-[16px]">
-          <div className="flex flex-col items-center justify-center gap-1 leading-4">
+        <div className="flex flex-row items-center gap-5 text-center text-[#616161] text-[13px]">
+          <div className="flex flex-col items-center justify-center gap-1">
             <svg
               width="16"
               height="15"
@@ -93,11 +110,14 @@ function JobDetailBox() {
                 />
               </g>
             </svg>
-            <p>Open on</p>
-            <p>07/11/20</p>
+            <p>
+              Open on
+              <br />
+              {formatDate(data.created_at)}
+            </p>
           </div>
           <div className="flex flex-col text-[#616161]">
-            <div className="flex flex-row items-center justify-center gap-1 leading-4">
+            <div className="flex flex-row items-center justify-center gap-1">
               <svg
                 width="16"
                 height="16"
@@ -113,14 +133,17 @@ function JobDetailBox() {
                   />
                 </g>
               </svg>
-              <p>5</p>
+              <p>{data.total_candidate}</p>
             </div>
-            <p>Total</p>
-            <p>Candidates</p>
+            <p>
+              Total
+              <br />
+              Candidates
+            </p>
           </div>
           <div className="flex flex-col text-[#F48FB1]">
-            <div className="flex flex-row items-center justify-center gap-1 leading-4">
-              <p>5</p>
+            <div className="flex flex-row items-center justify-center gap-1">
+              <p>{data.candidate_on_track}</p>
               <svg
                 width="16"
                 height="16"
@@ -137,52 +160,86 @@ function JobDetailBox() {
                 </g>
               </svg>
             </div>
-            <p>Candidates</p>
-            <p>on track</p>
+            <p>
+              Candidates
+              <br />
+              on track
+            </p>
           </div>
         </div>
-        <div className="flex flex-row gap-4">
-          <button className="flex flex-row items-center justify-center w-[112px] h-[40px] text-[18.66px] gap-3">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g id="Group">
-                <path
-                  id="Vector"
-                  d="M18.031 16.617L22.314 20.899L20.899 22.314L16.617 18.031C15.0237 19.3082 13.042 20.0029 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20.0029 13.042 19.3082 15.0237 18.031 16.617ZM16.025 15.875C17.2941 14.5699 18.0029 12.8204 18 11C18 7.132 14.867 4 11 4C7.132 4 4 7.132 4 11C4 14.867 7.132 18 11 18C12.8204 18.0029 14.5699 17.2941 15.875 16.025L16.025 15.875Z"
-                  fill="#616161"
-                />
-              </g>
-            </svg>
-            SHOW{" "}
+        <div className="flex flex-row items-center gap-4 mr-[74.67px]">
+          <Link to={`/showjobposting/${data.job_id}`}>
+            <button className="flex flex-row items-center justify-center w-[149.34px] h-[53.33px] text-[15px] gap-3">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="Group">
+                  <path
+                    id="Vector"
+                    d="M18.031 16.617L22.314 20.899L20.899 22.314L16.617 18.031C15.0237 19.3082 13.042 20.0029 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20.0029 13.042 19.3082 15.0237 18.031 16.617ZM16.025 15.875C17.2941 14.5699 18.0029 12.8204 18 11C18 7.132 14.867 4 11 4C7.132 4 4 7.132 4 11C4 14.867 7.132 18 11 18C12.8204 18.0029 14.5699 17.2941 15.875 16.025L16.025 15.875Z"
+                    fill="#616161"
+                  />
+                </g>
+              </svg>
+              SHOW
+            </button>
+          </Link>
+          {data.job_status === "track" && (
+            <CloseJobButton
+              mark={data.job_id}
+              refreshData={props.refreshData}
+            />
+          )}
+          {data.job_status === "closed" && <ClosedJobButton />}
+          <button className="flex flex-row items-center justify-center bg-[#F48FB1] w-[154.67px] h-[53.36px] gap-2 text-white rounded-[21.33px] text-[15px] hover:bg-rose-200 duration-200">
+            EDIT
           </button>
-          <button className="flex flex-row items-center justify-center bg-[#F48FB1] w-[154.67px] h-[53.36px] gap-2 text-white rounded-[21.33px] text-[18.66px] ">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g id="Group">
-                <path
-                  id="Vector"
-                  d="M12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22ZM12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20ZM12 10.586L14.828 7.757L16.243 9.172L13.414 12L16.243 14.828L14.828 16.243L12 13.414L9.172 16.243L7.757 14.828L10.586 12L7.757 9.172L9.172 7.757L12 10.586Z"
-                  fill="white"
-                />
-              </g>
-            </svg>
-            CLOSE
-          </button>
-          <button className="flex flex-row items-center justify-center bg-[#F48FB1] w-[154.67px] h-[53.36px] gap-2 text-white rounded-[21.33px] text-[18.66px] ">
-            edit
-          </button>
+        </div>
+      </div>
+      <div className="flex flex-row items-between w-full">
+        <div className="overflow-hidden max-h-0 w-full group-[.is-active]:max-h-[600px] duration-500 ml-[21.33px] text-[14px]">
+          <div className="mt-[16px]">
+            <p className="text-[#BF5F82] text-[14px] font-[Montserrat]">
+              About the job position
+            </p>
+            <p className="mt-[10.66px]">{data.job_position}</p>
+          </div>
+          <div className="mt-[16px]">
+            <p className="text-[#BF5F82] text-[14px] font-[Montserrat]">
+              Mandatory Requirements
+            </p>
+            <ul style={{ listStyleType: 'none' }}>
+            {mandatory.map((item, key) => {
+              return (
+                <li key={key} className="mt-[10.66px] ">
+                  - {item}
+                </li>
+              );
+            })}
+            </ul>
+          </div>
+          <div className="mt-[16px] pb-[16px]">
+            <p className="text-[#BF5F82] text-[14px] font-[Montserrat]">
+              Optional Requirements
+            </p>
+            <ul style={{ listStyleType: 'none' }}>
+            {optional.map((item, key) => {
+              return (
+                <li key={key} className="mt-[10.66px]">
+                  - {item}
+                </li>
+              );
+            })}
+            </ul>
+          </div>
+        </div>
+        <div className="flex items-end h-full relative bg-slate-500">
           <div
-            className="cursor-pointer group-[.is-active]:rotate-[180deg] duration-500"
+            className="flex flex-col justify-end items-end cursor-pointer group-[.is-active]:rotate-[180deg] duration-500 mr-[21.33px] absolute bottom-6 right-1"
             onClick={handleToggleActive}
           >
             <svg
@@ -201,20 +258,6 @@ function JobDetailBox() {
               </g>
             </svg>
           </div>
-        </div>
-      </div>
-      <div className="overflow-hidden max-h-0 group-[.is-active]:max-h-[600px] duration-500 ml-[16px] mb">
-        <div className="mt-[16px]">
-          <p className="text-[#BF5F82]">Professional experience</p>
-          sdasd
-        </div>
-        <div className="mt-[16px]">
-          <p className="text-[#BF5F82]">Mandatory Requirements</p>
-          <p>asdasd</p>
-        </div>
-        <div className="mt-[16px]">
-          <p className="text-[#BF5F82]">Optional Requirements</p>
-          <p>asdasd</p>
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ import { AuthProvider } from './contexts/Authorization.jsx';
 import jwtInterceptor from './utils/jwtIntercepter.jsx';
 import { QueryClient, QueryClientProvider} from 'react-query';
 
+
 const queryClient = new QueryClient();
 jwtInterceptor();
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -16,7 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <ContextProvider>
-            <App />
+            <App />          
           </ContextProvider>
         </AuthProvider>
       </QueryClientProvider>

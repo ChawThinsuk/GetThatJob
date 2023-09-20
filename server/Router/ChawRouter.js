@@ -3,7 +3,7 @@ import { pool } from "../utils/db.js";
 
 const ChawRouter = Router();
 
-ChawRouter.post("/", async (req, res) => {
+ChawRouter.post("/get-job-posting", async (req, res) => {
   try {
     const data = req.body;
     const query = queryCommand();
@@ -90,6 +90,7 @@ ChawRouter.post("/getcandidate", async (req, res) => {
       });
     }
     const results = await pool.query(query.queryCandidate, [data.job_id]);
+    console.log(results)
     return res.json({
       data: results.rows,
     });
@@ -101,7 +102,7 @@ ChawRouter.post("/getcandidate", async (req, res) => {
 });
 ChawRouter.put("/candidate-status", async (req, res) => {
   try {
-    const data = req.body
+    const data = req.body;
     let errorMessage = validateCandidateStatus(data);
     const query = queryCommand();
     if (errorMessage) {
@@ -109,7 +110,10 @@ ChawRouter.put("/candidate-status", async (req, res) => {
         ERROR: errorMessage,
       });
     }
-    const results = await pool.query(query.queryUpdateCandidateStatus, [data.job_user_mark,data.job_professional_id]);
+    const results = await pool.query(query.queryUpdateCandidateStatus, [
+      data.job_user_mark,
+      data.job_professional_id,
+    ]);
     return res.json({
       message: "Updated successfully",
     });
@@ -171,30 +175,30 @@ function queryCommand() {
   const queryJob = `select j.*, COALESCE(pc.total_candidate,0) total_candidate,COALESCE(am.candidate_on_track,0) candidate_on_track from jobs j 
 left join (select job_id, count (professional_id) total_candidate from jobs_professional group by job_id) pc 
 on j.job_id = pc.job_id 
-left join(select job_id, count (professional_id) candidate_on_track from jobs_professional where job_user_mark = 'STARTED' group by job_id) am 
+left join(select job_id, count (professional_id) candidate_on_track from jobs_professional where job_user_mark = 'in_progress' group by job_id) am 
 on j.job_id = am.job_id 
 where j.recruiter_id = $1 `;
   const queryJobWithStatus = `select j.*, COALESCE(pc.total_candidate,0) total_candidate,COALESCE(am.candidate_on_track,0) candidate_on_track from jobs j 
 left join (select job_id, count (professional_id) total_candidate from jobs_professional group by job_id) pc 
 on j.job_id = pc.job_id 
-left join(select job_id, count (professional_id) candidate_on_track from jobs_professional where job_user_mark = 'STARTED' group by job_id) am 
+left join(select job_id, count (professional_id) candidate_on_track from jobs_professional where job_user_mark = 'in_progress' group by job_id) am 
 on j.job_id = am.job_id 
 where j.recruiter_id = $1 AND j.job_status = $2`;
 
-const queryJobWithJobId = `select j.*, COALESCE(pc.total_candidate,0) total_candidate,COALESCE(am.candidate_on_track,0) candidate_on_track from jobs j 
+  const queryJobWithJobId = `select j.*, COALESCE(pc.total_candidate,0) total_candidate,COALESCE(am.candidate_on_track,0) candidate_on_track from jobs j 
 left join (select job_id, count (professional_id) total_candidate from jobs_professional group by job_id) pc 
 on j.job_id = pc.job_id 
-left join(select job_id, count (professional_id) candidate_on_track from jobs_professional where job_user_mark = 'STARTED' group by job_id) am 
+left join(select job_id, count (professional_id) candidate_on_track from jobs_professional where job_user_mark = 'in_progress' group by job_id) am 
 on j.job_id = am.job_id 
-where j.job_id = $1`
+where j.job_id = $1`;
 
-  const queryCandidate = `select  pd.*,us.email,jp.job_user_mark, jp.updated_at from jobs_professional jp
+  const queryCandidate = `select  pd.*,us.email,jp.job_user_mark, jp.updated_at,jp.job_professional_id,jp.job_user_cv from jobs_professional jp
 left join (select  * from professionals group by  professional_id,user_id) pd
 on jp.professional_id = pd.professional_id
 left join (select user_id,email from users where user_type = 'PROFESSIONAL' group by user_id) us
 on pd.user_id = us.user_id
 where job_id = $1`;
-  const queryCandidateWithStatus = `select  pd.*,us.email,jp.job_user_mark, jp.updated_at from jobs_professional jp
+  const queryCandidateWithStatus = `select  pd.*,us.email,jp.job_user_mark, jp.updated_at ,jp.job_professional_id,jp.job_user_cv from  jobs_professional jp
 left join (select  * from professionals group by  professional_id,user_id) pd
 on jp.professional_id = pd.professional_id
 left join (select user_id,email from users where user_type = 'PROFESSIONAL' group by user_id) us
@@ -203,7 +207,6 @@ where job_id = $1 and job_user_mark = $2`;
   const queryCloseJob = `UPDATE jobs SET job_status = 'closed', closed_at = now() where job_id = $1`;
   const queryUpdateCandidateStatus = `UPDATE jobs_professional SET job_user_mark = $1 where job_professional_id = $2`;
 
-
   let query = {
     queryJob,
     queryJobWithStatus,
@@ -211,11 +214,9 @@ where job_id = $1 and job_user_mark = $2`;
     queryCandidateWithStatus,
     queryCloseJob,
     queryJobWithJobId,
-    queryUpdateCandidateStatus
+    queryUpdateCandidateStatus,
   };
   return query;
 }
 
 export default ChawRouter;
-
-

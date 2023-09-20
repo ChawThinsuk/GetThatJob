@@ -13,7 +13,10 @@ AooRouter.get("/:id", async (req, res) => {
     // console.log(result);
     return res.json({
       data: result.rows[0],
+<<<<<<< HEAD
       message: "Get Professional profile successfully",
+=======
+>>>>>>> 23f155d (feat : add method GET for front and backend)
     });
   } catch (error) {
     return res.status(500).json({
@@ -23,6 +26,7 @@ AooRouter.get("/:id", async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 AooRouter.post("/getrecruiter", async (req, res) => {
   const recruiter_id = req.body.id;
   // console.log(recruiter_id);
@@ -182,4 +186,6 @@ AooRouter.put("/getrecruiter/:id", async (req, res) => {
   }
 });
 
+=======
+>>>>>>> 23f155d (feat : add method GET for front and backend)
 export default AooRouter;

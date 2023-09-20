@@ -22,6 +22,7 @@ import { useAuth } from "../../contexts/Authorization.jsx";
 import uploadlogo from "../../assets/register-images/pdf-upload.svg";
 
 export function RecruiterProfile() {
+<<<<<<< HEAD
   const { profFormStyle, userType } = useGlobalContext();
   const [companyName, setCompanyName] = useState("");
   const [recruiterEmail, setRecruiterEmail] = useState("");
@@ -35,6 +36,23 @@ export function RecruiterProfile() {
   const [formattedUpdatedTime, setFormattedUpdatedTime] = useState("");
   const [newLogo, setNewLogo] = useState("");
   const [selectedLogoFileName, setSelectedLogoFileName] = useState(null);
+=======
+  const {
+    profFormStyle,
+    companyName,
+    setCompanyName,
+    recruiterEmail,
+    setRecruiterEmail,
+    recruiterPassword,
+    setRecruiterPassword,
+    recruiterpasswordConfirmation,
+    setRecruiterPasswordConfirmation,
+    companyWebsite,
+    setCompanyWebsite,
+    aboutCompany,
+    setAboutCompany,
+  } = useGlobalContext();
+>>>>>>> 23f155d (feat : add method GET for front and backend)
 
   const { state } = useAuth();
   const toast = useToast();

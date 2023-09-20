@@ -38,4 +38,13 @@ authRouter.post('/login', async (req, res) => {
   }
 });
 
+authRouter.put("/", async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    return res.status(200).json({ message: "Change Password success" });
+  } catch (error) {
+    return res.status(500).json({ message: error });
+  }
+});
+
 export default authRouter;

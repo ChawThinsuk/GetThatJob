@@ -7,7 +7,27 @@ export const Otp = ({ props }) => {
   const [inputOtp, setInputOtp] = useState([0, 0, 0, 0, 0, 0]);
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(1);
+  const [countdown, setCountdown] = useState(60);
+  const [disable, setDisable] = useState(false);
   const toast = useToast();
+
+  useEffect(() => {
+    let intervalId;
+    if (countdown === 0) {
+      setDisable(false);
+      setCountdown(60);
+      clearInterval(intervalId);
+    }
+    if (disable) {
+      intervalId = setInterval(() => {
+        setCountdown((prevCountdown) => prevCountdown - 1);
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [disable, countdown]);
 
   const handleEmail = async (e) => {
     e.preventDefault();
@@ -22,7 +42,7 @@ export const Otp = ({ props }) => {
         title: 'OTP has been sended to yout email.',
         description: 'Please check yout email.',
         status: 'success',
-        duration: 9000,
+        duration: 3000,
         isClosable: true,
       });
       setOtp(OTP);
@@ -34,7 +54,7 @@ export const Otp = ({ props }) => {
         title: 'Something wrong.',
         description: 'Please try again later.',
         status: 'error',
-        duration: 9000,
+        duration: 3000,
         isClosable: true,
       });
     }
@@ -48,14 +68,14 @@ export const Otp = ({ props }) => {
         title: 'Wrong OTP.',
         description: 'Please try again.',
         status: 'error',
-        duration: 9000,
+        duration: 3000,
         isClosable: true,
       });
     }
   };
   return (
     <div className='flex mt-24 justify-center w-screen h-screen'>
-      <section className='w-[35%] h-fit pt-[20px] px-[20px] pb-[50px] bg-gray-100 border-[0.5px] border-gray-300 rounded-lg shadow-xl transition-all duration-500'>
+      <section className='w-[35%] h-fit pt-[20px] px-[20px] pb-[40px] bg-gray-100 border-[0.5px] border-gray-300 rounded-lg shadow-xl transition-all duration-500'>
         <div className='flex flex-col items-end pt-3'>
           <h1 className='font-[Montserrat] text-[18px]  w-full'>
             Please input your email address
@@ -69,7 +89,7 @@ export const Otp = ({ props }) => {
           {isLoading ? (
             <Button
               isLoading
-              mt={3}
+              mt={5}
               loadingText='Loading'
               colorScheme='teal'
               variant='outline'
@@ -80,7 +100,7 @@ export const Otp = ({ props }) => {
               isDisabled
               type='button'
               bg={'gray.300'}
-              mt={3}
+              mt={5}
               fontSize='md'
               textColor='white'
               onClick={handleEmail}
@@ -91,7 +111,7 @@ export const Otp = ({ props }) => {
             <Button
               type='button'
               bg='#F48FB1'
-              mt={3}
+              mt={5}
               fontSize='md'
               textColor='white'
               onClick={handleEmail}
@@ -204,12 +224,22 @@ export const Otp = ({ props }) => {
             </button>
             <div className='flex gap-2 mt-5'>
               <p>Didn't receive email?</p>
-              <p
-                className=' text-blue-900 underline hover:cursor-pointer'
-                onClick={handleEmail}
-              >
-                resend email
-              </p>
+              {disable ? (
+                <p>
+                  resend again in{' '}
+                  <span className='text-blue-900'>{countdown}</span> second
+                </p>
+              ) : (
+                <p
+                  className=' text-blue-900 underline hover:cursor-pointer'
+                  onClick={(e) => {
+                    setDisable(true);
+                    handleEmail(e);
+                  }}
+                >
+                  resend email
+                </p>
+              )}
             </div>
           </div>
         )}

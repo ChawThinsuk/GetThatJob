@@ -103,7 +103,7 @@ function LoginPage() {
             <div className='mt-2 flex flex-row justify-between'>
               <h1
                 className=' text-[12px] hover:cursor-pointer'
-                onClick={() => setPage('otp')}
+                onClick={() => setPage('changePass')}
               >
                 Forgot Password?
               </h1>

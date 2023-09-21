@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/Authorization';
 import Navbar from '../components/navbar';
 import { Spinner } from '@chakra-ui/react';
 import { Otp } from '../components/Login/Otp';
-import { ChangePass } from '../components/Login/ChangePass';
+import ChangePass from '../components/Login/ChangePass';
 import { ResetSuccess } from '../components/Login/ResetSuccess';
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -35,7 +35,7 @@ function LoginPage() {
       )}
       <Navbar />
       {page === 'otp' && <Otp setEmail={setEmail}/>}
-      {page === 'changePass' && <ChangePass email={email}/>}
+      {page === 'changePass' && <ChangePass email={email} setPage={setPage}/>}
       {page === 'resetSuccess' && <ResetSuccess />}
       {page === 'login' && (
         <div className='flex flex-row justify-center items-start bg-[#F5F5F6] w-srceen h-[1000px] gap-[60px] pt-[200px]'>

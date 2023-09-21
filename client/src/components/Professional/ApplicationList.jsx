@@ -1,5 +1,3 @@
-import { JobHeader } from "./JobHeader";
-import { Textarea } from "@chakra-ui/react";
 import { Text, Box, useToast } from "@chakra-ui/react";
 import {
   Radio,
@@ -18,7 +16,6 @@ import {
 import { useState, useEffect } from "react";
 import { EmailIcon } from "@chakra-ui/icons";
 import { useParams } from "react-router-dom";
-import { useQuery } from "react-query";
 import { usePro } from "../../contexts/Professional";
 import Axios from "axios";
 import { useAuth } from "../../contexts/Authorization";
@@ -28,6 +25,12 @@ import buildingImg from "./listItem/building.svg";
 import calendarImg from "./listItem/calendar.svg";
 import moneyImg from "./listItem/money.svg";
 import declineImg from "./listItem/decline.svg";
+import waitingIcn from "./listItem/waiting.svg";
+import inprogressIcn from "./listItem/inProgress.svg";
+import finishedIcn from "./listItem/finished.svg";
+import declinedIcn from "./listItem/declined.svg";
+import sentIcn from "./listItem/sent.svg";
+import arrowIcn from "./listItem/arrow.svg";
 
 export const ApplicationList = () => {
   const [value, setValue] = useState("1");
@@ -89,6 +92,34 @@ export const ApplicationList = () => {
       return `${formattedMinSalary} - ${formattedMaxSalary}`;
     }
     return "";
+  };
+
+  const handleDeclined = async () => {
+    try {
+      const submitDeclined = {
+        job_user_mark: "declined",
+      };
+      await axios.put(
+        `http://localhost:4000/ta2/users/${state.userID}/jobs/${job_id}`,
+        submitDeclined
+      );
+
+      toast({
+        title: "Application declined",
+        status: "success",
+        duration: 5000,
+        isCloseable: true,
+      });
+    } catch (error) {
+      console.error("Error submit profile");
+      toast({
+        title:
+          "An error occured while declined your application please tray again",
+        status: "error",
+        duration: 5000,
+        isCloseable: true,
+      });
+    }
   };
 
   const formatDate = (dateString) => {
@@ -187,12 +218,18 @@ export const ApplicationList = () => {
             </Box>
           ) : (
             fillteredData.map((item) => (
-              <div
+              <label
                 key={item.job_professional_id}
-                className="flex w-[59rem] p-[1rem] shadow-md flex-col items-start rounded-[0.5rem] border-1px-solid bg-white gap-[1rem]"
+                className="flex w-[59rem] p-[1rem] shadow-md flex-col items-start rounded-[0.5rem] border-1px-solid bg-white gap-[1rem] hover:bg-[#dddddd] cursor-pointer relative"
+                htmlFor={`checkbox-${item.job_professional_id}`}
               >
+                <input
+                  type="checkbox"
+                  id={`checkbox-${item.job_professional_id}`}
+                  className="absolute peer opacity-0"
+                />
                 <div className=" flex w-[55.5625rem] justify-between items-center ">
-                  <div className=" flex items-center gap-[1rem]">
+                  <div className=" flex w-[170px] items-center gap-[1rem]">
                     <img
                       src={item.logo}
                       alt={item.logo}
@@ -220,16 +257,42 @@ export const ApplicationList = () => {
                       {formatDate(item.created_at)}
                     </div>
                   </div>
-                  <div className="flex items-start w-[5rem] gap-[0.25rem]">
-                    <div>
-                      <EmailIcon color="#616161" />
+                  <div className="flex items-start gap-[0.25rem] relative ">
+                    <div className=" flex flex-col w-[5rem] items-center  ">
+                      <img src={sentIcn} />
+                      <div className="text-center font-inter text-xs text-[#616161] font-normal leading-[1rem] tracking-[0.025rem]">
+                        Sent {formatDate(item.created_at)}
+                      </div>
                     </div>
-                    <div>
-                      <EmailIcon color="#F48FB1" />
+                    <div className=" flex flex-col w-[5rem] items-center font-inter text-xs text-[#F48FB1] text-center font-normal leading-[1rem] tracking-[0.025rem]  ">
+                      {item.job_user_mark === "waiting" && (
+                        <>
+                          <img src={waitingIcn} alt="Waiting" />
+                          Waiting for review
+                        </>
+                      )}
+                      {item.job_user_mark === "in_progress" && (
+                        <>
+                          <img src={inprogressIcn} alt="In Progress" />
+                          Review in progress
+                        </>
+                      )}
+                      {item.job_user_mark === "finished" && (
+                        <>
+                          <img src={finishedIcn} alt="Finished" />
+                          Review finished
+                        </>
+                      )}
+                      {item.job_user_mark === "declined" && (
+                        <>
+                          <img src={declinedIcn} alt="Declined" />
+                          Declined
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
-                <div className=" flex flex-col items-start gap-[1rem] ">
+                <div className=" flex flex-col items-start gap-[1rem] max-h-0 overflow-hidden peer-checked:max-h-full ease-in  ">
                   <div className=" w-[47.5] flex flex-col items-start gap-[0.2rem] ">
                     <h2 className="text-[1rem] text-[#c7668a] font-normal leading-normal tracking-[0.00938rem]">
                       Professional experience
@@ -274,12 +337,18 @@ export const ApplicationList = () => {
                       gap="0.7rem"
                       borderRadius="2rem"
                       _hover={{ bg: "#de7b9c" }}
+                      onClick={handleDeclined}
+                      isDisabled={item.job_user_mark === "declined"}
                     >
                       <img src={declineImg} /> DECLINE APPLICATION{" "}
                     </Button>
                   </div>
                 </div>
-              </div>
+                <div className=" absolute bottom-0 right-0 transform rotate-0 peer-checked:rotate-180 p-3">
+                  {" "}
+                  <img src={arrowIcn} alt={arrowIcn} />{" "}
+                </div>
+              </label>
             ))
           )}
         </Accordion>

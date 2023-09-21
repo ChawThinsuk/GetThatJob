@@ -220,7 +220,7 @@ export const ApplicationList = () => {
             fillteredData.map((item) => (
               <label
                 key={item.job_professional_id}
-                className="flex w-[59rem] p-[1rem] shadow-md flex-col items-start rounded-[0.5rem] border-1px-solid bg-white gap-[1rem] hover:bg-[#dddddd] cursor-pointer relative"
+                className="flex w-[59rem] p-[1rem] shadow-md flex-col items-start rounded-[0.5rem] border-1px-solid bg-white gap-[1rem] hover:bg-[#efeded] cursor-pointer relative "
                 htmlFor={`checkbox-${item.job_professional_id}`}
               >
                 <input
@@ -292,7 +292,7 @@ export const ApplicationList = () => {
                     </div>
                   </div>
                 </div>
-                <div className=" flex flex-col items-start gap-[1rem] max-h-0 overflow-hidden peer-checked:max-h-full ease-in  ">
+                <div className=" flex flex-col items-start gap-[1rem] max-h-0 overflow-hidden peer-checked:max-h-full   ">
                   <div className=" w-[47.5] flex flex-col items-start gap-[0.2rem] ">
                     <h2 className="text-[1rem] text-[#c7668a] font-normal leading-normal tracking-[0.00938rem]">
                       Professional experience

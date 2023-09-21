@@ -5,17 +5,25 @@ import axios from 'axios';
 
 export const Following = () => {
   const [followedJobs, setFollowedJobs] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { state } = useAuth();
 
   const getFollowedJobs = async (userID) => {
-    const followedJobFetched = await axios.get(
-      'http://localhost:4000/pro/followedJobs',
-      {
-        params: { userID: userID },
-      }
-    );
-    const followedJobData = followedJobFetched.data.data;
-    setFollowedJobs(followedJobData);
+    setIsLoading(true);
+    try {
+      const followedJobFetched = await axios.get(
+        'http://localhost:4000/pro/followedJobs',
+        {
+          params: { userID: userID },
+        }
+      );
+      const followedJobData = followedJobFetched.data.data;
+      setFollowedJobs(followedJobData);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
   };
   useEffect(() => {
     getFollowedJobs(state.userID);
@@ -26,10 +34,18 @@ export const Following = () => {
       <h1 className='font-[Montserrat] font-[400] text-[45.3356px] '>
         Following
       </h1>
+
       <div className='flex flex-col gap-[10.6667px] p-[10.6672] w-full min-h-screen'>
-        <p className='font-[Montserrat] font-[500] text-[26.668px]'>
-          You are following {followedJobs.length} jobs
-        </p>
+        {isLoading ? (
+          <p className='font-[Montserrat] font-[500] text-[26.668px]'>
+            Loading...
+          </p>
+        ) : (
+          <p className='font-[Montserrat] font-[500] text-[26.668px]'>
+            You are following {followedJobs.length} jobs
+          </p>
+        )}
+
         <div className='flex flex-wrap justify-start gap-[16px] w-[1280px] h-srceen'>
           {followedJobs.map((job) => {
             return <JobCard job={job} key={job.job_id} />;

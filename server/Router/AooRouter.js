@@ -182,4 +182,69 @@ AooRouter.put("/getrecruiter/:id", async (req, res) => {
   }
 });
 
+AooRouter.post("/:id/createjob", async (req, res) => {
+  const user_id = req.params.id;
+  const selectRec_id = `select recruiter_id from recruiters where user_id = ${user_id}`;
+  const recruiterResult = await pool.query(selectRec_id);
+  const recruiter_id = recruiterResult.rows[0].recruiter_id;
+
+  const {
+    job_title,
+    job_position,
+    job_mandatory,
+    job_optional,
+    job_category,
+    job_type,
+    salary_min,
+    salary_max,
+  } = req.body;
+
+  // const job_title = req.body.job_title;
+  // const job_position = req.body.job_position;
+  // const job_mandatory = req.body.job_mandatory;
+  // const job_optional = req.body.job_optional;
+  // const job_category = req.body.job_category;
+  // const job_type = req.body.job_type;
+  // const salary_min = req.body.salary_min;
+  // const salary_max = req.body.salary_max;
+
+  const newJob = {
+    job_title,
+    job_position,
+    job_mandatory,
+    job_optional,
+    job_category,
+    job_type,
+    salary_min,
+    salary_max,
+  };
+  const jobStatus = "track";
+  let insertData = `INSERT INTO jobs (recruiter_id, job_title, job_category, salary_min, salary_max, job_type, job_position, job_mandatory, job_optional,job_status, created_at)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NOW())`;
+
+  try {
+    await pool.query(insertData, [
+      recruiter_id,
+      newJob.job_title,
+      newJob.job_category,
+      newJob.salary_min,
+      newJob.salary_max,
+      newJob.job_type,
+      newJob.job_position,
+      newJob.job_mandatory,
+      newJob.job_optional,
+      jobStatus,
+    ]);
+
+    return res.json({
+      message: "Professional profile posted successfully",
+    });
+  } catch (error) {
+    return res.json({
+      message: "Bomb has been planted.",
+      error: error.message,
+    });
+  }
+});
+
 export default AooRouter;

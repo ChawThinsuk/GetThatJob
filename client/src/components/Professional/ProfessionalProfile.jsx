@@ -32,6 +32,7 @@ export function ProfessionalProfile() {
   const [educationalInfo, setEducationalInfo] = useState("");
   const [cv, setCv] = useState("");
   const [selectedFileName, setSelectedFileName] = useState(null);
+  const [formattedUpdatedTime, setFormattedUpdatedTime] = useState(""); // Declare formattedDate2 in the component's state
 
   const toast = useToast();
   const { state } = useAuth();
@@ -70,6 +71,12 @@ export function ProfessionalProfile() {
     const isoDate = response.data.data.birthdate;
     const formattedDate = isoDate.slice(0, 10);
 
+    const updatedTime = response.data.data.updated_at;
+    const date = new Date(updatedTime);
+    const newFormattedUpdatedTime = `${date
+      .toISOString()
+      .slice(0, 10)} at ${date.toLocaleTimeString()}`;
+
     setEmail(response.data.data.email);
     setName(response.data.data.username);
     setPhone(response.data.data.phone);
@@ -80,7 +87,7 @@ export function ProfessionalProfile() {
     setEducationalInfo(response.data.data.education);
     setCv(response.data.data.cv);
     setSelectedFileName(response.data.data.cv);
-    // console.log(response.data.message);
+    setFormattedUpdatedTime(newFormattedUpdatedTime);
   };
 
   useEffect(() => {
@@ -92,18 +99,18 @@ export function ProfessionalProfile() {
       // Prepare the updated profile data object
       const updatedProfileData = {
         email: email,
-        name: name,
+        username: name,
         phone: phone,
-        birthDate: birthDate,
-        linkedinUrl: linkedinUrl,
+        birthdate: birthDate,
+        linkedin: linkedinUrl,
         title: title,
-        professionalExperience: professionalExperience,
-        educationalInfo: educationalInfo,
+        experience: professionalExperience,
+        education: educationalInfo,
         cv: cv,
       };
 
-      // Make a POST request to update the profile data
-      await axios.post(
+      // Make a PUT request to update the profile data
+      await axios.put(
         `http://localhost:4000/aoo/${state.userID}`,
         updatedProfileData
       );
@@ -273,9 +280,6 @@ export function ProfessionalProfile() {
                       setProfessionalExperience(event.target.value);
                     }}
                   />
-                  {/* <span className="text-[#8E8E8E] text-[16px] lowercase">
-                    Between 300 and 2000 characters
-                  </span> */}
                 </FormControl>
                 <FormControl id="eduInfo" isRequired>
                   <FormLabel sx={profFormStyle}>EDUCATION</FormLabel>
@@ -351,6 +355,10 @@ export function ProfessionalProfile() {
 
             <p className="mt-2 text-[#8E8E8E] text-[16px]">
               Only PDF. Max size 5MB
+            </p>
+
+            <p className="mt-2 text-[#8E8E8E] text-[16px]">
+              Last Updated: {formattedUpdatedTime}
             </p>
 
             <Button

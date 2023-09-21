@@ -80,16 +80,12 @@ export function ProfessionalProfile() {
     setEducationalInfo(response.data.data.education);
     setCv(response.data.data.cv);
     setSelectedFileName(response.data.data.cv);
-<<<<<<< HEAD
     // console.log(response.data.message);
-=======
->>>>>>> 23f155d (feat : add method GET for front and backend)
   };
 
   useEffect(() => {
     getProfProfile();
   }, []);
-<<<<<<< HEAD
 
   const handleSaveChanges = async () => {
     try {
@@ -132,8 +128,6 @@ export function ProfessionalProfile() {
       });
     }
   };
-=======
->>>>>>> 23f155d (feat : add method GET for front and backend)
 
   return (
     <ChakraProvider>

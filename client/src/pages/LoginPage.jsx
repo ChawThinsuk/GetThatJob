@@ -11,7 +11,7 @@ function LoginPage() {
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState('PROFESSIONAL');
   const { login, loading } = useAuth();
-  const [page, setPage] = useState('login');
+  const [page, setPage] = useState('resetSuccess');
   const handleSubmit = (event) => {
     event.preventDefault();
     login({
@@ -36,7 +36,7 @@ function LoginPage() {
       <Navbar />
       {page === 'otp' && <Otp props={{ setEmail, email, setPage }} />}
       {page === 'changePass' && <ChangePass email={email} />}
-      {page === 'resetSuccess' && <ResetSuccess />}
+      {page === 'resetSuccess' && <ResetSuccess setPage={setPage} />}
       {page === 'login' && (
         <div className='flex flex-row justify-center items-start bg-[#F5F5F6] w-srceen h-[1000px] gap-[60px] pt-[200px]'>
           <form className='ml-[150px] mr-[60px]' onSubmit={handleSubmit}>

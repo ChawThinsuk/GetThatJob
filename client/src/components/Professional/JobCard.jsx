@@ -1,17 +1,17 @@
-import manufacturing from "../../assets/pro2/category.svg";
-import calendar from "../../assets/pro2/calendar.svg";
-import small from "../../assets/pro2/money.svg";
-import followOff from "../../assets/pro2/followOff.svg";
-import followOn from "../../assets/pro2/followOn.svg";
-import { Link } from "react-router-dom";
-import { usePro } from "../../contexts/Professional.jsx";
-import { useAuth } from "../../contexts/Authorization.jsx";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import manufacturing from '../../assets/pro2/category.svg';
+import calendar from '../../assets/pro2/calendar.svg';
+import small from '../../assets/pro2/money.svg';
+import followOff from '../../assets/pro2/followOff.svg';
+import followOn from '../../assets/pro2/followOn.svg';
+import { Link } from 'react-router-dom';
+import { usePro } from '../../contexts/Professional.jsx';
+import { useAuth } from '../../contexts/Authorization.jsx';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const JobCard = (prop) => {
   const { state } = useAuth();
-  const [ follow, setFollow ] = useState({});
+  const [follow, setFollow] = useState({});
   const { job } = prop;
   const { updateJobFollowStatus, addJobProfessionalData } = usePro();
   const getJobFollowStatus = async () => {
@@ -31,7 +31,7 @@ const JobCard = (prop) => {
   useEffect(() => {
     getJobFollowStatus();
   }, []);
-
+  console.log(follow);
   const handleChangeStatus = async () => {
     if (follow) {
       let data = {
@@ -47,50 +47,50 @@ const JobCard = (prop) => {
       };
       addJobProfessionalData(data);
       setFollow({ job_user_following: true });
-    };
+    }
   };
 
   return (
     <div
       key={job.job_id}
-      className="w-[390px] h-[227px] rounded-[8px] border-[1px] border-[#E1E2E1] bg-[#FFFFFF] flex justify-center items-center mr-[16px] shadow-pro1"
+      className='w-[390px] h-[227px] rounded-[8px] border-[1px] border-[#E1E2E1] bg-[#FFFFFF] flex justify-center items-center mr-[16px] shadow-pro1'
     >
-      <div className="w-[345px] h-[195px] flex flex-col justify-between items-center">
-        <div className="flex flex-row w-[345px] h-[110px] gap-[10px]">
-          <img src={job.logo} className="w-[100px] h-[100px]" />
-          <div className="flex flex-col w-[230px] h-[110px]">
-            <div className="flex flex-row gap-[5px]">
-              <img src={manufacturing} className="w-[20px] h-[20px]" />
-              <p className="text-[16px] text-[#8E8E8E] min-w-[142px] h-[22px]">
+      <div className='w-[345px] h-[195px] flex flex-col justify-between items-center'>
+        <div className='flex flex-row w-[345px] h-[110px] gap-[10px]'>
+          <img src={job.logo} className='w-[100px] h-[100px]' />
+          <div className='flex flex-col w-[230px] h-[110px]'>
+            <div className='flex flex-row gap-[5px]'>
+              <img src={manufacturing} className='w-[20px] h-[20px]' />
+              <p className='text-[16px] text-[#8E8E8E] min-w-[142px] h-[22px]'>
                 {job.job_category}
               </p>
             </div>
-            <div className="flex flex-col w-[230px] h-[86px]">
-              <p className="text-[24px] text-[#373737] w-[230px] h-[32px]">
+            <div className='flex flex-col w-[230px] h-[86px]'>
+              <p className='text-[24px] text-[#373737] w-[230px] h-[32px]'>
                 {job.job_title}
               </p>
-              <p className="text-[20px] text-[#616161] w-[230px] h-[24px]">
+              <p className='text-[20px] text-[#616161] w-[230px] h-[24px]'>
                 {job.company_name}
               </p>
-              <p className="text-[14px] text-[#616161] w-[230px] h-[24px] mt-[6px]">
+              <p className='text-[14px] text-[#616161] w-[230px] h-[24px] mt-[6px]'>
                 {job.job_location}
               </p>
             </div>
-            <div className="flex flex-row justify-between items-center w-[230px] h-[27px] pt-[4px]">
-              <div className="flex flex-row justify-center items-center gap-[5px] w-[106px] h-[27px] ">
-                <img src={calendar} className="w-[20-px] h-[20px]" />
-                <p className="text-[16px] text-[#8E8E8E] w-[95px] h-[22px]">
+            <div className='flex flex-row justify-between items-center w-[230px] h-[27px] pt-[4px]'>
+              <div className='flex flex-row justify-center items-center gap-[5px] w-[106px] h-[27px] '>
+                <img src={calendar} className='w-[20-px] h-[20px]' />
+                <p className='text-[16px] text-[#8E8E8E] w-[95px] h-[22px]'>
                   {job.job_type}
                 </p>
               </div>
-              <div className="flex flex-row justify-center items-center min-w-[112px] h-[27px] ">
-                <img src={small} className="w-[20px] h-[20px]" />
-                <div className="flex flex-row justify-center items-center min-w-[86px] h-[22px]">
-                  <p className="text-[16px] text-[#8E8E8E]">
+              <div className='flex flex-row justify-center items-center min-w-[112px] h-[27px] '>
+                <img src={small} className='w-[20px] h-[20px]' />
+                <div className='flex flex-row justify-center items-center min-w-[86px] h-[22px]'>
+                  <p className='text-[16px] text-[#8E8E8E]'>
                     {(job.salary_min / 1000).toFixed(1)}k
                   </p>
                   <p>-</p>
-                  <p className="text-[16px] text-[#8E8E8E]">
+                  <p className='text-[16px] text-[#8E8E8E]'>
                     {(job.salary_max / 1000).toFixed(1)}k
                   </p>
                 </div>
@@ -98,26 +98,35 @@ const JobCard = (prop) => {
             </div>
           </div>
         </div>
-        <div className="flex flex-row justify-between w-[345px] h-[54px] pt-[5px]">
+        <div className='flex flex-row justify-between w-[345px] h-[54px] pt-[5px]'>
           <div
-            className="w-[147px] h-[54px] flex flex-row justify-center items-center"
+            className='w-[147px] h-[54px] flex flex-row justify-center items-center'
             onClick={handleChangeStatus}
           >
-            <div className="w-[54px] h-[53px] flex flex-row justify-center items-center">
+            <div className='w-[80%] h-[53px] flex flex-row justify-start items-center cursor-pointer gap-[5px] '>
               <img
                 src={follow && follow.job_user_following ? followOn : followOff}
-                className="w-[32px] h-[32px]"
+                className='w-[32px] h-[32px]'
               />
+              <button className=' text-[18px] text-[#616161] font-[Inter] font-[500] tracking-[1.25px] w-[92px] h-[54px] flex flex-row justify-center items-center'>
+                {follow && follow.job_user_following ? ' Following' : 'Follow'}
+              </button>
             </div>
-            <button className=" text-[18px] text-[#616161] font-[Inter] font-[500] tracking-[1.25px] w-[92px] h-[54px] flex flex-row justify-center items-center">
-              {follow && follow.job_user_following ? " Following" : "Follow"}
-            </button>
           </div>
-          <Link to={`/${job.job_id}`}>
-            <button className="w-[147px] h-[54px] border-[1px] border-[#F48FB1] rounded-xl hover:bg-[#F5F5F6] text-[18px] text-[#616161] font-[Inter] font-[500]">
-              SEE MORE
+          {follow && follow.job_user_application ? (
+            <button
+              disabled
+              className='w-[147px] h-[54px] border-none bg-[#E1E2E1] rounded-3xl tracking-widest  text-[18px] text-[#616161] font-[Inter] font-[500]'
+            >
+              Applied
             </button>
-          </Link>
+          ) : (
+            <Link to={`/${job.job_id}`}>
+              <button className='w-[147px] h-[54px] border-[1px] border-[#F48FB1] tracking-wide  rounded-xl hover:bg-[#F5F5F6] text-[18px] text-[#616161] font-[Inter] font-[500]'>
+                SEE MORE
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

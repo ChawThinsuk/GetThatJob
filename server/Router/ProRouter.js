@@ -29,7 +29,7 @@ proRouter.get('/follow/job', async (req, res) => {
   const jobID = req.query.job_id;
   try {
     const companyFollow = await pool.query(
-      'SELECT jobs_professional.job_professional_id, jobs_professional.job_user_following FROM jobs_professional INNER JOIN professionals ON professionals.professional_id = jobs_professional.professional_id WHERE professionals.user_id = $1 AND jobs_professional.job_id = $2',
+      'SELECT jobs_professional.job_professional_id, jobs_professional.job_user_following, jobs_professional.job_user_application FROM jobs_professional INNER JOIN professionals ON professionals.professional_id = jobs_professional.professional_id WHERE professionals.user_id = $1 AND jobs_professional.job_id = $2',
       [userID, jobID]
     );
     return res.json({

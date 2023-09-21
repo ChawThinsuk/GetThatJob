@@ -11,7 +11,7 @@ function LoginPage() {
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState('PROFESSIONAL');
   const { login, loading } = useAuth();
-  const [page, setPage] = useState('resetSuccess');
+  const [page, setPage] = useState('login');
   const handleSubmit = (event) => {
     event.preventDefault();
     login({
@@ -35,11 +35,11 @@ function LoginPage() {
       )}
       <Navbar />
       {page === 'otp' && <Otp props={{ setEmail, email, setPage }} />}
-      {page === 'changePass' && <ChangePass email={email} setPage={setPage}/>}
+      {page === 'changePass' && <ChangePass email={email} setPage={setPage} />}
       {page === 'resetSuccess' && <ResetSuccess setPage={setPage} />}
 
       {page === 'login' && (
-        <div className='flex flex-row justify-center items-start bg-[#F5F5F6] w-srceen h-[1000px] gap-[60px] pt-[200px]'>
+        <div className='flex flex-row justify-center items-start bg-[#F5F5F6] w-srceen h-[1000px] gap-[60px] pt-[100px]'>
           <form className='ml-[150px] mr-[60px]' onSubmit={handleSubmit}>
             <h1 className='text-[48px] mb-2'>Welcome back</h1>
             <h2 className='text-[20px] mt-2 mb-4'>
@@ -104,7 +104,7 @@ function LoginPage() {
             <div className='mt-2 flex flex-row justify-between'>
               <h1
                 className=' text-[12px] hover:cursor-pointer'
-                onClick={() => setPage('changePass')}
+                onClick={() => setPage('otp')}
               >
                 Forgot Password?
               </h1>

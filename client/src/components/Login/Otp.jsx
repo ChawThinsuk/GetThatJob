@@ -1,9 +1,16 @@
-import { Button, useToast } from '@chakra-ui/react';
+import {
+  Button,
+  useToast,
+  HStack,
+  PinInput,
+  PinInputField,
+} from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+
 export const Otp = ({ props }) => {
   const { setEmail, email, setPage } = props;
-  const [otp, setOtp] = useState(null);
+  const [otp, setOtp] = useState(123456);
   const [inputOtp, setInputOtp] = useState([0, 0, 0, 0, 0, 0]);
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(1);
@@ -42,7 +49,7 @@ export const Otp = ({ props }) => {
         title: 'OTP has been sended to yout email.',
         description: 'Please check yout email.',
         status: 'success',
-        duration: 3000,
+        duration: 2000,
         isClosable: true,
       });
       setOtp(OTP);
@@ -54,7 +61,7 @@ export const Otp = ({ props }) => {
         title: 'Something wrong.',
         description: 'Please try again later.',
         status: 'error',
-        duration: 3000,
+        duration: 2000,
         isClosable: true,
       });
     }
@@ -62,13 +69,20 @@ export const Otp = ({ props }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (otp == inputOtp.join('')) {
+      toast({
+        title: 'Correct authorization.',
+        description: 'Please set your new password.',
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+      });
       setPage('changePass');
     } else {
       toast({
-        title: 'Wrong OTP.',
+        title: 'Incorrect OTP.',
         description: 'Please try again.',
         status: 'error',
-        duration: 3000,
+        duration: 2000,
         isClosable: true,
       });
     }
@@ -80,12 +94,23 @@ export const Otp = ({ props }) => {
           <h1 className='font-[Montserrat] text-[18px]  w-full'>
             Please input your email address
           </h1>
-          <input
-            type='text'
-            value={email}
-            className='mt-2 text-[19px] w-full h-[40px] rounded-lg border-[1px] border-gray-300 pl-5 bg-gray-100 shadow-sm focus:outline-none focus:bg-white'
-            onChange={(e) => setEmail(e.target.value)}
-          ></input>
+          {step === 2 ? (
+            <input
+              disabled
+              type='text'
+              value={email}
+              className='mt-2 text-[19px] w-full h-[40px] rounded-lg border-[1px] border-gray-300 pl-5 text-gray-400 bg-gray-200 shadow-sm '
+              onChange={(e) => setEmail(e.target.value)}
+            ></input>
+          ) : (
+            <input
+              type='text'
+              value={email}
+              className='mt-2 text-[19px] w-full h-[40px] rounded-lg border-[1px] border-gray-300 pl-5 bg-gray-100 shadow-sm focus:outline-none focus:bg-white'
+              onChange={(e) => setEmail(e.target.value)}
+            ></input>
+          )}
+
           {isLoading ? (
             <Button
               isLoading
@@ -128,93 +153,85 @@ export const Otp = ({ props }) => {
               Email Verification
             </h1>
             <p className='font-[Inter] text-gray-500'>
-              We have sent a code to your email {email}
+              We have sent a OTP code to {email}
             </p>
             <div className='flex justify-center mt-8 w-full gap-[10px]'>
-              <input
-                maxLength={1}
-                className=' text-center w-[50px] h-[60px] bg-gray-200 rounded-lg text-[35px] border-[1.5px] border-gray-400 shadow-md focus:outline-none'
-                onChange={(e) =>
-                  setInputOtp([
-                    e.target.value,
-                    inputOtp[1],
-                    inputOtp[2],
-                    inputOtp[3],
-                    inputOtp[4],
-                    inputOtp[5],
-                  ])
-                }
-              />
-              <input
-                maxLength={1}
-                className=' text-center w-[50px] h-[60px] bg-gray-200 rounded-lg text-[35px] border-[1.5px] border-gray-400 shadow-md focus:outline-none'
-                onChange={(e) =>
-                  setInputOtp([
-                    inputOtp[0],
-                    e.target.value,
-                    inputOtp[2],
-                    inputOtp[3],
-                    inputOtp[4],
-                    inputOtp[5],
-                  ])
-                }
-              />
-              <input
-                maxLength={1}
-                className=' text-center w-[50px] h-[60px] bg-gray-200 rounded-lg text-[35px] border-[1.5px] border-gray-400 shadow-md focus:outline-none'
-                onChange={(e) =>
-                  setInputOtp([
-                    inputOtp[0],
-                    inputOtp[1],
-                    e.target.value,
-                    inputOtp[3],
-                    inputOtp[4],
-                    inputOtp[5],
-                  ])
-                }
-              />
-              <input
-                maxLength={1}
-                className=' text-center w-[50px] h-[60px] bg-gray-200 rounded-lg text-[35px] border-[1.5px] border-gray-400 shadow-md focus:outline-none'
-                onChange={(e) =>
-                  setInputOtp([
-                    inputOtp[0],
-                    inputOtp[1],
-                    inputOtp[2],
-                    e.target.value,
-                    inputOtp[4],
-                    inputOtp[5],
-                  ])
-                }
-              />
-              <input
-                maxLength={1}
-                className=' text-center w-[50px] h-[60px] bg-gray-200 rounded-lg text-[35px] border-[1.5px] border-gray-400 shadow-md focus:outline-none'
-                onChange={(e) =>
-                  setInputOtp([
-                    inputOtp[0],
-                    inputOtp[1],
-                    inputOtp[2],
-                    inputOtp[3],
-                    e.target.value,
-                    inputOtp[5],
-                  ])
-                }
-              />
-              <input
-                maxLength={1}
-                className=' text-center w-[50px] h-[60px] bg-gray-200 rounded-lg text-[35px] border-[1.5px] border-gray-400 shadow-md focus:outline-none'
-                onChange={(e) =>
-                  setInputOtp([
-                    inputOtp[0],
-                    inputOtp[1],
-                    inputOtp[2],
-                    inputOtp[3],
-                    inputOtp[4],
-                    e.target.value,
-                  ])
-                }
-              />
+              <HStack>
+                <PinInput size='lg'>
+                  <PinInputField
+                    onChange={(e) =>
+                      setInputOtp([
+                        e.target.value,
+                        inputOtp[1],
+                        inputOtp[2],
+                        inputOtp[3],
+                        inputOtp[4],
+                        inputOtp[5],
+                      ])
+                    }
+                  />
+                  <PinInputField
+                    onChange={(e) =>
+                      setInputOtp([
+                        inputOtp[0],
+                        e.target.value,
+                        inputOtp[2],
+                        inputOtp[3],
+                        inputOtp[4],
+                        inputOtp[5],
+                      ])
+                    }
+                  />
+                  <PinInputField
+                    onChange={(e) =>
+                      setInputOtp([
+                        inputOtp[0],
+                        inputOtp[1],
+                        e.target.value,
+                        inputOtp[3],
+                        inputOtp[4],
+                        inputOtp[5],
+                      ])
+                    }
+                  />
+                  <PinInputField
+                    onChange={(e) =>
+                      setInputOtp([
+                        inputOtp[0],
+                        inputOtp[1],
+                        inputOtp[2],
+                        e.target.value,
+                        inputOtp[4],
+                        inputOtp[5],
+                      ])
+                    }
+                  />
+                  <PinInputField
+                    onChange={(e) =>
+                      setInputOtp([
+                        inputOtp[0],
+                        inputOtp[1],
+                        inputOtp[2],
+                        inputOtp[3],
+                        e.target.value,
+                        inputOtp[5],
+                      ])
+                    }
+                  />
+                  <PinInputField
+                    onChange={(e) =>
+                      setInputOtp([
+                        inputOtp[0],
+                        inputOtp[1],
+                        inputOtp[2],
+                        inputOtp[3],
+                        inputOtp[4],
+                        e.target.value,
+                      ])
+                    }
+                  />
+                </PinInput>
+              </HStack>
             </div>
             <button
               className='w-3/4 h-[50px] mt-10 bg-[#F48FB1] text-[18px] text-white font-semibold rounded-lg shadow-lg hover:cursor-pointer hover:bg-[#eb6c96]'

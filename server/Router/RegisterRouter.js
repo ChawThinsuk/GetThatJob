@@ -7,7 +7,7 @@ const RegisterRouter = Router();
 RegisterRouter.post("/register-professional", async (req, res) => {
   try {
     const data = req.body;
-    let messageError = await validateProfessional(data);
+    let messageError = await validateProfessional(data); //"Error 101"
     let bcryptPassword = await generatePassword(data.password);
     if (messageError) {
       return res.json({

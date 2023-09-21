@@ -38,9 +38,17 @@ authRouter.post('/login', async (req, res) => {
   }
 });
 
-authRouter.put("/", async (req, res) => {
-  const { email, password } = req.body;
+authRouter.put("/password", async (req, res) => {
+  const { email, newPassword } = req.body;
   try {
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+
+    await pool.query(
+      `UPDATE users SET password = $1, updated_at = $2 WHERE email = $3`,
+      [hashedPassword, new Date(), email]
+    );
+
     return res.status(200).json({ message: "Change Password success" });
   } catch (error) {
     return res.status(500).json({ message: error });

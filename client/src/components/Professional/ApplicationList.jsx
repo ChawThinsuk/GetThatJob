@@ -231,7 +231,7 @@ export const ApplicationList = () => {
             fillteredData.map((item) => (
               <label
                 key={item.job_professional_id}
-                className="flex w-[59.1rem] p-[1.1rem] shadow-md flex-col items-start rounded-[0.6rem] border-2px-solid bg-white gap-[1.1rem] hover:bg-[#efeded] cursor-pointer relative "
+                className="flex w-[59.1rem]  p-[1.1rem] shadow-md flex-col items-start rounded-[0.6rem] border-2px-solid bg-white gap-[1.1rem] hover:bg-[#efeded] cursor-pointer relative "
                 htmlFor={`checkbox-${item.job_professional_id}`}
               >
                 <input
@@ -319,14 +319,14 @@ export const ApplicationList = () => {
                       </p>
                     )}
                   </div>
-                  <div className=" w-[47.6] flex flex-col items-start gap-[0.6rem] ">
+                  <div className=" w-[47.6rem] flex flex-col items-start gap-[0.6rem] ">
                     <h2 className="text-[1.1rem] text-[#c7668a] font-normal leading-normal tracking-[0.10938rem]">
                       Why are you interested in working at the{" "}
                       {item.company_name}
                     </h2>
                     {item.job_user_interesting != null &&
                     item.job_user_interesting != "" ? (
-                      <p className="text-[0.975rem] text-[#373737] font-normal leading-[1.35rem] tracking-[0.11563rem]">
+                      <p className="text-[0.975rem] text-[#373737] font-normal leading-[1.35rem] tracking-[0.11563rem] w-full">
                         {item.job_user_interesting}
                       </p>
                     ) : (

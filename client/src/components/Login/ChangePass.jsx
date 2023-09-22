@@ -107,7 +107,7 @@ const ChangePass = ({ email, setPage }) => {
                 textColor='white'
                 onClick={changePassword}
               >
-                Send OTP
+                Submit
               </Button>
             )}
           </div>

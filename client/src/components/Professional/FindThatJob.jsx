@@ -33,7 +33,7 @@ export const FindThatJob = () => {
               <input
                 type="text"
                 placeholder="manufacturing, sales, swim"
-                className="w-[500px] h-[27px] text-[18px] p-[8px] leading-6 outline-nonefont-[Inter] font-[400] text-[#8E8E8E]"
+                className="w-[500px] h-[27px] text-[18px] p-[8px] leading-6 outline-none font-[Inter] font-[400] text-[#8E8E8E]"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />

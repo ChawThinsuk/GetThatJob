@@ -19,7 +19,7 @@ bigRouter.get('/', async (req, res) => {
   if (searchTerm) {
     queryParams.push(searchTerm);
     queryParts.push(
-      'AND UPPER(job_title) ~ UPPER($1) OR UPPER(job_category) ~ UPPER($1) OR UPPER(company_name) ~ UPPER($1) OR UPPER(job_type) ~ UPPER($1) OR UPPER(job_location) ~ UPPER($1)'
+      'AND (UPPER(job_title) ~ UPPER($1) OR UPPER(job_category) ~ UPPER($1) OR UPPER(company_name) ~ UPPER($1) OR UPPER(job_type) ~ UPPER($1) OR UPPER(job_location) ~ UPPER($1))'
     );
   }
 

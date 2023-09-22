@@ -11,14 +11,16 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 export const NavbarHomepage = () => {
+  const urlArray = []
+  urlArray.push(window.location.href.split('/')[3]);
+  console.log(window.location.href);
   const navigate = useNavigate();
-  const [selectNav, setSelectNav] = useState("/");
+  const [selectNav, setSelectNav] = useState(`/${urlArray[0]}`);
   const { logout, state } = useAuth();
   const professionalNav = [
     { logo: search, title: "Find that job", url: "/" },
     { logo: paper, title: "Your application", url: "/apply" },
     { logo: follow, title: "Following", url: "/follow" },
-
     { logo: user, title: "Profile", url: "/proprofile" },
   ];
   const recruiterNav = [

@@ -3,12 +3,15 @@ import man from '../assets/man.svg';
 import { useAuth } from '../contexts/Authorization';
 import Navbar from '../components/navbar';
 import { Spinner } from '@chakra-ui/react';
+import { Otp } from '../components/Login/Otp';
+import ChangePass from '../components/Login/ChangePass';
+import { ResetSuccess } from '../components/Login/ResetSuccess';
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState('PROFESSIONAL');
   const { login, loading } = useAuth();
-
+  const [page, setPage] = useState('login');
   const handleSubmit = (event) => {
     event.preventDefault();
     login({
@@ -31,6 +34,11 @@ function LoginPage() {
         </div>
       )}
       <Navbar />
+{page === 'otp' && <Otp props={{ setEmail, email, setPage }} />}
+      {page === 'changePass' && <ChangePass email={email} setPage={setPage} />}
+      {page === 'resetSuccess' && <ResetSuccess setPage={setPage} />}
+
+      {page === 'login' && (
       <div className='flex flex-row justify-center items-start bg-[#F5F5F6] w-srceen h-[1000px] gap-[60px] pt-[200px]'>
         <form className='ml-[150px] mr-[60px]' onSubmit={handleSubmit}>
           <h1 className='text-[48px] font-[Montserrat] font-[400] text-[#373737] mb-2'>Welcome back</h1>
@@ -91,7 +99,13 @@ function LoginPage() {
               />
             </label>
           </div>
-          <div className='mt-2 flex flex-row justify-end'>
+          <div className='mt-2 flex flex-row justify-between'>
+             <h1
+                className=' text-[12px] hover:cursor-pointer'
+                onClick={() => setPage('otp')}
+              >
+                Forgot Password?
+              </h1>
             <button
               type='submit'
               className='rounded-[16px] bg-[#F48FB1] text-[16px] w-[80px] h-[40px] hover:bg-[#d77696] font-[Inter] font-[500] text-[#FFFFFF]'
@@ -101,7 +115,7 @@ function LoginPage() {
           </div>
         </form>
         <img src={man} className='w-[560px] h-[567px]' />
-      </div>
+      </div>)}
     </div>
   );
 }

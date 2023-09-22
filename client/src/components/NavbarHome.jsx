@@ -18,12 +18,13 @@ export const NavbarHomepage = () => {
     { logo: search, title: "Find that job", url: "/" },
     { logo: paper, title: "Your application", url: "/apply" },
     { logo: follow, title: "Following", url: "/follow" },
-    { logo: user, title: "profile", url: "/proprofile" },
+
+    { logo: user, title: "Profile", url: "/proprofile" },
   ];
   const recruiterNav = [
     { logo: bag, title: "Job Postings", url: "/" },
     { logo: doc, title: "Create New Job", url: "/createjob" },
-    { logo: user, title: "profile", url: "/recruitprofile" },
+    { logo: user, title: "Profile", url: "/recruitprofile" },
   ];
 
   return (
@@ -67,6 +68,7 @@ export const NavbarHomepage = () => {
         >
           <img src={logoutlogo} className="p-2" />
           <p className="font-[Inter] text-[21.33px] text-[#616161] ">Log out</p>
+
         </div>
       </div>
     </div>

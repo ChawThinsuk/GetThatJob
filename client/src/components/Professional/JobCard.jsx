@@ -76,36 +76,36 @@ const JobCard = (prop) => {
             <div className='flex flex-col w-[230px] h-[110px]'>
               <div className='flex flex-row gap-[5px]'>
                 <img src={manufacturing} className='w-[20px] h-[20px]' />
-                <p className='text-[16px] text-[#8E8E8E] min-w-[142px] h-[22px]'>
+                <p className='text-[16px] text-[#8E8E8E] min-w-[142px] h-[22px] font-[Inter] font-[400]'>
                   {job.job_category}
                 </p>
               </div>
               <div className='flex flex-col w-[230px] h-[86px]'>
-                <p className='text-[24px] text-[#373737] w-[230px] h-[32px]'>
+                <p className='text-[24px] text-[#373737] w-[230px] h-[32px] font-[Montserrat] font-[500]'>
                   {job.job_title}
                 </p>
-                <p className='text-[20px] text-[#616161] w-[230px] h-[24px]'>
+                <p className='text-[20px] text-[#616161] w-[230px] h-[24px] font-[Montserrat] font-[500]'>
                   {job.company_name}
                 </p>
-                <p className='text-[14px] text-[#616161] w-[230px] h-[24px] mt-[6px]'>
+                <p className='text-[14px] text-[#616161] w-[230px] h-[24px] mt-[6px] font-[Montserrat] font-[500]'>
                   {job.job_location}
                 </p>
               </div>
               <div className='flex flex-row justify-between items-center w-[230px] h-[27px] pt-[4px]'>
                 <div className='flex flex-row justify-center items-center gap-[5px] w-[106px] h-[27px] '>
                   <img src={calendar} className='w-[20-px] h-[20px]' />
-                  <p className='text-[16px] text-[#8E8E8E] w-[95px] h-[22px]'>
+                  <p className='text-[16px] text-[#8E8E8E] w-[95px] h-[22px] font-[Inter] font-[400]'>
                     {job.job_type}
                   </p>
                 </div>
                 <div className='flex flex-row justify-center items-center min-w-[112px] h-[27px] '>
                   <img src={small} className='w-[20px] h-[20px]' />
                   <div className='flex flex-row justify-center items-center min-w-[86px] h-[22px]'>
-                    <p className='text-[16px] text-[#8E8E8E]'>
+                    <p className='text-[16px] text-[#8E8E8E] font-[Inter] font-[400]'>
                       {(job.salary_min / 1000).toFixed(1)}k
                     </p>
                     <p>-</p>
-                    <p className='text-[16px] text-[#8E8E8E]'>
+                    <p className='text-[16px] text-[#8E8E8E] font-[Inter] font-[400]'>
                       {(job.salary_max / 1000).toFixed(1)}k
                     </p>
                   </div>

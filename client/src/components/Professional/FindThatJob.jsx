@@ -20,12 +20,12 @@ export const FindThatJob = () => {
   return (
     <div className="flex flex-col justify-start items-center w-full min-h-srceen pr-[100px] pl-[100px] pt-[50px] font-[Inter] bg-[#F5F5F6]">
       <div className="flex flex-col justify-center items-start w-full">
-        <p className="text-[46px] text-start w-full font-[Montserrat]">
+        <p className="text-[46px] text-start w-full font-[Montserrat] font-[400] text-[#373737]">
           Find That Job
         </p>
         <div className="flex flex-row">
           <div className="flex flex-col pr-[16px]">
-            <p className="text-[14px] pt-[16px]">
+            <p className="text-[14px] pt-[16px] font-[Inter] font-[400] text-[#616161]">
               SEARCH BY JOB TITLE OR COMPANY NAME
             </p>
             <div className="border-[1px] border-[#F48FB1] rounded-[8px] w-[560px] h-[42px] flex flex-row justify-start items-center bg-[#FFFFFF]">
@@ -33,18 +33,18 @@ export const FindThatJob = () => {
               <input
                 type="text"
                 placeholder="manufacturing, sales, swim"
-                className="w-[500px] h-[27px] text-[18px] p-[8px] leading-6 outline-none"
+                className="w-[500px] h-[27px] text-[18px] p-[8px] leading-6 outline-nonefont-[Inter] font-[400] text-[#8E8E8E]"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
           </div>
           <div className="w-[400px]">
-              <p className="text-[14px] pt-[16px]">LOCATION</p>
+              <p className="text-[14px] pt-[16px] font-[Inter] font-[400] text-[#616161]">LOCATION</p>
               <select
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="border-[1px] border-[#F48FB1] rounded-[8px] w-full h-[42px] flex flex-row justify-center items-center text-[18px] p-[8px] text-[#8E8E8E]"
+                className="border-[1px] border-[#F48FB1] rounded-[8px] w-full h-[42px] flex flex-row justify-center items-center text-[18px] p-[8px] font-[Inter] font-[400] text-[#8E8E8E]"
               >
                 <option value={""}>Select a location</option>
                 <optgroup label="North">
@@ -143,11 +143,11 @@ export const FindThatJob = () => {
         </div>
         <div className="flex flex-rows pt-[8px]">
           <div className="pr-[16px] w-[375px]">
-              <p className="text-[14px]">CATEGORY</p>
+              <p className="text-[14px] font-[Inter] font-[400] text-[#616161]">CATEGORY</p>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="border-[1px] border-[#F48FB1] rounded-[8px] w-full h-[42px] flex flex-row justify-center items-center text-[18px] p-[8px] text-[#8E8E8E]"
+                className="border-[1px] border-[#F48FB1] rounded-[8px] w-full h-[42px] flex flex-row justify-center items-center text-[18px] p-[8px] font-[Inter] font-[400] text-[#8E8E8E]"
               >
                 <option value={""}>Select a category</option>
                 <option>Software Developer</option>
@@ -157,11 +157,11 @@ export const FindThatJob = () => {
               </select>
           </div>
           <div className="pr-[16px] w-[375px]">
-              <p className="text-[14px]">TYPE</p>
+              <p className="text-[14px] font-[Inter] font-[400] text-[#616161]">TYPE</p>
               <select
                 value={type}
                 onChange={(e) => setType(e.target.value)}
-                className="border-[1px] border-[#F48FB1] rounded-[8px] w-full h-[42px] flex flex-row justify-center items-center text-[18px] p-[8px] text-[#8E8E8E]"
+                className="border-[1px] border-[#F48FB1] rounded-[8px] w-full h-[42px] flex flex-row justify-center items-center text-[18px] p-[8px] font-[Inter] font-[400] text-[#8E8E8E]"
               >
                 <option value={""} >Select a type</option>
                 <option>Full time</option>
@@ -169,14 +169,14 @@ export const FindThatJob = () => {
               </select>
           </div>
           <div>
-            <p className="text-[14px]">SALARY RANGE</p>
+            <p className="text-[14px] font-[Inter] font-[400] text-[#616161]">SALARY RANGE</p>
             <div className="flex flex-rows justify-between items-center w-[308px]">
               <div className="border-[1px] border-[#F48FB1] rounded-[8px] w-[136px] h-[42px] flex flex-row justify-start items-center bg-[#FFFFFF]">
                 <img src={money} className="pl-2" />
                 <input
                   type="text"
                   placeholder="min"
-                  className="w-[77px] h-[27px] flex flex-col justify-center text-[18px] p-[8px] leading-6 outline-none"
+                  className="w-[77px] h-[27px] flex flex-col justify-center text-[18px] p-[8px] leading-6 outline-none font-[Inter] font-[400] text-[#8E8E8E]"
                   onChange={(e) => setMinSalary(e.target.value)}
                 />
               </div>
@@ -186,7 +186,7 @@ export const FindThatJob = () => {
                 <input
                   type="text"
                   placeholder="max"
-                  className="w-[77px] h-[27px] flex flex-col justify-center text-[18px] p-[8px] leading-6 outline-none"
+                  className="w-[77px] h-[27px] flex flex-col justify-center text-[18px] p-[8px] leading-6 outline-none font-[Inter] font-[400] text-[#8E8E8E]"
                   onChange={(e) => setMaxSalary(e.target.value)}
                 />
               </div>

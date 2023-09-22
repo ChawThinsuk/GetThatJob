@@ -1,12 +1,12 @@
 import { useAuth } from "../contexts/Authorization";
 import icon from "../assets/gtj-logo 1.svg";
-import search from "../../img/search.png";
-import paper from "../../img/paper.png";
-import follow from "../../img/follow.png";
-import user from "../../img/user.png";
-import bag from "../../img/bag.png";
-import doc from "../../img/doc.png";
-import logoutlogo from "../../img/logout.png";
+import search from "../assets/NavbarHome/search.svg";
+import paper from "../assets/NavbarHome/paper.svg";
+import follow from "../assets/NavbarHome/follow.svg";
+import user from "../assets/NavbarHome/profile.svg";
+import bag from "../assets/NavbarHome/bag.svg";
+import doc from "../assets/NavbarHome/doc.svg";
+import logoutlogo from "../assets/NavbarHome/logout.svg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,7 @@ export const NavbarHomepage = () => {
     { logo: search, title: "Find that job", url: "/" },
     { logo: paper, title: "Your application", url: "/apply" },
     { logo: follow, title: "Following", url: "/follow" },
+
     { logo: user, title: "Profile", url: "/proprofile" },
   ];
   const recruiterNav = [
@@ -67,6 +68,7 @@ export const NavbarHomepage = () => {
         >
           <img src={logoutlogo} className="p-2" />
           <p className="font-[Inter] text-[21.33px] text-[#616161] ">Log out</p>
+
         </div>
       </div>
     </div>

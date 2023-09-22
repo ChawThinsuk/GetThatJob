@@ -124,11 +124,9 @@ const ContextProvider = ({ children }) => {
             cacheControl: "3600",
             upsert: false,
           });
-
         if (recruiterError) {
           error = recruiterError; // Assign error if recruiterError is defined
         }
-
         console.log(error); // Log error here
 
         const urlPath = supabase.storage.from("files").getPublicUrl(data.path);

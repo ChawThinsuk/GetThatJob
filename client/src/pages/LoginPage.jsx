@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import man from '../../img/man.png';
+import man from '../assets/man.svg';
 import { useAuth } from '../contexts/Authorization';
 import Navbar from '../components/navbar';
 import { Spinner } from '@chakra-ui/react';
@@ -33,12 +33,12 @@ function LoginPage() {
       <Navbar />
       <div className='flex flex-row justify-center items-start bg-[#F5F5F6] w-srceen h-[1000px] gap-[60px] pt-[200px]'>
         <form className='ml-[150px] mr-[60px]' onSubmit={handleSubmit}>
-          <h1 className='text-[48px] mb-2'>Welcome back</h1>
-          <h2 className='text-[20px] mt-2 mb-4'>Login to you account as...</h2>
+          <h1 className='text-[48px] font-[Montserrat] font-[400] text-[#373737] mb-2'>Welcome back</h1>
+          <h2 className='text-[20px] font-[Montserrat] font-[500] text-[#373737] mt-2 mb-4'>Login to you account as...</h2>
           <div>
             <button
               type='button'
-              className={`border-b-2 m-1 ${
+              className={`border-b-2 m-1 font-[Inter] font-[500] ${
                 userType === 'PROFESSIONAL'
                   ? 'border-[#F48FB1] text-[14px] text-black'
                   : 'border-[#BDBDBD] text-[14px] text-[#8E8E8E]'
@@ -49,7 +49,7 @@ function LoginPage() {
             </button>
             <button
               type='button'
-              className={`border-b-2 m-1 ${
+              className={`border-b-2 m-1 font-[Inter] font-[500] ${
                 userType === 'RECRUITER'
                   ? 'border-[#F48FB1] text-[14px] text-black'
                   : 'border-[#BDBDBD] text-[14px] text-[#8E8E8E]'
@@ -61,7 +61,7 @@ function LoginPage() {
           </div>
           <div className='mt-2'>
             <label>
-              <p className='text-[10px]'>EMAIL</p>
+              <p className='text-[10px] font-[Inter] font-[400] text-[#373737]'>EMAIL</p>
               <input
                 id='email'
                 name='email'
@@ -71,13 +71,13 @@ function LoginPage() {
                   setEmail(event.target.value);
                 }}
                 value={email}
-                className='border-[1px] border-[#F48FB1] rounded-[8px] w-[356px] h-[36px] flex flex-col justify-center text-[14px] p-[8px]'
+                className='border-[1px] border-[#F48FB1] rounded-[8px] w-[356px] h-[36px] flex flex-col justify-center text-[14px] p-[8px] font-[Inter] font-[400] text-[#8E8E8E]'
               />
             </label>
           </div>
           <div className='mt-2'>
             <label>
-              <p className='text-[10px]'>PASSWORD</p>
+              <p className='text-[10px] font-[Inter] font-[400] text-[#373737]'>PASSWORD</p>
               <input
                 id='password'
                 name='password'
@@ -87,14 +87,14 @@ function LoginPage() {
                   setPassword(event.target.value);
                 }}
                 value={password}
-                className='border-[1px] border-[#F48FB1] rounded-[8px] w-[356px] h-[36px] flex flex-col justify-center text-[14px] p-[8px]'
+                className='border-[1px] border-[#F48FB1] rounded-[8px] w-[356px] h-[36px] flex flex-col justify-center text-[14px] p-[8px] font-[Inter] font-[400] text-[#8E8E8E]'
               />
             </label>
           </div>
           <div className='mt-2 flex flex-row justify-end'>
             <button
               type='submit'
-              className='rounded-[16px] bg-[#F48FB1] text-white text-[16px] w-[80px] h-[40px] hover:bg-[#d77696]'
+              className='rounded-[16px] bg-[#F48FB1] text-[16px] w-[80px] h-[40px] hover:bg-[#d77696] font-[Inter] font-[500] text-[#FFFFFF]'
             >
               LOGIN
             </button>

@@ -256,11 +256,11 @@ export const ApplicationList = () => {
                     </div>
                   </div>
                   <div className=" flex flex-col items-start gap-[0.6rem] text-[#8E8E8E]">
-                    <div className=" flex font-inter text-xs font-normal leading-[1rem] tracking-[0.125rem] gap-[0.35rem]">
+                    <div className=" flex font-inter text-xs font-normal leading-[0.5rem] tracking-[0.05rem] gap-[0.35rem]">
                       <img src={buildingImg} />
                       {item.job_category} <img src={clockImg} /> {item.job_type}{" "}
                     </div>
-                    <div className=" flex font-inter text-xs font-normal leading-[1.1rem] tracking-[0.125rem] gap-[0.35rem]">
+                    <div className=" flex font-inter text-xs font-normal leading-[0.5rem] tracking-[0.05rem] gap-[0.35rem]">
                       <img src={moneyImg} />
                       {"  "}
                       {formatSalaryRange(item.salary_min, item.salary_max)}{" "}
@@ -272,11 +272,11 @@ export const ApplicationList = () => {
                   <div className="flex items-start gap-[0.35rem] relative ">
                     <div className=" flex flex-col w-[5.1rem] items-center  ">
                       <img src={sentIcn} />
-                      <div className="text-center font-inter text-xs text-[#616161] font-normal leading-[1.1rem] tracking-[0.125rem]">
+                      <div className="text-center font-inter text-xs text-[#616161] font-normal leading-[1.1rem] tracking-[0.05rem]">
                         Sent {formatDate(item.jobs_professional_created_at)}
                       </div>
                     </div>
-                    <div className=" flex flex-col w-[5.1rem] items-center font-inter text-xs text-[#F48FB1] text-center font-normal leading-[1.1rem] tracking-[0.225rem]  ">
+                    <div className=" flex flex-col w-[5.1rem] items-center font-inter text-xs text-[#F48FB1] text-center font-normal leading-[1.1rem] tracking-[0.125rem]  ">
                       {item.job_user_mark === "waiting" && (
                         <>
                           <img src={waitingIcn} alt="Waiting" />

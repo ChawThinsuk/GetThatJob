@@ -10,7 +10,7 @@ import axios from 'axios';
 
 export const Otp = ({ props }) => {
   const { setEmail, email, setPage } = props;
-  const [otp, setOtp] = useState(123456);
+  const [otp, setOtp] = useState(null);
   const [inputOtp, setInputOtp] = useState([0, 0, 0, 0, 0, 0]);
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(1);
@@ -91,7 +91,7 @@ export const Otp = ({ props }) => {
     <div className='flex mt-24 justify-center w-screen h-screen'>
       <section className='w-[35%] h-fit pt-[20px] px-[20px] pb-[40px] bg-gray-100 border-[0.5px] border-gray-300 rounded-lg shadow-xl transition-all duration-500'>
         <div className='flex flex-col items-end pt-3'>
-          <h1 className='font-[Montserrat] text-[18px]  w-full'>
+          <h1 className='font-[Montserrat] text-[18px] w-full'>
             Please input your email address
           </h1>
           {step === 2 ? (

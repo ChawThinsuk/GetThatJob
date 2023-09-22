@@ -85,7 +85,7 @@ export const JobDetail = () => {
       <Link to='/'>
         <button className='flex items-center h-[32.001px]'>
           <img src={leftArrow} className='w-[32.001px] h-[32.001px]' />
-          <p className=' font-[Inter] text-[18.667px] text-[#616161]'>BACK</p>
+          <p className=' font-[Inter] text-[22px] text-[#616161]'>BACK</p>
         </button>
       </Link>
       <div className='flex flex-col mt-[13.334px]'>

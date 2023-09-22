@@ -59,7 +59,7 @@ const JobCard = (prop) => {
   return (
     <div
       key={job.job_id}
-      className='w-[390px] h-[227px] rounded-[8px] border-[1px] border-[#E1E2E1] bg-[#FFFFFF] flex justify-center items-center mr-[16px] shadow-pro1'
+      className='w-[400px] h-[227px] rounded-[8px] border-[1px] border-[#E1E2E1] bg-[#FFFFFF] flex justify-center items-center mr-[16px] shadow-pro1'
     >
       {isLoading ? (
         <Spinner
@@ -81,7 +81,7 @@ const JobCard = (prop) => {
                 </p>
               </div>
               <div className='flex flex-col w-[230px] h-[86px]'>
-                <p className='text-[24px] text-[#373737] w-[230px] h-[32px] font-[Montserrat] font-[500]'>
+                <p className='text-[24px] text-[#373737] w-[270px] h-[32px] font-[Montserrat] font-[500]'>
                   {job.job_title}
                 </p>
                 <p className='text-[20px] text-[#616161] w-[230px] h-[24px] font-[Montserrat] font-[500]'>

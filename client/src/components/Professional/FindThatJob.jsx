@@ -32,9 +32,9 @@ export const FindThatJob = () => {
             <div className='border-[1px] border-[#F48FB1] rounded-[8px] w-[560px] h-[42px] flex flex-row justify-start items-center bg-[#FFFFFF]'>
               <img src={find} className='w-[22] h-[22] pl-2' />
               <input
-                type='text'
-                placeholder='manufacturing, sales, swim'
-                className='w-[500px] h-[27px] text-[18px] p-[8px] leading-6 outline-nonefont-[Inter] font-[400] text-[#8E8E8E]'
+                type="text"
+                placeholder="manufacturing, sales, swim"
+                className="w-[500px] h-[27px] text-[18px] p-[8px] leading-6 outline-none font-[Inter] font-[400] text-[#8E8E8E]"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />

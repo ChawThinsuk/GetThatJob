@@ -39,7 +39,7 @@ const ChangePass = ({ email, setPage }) => {
           email,
         });
         setIsLoading(false);
-        setPage('recovered');
+        setPage('resetSuccess');
       } catch (error) {
         setIsLoading(false);
         toast({

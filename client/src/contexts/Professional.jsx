@@ -7,6 +7,7 @@ function ProProvider(props) {
   const [jobs, setJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [jobFollow, setJobFollow] = useState(null);
+  const [popularJobs, setPopularJobs] = useState([]);
   const getSingleJob = async (id) => {
     return axios.get(`http://localhost:4000/pro/job/${id}`);
   };
@@ -16,17 +17,17 @@ function ProProvider(props) {
     const timeDifferent = currentDate - createDate;
     return Math.floor(timeDifferent / (1000 * 60 * 60 * 24));
   };
-
   const getJobs = async (input) => {
-    const { searchTerm, category, type, minSalary, maxSalary, location } = input;
+    const { searchTerm, category, type, minSalary, maxSalary, location } =
+      input;
     try {
       const params = new URLSearchParams();
-      params.append("searchTerm", searchTerm);
-      params.append("category", category);
-      params.append("type", type);
-      params.append("minSalary", minSalary);
-      params.append("maxSalary", maxSalary);
-      params.append("location", location);
+      params.append('searchTerm', searchTerm);
+      params.append('category', category);
+      params.append('type', type);
+      params.append('minSalary', minSalary);
+      params.append('maxSalary', maxSalary);
+      params.append('location', location);
       setIsLoading(true);
       const result = await axios.get(
         `http://localhost:4000/big?${params.toString()}`
@@ -38,7 +39,6 @@ function ProProvider(props) {
       console.log('error', error);
     }
   };
-
   const getJobFollowStatus = async (userID, job_id) => {
     try {
       const jobFollowStatus = await axios.get(
@@ -67,6 +67,24 @@ function ProProvider(props) {
       console.log(error);
     }
   };
+  const getPopularJob = async () => {
+    try {
+      const popularJob = await axios.get(
+        `http://localhost:4000/big/job/popular`
+      );
+      let popularSearch = [];
+      popularJob.data.popularJobs.map((job) => {
+        for (let i in job) {
+          if (!popularSearch.includes(job[i])) {
+            popularSearch.push(job[i]);
+          }
+        }
+      });
+      setPopularJobs(popularSearch);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <ProContext.Provider
       value={{
@@ -81,6 +99,8 @@ function ProProvider(props) {
         setJobFollow,
         updateJobFollowStatus,
         addJobProfessionalData,
+        getPopularJob,
+        popularJobs,
       }}
     >
       {props.children}

@@ -12,8 +12,7 @@ export const FindThatJob = () => {
   const [minSalary, setMinSalary] = useState('');
   const [maxSalary, setMaxSalary] = useState('');
   const [location, setLocation] = useState('');
-  const { jobs, getJobs, getPopularJob, popularJobs } =
-    usePro();
+  const { jobs, getJobs, getPopularJob, popularJobs } = usePro();
   useEffect(() => {
     getJobs({ searchTerm, category, type, minSalary, maxSalary, location });
     getPopularJob();
@@ -204,27 +203,23 @@ export const FindThatJob = () => {
           </div>
         </div>
       </div>
-      <div className='flex flex-col justify-center items-start w-full  pt-[14px]'>
+      <div className='flex flex-col justify-center items-start w-full  pt-[12px]'>
         <div className='mb-[16px]'>
-          <div className='flex flex-row gap-3 mb-4 items-center'>
-            <p className='font-[Inter] text-[14px] '>Popular search:</p>
-            {popularJobs.map((job) => {
-              return (
-                <div key={job.job_id} className='flex flex-row gap-3'>
-                  <p
-                    className='bg-gray-300 rounded-xl p-[1px] px-[4px] text-[13px] hover:cursor-pointer'
-                    onClick={() => setSearchTerm(job.job_title)}
-                  >
-                    {job.job_title}
-                  </p>
-                  <p
-                    className='bg-gray-300 rounded-xl p-[1px] px-[4px] text-[13px] hover:cursor-pointer'
-                    onClick={() => setSearchTerm(job.job_category)}
-                  >
-                    {job.job_category}
-                  </p>
-                </div>
-              );
+          <div className='flex flex-row gap-3 mb-4 items-center w-screen'>
+            <p className='font-[Inter] text-[14px] '>Popular searches:</p>
+            {popularJobs.map((job, index) => {
+              if (index <= 7) {
+                return (
+                  <div key={index} className='flex flex-row gap-3'>
+                    <p
+                      className='bg-gray-300 rounded-xl py-[1px] px-[5px] text-[13px] hover:cursor-pointer'
+                      onClick={() => setSearchTerm(job)}
+                    >
+                      {job}
+                    </p>
+                  </div>
+                );
+              }
             })}
           </div>
           <p className='text-[20px] text-start w-full font-[Montserrat] font-[500]'>

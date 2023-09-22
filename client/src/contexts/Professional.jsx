@@ -72,7 +72,15 @@ function ProProvider(props) {
       const popularJob = await axios.get(
         `http://localhost:4000/big/job/popular`
       );
-      setPopularJobs(popularJob.data.popularJobs);
+      let popularSearch = [];
+      popularJob.data.popularJobs.map((job) => {
+        for (let i in job) {
+          if (!popularSearch.includes(job[i])) {
+            popularSearch.push(job[i]);
+          }
+        }
+      });
+      setPopularJobs(popularSearch);
     } catch (error) {
       console.log(error);
     }

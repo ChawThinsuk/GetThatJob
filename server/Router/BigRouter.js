@@ -80,7 +80,7 @@ bigRouter.get('/', async (req, res) => {
 bigRouter.get('/job/popular', async (req, res) => {
   try {
     const popularJobs = await pool.query(
-      'SELECT jobs.*,recruiters.* FROM jobs_professional INNER JOIN jobs ON jobs_professional.job_id = jobs.job_id INNER JOIN recruiters ON recruiters.recruiter_id = jobs.recruiter_id WHERE jobs_professional.job_user_following = true GROUP BY jobs.job_id, recruiters.recruiter_id,jobs.job_category ORDER BY count(jobs.job_id) desc limit 4'
+      'SELECT jobs.job_title,jobs.job_category FROM jobs_professional INNER JOIN jobs ON jobs_professional.job_id = jobs.job_id INNER JOIN recruiters ON recruiters.recruiter_id = jobs.recruiter_id WHERE jobs_professional.job_user_following = true GROUP BY jobs.job_id, recruiters.recruiter_id,jobs.job_category ORDER BY count(jobs.job_id) desc limit 8'
     );
     return res.status(200).json({
       message: 'get popular jobs complete',

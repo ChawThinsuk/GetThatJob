@@ -86,7 +86,7 @@ export const YourApplication = () => {
       <div className="w-screen h-screen opacity-80 bg-white flex justify-center items-center">
         <Spinner
           thickness="4px"
-          speed="0.65s"
+          speed="0.5s"
           emptyColor="gray.200"
           color="#F48FB1"
           size="xl"
@@ -97,17 +97,17 @@ export const YourApplication = () => {
   if (error) {
     return (
       <div className="absolute w-screen h-screen flex flex-col items-center pt-20">
-        <h1 className="text-[3rem] font-bold text-[#373737] ">
+        <h1 className="text-[3.1rem] font-bold text-[#373737] ">
           Something wrong
         </h1>
         <div className="flex mt-5 gap-10">
           <Link to="/">
-            <h1 className=" text-blue-700 text-[1.2rem] underline hover:cursor-pointer hover:text-blue-800">
+            <h1 className=" text-blue-700 text-[1.3rem] underline hover:cursor-pointer hover:text-blue-800">
               Back to homepage
             </h1>
           </Link>
           <h1
-            className=" text-blue-700 text-[1.2rem] underline hover:cursor-pointer hover:text-blue-800"
+            className=" text-blue-700 text-[1.3rem] underline hover:cursor-pointer hover:text-blue-800"
             onClick={() => window.location.reload(true)}
           >
             Retry
@@ -119,17 +119,17 @@ export const YourApplication = () => {
   if (!data.data.job) {
     return (
       <div className="absolute w-screen h-screen flex flex-col items-center pt-20">
-        <h1 className="text-[3rem] font-bold text-[#373737] ">
+        <h1 className="text-[3.1rem] font-bold text-[#373737] ">
           JOB NOT FOUNDED
         </h1>
         <div className="flex mt-5 gap-10">
           <Link to="/">
-            <h1 className=" text-blue-700 text-[1.2rem] underline hover:cursor-pointer hover:text-blue-800">
+            <h1 className=" text-blue-700 text-[1.3rem] underline hover:cursor-pointer hover:text-blue-800">
               Back to homepage
             </h1>
           </Link>
           <h1
-            className=" text-blue-700 text-[1.2rem] underline hover:cursor-pointer hover:text-blue-800"
+            className=" text-blue-700 text-[1.3rem] underline hover:cursor-pointer hover:text-blue-800"
             onClick={() => window.location.reload(true)}
           >
             Retry
@@ -156,7 +156,7 @@ export const YourApplication = () => {
       display="flex"
       flexDirection="column"
       alignItems="center"
-      gap="3.375rem"
+      gap="3.5rem"
       alignSelf="stretch"
     >
       <JobHeader
@@ -166,17 +166,17 @@ export const YourApplication = () => {
       <Box
         display="flex"
         flexDirection="column"
-        gap="1rem"
-        width="60rem"
+        gap="1.1rem"
+        width="60.1rem"
         alignItems="flex-start"
       >
         <Text
           fontFamily="Montserrat"
-          fontSize="1.5rem"
+          fontSize="1.8rem"
           fontStyle="normal"
           fontWeight="400"
           lineHeight="normal"
-          letterSpacing="0.09375rem"
+          letterSpacing="0.19375rem"
           color="#BF5F82"
         >
           Complete your application
@@ -184,16 +184,16 @@ export const YourApplication = () => {
         <Box
           display="flex"
           flexDirection="column"
-          gap="0.25rem"
+          gap="0.35rem"
           alignItems="flex-start"
         >
           <Text
             fontFamily="Inter"
-            fontSize="0.625rem"
+            fontSize="1.55rem"
             fontStyle="normal"
             fontWeight="400"
             lineHeight="normal"
-            letterSpacing="0.09375rem"
+            letterSpacing="0.17rem"
             color="#373737"
           >
             SEND YOUR CV UPDATED
@@ -203,7 +203,7 @@ export const YourApplication = () => {
             onChange={setValue}
             value={value}
             fontFamily="Inter"
-            fontSize="0.875rem"
+            fontSize="1.7rem"
             fontStyle="normal"
             fontWeight="400"
             lineHeight="1.25rem"
@@ -221,18 +221,18 @@ export const YourApplication = () => {
         <Box
           display="flex"
           flexDirection="column"
-          gap="0.25rem"
+          gap="0.35rem"
           alignItems="flex-start"
         >
           <Flex
             alignItems="center"
-            gap="0.5rem"
+            gap="0.683rem"
             fontFamily="Inter"
-            fontSize="0.875rem"
+            fontSize="0.955rem"
             fontStyle="normal"
             fontWeight="400"
-            lineHeight="1.25rem"
-            letterSpacing="0.01563rem"
+            lineHeight="1.35rem"
+            letterSpacing="0.1rem"
           >
             <Button
               bg="#F48FB1"
@@ -240,6 +240,16 @@ export const YourApplication = () => {
               _hover={{ bg: "#de7b9c" }}
               onClick={() => document.getElementById("cvInput").click()}
               isDisabled={value === "1"}
+              color="white"
+              padding="1.5rem"
+              fontFamily="Inter"
+              fontSize="1.6rem"
+              fontStyle="normal"
+              fontWeight="500"
+              lineHeight="1.6rem"
+              letterSpacing="0.05rem"
+              textTransform="uppercase"
+              borderRadius="10px"
             >
               Choose a File
             </Button>
@@ -262,29 +272,24 @@ export const YourApplication = () => {
           />
           <Text
             fontFamily="Inter"
-            fontSize="0.75rem"
+            fontSize="1rem"
             fontStyle="normal"
             fontWeight="400"
-            lineHeight="1rem"
-            letterSpacing="0.025rem"
+            lineHeight="1.3rem"
+            letterSpacing="0.1rem"
             color="#8E8E8E"
           >
             Only PDF. Max size 5MB
           </Text>
         </Box>
-        <Box
-          display="flex"
-          flexDirection="column"
-          width="47.5rem"
-          gap="0.25rem"
-        >
+        <Box display="flex" flexDirection="column" width="47.7rem" gap="0.4rem">
           <Text
             fontFamily="Inter"
-            fontSize="0.625rem"
+            fontSize="0.7rem"
             fontStyle="normal"
             fontWeight="400"
             lineHeight="normal"
-            letterSpacing="0.09375rem"
+            letterSpacing="0.19rem"
             textTransform="uppercase"
             color="#373737"
           >
@@ -292,20 +297,22 @@ export const YourApplication = () => {
           </Text>
           <Textarea
             placeholder="Professional experience"
-            border="1px"
+            border="2px"
             borderColor="#F48FB1"
             display="flex"
             alignItems="flex-start"
-            padding="0.5rem"
+            padding="0.6rem"
             alignSelf="stretch"
             fontFamily="Inter"
-            fontSize="0.625rem"
+            fontSize="0.725rem"
             fontStyle="normal"
             fontWeight="400"
-            lineHeight="1.25rem"
-            letterSpacing="0.01563rem"
+            lineHeight="1.35rem"
+            letterSpacing="0.11563rem"
             textTransform="uppercase"
             color="#373737"
+            height="30rem"
+            width="60rem"
             value={experienceData}
             onChange={(e) => setExperienceData(e.target.value)}
           />
@@ -318,32 +325,34 @@ export const YourApplication = () => {
         >
           <Text
             fontFamily="Inter"
-            fontSize="0.625rem"
+            fontSize="0.7rem"
             fontStyle="normal"
             fontWeight="400"
             lineHeight="normal"
-            letterSpacing="0.09375rem"
+            letterSpacing="0.19rem"
             textTransform="uppercase"
             color="#373737"
           >
-            Why are you interested in working at The company name SA
+            Why are you interested in working at {job_id}
           </Text>
           <Textarea
             placeholder="Mention things about The Company Name SA that excite you. Why would you be a good candidate?"
-            border="1px"
+            border="2px"
             borderColor="#F48FB1"
             display="flex"
             alignItems="flex-start"
-            padding="0.5rem"
+            padding="0.6rem"
             alignSelf="stretch"
             fontFamily="Inter"
-            fontSize="0.625rem"
+            fontSize="0.725rem"
             fontStyle="normal"
             fontWeight="400"
-            lineHeight="1.25rem"
-            letterSpacing="0.01563rem"
+            lineHeight="1.35rem"
+            letterSpacing="0.11563rem"
             textTransform="uppercase"
             color="#373737"
+            height="25rem"
+            width="60rem"
             value={interestingData}
             onChange={(e) => setInterestingData(e.target.value)}
           />
@@ -360,24 +369,30 @@ export const YourApplication = () => {
           </Text>
         </Box>
       </Box>
-      <Box display="flex" justifyContent="center" alignItems="center">
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        padding="1.5rem"
+      >
         <Button
           leftIcon={<EmailIcon />}
           _hover={{ bg: "#de7b9c" }}
           color="white"
           bg="#F48FB1"
           display="flex"
-          padding="1rem 1.5rem"
+          padding="2rem"
           gap="0.5rem"
           alignItems="center"
           fontFamily="Inter"
-          fontSize="0.875rem"
+          fontSize="1.6rem"
           fontStyle="normal"
           fontWeight="500"
-          lineHeight="1.5rem"
-          letterSpacing="0.07813rem"
+          lineHeight="1.6rem"
+          letterSpacing="0.1rem"
           textTransform="uppercase"
           onClick={handleSubmit}
+          borderRadius="10px"
         >
           {" "}
           SEND APPLICATION

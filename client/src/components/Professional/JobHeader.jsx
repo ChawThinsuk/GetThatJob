@@ -135,17 +135,18 @@ export const JobHeader = (props) => {
             color="white"
             bg="#F48FB1"
             display="flex"
-            padding="1rem 1.5rem"
+            padding="2rem"
             gap="0.5rem"
             alignItems="center"
             fontFamily="Inter"
-            fontSize="0.875rem"
+            fontSize="1.6rem"
             fontStyle="normal"
             fontWeight="500"
-            lineHeight="1.5rem"
-            letterSpacing="0.07813rem"
+            lineHeight="1.6rem"
+            letterSpacing="0.1rem"
             textTransform="uppercase"
             onClick={handleSubmit}
+            borderRadius="10px"
           >
             {" "}
             SEND APPLICATION

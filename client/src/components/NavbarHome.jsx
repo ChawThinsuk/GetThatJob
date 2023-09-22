@@ -51,7 +51,7 @@ export const NavbarHomepage = () => {
                 }`}
               >
                 <img src={navButton.logo} className="p-2" />
-                <p className=" text-[21.33px] text-[#616161] font-[Inter]">
+                <p className=" text-[21.33px] text-[#616161] font-[Inter] font-[400]">
                   {navButton.title}
                 </p>
               </div>
@@ -66,7 +66,7 @@ export const NavbarHomepage = () => {
           }}
         >
           <img src={logoutlogo} className="p-2" />
-          <p className="font-[Inter] text-[21.33px] text-[#616161] ">Log out</p>
+          <p className="font-[Inter] font-[400] text-[21.33px] text-[#616161] ">Log out</p>
         </div>
       </div>
     </div>

@@ -2,10 +2,12 @@ import { Router, query } from "express";
 import { pool } from "../utils/db.js";
 import { protect } from "../middlewares/protect.js";
 const proRouter = Router();
-//Get singleJob
 proRouter.use(protect);
 
-proRouter.get("/job/:id", async (req, res) => {
+
+//Get singleJob
+proRouter.get('/job/:id', async (req, res) => {
+
   const { id } = req.params;
   try {
     const jobID = Number(id);
@@ -23,13 +25,14 @@ proRouter.get("/job/:id", async (req, res) => {
     return res.status(500).json({ message: error });
   }
 });
+
 //Get Job Following Status
 proRouter.get("/follow/job", async (req, res) => {
   const userID = req.query.userID;
   const jobID = req.query.job_id;
   try {
     const companyFollow = await pool.query(
-      "SELECT jobs_professional.job_professional_id, jobs_professional.job_user_following FROM jobs_professional INNER JOIN professionals ON professionals.professional_id = jobs_professional.professional_id WHERE professionals.user_id = $1 AND jobs_professional.job_id = $2",
+      'SELECT jobs_professional.job_professional_id, jobs_professional.job_user_following, jobs_professional.job_user_application FROM jobs_professional INNER JOIN professionals ON professionals.professional_id = jobs_professional.professional_id WHERE professionals.user_id = $1 AND jobs_professional.job_id = $2',
       [userID, jobID]
     );
     return res.json({
@@ -40,6 +43,23 @@ proRouter.get("/follow/job", async (req, res) => {
     return res.status(500).json({ message: error });
   }
 });
+
+//Get Followed Jobs (pro5)
+proRouter.get('/followedJobs', async (req, res) => {
+  const { userID } = req.query;
+  try {
+    const jobFollowedData = await pool.query(
+      'SELECT * FROM jobs_professional INNER JOIN jobs ON jobs.job_id = jobs_professional.job_id INNER JOIN recruiters ON jobs.recruiter_id = recruiters.recruiter_id INNER JOIN professionals ON professionals.professional_id = jobs_professional.professional_id WHERE professionals.user_id = $1 AND jobs_professional.job_user_following = true',
+      [userID]
+    );
+    return res
+      .status(200)
+      .json({ message: 'Get data completed', data: jobFollowedData.rows });
+  } catch (error) {
+    return res.status(500).json({ message: error });
+  }
+});
+
 //Update Job Follow
 proRouter.put("/follow/job", async (req, res) => {
   const { job_professional_id, job_professional_follow } = req.body.data;
@@ -74,6 +94,8 @@ proRouter.post("/jobpro/follow", async (req, res) => {
     console.log(error);
   }
 });
+
 // get professional experience
+
 
 export default proRouter;

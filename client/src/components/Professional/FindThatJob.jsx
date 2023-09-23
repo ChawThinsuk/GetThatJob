@@ -2,6 +2,7 @@ import find from '../../assets/FindThatJob/find.svg';
 import money from '../../assets/FindThatJob/money.svg';
 import { useEffect, useState } from 'react';
 import { usePro } from '../../contexts/Professional';
+import { AiOutlineClose } from 'react-icons/ai';
 import { debounce } from 'lodash';
 import JobCard from './JobCard';
 
@@ -29,15 +30,23 @@ export const FindThatJob = () => {
             <p className='text-[14px] pt-[16px] font-[Inter] font-[400] text-[#616161]'>
               SEARCH BY JOB TITLE OR COMPANY NAME
             </p>
-            <div className='border-[1px] border-[#F48FB1] rounded-[8px] w-[560px] h-[42px] flex flex-row justify-start items-center bg-[#FFFFFF]'>
+            <div className='relative border-[1px] border-[#F48FB1] rounded-[8px] w-[560px] h-[42px] flex flex-row justify-start items-center bg-[#FFFFFF]'>
               <img src={find} className='w-[22] h-[22] pl-2' />
               <input
-                type="text"
-                placeholder="manufacturing, sales, swim"
-                className="w-[500px] h-[27px] text-[18px] p-[8px] leading-6 outline-none font-[Inter] font-[400] text-[#8E8E8E]"
+                type='text'
+                placeholder='manufacturing, sales, swim'
+                className='w-[500px] h-[27px] text-[18px] p-[8px] leading-6 outline-none font-[Inter] font-[400] text-[#8E8E8E]'
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
+              {searchTerm !== '' && (
+                <button
+                  className='absolute right-2 opacity-20 hover:opacity-75'
+                  onClick={() => setSearchTerm('')}
+                >
+                  <AiOutlineClose />
+                </button>
+              )}
             </div>
           </div>
           <div className='w-[400px]'>

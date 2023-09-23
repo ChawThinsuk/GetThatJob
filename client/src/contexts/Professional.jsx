@@ -11,11 +11,31 @@ function ProProvider(props) {
   const getSingleJob = async (id) => {
     return axios.get(`http://localhost:4000/pro/job/${id}`);
   };
-  const dayAgo = (date) => {
-    const createDate = new Date(date);
+  const dayAgo = (dateString) => {
+    const date = new Date(dateString);
     const currentDate = new Date();
-    const timeDifferent = currentDate - createDate;
-    return Math.floor(timeDifferent / (1000 * 60 * 60 * 24));
+    const timeDifference = (currentDate - date) / 1000; // Convert to seconds
+    const oneMinuteInSeconds = 60;
+    const oneHourInSeconds = 60 * 60;
+
+    if (timeDifference < oneMinuteInSeconds) {
+      const secondsAgo = Math.floor(timeDifference);
+      return `${secondsAgo} second${secondsAgo === 1 ? '' : 's'} ago`;
+    } else if (timeDifference < oneHourInSeconds) {
+      const minutesAgo = Math.floor(timeDifference / oneMinuteInSeconds);
+      return `${minutesAgo} minute${minutesAgo === 1 ? '' : 's'} ago`;
+    } else if (timeDifference < oneHourInSeconds * 24) {
+      const hoursAgo = Math.floor(timeDifference / oneHourInSeconds);
+      return `${hoursAgo} hour${hoursAgo === 1 ? '' : 's'} ago`;
+    } else if (timeDifference < oneHourInSeconds * 24 * 5) {
+      const daysAgo = Math.floor(timeDifference / (oneHourInSeconds * 24));
+      return `${daysAgo} day${daysAgo === 1 ? '' : 's'} ago`;
+    } else {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}/${month}/${day}`;
+    }
   };
   const getJobs = async (input) => {
     const { searchTerm, category, type, minSalary, maxSalary, location } =

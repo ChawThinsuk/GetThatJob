@@ -20,7 +20,6 @@ function jwtInterceptor() {
       ) {
         window.alert(error.response.data.message);
         window.localStorage.removeItem('token');
-        window.localStorage.removeItem('state');
         window.location.replace('/login');
       }
       if (error.response.status === 404) {

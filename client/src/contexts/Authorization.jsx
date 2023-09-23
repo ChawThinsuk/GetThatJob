@@ -5,8 +5,11 @@ import { useNavigate } from 'react-router-dom';
 const AuthContext = React.createContext();
 // set state to localstorage
 const getState = () => {
-  const data = JSON.parse(localStorage.getItem('state'));
-  return data;
+  const token = localStorage.getItem('token');
+  if (token) {
+    const userDataFromToken = jwtDecode(token);
+    return userDataFromToken;
+  }
 };
 
 function AuthProvider(props) {
@@ -24,10 +27,8 @@ function AuthProvider(props) {
       );
       const token = response.data.token;
       if (token) {
-        const userDataFromToken = jwtDecode(token);
         //Save token and data in local storage
         localStorage.setItem('token', token);
-        localStorage.setItem('state', JSON.stringify(userDataFromToken));
         setState(getState());
         setLoading(false);
         navigate('/');
@@ -44,7 +45,6 @@ function AuthProvider(props) {
 
   const logout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('state');
     setState({ ...state, userID: null, userType: null });
   };
 

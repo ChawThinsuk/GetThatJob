@@ -18,6 +18,7 @@ async function init() {
   app.use("/chaw", ChawRouter);
   app.use("/aoo", AooRouter);
   app.get("/", (req, res) => {
+
     return res.json({
       message: "Hello",
     });

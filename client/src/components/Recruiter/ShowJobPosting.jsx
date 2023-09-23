@@ -30,6 +30,7 @@ function ShowJobPosting() {
     error: errorR,
     loading: loadingR,
     refetch: refetchR,
+
   } = useQuery({
     queryKey: ["jobs", data],
     queryFn: async (data) => {
@@ -73,6 +74,7 @@ function ShowJobPosting() {
     return new Date(b.created_at) - new Date(a.created_at);
   });
   candidates?.sort(sortByStatus);
+
   return (
     <div className="w-[1259px] flex flex-col  items-start font-[Inter] ml-[160px] mr-[160px] pt-[32px]">
       <Link to={`/`}>

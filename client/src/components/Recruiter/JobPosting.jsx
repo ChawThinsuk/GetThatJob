@@ -47,6 +47,7 @@ function JobPosting(props) {
         <Spinner color="pink.200" size="lg" />
       </div>
     );
+
   }
   if (error) {
     return <div>Error Loading</div>;
@@ -60,6 +61,7 @@ function JobPosting(props) {
     <div className="w-[1259px] flex flex-col  items-start font-[Inter] ml-[160px] mr-[160px] pt-[32px]">
       <p className="font-[Montserrat] text-[35px] font-medium">Job Postings</p>
       <RadioJobPosting />
+
       <p className="font-[Montserrat] text-[21px] font-medium pt-[21.33px]">
         {posts?.length} jobs postings found
       </p>
@@ -71,6 +73,7 @@ function JobPosting(props) {
             refreshData={refetch}
             fetching={isFetching}
           />
+
         );
       })}
     </div>

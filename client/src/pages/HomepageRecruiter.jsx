@@ -6,6 +6,7 @@ import JobPosting from "../components/Recruiter/JobPosting";
 import { RecruiterProfile } from "../components/Recruiter/RecruiterProfile";
 import ShowJobPosting from "../components/Recruiter/ShowJobPosting";
 import { RecruiterProvider } from "../contexts/recruiterPage1-2";
+
 export const HomepageRecruiter = () => {
   const { state } = useAuth();
   return (
@@ -20,6 +21,7 @@ export const HomepageRecruiter = () => {
           <Route path="*" element={<JobPosting />} />
         </Routes>
       </div>
+
     </RecruiterProvider>
   );
 };

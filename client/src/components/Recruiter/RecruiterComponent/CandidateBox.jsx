@@ -15,11 +15,13 @@ function Candidate(props) {
   const data = props.datas;
   const [item, setItemm] = useState(props.datas);
   const date = calculateDayAgo(data.application_created_at);
+
   const handleToggleActive = () => {
     let newActive = item.active === 1 ? 0 : 1;
     setItemm({ ...item, active: newActive });
   };
   console.log(data.application_created_at)
+
   return (
     <div
       className={`flex flex-col justify-between  w-[1258.72px] rounded-[8px] mt-[21.33px] shadow-md group ${
@@ -116,6 +118,7 @@ function Candidate(props) {
               <p>
                 sent on
                 <br /> {formatDate(data.application_created_at)}
+
               </p>
             )}
           </div>

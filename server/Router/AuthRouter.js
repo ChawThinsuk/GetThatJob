@@ -1,9 +1,9 @@
-import { Router, query } from "express";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
-import { pool } from "../utils/db.js";
-import dotenv from "dotenv";
-import nodemailer from "nodemailer";
+import { Router, query } from 'express';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+import { pool } from '../utils/db.js';
+import dotenv from 'dotenv';
+import nodemailer from 'nodemailer';
 
 dotenv.config();
 const authRouter = Router();
@@ -62,7 +62,7 @@ const authRouter = Router();
 function sendEmail({ recipient_email, OTP }) {
   return new Promise((resolve, reject) => {
     var transporter = nodemailer.createTransport({
-      service: "gmail",
+      service: 'gmail',
       auth: {
         user: process.env.MY_EMAIL,
         pass: process.env.MY_PASSWORD,
@@ -72,7 +72,7 @@ function sendEmail({ recipient_email, OTP }) {
     const mail_configs = {
       from: process.env.MY_EMAIL,
       to: recipient_email,
-      subject: "GET THAT JOB Password Recovery",
+      subject: 'GET THAT JOB Password Recovery',
       html: `<!DOCTYPE html>
       <html lang="en">
       <head>
@@ -104,41 +104,40 @@ function sendEmail({ recipient_email, OTP }) {
     transporter.sendMail(mail_configs, function (error, info) {
       if (error) {
         console.log(error);
-        reject({ message: "An error has occurred" });
+        reject({ message: 'An error has occurred' });
       } else {
-        resolve({ message: "Email sent successfully" });
+        resolve({ message: 'Email sent successfully' });
       }
     });
   });
 }
-
-authRouter.post("/send-otp", async (req, res) => {
+authRouter.post('/send-otp', async (req, res) => {
   // console.log(process.env.MY_EMAIL);
   const email = req.body.recipient_email;
   const otp = req.body.OTP;
 
   try {
-    const result = await pool.query("SELECT * FROM users WHERE email = $1", [
+    const result = await pool.query('SELECT * FROM users WHERE email = $1', [
       email,
     ]);
     // console.log(result);
 
     if (result.rows[0]) {
       sendEmail(req.body)
-        .then((response) => res.json({ message: "ok" }))
+        .then((response) => res.json({ message: 'ok' }))
         .catch((error) => res.status(500).send(error.message));
     } else {
-      return res.json({ message: "No User" });
+      return res.json({ message: 'No User' });
     }
   } catch (error) {
     return res.status(500).json({
-      message: "An error occurred",
+      message: 'An error occurred',
       error: error.message,
     });
   }
 });
 
-authRouter.post("/login", async (req, res) => {
+authRouter.post('/login', async (req, res) => {
   const { userType, email, password } = req.body;
   try {
     // query data from users record and check for existance of email
@@ -148,12 +147,12 @@ authRouter.post("/login", async (req, res) => {
     );
     userData = userData.rows[0];
     if (!userData) {
-      return res.status(404).json({ message: "Invalid email" });
+      return res.json({ status: 404 });
     }
     // compare password with bcrypt
     const isValidPassword = await bcrypt.compare(password, userData.password);
     if (!isValidPassword) {
-      return res.status(401).json({ message: "Invalid password" });
+      return res.json({ status: 401 });
     }
     // Token generation with signing userID and userType data
     const token = jwt.sign(
@@ -162,15 +161,15 @@ authRouter.post("/login", async (req, res) => {
         userType: userType,
       },
       process.env.SECRET_KEY,
-      { expiresIn: "90000000" }
+      { expiresIn: '90000000' }
     );
-    return res.status(200).json({ message: "Login success", token });
+    return res.status(200).json({ status: 200, token });
   } catch (error) {
-    return res.status(500).json({ message: error });
+    return res.json({ status: 500 });
   }
 });
 
-authRouter.put("/password", async (req, res) => {
+authRouter.put('/password', async (req, res) => {
   const { email, newPassword } = req.body;
   try {
     const saltRounds = 10;
@@ -181,7 +180,7 @@ authRouter.put("/password", async (req, res) => {
       [hashedPassword, new Date(), email]
     );
 
-    return res.status(200).json({ message: "Change Password success" });
+    return res.status(200).json({ message: 'Change Password success' });
   } catch (error) {
     return res.status(500).json({ message: error });
   }

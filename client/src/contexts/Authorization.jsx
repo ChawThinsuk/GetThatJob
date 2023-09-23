@@ -13,6 +13,7 @@ function AuthProvider(props) {
   const navigate = useNavigate();
   const [state, setState] = useState(getState());
   const [loading, setLoading] = useState(false);
+  const [loginResult, setLoginResult] = useState(null);
 
   const login = async (data) => {
     try {
@@ -21,16 +22,22 @@ function AuthProvider(props) {
         'http://localhost:4000/auth/login',
         data
       );
-      setLoading(false);
       const token = response.data.token;
-      const userDataFromToken = jwtDecode(token);
-      //Save token and data in local storage
-      localStorage.setItem('token', token);
-      localStorage.setItem('state', JSON.stringify(userDataFromToken));
-      setState(getState());
-      navigate('/');
+      if (token) {
+        const userDataFromToken = jwtDecode(token);
+        //Save token and data in local storage
+        localStorage.setItem('token', token);
+        localStorage.setItem('state', JSON.stringify(userDataFromToken));
+        setState(getState());
+        setLoading(false);
+        navigate('/');
+      } else {
+        setLoginResult(response.data.status);
+        setLoading(false);
+      }
     } catch (error) {
       setLoading(false);
+      setLoginResult(500);
       console.log('error', error);
     }
   };
@@ -45,7 +52,15 @@ function AuthProvider(props) {
 
   return (
     <AuthContext.Provider
-      value={{ state, login, logout, isAuthenticated, loading }}
+      value={{
+        state,
+        login,
+        logout,
+        isAuthenticated,
+        loading,
+        loginResult,
+        setLoginResult,
+      }}
     >
       {props.children}
     </AuthContext.Provider>

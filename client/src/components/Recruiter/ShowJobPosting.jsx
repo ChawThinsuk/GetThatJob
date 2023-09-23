@@ -5,7 +5,7 @@ import { useRecruiterContext } from "../../contexts/recruiterPage1-2";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import JobDetailBox from "./RecruiterComponent/JobDetailBox";
-import { Spinner,Skeleton } from "@chakra-ui/react";
+import { Spinner, Skeleton } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { RadioCandidate } from "./RecruiterComponent/Recruiter-1-2-Component";
 
@@ -29,7 +29,8 @@ function ShowJobPosting() {
     data: job,
     error: errorR,
     loading: loadingR,
-    refetch: refetchR
+    refetch: refetchR,
+
   } = useQuery({
     queryKey: ["jobs", data],
     queryFn: async (data) => {
@@ -72,7 +73,8 @@ function ShowJobPosting() {
   candidates?.sort((a, b) => {
     return new Date(b.created_at) - new Date(a.created_at);
   });
-  candidates?.sort(sortByStatus);  
+  candidates?.sort(sortByStatus);
+
   return (
     <div className="w-[1259px] flex flex-col  items-start font-[Inter] ml-[160px] mr-[160px] pt-[32px]">
       <Link to={`/`}>
@@ -99,9 +101,7 @@ function ShowJobPosting() {
         Show Job Posting
       </p>
       {job?.map((item, key) => {
-        return (
-      <JobDetailBox key={key} datas={item} refreshData={refetchR}/>           
-        );
+        return <JobDetailBox key={key} datas={item} refreshData={refetchR} />;
       })}
       <RadioCandidate />
       <p className="text-[21px] font-[Montserrat] font-medium mt-[16px]">
@@ -109,7 +109,12 @@ function ShowJobPosting() {
       </p>
       {candidates?.map((item, key) => {
         return (
-              <Candidate key={key} datas={item} refreshData={refetch} jobRefreshData={refetchR}/>
+          <Candidate
+            key={key}
+            datas={item}
+            refreshData={refetch}
+            jobRefreshData={refetchR}
+          />
         );
       })}
     </div>

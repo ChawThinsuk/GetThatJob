@@ -90,7 +90,6 @@ ChawRouter.post("/getcandidate", async (req, res) => {
       });
     }
     const results = await pool.query(query.queryCandidate, [data.job_id]);
-    console.log(results)
     return res.json({
       data: results.rows,
     });
@@ -192,13 +191,16 @@ left join(select job_id, count (professional_id) candidate_on_track from jobs_pr
 on j.job_id = am.job_id 
 where j.job_id = $1`;
 
-  const queryCandidate = `select  pd.*,us.email,jp.job_user_mark, jp.updated_at,jp.job_professional_id,jp.job_user_cv from jobs_professional jp
+  const queryCandidate = `select  pd.*,us.email,jp.job_user_mark, jp.updated_at,jp.job_professional_id,jp.job_user_cv, jp.created_at application_created_at from jobs_professional jp
+
 left join (select  * from professionals group by  professional_id,user_id) pd
 on jp.professional_id = pd.professional_id
 left join (select user_id,email from users where user_type = 'PROFESSIONAL' group by user_id) us
 on pd.user_id = us.user_id
 where job_id = $1`;
-  const queryCandidateWithStatus = `select  pd.*,us.email,jp.job_user_mark, jp.updated_at ,jp.job_professional_id,jp.job_user_cv from  jobs_professional jp
+
+  const queryCandidateWithStatus = `select  pd.*,us.email,jp.job_user_mark, jp.updated_at ,jp.job_professional_id,jp.job_user_cv,jp.created_at application_created_at  from  jobs_professional jp
+
 left join (select  * from professionals group by  professional_id,user_id) pd
 on jp.professional_id = pd.professional_id
 left join (select user_id,email from users where user_type = 'PROFESSIONAL' group by user_id) us

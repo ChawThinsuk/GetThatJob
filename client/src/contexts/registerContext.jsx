@@ -20,6 +20,16 @@ const ContextProvider = ({ children }) => {
     letterSpacing: "1.5px",
     textTransform: "uppercase",
   };
+  const profFormStyle = {
+    fontFamily: "Inter",
+    fontSize: "13px",
+    fontStyle: "normal",
+    fontWeight: 400,
+    lineHeight: "normal",
+    letterSpacing: "1.5px",
+    textTransform: "uppercase",
+    color: "#373737",
+  };
 
   // register page context
   const [userType, setUserType] = useState("PROFESSIONAL");
@@ -156,6 +166,7 @@ const ContextProvider = ({ children }) => {
         recruiterRegisterPage,
         setRecruiterRegisterPage,
         customTextStyle,
+        profFormStyle,
         userType,
         setUserType,
         // professional contxt

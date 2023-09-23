@@ -42,9 +42,12 @@ function JobPosting(props) {
     },
   });
   if (isLoading) {
-    return <div className="flex flex-col items-center justify-center w-full">
-      <Spinner  color='pink.200' size='lg'/>
-    </div>
+    return (
+      <div className="flex flex-col items-center justify-center w-full">
+        <Spinner color="pink.200" size="lg" />
+      </div>
+    );
+
   }
   if (error) {
     return <div>Error Loading</div>;
@@ -53,22 +56,24 @@ function JobPosting(props) {
     return new Date(a.created_at) - new Date(b.created_at);
   });
   posts?.sort(sortByStatus);
-  console.log(posts)
+  console.log(posts);
   return (
     <div className="w-[1259px] flex flex-col  items-start font-[Inter] ml-[160px] mr-[160px] pt-[32px]">
       <p className="font-[Montserrat] text-[35px] font-medium">Job Postings</p>
-      <RadioJobPosting/>
+      <RadioJobPosting />
+
       <p className="font-[Montserrat] text-[21px] font-medium pt-[21.33px]">
         {posts?.length} jobs postings found
       </p>
       {posts?.map((item, key) => {
         return (
-            <JobDetailBox
-            key = {key}
-              datas={item}
-              refreshData={refetch}
-              fetching={isFetching}
-            />
+          <JobDetailBox
+            key={key}
+            datas={item}
+            refreshData={refetch}
+            fetching={isFetching}
+          />
+
         );
       })}
     </div>

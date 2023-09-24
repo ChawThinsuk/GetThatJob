@@ -142,7 +142,6 @@ export const YourApplication = () => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
       setCvFileName(selectedFile.name);
-
       setCvChosen(true);
     } else {
       setCvFileName("No file chosen");

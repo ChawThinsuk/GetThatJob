@@ -195,6 +195,7 @@ export const FindThatJob = () => {
                   type='text'
                   placeholder='min'
                   className='w-[77px] h-[27px] flex flex-col justify-center text-[18px] p-[8px] leading-6 outline-none font-[Inter] font-[400] text-[#8E8E8E]'
+                  value={minSalary}
                   onChange={(e) => setMinSalary(e.target.value)}
                 />
               </div>
@@ -205,6 +206,7 @@ export const FindThatJob = () => {
                   type='text'
                   placeholder='max'
                   className='w-[77px] h-[27px] flex flex-col justify-center text-[18px] p-[8px] leading-6 outline-none font-[Inter] font-[400] text-[#8E8E8E]'
+                  value={maxSalary}
                   onChange={(e) => setMaxSalary(e.target.value)}
                 />
               </div>
@@ -222,7 +224,14 @@ export const FindThatJob = () => {
                   <div key={index} className='flex flex-row gap-3'>
                     <p
                       className='bg-gray-300 rounded-xl py-[1px] px-[5px] text-[13px] hover:cursor-pointer'
-                      onClick={() => setSearchTerm(job)}
+                      onClick={() => {
+                        setSearchTerm(job);
+                        setCategory('');
+                        setType('');
+                        setMaxSalary('');
+                        setMinSalary('');
+                        setLocation('');
+                      }}
                     >
                       {job}
                     </p>

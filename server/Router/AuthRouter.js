@@ -8,57 +8,6 @@ import nodemailer from 'nodemailer';
 dotenv.config();
 const authRouter = Router();
 
-// function sendEmail({ recipient_email, OTP }) {
-//   return new Promise((resolve, reject) => {
-//     const transporter = nodemailer.createTransport({
-//       service: "gmail",
-//       auth: {
-//         user: process.env.MY_EMAIL,
-//         pass: process.env.MY_PASSWORD,
-//       },
-//     });
-
-//     const mailConfigs = {
-//       from: process.env.MY_EMAIL,
-//       to: recipient_email,
-//       subject: "KODING 101 PASSWORD RECOVERY",
-//       html: `<!DOCTYPE html>
-//       <html lang="en">
-//       <head>
-//         <meta charset="UTF-8">
-//         <title>CodePen - OTP Email Template</title>
-//       </head>
-//       <body>
-//       <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
-//         <div style="margin:50px auto;width:70%;padding:20px 0">
-//           <div style="border-bottom:1px solid #eee">
-//             <a href="" style="font-size:1.4em;color: #F48FB1;text-decoration:none;font-weight:600">Get That job</a>
-//           </div>
-//           <p style="font-size:1.1em">Hi,</p>
-//           <p>Use the following OTP to complete your Password Recovery Procedure. OTP is valid for 5 minutes</p>
-//           <h2 style="background: #F48FB1;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">${OTP}</h2>
-//           <p style="font-size:0.9em;">Regards,<br />Get That Job Team</p>
-//           <hr style="border:none;border-top:1px solid #eee" />
-//           <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
-//             <p>Koding 101 Inc</p>
-//             <p>1600 Amphitheatre Parkway</p>
-//             <p>California</p>
-//           </div>
-//         </div>
-//       </div>
-//       </body>
-//       </html>`,
-//     };
-//     transporter.sendMail(mailConfigs, function (error, info) {
-//       if (error) {
-//         console.log(error);
-//         return reject({ message: `An error has occurred` });
-//       }
-//       return resolve({ message: "Email sent successfully" });
-//     });
-//   });
-// }
-
 function sendEmail({ recipient_email, OTP }) {
   return new Promise((resolve, reject) => {
     var transporter = nodemailer.createTransport({
@@ -68,7 +17,6 @@ function sendEmail({ recipient_email, OTP }) {
         pass: process.env.MY_PASSWORD,
       },
     });
-
     const mail_configs = {
       from: process.env.MY_EMAIL,
       to: recipient_email,
@@ -100,7 +48,6 @@ function sendEmail({ recipient_email, OTP }) {
       </body>
       </html>`,
     };
-
     transporter.sendMail(mail_configs, function (error, info) {
       if (error) {
         console.log(error);
@@ -112,16 +59,12 @@ function sendEmail({ recipient_email, OTP }) {
   });
 }
 authRouter.post('/send-otp', async (req, res) => {
-  // console.log(process.env.MY_EMAIL);
   const email = req.body.recipient_email;
   const otp = req.body.OTP;
-
   try {
     const result = await pool.query('SELECT * FROM users WHERE email = $1', [
       email,
     ]);
-    // console.log(result);
-
     if (result.rows[0]) {
       sendEmail(req.body)
         .then((response) => res.json({ message: 'ok' }))
@@ -136,7 +79,6 @@ authRouter.post('/send-otp', async (req, res) => {
     });
   }
 });
-
 authRouter.post('/login', async (req, res) => {
   const { userType, email, password } = req.body;
   try {
@@ -168,7 +110,6 @@ authRouter.post('/login', async (req, res) => {
     return res.json({ status: 500 });
   }
 });
-
 authRouter.put('/password', async (req, res) => {
   const { email, newPassword } = req.body;
   try {

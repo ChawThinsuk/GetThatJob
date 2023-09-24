@@ -112,11 +112,9 @@ export function ProfessionalProfile() {
           cacheControl: "3600",
           upsert: false,
         });
-
       if (professionalError) {
         throw professionalError; // Throw the error to trigger the catch block
       }
-
       const updatedProfileData = {
         email: email,
         username: name,

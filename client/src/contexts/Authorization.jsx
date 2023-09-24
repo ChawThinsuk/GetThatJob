@@ -11,7 +11,6 @@ const getState = () => {
     return userDataFromToken;
   }
 };
-
 function AuthProvider(props) {
   const navigate = useNavigate();
   const [state, setState] = useState(getState());

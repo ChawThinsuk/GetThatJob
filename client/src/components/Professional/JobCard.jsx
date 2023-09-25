@@ -137,11 +137,11 @@ const JobCard = (prop) => {
                 disabled
                 className='w-[147px] h-[54px] border-none bg-[#E1E2E1] rounded-3xl tracking-widest  text-[18px] text-[#616161] font-[Inter] font-[500]'
               >
-                Applied
+                APPLIED
               </button>
             ) : (
               <Link to={`/${job.job_id}`}>
-                <button className='w-[147px] h-[54px] border-[1px] border-[#F48FB1] tracking-wide  rounded-xl hover:bg-[#F5F5F6] text-[18px] text-[#616161] font-[Inter] font-[500]'>
+                <button className='w-[147px] h-[54px] border-[1px] border-[#F48FB1] tracking-wide  rounded-3xl hover:bg-[#F5F5F6] text-[18px] text-[#616161] font-[Inter] font-[500]'>
                   SEE MORE
                 </button>
               </Link>

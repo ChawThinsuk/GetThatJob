@@ -20,7 +20,13 @@ proRouter
   .route('/:id')
   .get(controllers.getProfProfile)
   .put(controllers.updatedProfileData);
-
 //Ta
+proRouter.get('/users/applist/:user_id', controllers.getApplyJob);
+proRouter.put(
+  '/users/applist/:user_id/jobs/:job_id',
+  controllers.handleDecline
+);
+proRouter.get('/users/:id', controllers.getExpData);
+proRouter.put('/users/:user_id/jobs/:job_id', controllers.submitProfileData);
 
 export default proRouter;

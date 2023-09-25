@@ -223,7 +223,9 @@ export const FindThatJob = () => {
                 return (
                   <div key={index} className='flex flex-row gap-3'>
                     <p
-                      className='bg-gray-300 rounded-xl py-[1px] px-[5px] text-[13px] hover:cursor-pointer'
+                      className={`${
+                        job === searchTerm ? 'bg-[#fecbdb]' : 'bg-gray-300'
+                      } rounded-xl py-[1px] px-[5px] text-[13px] hover:cursor-pointer`}
                       onClick={() => {
                         setSearchTerm(job);
                         setCategory('');

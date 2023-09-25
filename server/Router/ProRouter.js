@@ -5,6 +5,7 @@ const proRouter = Router();
 const controllers = new ProController();
 proRouter.use(protect);
 //Phun
+proRouter.route('/job/popular').get(controllers.getPopularJob);
 proRouter.route('/job/:id').get(controllers.getSingleJob);
 proRouter.route('/followedJobs').get(controllers.getFollowedJob);
 proRouter
@@ -14,7 +15,6 @@ proRouter
   .post(controllers.createJobFollowStatus);
 //Big
 proRouter.route('/').get(controllers.getAllJobs);
-proRouter.route('/job/popular').get(controllers.getPopularJob);
 //Aoo
 proRouter
   .route('/:id')

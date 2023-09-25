@@ -6,6 +6,8 @@ import JobPosting from "../components/Recruiter/JobPosting";
 import { RecruiterProfile } from "../components/Recruiter/RecruiterProfile";
 import ShowJobPosting from "../components/Recruiter/ShowJobPosting";
 import { RecruiterProvider } from "../contexts/recruiterPage1-2";
+import AdminChat from "../components/Support-chat/adminChat";
+
 
 export const HomepageRecruiter = () => {
   const { state } = useAuth();
@@ -19,6 +21,7 @@ export const HomepageRecruiter = () => {
           <Route path="/createjob" element={<CreateNewJob />} />
           <Route path="/recruitprofile" element={<RecruiterProfile />} />
           <Route path="*" element={<JobPosting />} />
+          <Route path="/support" element={<AdminChat />} />
         </Routes>
       </div>
 

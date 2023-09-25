@@ -122,7 +122,6 @@ function TalentFormProgress() {
                   px={5}
                   py={5}
                   mt={8}
-                  mb={8}
                   type="button"
                   bg="#F48FB1"
                   variant="solid"

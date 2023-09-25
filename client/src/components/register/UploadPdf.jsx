@@ -15,6 +15,7 @@ const UploadPdf = () => {
         if (file.type === "application/pdf" && file.size <= 5 * 1024 * 1024) {
           setCv(file);
           setSelectedFileName(file.name);
+          console.log(file.name);
         } else {
           setCv(null);
           setSelectedFileName(null);
@@ -107,15 +108,6 @@ const UploadPdf = () => {
           <p>No file chosen</p>
         </div>
       )}
-      {/* {cv === null && (
-        <div id="file-error" className="text-red-600 mt-2 hidden">
-          {userType === "PROFESSIONAL"
-            ? "Invalid file. Please choose a PDF file under 5MB."
-            : userType === "RECRUITER"
-            ? "Invalid file. Please choose a JPG or PNG file under 5MB."
-            : "Invalid file. Please choose a valid file under 5MB."}
-        </div>
-      )} */}
 
       {logo && (
         <div className="mt-2">
@@ -127,13 +119,6 @@ const UploadPdf = () => {
           <p>No file chosen</p>
         </div>
       )}
-      {/* {logo === null && (
-        <div id="file-error" className="text-red-600 mt-2 hidden">
-          {userType === "RECRUITER"
-            ? "Invalid file. Please choose a JPG or PNG file under 5MB."
-            : "Invalid file. Please choose a valid file under 5MB."}
-        </div>
-      )} */}
     </div>
   );
 };

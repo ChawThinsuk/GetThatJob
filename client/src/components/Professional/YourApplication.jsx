@@ -7,7 +7,6 @@ import {
   Stack,
   Button,
   Flex,
-  Link,
   Spinner,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
@@ -18,6 +17,8 @@ import { usePro } from "../../contexts/Professional";
 import Axios from "axios";
 import { useAuth } from "../../contexts/Authorization";
 import axios from "axios";
+import leftArrow from "../../assets/pro2/leftArrow.svg";
+import { Link } from "react-router-dom";
 
 export const YourApplication = () => {
   const [value, setValue] = useState("1");
@@ -154,14 +155,27 @@ export const YourApplication = () => {
     <Box
       display="flex"
       flexDirection="column"
-      alignItems="center"
-      gap="3.5rem"
-      alignSelf="stretch"
+      gap="0.5rem"
+      width="full"
+      minH="100vh"
+      backgroundColor="#F5F5F6"
+      paddingTop="2rem"
+      paddingLeft="10%"
+      paddingRight="10%"
+      paddingBottom="53.336px"
     >
-      <JobHeader
-        data={data.data.job}
-        state={{ cvData, experienceData, interestingData }}
-      />
+      <Link to={`/${job_id}`}>
+        <button className="flex items-center h-[32.001px] pb-0">
+          <img src={leftArrow} className="w-[32.001px] h-[32.001px]" />
+          <p className=" font-[Inter] text-[18.667px] text-[#616161]">BACK</p>
+        </button>
+      </Link>
+      <div className=" mb-[3.05rem]">
+        <JobHeader
+          data={data.data.job}
+          state={{ cvData, experienceData, interestingData }}
+        />
+      </div>
       <Box
         display="flex"
         flexDirection="column"
@@ -169,15 +183,7 @@ export const YourApplication = () => {
         width="60.1rem"
         alignItems="flex-start"
       >
-        <Text
-          fontFamily="Montserrat"
-          fontSize="1.8rem"
-          fontStyle="normal"
-          fontWeight="400"
-          lineHeight="normal"
-          letterSpacing="0.19375rem"
-          color="#BF5F82"
-        >
+        <Text className="text-[32.001px] text-[#BF5F82] font-[400] font-[Montserrat]">
           Complete your application
         </Text>
         <Box
@@ -186,15 +192,7 @@ export const YourApplication = () => {
           gap="0.35rem"
           alignItems="flex-start"
         >
-          <Text
-            fontFamily="Inter"
-            fontSize="1.55rem"
-            fontStyle="normal"
-            fontWeight="400"
-            lineHeight="normal"
-            letterSpacing="0.17rem"
-            color="#373737"
-          >
+          <Text className="w-[1013.384px] text-[21.334px] text-[#373737] font-[400] font-[Inter] leading-[32.001px] tracking-[0.668px]">
             SEND YOUR CV UPDATED
           </Text>
           {/* ... */}
@@ -288,7 +286,7 @@ export const YourApplication = () => {
             fontStyle="normal"
             fontWeight="400"
             lineHeight="normal"
-            letterSpacing="0.19rem"
+            letterSpacing="0.05rem"
             textTransform="uppercase"
             color="#373737"
           >
@@ -307,7 +305,7 @@ export const YourApplication = () => {
             fontStyle="normal"
             fontWeight="400"
             lineHeight="1.35rem"
-            letterSpacing="0.11563rem"
+            letterSpacing="0.05rem"
             textTransform="uppercase"
             color="#373737"
             height="30rem"
@@ -328,7 +326,7 @@ export const YourApplication = () => {
             fontStyle="normal"
             fontWeight="400"
             lineHeight="normal"
-            letterSpacing="0.19rem"
+            letterSpacing="0.05rem"
             textTransform="uppercase"
             color="#373737"
           >
@@ -347,7 +345,7 @@ export const YourApplication = () => {
             fontStyle="normal"
             fontWeight="400"
             lineHeight="1.35rem"
-            letterSpacing="0.11563rem"
+            letterSpacing="0.05rem"
             textTransform="uppercase"
             color="#373737"
             height="25rem"
@@ -374,28 +372,24 @@ export const YourApplication = () => {
         alignItems="center"
         padding="1.5rem"
       >
-        <Button
-          leftIcon={<EmailIcon />}
-          _hover={{ bg: "#de7b9c" }}
-          color="white"
-          bg="#F48FB1"
-          display="flex"
-          padding="2rem"
-          gap="0.5rem"
-          alignItems="center"
-          fontFamily="Inter"
-          fontSize="1.6rem"
-          fontStyle="normal"
-          fontWeight="500"
-          lineHeight="1.6rem"
-          letterSpacing="0.1rem"
-          textTransform="uppercase"
-          onClick={handleSubmit}
-          borderRadius="10px"
-        >
+        <Link to="/apply">
           {" "}
-          SEND APPLICATION
-        </Button>
+          <Button
+            leftIcon={<EmailIcon />}
+            _hover={{ bg: "#de7b9c" }}
+            color="white"
+            bg="#F48FB1"
+            display="flex"
+            padding="2rem"
+            gap="0.5rem"
+            alignItems="center"
+            className="text-[18.668px] font-[Inter] tracking-[1.667px] rounded-[21.3344px]"
+            onClick={handleSubmit}
+          >
+            {" "}
+            SEND APPLICATION
+          </Button>
+        </Link>
       </Box>
     </Box>
   );

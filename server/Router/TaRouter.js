@@ -44,17 +44,16 @@ taRouter.put("/users/:user_id/jobs/:job_id", async (req, res) => {
           job_user_experience = $2,
           job_user_interesting = $3,
           updated_at = $4,
-          created_at = $5,
-          job_user_mark = 'waiting'
+          job_user_mark = 'waiting',
+          job_user_application = true
         WHERE
-          job_professional_id = $6
+          job_professional_id = $5
       `;
 
       await pool.query(updateQuery, [
         req.body.job_user_cv,
         req.body.job_user_experience,
         req.body.job_user_interesting,
-        updateTimestamp,
         updateTimestamp,
         data.rows[0].job_professional_id,
       ]);
@@ -75,8 +74,9 @@ taRouter.put("/users/:user_id/jobs/:job_id", async (req, res) => {
           professional_id,
           created_at,
           updated_at,
-          job_user_mark
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 'waiting')
+          job_user_mark,
+          job_user_application
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 'waiting', true)
       `;
       await pool.query(insertQuery, [
         true,

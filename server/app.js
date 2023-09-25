@@ -7,6 +7,7 @@ import RegisterRouter from './Router/RegisterRouter.js';
 import RecruiterRouter from './Router/RecruiterRouter.js';
 import RecruiterDisplayRouter from './Router/RecruiterDisplayRouter.js';
 import proRouter from './Router/ProRouter.js';
+import adsRouter from './Router/AdsRouter.js';
 // import taRouter from './Router/TaRouter.js';
 // import taRouter2 from './Router/TaRouter2.js';
 // import AooRouter from './Router/AooRouter.js';
@@ -21,6 +22,7 @@ async function init() {
   app.use('/recruiter', RecruiterRouter);
   app.use('/recruiter-display', RecruiterDisplayRouter);
   app.use('/pro', proRouter);
+  app.use('/ads', adsRouter);
 
   app.listen(PORT, () => {
     console.log(`listen @ port ${PORT}`);

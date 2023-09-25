@@ -9,6 +9,7 @@ import { ProProvider } from './contexts/Professional.jsx';
 import jwtInterceptor from './utils/jwtIntercepter.jsx';
 import { QueryClient, QueryClientProvider} from 'react-query';
 
+
 const queryClient = new QueryClient();
 jwtInterceptor();
 ReactDOM.createRoot(document.getElementById('root')).render(

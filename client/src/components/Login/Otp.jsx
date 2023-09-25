@@ -7,6 +7,7 @@ import {
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import leftArrow from '../../assets/pro2/leftArrow.svg';
 
 export const Otp = ({ props }) => {
   const { setEmail, email, setPage } = props;
@@ -99,7 +100,14 @@ export const Otp = ({ props }) => {
     }
   };
   return (
-    <div className='flex mt-24 justify-center w-screen h-screen'>
+    <div className='flex flex-col mt-24 items-center w-screen h-screen'>
+      <button
+        className='flex items-center w-[35%] h-[20.001px] mb-2'
+        onClick={() => setPage('login')}
+      >
+        <img src={leftArrow} className='w-[18.001px] h-[18.001px]' />
+        <p className=' font-[Inter] text-[12px] text-[#616161]'>BACK</p>
+      </button>
       <section className='w-[35%] h-fit pt-[20px] px-[20px] pb-[40px] bg-gray-100 border-[0.5px] border-gray-300 rounded-lg shadow-xl transition-all duration-500'>
         <div className='flex flex-col items-end pt-3'>
           <h1 className='font-[Montserrat] text-[18px] w-full'>

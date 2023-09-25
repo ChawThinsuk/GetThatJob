@@ -7,11 +7,7 @@ import theme from "./components/theme.js";
 
 function App() {
   const auth = useAuth();
-  const [visible, setVisible] = useState(false);
 
-  const handleToggle = () => {
-    setVisible((current) => !current);
-  };
   return (
     <ChakraProvider theme={theme}>
       {auth.isAuthenticated ? <AuthenticatedApp /> : <UnauthenticatedApp />}

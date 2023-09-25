@@ -1,31 +1,38 @@
-import React, { useRef, useState } from "react";
-import { ChatEngineWrapper, Socket, ChatFeed,ChatSocket,NewMessageForm } from "react-chat-engine";
+import React, { useRef, useState, useEffect } from "react";
+import {
+  ChatEngineWrapper,
+  ChatFeed,
+  ChatSocket,
+} from "react-chat-engine";
 import axios from "axios";
 
-function UserChat() {
+function UserChat(props) {
   const [user, setUser] = useState();
   const [chat, setChat] = useState();
   return (
     <>
       {user && chat ? (
-         <div className="flex flex-col justify-center items-center w-[450px] h-[500px] border-[1px] fixed bottom-[150px] right-[35px]">
         <ChatView user={user} chat={chat} />
-        </div>
       ) : (
-        <div className="flex flex-col justify-center items-center w-[450px] h-[500px] border-[1px] fixed bottom-[150px] right-[35px]">
-          <p>Welcome to our support 👋</p>
-          <Register setChat={setChat} setUser={setUser} />
-          <p>Enter your email to get started</p>
-        </div>
+        <Register
+          setChat={setChat}
+          setUser={setUser}
+          user_email={props.email}
+        />
       )}
     </>
   );
 }
-function Register({ setUser, setChat }) {
+function Register({ setUser, setChat, user_email }) {
+  useEffect(() => {
+    user_email && register(user_email);
+  }, [user_email]);
+
   const inputEmail = useRef();
 
-  function register() {
-    let email = inputEmail.current.value;
+  function register(p_email) {
+    let email = p_email || inputEmail.current.value;
+    console.log(p_email);
     const callback_created = (user) => {
       setUser(user);
       getOrCreateChat((chat) => {
@@ -34,28 +41,39 @@ function Register({ setUser, setChat }) {
     };
     getOrCreateUser(callback_created, email);
   }
+  if (user_email) {
+    return null;
+  }
   return (
     <>
-      <input
-        placeholder="Input you email"
-        ref={inputEmail}
-        className="rounded-sm text-center"
-      />
-      <button onClick={register}>Help</button>
+      <div className="flex flex-col justify-center items-center w-[450px] h-[500px] border-[1px] fixed bottom-[150px] right-[35px] border-black">
+        <p>Welcome to our support 👋</p>
+        <input
+          placeholder="Input you email"
+          ref={inputEmail}
+          className="rounded-sm text-center"
+        />
+        <button onClick={() => register()}>Help</button>
+        <p>Enter your email to get started</p>
+      </div>
     </>
   );
 }
 function ChatView({ user, chat }) {
   return (
-    <ChatEngineWrapper>
-      <ChatSocket
-        projectID={"a760508d-04d8-4331-84b7-781fc9371f90"}
-        chatID={chat?.id}
-        chatAccessKey={chat?.access_key}
-        senderUsername={user?.username}
-      />
-      <ChatFeed />    
-    </ChatEngineWrapper>
+    <>
+      <div className="flex flex-col w-[450px] h-[500px] border-[1px] fixed bottom-[150px] right-[35px]">
+        <ChatEngineWrapper>
+          <ChatSocket
+            projectID={"a760508d-04d8-4331-84b7-781fc9371f90"}
+            chatID={chat?.id}
+            chatAccessKey={chat?.access_key}
+            senderUsername={user?.username}
+          />
+          <ChatFeed />
+        </ChatEngineWrapper>
+      </div>
+    </>
   );
 }
 function getOrCreateChat(callback, email) {

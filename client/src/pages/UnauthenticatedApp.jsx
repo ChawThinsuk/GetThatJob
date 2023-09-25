@@ -4,10 +4,12 @@ import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
 import AdminLoginPage from './AdminLoginPage';
 import '../App.css';
+import HelpButton from "../components/Support-chat/HelpButton"
+
 
 function UnauthenticatedApp() {
   return (
-    <div className='App'>
+    <div className='App flex flex-col relative'>
       <Routes>
         <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<LoginPage />} />
@@ -15,6 +17,7 @@ function UnauthenticatedApp() {
         <Route path='/admin' element={<AdminLoginPage />} />
         <Route path='*' element={<LoginPage />} />
       </Routes>
+      <HelpButton/>
     </div>
   );
 }

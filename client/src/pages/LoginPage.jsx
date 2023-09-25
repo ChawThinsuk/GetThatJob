@@ -25,11 +25,12 @@ function LoginPage() {
   const [page, setPage] = useState('login');
   const handleSubmit = (event) => {
     event.preventDefault();
-    login({
+    let loginResult = await login({
       email,
-      password,
+      password, 
       userType,
     });
+    loginResult && navigate("/")
   };
 
   useEffect(() => {

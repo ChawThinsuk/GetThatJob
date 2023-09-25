@@ -7,11 +7,12 @@ import { RecruiterProfile } from "../components/Recruiter/RecruiterProfile";
 import ShowJobPosting from "../components/Recruiter/ShowJobPosting";
 import { RecruiterProvider } from "../contexts/recruiterPage1-2";
 import AdminChat from "../components/Support-chat/adminChat";
-
+import HelpButton from "../components/Support-chat/HelpButton";
 
 export const HomepageRecruiter = () => {
   const { state } = useAuth();
   return (
+    <>
     <RecruiterProvider>
       <div className="grid grid-cols-[15%_85%] w-screen min-h-screen ">
         <NavbarHomepage userType={state.userType} />
@@ -24,7 +25,8 @@ export const HomepageRecruiter = () => {
           <Route path="/support" element={<AdminChat />} />
         </Routes>
       </div>
-
+    <HelpButton email={state.email}/>
     </RecruiterProvider>
+    </>
   );
 };

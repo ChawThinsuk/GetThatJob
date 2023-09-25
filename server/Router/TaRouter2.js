@@ -5,7 +5,7 @@ const taRouter2 = Router();
 taRouter2.get("/users/:user_id", async (req, res) => {
   const { user_id } = req.params;
   const selcectQuery = `SELECT  *,
-                            jobs_professional.created_at AS jobs_professional_created_at,
+                            jobs_professional.updated_at AS jobs_professional_updated_at,
                             professionals.created_at AS professional_created_at,
                             jobs.created_at AS job_created_at 
                             FROM jobs_professional 
@@ -42,7 +42,9 @@ taRouter2.put("/users/:user_id/jobs/:job_id", async (req, res) => {
       const updateQuery = `
       UPDATE jobs_professional
       SET
-        job_user_mark = 'declined'
+        job_user_mark = 'declined',
+        job_user_application = false
+
       WHERE
         job_professional_id = $1`;
 

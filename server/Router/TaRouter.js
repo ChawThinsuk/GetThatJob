@@ -74,9 +74,8 @@ taRouter.put("/users/:user_id/jobs/:job_id", async (req, res) => {
           professional_id,
           created_at,
           updated_at,
-          job_user_mark,
-          job_user_application
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 'waiting', true)
+          job_user_mark
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 'waiting')
       `;
       await pool.query(insertQuery, [
         true,

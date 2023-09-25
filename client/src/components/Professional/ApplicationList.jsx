@@ -68,11 +68,20 @@ export const ApplicationList = () => {
       const filtered = resultData.filter((item) => {
         switch (status) {
           case "2":
-            return item.job_user_mark === "waiting";
+            return (
+              item.job_user_mark === "waiting" &&
+              item.job_user_application === true
+            );
           case "3":
-            return item.job_user_mark === "in_progress";
+            return (
+              item.job_user_mark === "in_progress " &&
+              item.job_user_application === true
+            );
           case "4":
-            return item.job_user_mark === "finished";
+            return (
+              item.job_user_mark === "finished" &&
+              item.job_user_application === true
+            );
           case "5":
             return item.job_user_mark === "declined";
           default:
@@ -114,7 +123,7 @@ export const ApplicationList = () => {
       console.error("Error submit profile");
       toast({
         title:
-          "An error occured while declined your application please tray again",
+          "An error occured while declined your application please try again",
         status: "error",
         duration: 5000,
         isCloseable: true,
@@ -239,14 +248,14 @@ export const ApplicationList = () => {
                       {formatSalaryRange(item.salary_min, item.salary_max)}{" "}
                       <img src={calendarImg} /> Posted{" "}
                       {dayAgo(item.job_created_at)}
-                      {console.log(item.jobs_professional_created_at)}
+                      {console.log(item.jobs_professional_updated_at)}
                     </div>
                   </div>
                   <div className="flex items-start gap-[0.35rem] relative ">
                     <div className=" flex flex-col w-[5.1rem] items-center  ">
                       <img src={sentIcn} />
                       <div className="text-center font-inter text-xs text-[#616161] font-normal leading-[1.1rem] tracking-[0.05rem]">
-                        Sent {dayAgo(item.jobs_professional_created_at)}
+                        Sent {dayAgo(item.jobs_professional_updated_at)}
                       </div>
                     </div>
                     <div className=" flex flex-col w-[5.1rem] items-center font-inter text-xs text-[#F48FB1] text-center font-normal leading-[1.1rem] tracking-[0.125rem]  ">

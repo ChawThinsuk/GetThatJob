@@ -1,11 +1,11 @@
-import manufacturing from '../../assets/pro2/category.svg';
-import calendar from '../../assets/pro2/calendar.svg';
-import small from '../../assets/pro2/money.svg';
-import followOff from '../../assets/pro2/followOff.svg';
-import followOn from '../../assets/pro2/followOn.svg';
+import manufacturing from '../../../assets/pro2/category.svg';
+import calendar from '../../../assets/pro2/calendar.svg';
+import small from '../../../assets/pro2/money.svg';
+import followOff from '../../../assets/pro2/followOff.svg';
+import followOn from '../../../assets/pro2/followOn.svg';
 import { Link } from 'react-router-dom';
-import { usePro } from '../../contexts/Professional.jsx';
-import { useAuth } from '../../contexts/Authorization.jsx';
+import { usePro } from '../../../contexts/Professional.jsx';
+import { useAuth } from '../../../contexts/Authorization.jsx';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Spinner } from '@chakra-ui/react';
@@ -73,7 +73,7 @@ const JobCardAds = (prop) => {
         <div className='w-[345px] h-[195px] flex flex-col justify-center items-center'>
           <div className='flex flex-row w-[345px] h-[140px] gap-[10px]'>
             <div className='flex justify-center items-center'>
-            <img src={job.logo} className='w-[100px] h-[100px]' />
+              <img src={job.logo} className='w-[100px] h-[100px]' />
             </div>
             <div className='flex flex-col w-[230px] h-[110px]'>
               <div className='flex flex-row gap-[5px]'>

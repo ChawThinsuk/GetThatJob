@@ -35,7 +35,7 @@ function ShowJobPosting() {
     queryKey: ["jobs", data],
     queryFn: async (data) => {
       const response = await axios.post(
-        "http://localhost:4000/recruiter/getjob",
+        "http://localhost:4000/recruiter-display/getjob",
         data.queryKey[1]
       );
       return response.data;
@@ -43,7 +43,7 @@ function ShowJobPosting() {
   });
   async function getCandidate(data) {
     const response = await axios.post(
-      "http://localhost:4000/recruiter/getcandidate",
+      "http://localhost:4000/recruiter-display/getcandidate",
       data.queryKey[1]
     );
     return response.data.data;

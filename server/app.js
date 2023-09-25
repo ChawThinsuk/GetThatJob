@@ -5,6 +5,7 @@ import authRouter from "./Router/AuthRouter.js";
 import { protect } from "./middlewares/protect.js";
 import RegisterRouter from "./Router/RegisterRouter.js";
 import RecruiterRouter from "./Router/RecruiterRouter.js";
+import RecruiterDisplayRouter from "./Router/RecruiterDisplayRouter.js"
 
 async function init() {
   const app = express();
@@ -15,6 +16,7 @@ async function init() {
   app.use("/users", RegisterRouter);
   app.use("/auth", authRouter);
   app.use("/recruiter", RecruiterRouter);
+  app.use("/recruiter-display", RecruiterDisplayRouter);
   app.get("/", (req, res) => {
 
     return res.json({

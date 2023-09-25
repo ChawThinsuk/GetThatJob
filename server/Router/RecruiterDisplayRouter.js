@@ -1,9 +1,9 @@
 import { Router, query } from "express";
 import { pool } from "../utils/db.js";
 
-const ChawRouter = Router();
+const RecruiterDisplayRouter = Router();
 
-ChawRouter.post("/get-job-posting", async (req, res) => {
+RecruiterDisplayRouter.post("/get-job-posting", async (req, res) => {
   try {
     const data = req.body;
     const query = queryCommand();
@@ -28,7 +28,7 @@ ChawRouter.post("/get-job-posting", async (req, res) => {
     });
   }
 });
-ChawRouter.put("/job-status", async (req, res) => {
+RecruiterDisplayRouter.put("/job-status", async (req, res) => {
   try {
     const data = req.body;
     let errorMessage = validateJobClose(data);
@@ -48,7 +48,7 @@ ChawRouter.put("/job-status", async (req, res) => {
     });
   }
 });
-ChawRouter.post("/getjob", async (req, res) => {
+RecruiterDisplayRouter.post("/getjob", async (req, res) => {
   try {
     const data = req.body;
     const query = queryCommand();
@@ -66,7 +66,7 @@ ChawRouter.post("/getjob", async (req, res) => {
     });
   }
 });
-ChawRouter.post("/getcandidate", async (req, res) => {
+RecruiterDisplayRouter.post("/getcandidate", async (req, res) => {
   try {
     const data = req.body;
     const errorMessage = validateGetCandidate(data);
@@ -99,7 +99,7 @@ ChawRouter.post("/getcandidate", async (req, res) => {
     });
   }
 });
-ChawRouter.put("/candidate-status", async (req, res) => {
+RecruiterDisplayRouter.put("/candidate-status", async (req, res) => {
   try {
     const data = req.body;
     let errorMessage = validateCandidateStatus(data);
@@ -221,4 +221,4 @@ where job_id = $1 and job_user_mark = $2`;
   return query;
 }
 
-export default ChawRouter;
+export default RecruiterDisplayRouter;

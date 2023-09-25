@@ -50,7 +50,7 @@ function ProProvider(props) {
       params.append('location', location);
       setIsLoading(true);
       const result = await axios.get(
-        `http://localhost:4000/big?${params.toString()}`
+        `http://localhost:4000/pro?${params.toString()}`
       );
       setJobs(result.data.data.rows);
       console.log(input);
@@ -62,7 +62,7 @@ function ProProvider(props) {
   const getPopularJob = async () => {
     try {
       const popularJob = await axios.get(
-        `http://localhost:4000/big/job/popular`
+        `http://localhost:4000/pro/job/popular`
       );
       let popularSearch = [];
       popularJob.data.popularJobs.map((job) => {
@@ -110,7 +110,6 @@ function ProProvider(props) {
       console.log(error);
     }
   };
-
   return (
     <ProContext.Provider
       value={{

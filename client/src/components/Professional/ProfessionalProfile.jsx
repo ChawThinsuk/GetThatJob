@@ -1,5 +1,5 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import React, { useState, useEffect } from "react";
+import { ChakraProvider } from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Button,
@@ -13,29 +13,29 @@ import {
   InputLeftAddon,
   FormHelperText,
   useToast,
-} from "@chakra-ui/react";
-import { createClient } from "@supabase/supabase-js";
-import { useGlobalContext } from "../../contexts/registerContext.jsx";
-import UploadPdf from "../register/UploadPdf.jsx";
-import { useAuth } from "../../contexts/Authorization.jsx";
-import axios from "axios";
-import uploadlogo from "../../assets/register-images/pdf-upload.svg";
+} from '@chakra-ui/react';
+import { createClient } from '@supabase/supabase-js';
+import { useGlobalContext } from '../../contexts/registerContext.jsx';
+import UploadPdf from '../register/UploadPdf.jsx';
+import { useAuth } from '../../contexts/Authorization.jsx';
+import axios from 'axios';
+import uploadlogo from '../../assets/register-images/pdf-upload.svg';
 
 export function ProfessionalProfile() {
   const { profFormStyle, userType } = useGlobalContext();
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [birthDate, setBirthDate] = useState("");
-  const [linkedinUrl, setlinkedinUrl] = useState("");
-  const [title, setTitle] = useState("");
-  const [professionalExperience, setProfessionalExperience] = useState("");
-  const [educationalInfo, setEducationalInfo] = useState("");
-  const [cv, setCv] = useState("");
-  const [newCv, setNewCv] = useState("");
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [birthDate, setBirthDate] = useState('');
+  const [linkedinUrl, setlinkedinUrl] = useState('');
+  const [title, setTitle] = useState('');
+  const [professionalExperience, setProfessionalExperience] = useState('');
+  const [educationalInfo, setEducationalInfo] = useState('');
+  const [cv, setCv] = useState('');
+  const [newCv, setNewCv] = useState('');
   const [selectedFileName, setSelectedFileName] = useState(null);
   const [selectedNewFileName, setSelectedNewFileName] = useState(null);
-  const [formattedUpdatedTime, setFormattedUpdatedTime] = useState(""); // Declare formattedDate2 in the component's state
+  const [formattedUpdatedTime, setFormattedUpdatedTime] = useState(''); // Declare formattedDate2 in the component's state
 
   const toast = useToast();
   const { state } = useAuth();
@@ -43,7 +43,7 @@ export function ProfessionalProfile() {
 
   const getProfProfile = async () => {
     const response = await axios.get(
-      `http://localhost:4000/aoo/${state.userID}`
+      `http://localhost:4000/pro/${state.userID}`
     );
     // console.log(state.userID);
     const isoDate = response.data.data.birthdate;
@@ -75,9 +75,9 @@ export function ProfessionalProfile() {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    if (userType === "PROFESSIONAL") {
+    if (userType === 'PROFESSIONAL') {
       if (file) {
-        if (file.type === "application/pdf" && file.size <= 5 * 1024 * 1024) {
+        if (file.type === 'application/pdf' && file.size <= 5 * 1024 * 1024) {
           setNewCv(file);
           console.log(file);
           setSelectedNewFileName(file.name);
@@ -85,9 +85,9 @@ export function ProfessionalProfile() {
           setNewCv(null);
           setSelectedNewFileName(null);
           toast({
-            title: "Wrong file type or size",
-            description: "Please upload a PDF file under 5MB.",
-            status: "error",
+            title: 'Wrong file type or size',
+            description: 'Please upload a PDF file under 5MB.',
+            status: 'error',
             duration: 5000,
             isClosable: true,
           });
@@ -107,9 +107,9 @@ export function ProfessionalProfile() {
     console.log(cv);
     try {
       const { data, error: professionalError } = await supabase.storage
-        .from("files")
+        .from('files')
         .upload(`professionalcv/${Date.now()}${newCv.name}`, newCv, {
-          cacheControl: "3600",
+          cacheControl: '3600',
           upsert: false,
         });
       if (professionalError) {
@@ -131,25 +131,25 @@ export function ProfessionalProfile() {
 
       // Make a PUT request to update the profile data
       await axios.put(
-        `http://localhost:4000/aoo/${state.userID}`,
+        `http://localhost:4000/pro/${state.userID}`,
         updatedProfileData
       );
 
       // Display a success message to the user
       toast({
-        title: "Profile updated successfully",
-        status: "success",
+        title: 'Profile updated successfully',
+        status: 'success',
         duration: 5000,
         isClosable: true,
       });
     } catch (error) {
       // Handle any errors that may occur during the update process
-      console.error("Error updating profile:", error);
+      console.error('Error updating profile:', error);
       toast({
-        title: "Error updating profile",
+        title: 'Error updating profile',
         description:
-          "An error occurred while updating your profile. Please try again later.",
-        status: "error",
+          'An error occurred while updating your profile. Please try again later.',
+        status: 'error',
         duration: 5000,
         isClosable: true,
       });
@@ -158,23 +158,23 @@ export function ProfessionalProfile() {
 
   return (
     <ChakraProvider>
-      <div className="flex flex-col pl-[160px] font-[Inter]">
-        <h1 className="text-[45px] font-[Montserrat] mb-4 mt-[43px]">
+      <div className='flex flex-col pl-[160px] font-[Inter]'>
+        <h1 className='text-[45px] font-[Montserrat] mb-4 mt-[43px]'>
           Profile
         </h1>
-        <div className="ml-4">
-          <h1 className="text-[32px] font-[Montserrat]">
+        <div className='ml-4'>
+          <h1 className='text-[32px] font-[Montserrat]'>
             Personal Information
           </h1>
-          <Box w="100%" maxW="lg" mt="12px" borderRadius="md">
+          <Box w='100%' maxW='lg' mt='12px' borderRadius='md'>
             <form>
               <Stack spacing={4}>
-                <FormControl id="email" isRequired>
+                <FormControl id='email' isRequired>
                   <FormLabel sx={profFormStyle}>Email</FormLabel>
                   <Input
-                    borderColor="#F48FB1"
-                    type="email"
-                    placeholder="Enter your email address"
+                    borderColor='#F48FB1'
+                    type='email'
+                    placeholder='Enter your email address'
                     value={email}
                     onChange={(event) => {
                       setEmail(event.target.value);
@@ -207,56 +207,56 @@ export function ProfessionalProfile() {
                     }}
                   />
                 </FormControl> */}
-                <FormControl id="name" isRequired>
+                <FormControl id='name' isRequired>
                   <FormLabel sx={profFormStyle}>NAME</FormLabel>
                   <Input
-                    borderColor="#F48FB1"
-                    type="text"
-                    placeholder="Enter your name"
+                    borderColor='#F48FB1'
+                    type='text'
+                    placeholder='Enter your name'
                     value={name}
                     onChange={(event) => {
                       setName(event.target.value);
                     }}
                   />
                 </FormControl>
-                <FormControl id="phone" isRequired>
+                <FormControl id='phone' isRequired>
                   <FormLabel sx={profFormStyle}>Phone</FormLabel>
                   <InputGroup>
-                    <InputLeftAddon children="+66" />
+                    <InputLeftAddon children='+66' />
                     <Input
-                      borderColor="#F48FB1"
-                      type="tel"
-                      placeholder="Enter your phone number"
+                      borderColor='#F48FB1'
+                      type='tel'
+                      placeholder='Enter your phone number'
                       value={phone}
                       maxLength={9}
                       onChange={(event) => {
                         setPhone(event.target.value);
                       }}
-                      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                      pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
                     />
                   </InputGroup>
-                  <FormHelperText className="text-[#8E8E8E] text-[16px] lowercase">
+                  <FormHelperText className='text-[#8E8E8E] text-[16px] lowercase'>
                     +[country code][number]
                   </FormHelperText>
                 </FormControl>
-                <FormControl id="birthDate" isRequired>
+                <FormControl id='birthDate' isRequired>
                   <FormLabel sx={profFormStyle}>BIRTHDATE</FormLabel>
                   <Input
-                    borderColor="#F48FB1"
-                    type="date"
-                    placeholder="Enter your birthdate"
+                    borderColor='#F48FB1'
+                    type='date'
+                    placeholder='Enter your birthdate'
                     value={birthDate}
                     onChange={(event) => {
                       setBirthDate(event.target.value);
                     }}
                   />
                 </FormControl>
-                <FormControl id="linkedinUrl" isRequired>
+                <FormControl id='linkedinUrl' isRequired>
                   <FormLabel sx={profFormStyle}>Linkedin URL</FormLabel>
                   <Input
-                    borderColor="#F48FB1"
-                    type="url"
-                    placeholder="Enter Linkedin URL"
+                    borderColor='#F48FB1'
+                    type='url'
+                    placeholder='Enter Linkedin URL'
                     value={linkedinUrl}
                     onChange={(event) => {
                       setlinkedinUrl(event.target.value);
@@ -265,50 +265,50 @@ export function ProfessionalProfile() {
                 </FormControl>
               </Stack>
 
-              <h1 className="ml-2 text-[32px] font-[Montserrat] mt-[53px] mb-[11px]">
+              <h1 className='ml-2 text-[32px] font-[Montserrat] mt-[53px] mb-[11px]'>
                 Professional Information
               </h1>
-              <h3 className="text-[16px] mb-[11px] text-[#616161]">
+              <h3 className='text-[16px] mb-[11px] text-[#616161]'>
                 Changes made here will be reflected in your future applications
               </h3>
 
               <Stack spacing={4}>
-                <FormControl id="title" isRequired>
+                <FormControl id='title' isRequired>
                   <FormLabel sx={profFormStyle}>TITLE</FormLabel>
                   <Input
-                    borderColor="#F48FB1"
-                    type="text"
-                    placeholder="Enter your title"
+                    borderColor='#F48FB1'
+                    type='text'
+                    placeholder='Enter your title'
                     value={title}
                     onChange={(event) => {
                       setTitle(event.target.value);
                     }}
                   />
                 </FormControl>
-                <FormControl id="experience" w="100%" maxW="lg" isRequired>
+                <FormControl id='experience' w='100%' maxW='lg' isRequired>
                   <FormLabel sx={profFormStyle}>
                     PROFESSIONAL EXPERIENCE
                   </FormLabel>
                   <Textarea
-                    w="1013px"
-                    h="341px"
-                    borderColor="#F48FB1"
-                    type="text"
-                    placeholder="Enter your company info"
+                    w='1013px'
+                    h='341px'
+                    borderColor='#F48FB1'
+                    type='text'
+                    placeholder='Enter your company info'
                     value={professionalExperience}
                     onChange={(event) => {
                       setProfessionalExperience(event.target.value);
                     }}
                   />
                 </FormControl>
-                <FormControl id="eduInfo" isRequired>
+                <FormControl id='eduInfo' isRequired>
                   <FormLabel sx={profFormStyle}>EDUCATION</FormLabel>
                   <Textarea
-                    w="1013px"
-                    h="154px"
-                    borderColor="#F48FB1"
-                    type="text"
-                    placeholder="Enter your educational info"
+                    w='1013px'
+                    h='154px'
+                    borderColor='#F48FB1'
+                    type='text'
+                    placeholder='Enter your educational info'
                     value={educationalInfo}
                     onChange={(event) => {
                       setEducationalInfo(event.target.value);
@@ -318,36 +318,36 @@ export function ProfessionalProfile() {
               </Stack>
             </form>
           </Box>
-          <div className=" flex flex-col mt-[11px]">
-            <p className="mb-3 text-[#373737] text-[13px] tracking-[1.5px] uppercase">
+          <div className=' flex flex-col mt-[11px]'>
+            <p className='mb-3 text-[#373737] text-[13px] tracking-[1.5px] uppercase'>
               Upload / Update Your CV
             </p>
             <div>
               {/* <UploadPdf /> */}
-              <div className="mx-auto bg-white rounded-lg flex">
+              <div className='mx-auto bg-white rounded-lg flex'>
                 <input
-                  type="file"
-                  id="pdf-upload"
-                  className="hidden"
+                  type='file'
+                  id='pdf-upload'
+                  className='hidden'
                   onChange={handleFileChange}
                   accept={
-                    userType === "PROFESSIONAL"
-                      ? ".pdf"
-                      : userType === "RECRUITER"
-                      ? ".jpg,.jpeg,.png"
+                    userType === 'PROFESSIONAL'
+                      ? '.pdf'
+                      : userType === 'RECRUITER'
+                      ? '.jpg,.jpeg,.png'
                       : undefined // Allow any file type if not specified
                   }
                 />
                 <label
-                  htmlFor="pdf-upload"
-                  className="cursor-pointer flex items-center justify-center w-[160px] h-auto p-[13px] rounded-xl bg-[#F48FB1] text-white hover:bg-pink-600 transition duration-300"
+                  htmlFor='pdf-upload'
+                  className='cursor-pointer flex items-center justify-center w-[160px] h-auto p-[13px] rounded-xl bg-[#F48FB1] text-white hover:bg-pink-600 transition duration-300'
                 >
-                  <img src={uploadlogo} className="pr-2" alt="logo" />
-                  {userType === "PROFESSIONAL"
-                    ? "Choose a file"
-                    : userType === "RECRUITER"
-                    ? "Choose a file"
-                    : "Choose a file"}
+                  <img src={uploadlogo} className='pr-2' alt='logo' />
+                  {userType === 'PROFESSIONAL'
+                    ? 'Choose a file'
+                    : userType === 'RECRUITER'
+                    ? 'Choose a file'
+                    : 'Choose a file'}
                 </label>
 
                 {/* {selectedFileName ? (
@@ -362,15 +362,15 @@ export function ProfessionalProfile() {
                 )} */}
 
                 {selectedNewFileName ? (
-                  <div className="m-2 ml-4">
+                  <div className='m-2 ml-4'>
                     <p>File selected: {selectedNewFileName}</p>
                   </div>
                 ) : selectedFileName ? (
-                  <div className="m-2 ml-4">
+                  <div className='m-2 ml-4'>
                     <p>File selected: {selectedFileName}</p>
                   </div>
                 ) : (
-                  <div className="ml-4 mt-3">
+                  <div className='ml-4 mt-3'>
                     <p>No file chosen</p>
                   </div>
                 )}
@@ -379,35 +379,35 @@ export function ProfessionalProfile() {
                     <p>File selected: {cv.name}</p>
                   </div>
                 )} */}
-                {cv === null && userType === "PROFESSIONAL" && (
-                  <div className="ml-4 mt-3">
+                {cv === null && userType === 'PROFESSIONAL' && (
+                  <div className='ml-4 mt-3'>
                     <p>No file chosen</p>
                   </div>
                 )}
               </div>
             </div>
 
-            <p className="mt-2 text-[#8E8E8E] text-[16px]">
+            <p className='mt-2 text-[#8E8E8E] text-[16px]'>
               Only PDF. Max size 5MB
             </p>
 
-            <p className="mt-2 text-[#8E8E8E] text-[16px]">
+            <p className='mt-2 text-[#8E8E8E] text-[16px]'>
               Last Updated: {formattedUpdatedTime}
             </p>
 
             <Button
-              letterSpacing="2px"
-              w="220px"
-              h="53px"
+              letterSpacing='2px'
+              w='220px'
+              h='53px'
               mt={8}
               mb={8}
-              type="button"
-              bg="#F48FB1"
-              variant="solid"
-              size="sm"
-              fontSize="19px"
-              color="white"
-              borderRadius="19px"
+              type='button'
+              bg='#F48FB1'
+              variant='solid'
+              size='sm'
+              fontSize='19px'
+              color='white'
+              borderRadius='19px'
               onClick={handleSaveChanges}
             >
               SAVE CHANGES

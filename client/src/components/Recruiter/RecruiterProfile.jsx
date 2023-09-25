@@ -66,7 +66,7 @@ export function RecruiterProfile() {
   const getRecfProfile = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:4000/aoo/getrecruiter",
+        "http://localhost:4000/recruiter/getrecruiter",
         { id: state.userID }
       );
 
@@ -152,7 +152,7 @@ export function RecruiterProfile() {
       };
 
       await axios.put(
-        `http://localhost:4000/aoo/getrecruiter/${state.userID}`,
+        `http://localhost:4000/recruiter/getrecruiter/${state.userID}`,
         updatedRecData
       );
 

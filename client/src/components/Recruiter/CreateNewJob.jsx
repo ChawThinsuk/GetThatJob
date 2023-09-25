@@ -49,7 +49,7 @@ export function CreateNewJob() {
 
     try {
       const response = await axios.post(
-        `http://localhost:4000/aoo/${userID}/createjob`,
+        `http://localhost:4000/recruiter/${userID}/createjob`,
         jobData
       );
 

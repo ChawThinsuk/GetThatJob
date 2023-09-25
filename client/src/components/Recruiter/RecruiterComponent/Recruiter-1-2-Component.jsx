@@ -64,7 +64,7 @@ export function CloseJobButton(props) {
     try {
       setIsLoading(true);
       const response = await axios.put(
-        "http://localhost:4000/chaw/job-status",
+        "http://localhost:4000/recruiter/job-status",
         data
       );
       await props.refreshData();
@@ -274,7 +274,7 @@ export function MarKAsStartedButton(props) {
     try {
       setIsLoading(true);
       const response = await axios.put(
-        "http://localhost:4000/chaw/candidate-status",
+        "http://localhost:4000/recruiter/candidate-status",
         data
       );
       await props.refreshData();
@@ -313,7 +313,7 @@ export function MarKAsFinishedButton(props) {
     try {
       setIsLoading(true);
       const response = await axios.put(
-        "http://localhost:4000/chaw/candidate-status",
+        "http://localhost:4000/recruiter/candidate-status",
         data
       );
       await props.refreshData();

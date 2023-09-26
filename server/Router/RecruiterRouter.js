@@ -247,4 +247,125 @@ RecruiterRouter.post("/:id/createjob", async (req, res) => {
   }
 });
 
+RecruiterRouter.get("/:id/getjob/:jobid", async (req, res) => {
+  const recruiter_id = req.params.id;
+  const job_id = req.params.jobid;
+  console.log(recruiter_id);
+  console.log(job_id);
+
+  if (!recruiter_id) {
+    return res.status(400).json({
+      message: "Recruiter ID is required",
+    });
+  }
+
+  try {
+    const result = await pool.query(
+      `SELECT jobs.*
+      FROM jobs
+      INNER JOIN recruiters ON jobs.recruiter_id = recruiters.recruiter_id
+      INNER JOIN users ON recruiters.user_id = users.user_id
+      WHERE users.user_id = $1 and job_id = $2
+      `,
+      [recruiter_id , job_id]
+    );
+
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        message: "No jobs found on this recruiter",
+      });
+    }
+
+    return res.json({
+      data: result.rows[0],
+      message: "Get recruiter's profile successfully",
+    });
+  } catch (error) {
+    console.error("Error:", error.stack);
+    return res.status(500).json({
+      message: "An error occurred",
+      error: error.message,
+    });
+  }
+});
+
+RecruiterRouter.put("/editjob/:id", async (req, res) => {
+  const job_id = req.params.id;
+  // const selectRec_id = `select recruiter_id from recruiters where user_id = ${user_id}`;
+  // const recruiterResult = await pool.query(selectRec_id);
+  // const recruiter_id = recruiterResult.rows[0].recruiter_id;
+
+  const {
+    job_title,
+    job_position,
+    job_mandatory,
+    job_optional,
+    job_category,
+    job_type,
+    salary_min,
+    salary_max,
+  } = req.body;
+
+  // const job_title = req.body.job_title;
+  // const job_position = req.body.job_position;
+  // const job_mandatory = req.body.job_mandatory;
+  // const job_optional = req.body.job_optional;
+  // const job_category = req.body.job_category;
+  // const job_type = req.body.job_type;
+  // const salary_min = req.body.salary_min;
+  // const salary_max = req.body.salary_max;
+
+  const newJob = {
+    job_title,
+    job_position,
+    job_mandatory,
+    job_optional,
+    job_category,
+    job_type,
+    salary_min,
+    salary_max,
+  };
+  const jobStatus = "track";
+  let updateData = `UPDATE jobs
+  SET
+    job_title = $2,
+    job_category = $3,
+    salary_min = $4,
+    salary_max = $5,
+    job_type = $6,
+    job_position = $7,
+    job_mandatory = $8,
+    job_optional = $9,
+    job_status = $10,
+    updated_at = NOW()
+  WHERE
+    job_id = $1
+  ;`;
+
+  try {
+    await pool.query(updateData, [
+      job_id,
+      newJob.job_title,
+      newJob.job_category,
+      newJob.salary_min,
+      newJob.salary_max,
+      newJob.job_type,
+      newJob.job_position,
+      newJob.job_mandatory,
+      newJob.job_optional,
+      jobStatus,
+    ]);
+
+    return res.json({
+      message: "Job updated successfully",
+    });
+  } catch (error) {
+    return res.json({
+      message: "Bomb has been planted.",
+      error: error.message,
+    });
+  }
+});
+
 export default RecruiterRouter;

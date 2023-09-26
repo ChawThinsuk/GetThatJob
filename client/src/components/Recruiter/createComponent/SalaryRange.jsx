@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import dollarSign from "../../../assets/dollorSign.svg";
 
-function SalaryRangeInput({ setSalaryMin, setSalaryMax }) {
-  const [salary_min, setSalaryMinLocal] = useState("");
-  const [salary_max, setSalaryMaxLocal] = useState("");
+function SalaryRangeInput({ setSalaryMin, setSalaryMax , min , max }) {
+  const [salary_min, setSalaryMinLocal] = useState(min); 
+  const [salary_max, setSalaryMaxLocal] = useState(max);
+  
+  
 
   const handleMin = (event) => {
     setSalaryMinLocal(event.target.value);
@@ -27,7 +29,7 @@ function SalaryRangeInput({ setSalaryMin, setSalaryMax }) {
           type="number"
           placeholder="min"
           maxLength="7"
-          value={salary_min}
+          value={min}
           onChange={handleMin}
         />
       </div>
@@ -42,7 +44,7 @@ function SalaryRangeInput({ setSalaryMin, setSalaryMax }) {
           className="w-[136px] h-[48px] pl-12 pr-4 text-gray-700 border border-[#F48FB1] rounded-lg shadow-sm focus:outline-none focus:border-blue-400"
           type="number"
           placeholder="max"
-          value={salary_max}
+          value={max}
           onChange={handleMax}
         />
       </div>

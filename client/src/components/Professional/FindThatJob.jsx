@@ -1,6 +1,6 @@
 import find from '../../assets/FindThatJob/find.svg';
 import money from '../../assets/FindThatJob/money.svg';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { usePro } from '../../contexts/Professional';
 import { AiOutlineClose } from 'react-icons/ai';
 import { debounce } from 'lodash';
@@ -13,11 +13,47 @@ export const FindThatJob = () => {
   const [minSalary, setMinSalary] = useState('');
   const [maxSalary, setMaxSalary] = useState('');
   const [location, setLocation] = useState('');
+  const [autoComplete, setAutoComplete] = useState([]);
+  const [openAutoComplete, setOpenAutoComplete] = useState(false);
+  const autoCompleteRef = useRef();
   const { jobs, getJobs, getPopularJob, popularJobs } = usePro();
+  
   useEffect(() => {
     getJobs({ searchTerm, category, type, minSalary, maxSalary, location });
     getPopularJob();
+    autoCompleteData();
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, [searchTerm, category, type, minSalary, maxSalary, location]);
+
+  const autoCompleteData = () => {
+    const autocompleteList = [];
+    jobs.map((job) => {
+      if (
+        !autocompleteList.includes(job.job_title) &&
+        !autocompleteList.includes(job.job_category)
+      ) {
+        autocompleteList.push(job.job_title);
+        autocompleteList.push(job.job_category);
+      }
+    });
+    setAutoComplete(
+      autocompleteList
+        .filter((list) => list.toUpperCase().includes(searchTerm.toUpperCase()))
+        .sort()
+    );
+  };
+  const handleClickOutside = (event) => {
+    if (
+      autoCompleteRef.current &&
+      !autoCompleteRef.current.contains(event.target)
+    ) {
+      setOpenAutoComplete(false);
+    }
+  };
 
   return (
     <div className='flex flex-col justify-start items-center w-full min-h-srceen pr-[100px] pl-[100px] pt-[50px] font-[Inter] bg-[#F5F5F6]'>
@@ -37,7 +73,10 @@ export const FindThatJob = () => {
                 placeholder='manufacturing, sales, swim'
                 className='w-[500px] h-[27px] text-[18px] p-[8px] leading-6 outline-none font-[Inter] font-[400] text-[#8E8E8E]'
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                  setOpenAutoComplete(true);
+                }}
               />
               {searchTerm !== '' && (
                 <button
@@ -46,6 +85,27 @@ export const FindThatJob = () => {
                 >
                   <AiOutlineClose />
                 </button>
+              )}
+              {searchTerm && openAutoComplete && (
+                <div
+                  ref={autoCompleteRef}
+                  className='absolute z-50 top-[45px] pt-2 pb-1 max-h-[300px] overflow-auto  right-0 border-[1px] bg-white border-gray-300 shadow-xl w-full rounded-xl '
+                >
+                  {autoComplete.map((list, index) => {
+                    return (
+                      <p
+                        key={index}
+                        className='flex items-center h-[30px] font-semibold pl-2 w-full cursor-pointer hover:bg-gray-100'
+                        onClick={() => {
+                          setSearchTerm(list);
+                          setOpenAutoComplete(false);
+                        }}
+                      >
+                        {list}
+                      </p>
+                    );
+                  })}
+                </div>
               )}
             </div>
           </div>

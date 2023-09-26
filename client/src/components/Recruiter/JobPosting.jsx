@@ -10,7 +10,7 @@ function JobPosting(props) {
   const { jobPostingFilterState } = useRecruiterContext();
   const data = {
     job_status: jobPostingFilterState,
-    recruiter_id: 3,
+    user_id: props.id,
   };
   function sortByStatus(a, b) {
     if (a.job_status < b.job_status) {

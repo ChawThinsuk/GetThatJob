@@ -7,7 +7,6 @@ export const HomepageAdmin = () => {
     const { state } = useAuth();
   return (
     <>
-      <NavbarHomepage userType={state.userType} />
       <Routes>
         <Route path="/" element={<AdminChat />} />
       </Routes>

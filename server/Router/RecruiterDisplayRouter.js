@@ -15,12 +15,12 @@ RecruiterDisplayRouter.post("/get-job-posting", async (req, res) => {
     }
     if (data.job_status === "track" || data.job_status === "closed") {
       const results = await pool.query(query.queryJobWithStatus, [
-        data.recruiter_id,
+        data.user_id,
         data.job_status,
       ]);
       return res.json(results.rows);
     }
-    const results = await pool.query(query.queryJob, [data.recruiter_id]);
+    const results = await pool.query(query.queryJob, [data.user_id]);
     return res.json(results.rows);
   } catch (error) {
     return res.json({
@@ -123,7 +123,7 @@ RecruiterDisplayRouter.put("/candidate-status", async (req, res) => {
   }
 });
 function validateJobPosting(data) {
-  if (!data.job_status || !data.recruiter_id) {
+  if (!data.job_status || !data.user_id) {
     return "please check your body of API";
   }
   if (
@@ -176,13 +176,21 @@ left join (select job_id, count (professional_id) total_candidate from jobs_prof
 on j.job_id = pc.job_id 
 left join(select job_id, count (professional_id) candidate_on_track from jobs_professional where job_user_mark = 'in_progress' group by job_id) am 
 on j.job_id = am.job_id 
-where j.recruiter_id = $1 `;
+left join (select recruiter_id,user_id from recruiters group by recruiter_id) ri
+on j.recruiter_id = ri.recruiter_id
+left join (select user_id from users group by user_id) ui 
+on ri.user_id = ui.user_id
+where ui.user_id = $1`;
   const queryJobWithStatus = `select j.*, COALESCE(pc.total_candidate,0) total_candidate,COALESCE(am.candidate_on_track,0) candidate_on_track from jobs j 
 left join (select job_id, count (professional_id) total_candidate from jobs_professional group by job_id) pc 
 on j.job_id = pc.job_id 
 left join(select job_id, count (professional_id) candidate_on_track from jobs_professional where job_user_mark = 'in_progress' group by job_id) am 
 on j.job_id = am.job_id 
-where j.recruiter_id = $1 AND j.job_status = $2`;
+left join (select recruiter_id,user_id from recruiters group by recruiter_id) ri
+on j.recruiter_id = ri.recruiter_id
+left join (select user_id from users group by user_id) ui 
+on ri.user_id = ui.user_id
+where ui.user_id = $1 and j.job_status = $2`;
 
   const queryJobWithJobId = `select j.*, COALESCE(pc.total_candidate,0) total_candidate,COALESCE(am.candidate_on_track,0) candidate_on_track from jobs j 
 left join (select job_id, count (professional_id) total_candidate from jobs_professional group by job_id) pc 

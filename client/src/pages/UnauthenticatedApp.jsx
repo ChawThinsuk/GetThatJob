@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import LandingPage from './landingPage';
 import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
+import AdminLoginPage from './AdminLoginPage';
 import '../App.css';
 
 function UnauthenticatedApp() {
@@ -11,6 +12,7 @@ function UnauthenticatedApp() {
         <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<RegisterPage />} />
+        <Route path='/admin' element={<AdminLoginPage />} />
         <Route path='*' element={<LoginPage />} />
       </Routes>
     </div>

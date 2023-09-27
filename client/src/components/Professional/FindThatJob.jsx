@@ -244,7 +244,7 @@ export const FindThatJob = () => {
       </div>
       <div className="flex flex-col justify-center items-start w-full  pt-[12px]">
         <div className="mb-[16px] w-full">
-          <div className="flex flex-row gap-3 mt-2 mb-4 items-center w-full">
+          <div className="flex flex-row gap-3 mt-2  items-center w-full">
             <p className="font-[Inter] text-[14px] ">Popular searches:</p>
             {popularJobs.map((job, index) => {
               if (index <= 7) {
@@ -270,7 +270,7 @@ export const FindThatJob = () => {
               }
             })}
           </div>
-          <div className="flex w-[1280px] justify-center">
+          <div className="ml-[-5px] flex w-[1280px] justify-center h-[80px]">
           <button
             className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all 
           bg-pink-300 text-white px-6 py-2 rounded-lg
@@ -299,18 +299,18 @@ export const FindThatJob = () => {
             Next
           </button>
         </div>
-          <div> <p className="text-[20px] text-start w-full font-[Montserrat] font-[500]">
+          <div> <p className="text-[30px] text-start w-full font-[Montserrat] font-[500]">
             {jobs.length} jobs for you
           </p></div>
           
         </div>
       
         <div className="flex flex-wrap justify-start gap-[16px] w-[1280px] h-srceen">
-          {jobsToDisplay.map((job) => (
-            <JobCard job={job} key={job.job_id} />
+          {jobsToDisplay.map((job,index) => (
+            <JobCard job={job} key={job.job_id} index={index} page={currentPage} />
           ))}
         </div>
-        <div className="pagination-controls flex w-[1280px] justify-center">
+        <div className="pagination-controls ml-[-5px] flex w-[1280px] justify-center">
           <button
             className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all 
 bg-pink-300 text-white px-6 py-2 rounded-lg

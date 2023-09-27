@@ -8,6 +8,7 @@ import JobCard from './JobCard';
 
 export const FindThatJob = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchTermShow, setSearchTermShow] = useState('');
   const [category, setCategory] = useState('');
   const [type, setType] = useState('');
   const [minSalary, setMinSalary] = useState('');
@@ -17,13 +18,18 @@ export const FindThatJob = () => {
   const [openAutoComplete, setOpenAutoComplete] = useState(false);
   const autoCompleteRef = useRef();
   const { jobs, getJobs, getPopularJob, popularJobs } = usePro();
-  
   useEffect(() => {
-    getJobs({ searchTerm, category, type, minSalary, maxSalary, location });
-    getPopularJob();
+    getJobs({
+      searchTerm,
+      category,
+      type,
+      minSalary,
+      maxSalary,
+      location,
+    }),
+      getPopularJob();
     autoCompleteData();
     document.addEventListener('mousedown', handleClickOutside);
-
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
@@ -42,7 +48,9 @@ export const FindThatJob = () => {
     });
     setAutoComplete(
       autocompleteList
-        .filter((list) => list.toUpperCase().includes(searchTerm.toUpperCase()))
+        .filter((list) =>
+          list.toUpperCase().includes(searchTermShow.toUpperCase())
+        )
         .sort()
     );
   };
@@ -54,7 +62,9 @@ export const FindThatJob = () => {
       setOpenAutoComplete(false);
     }
   };
-
+  const handleSearchTermChange = debounce((search) => {
+    setSearchTerm(search);
+  }, 500);
   return (
     <div className='flex flex-col justify-start items-center w-full min-h-srceen pr-[100px] pl-[100px] pt-[50px] font-[Inter] bg-[#F5F5F6]'>
       <div className='flex flex-col justify-center items-start w-full'>
@@ -72,16 +82,20 @@ export const FindThatJob = () => {
                 type='text'
                 placeholder='manufacturing, sales, swim'
                 className='w-[500px] h-[27px] text-[18px] p-[8px] leading-6 outline-none font-[Inter] font-[400] text-[#8E8E8E]'
-                value={searchTerm}
+                value={searchTermShow}
                 onChange={(e) => {
-                  setSearchTerm(e.target.value);
+                  setSearchTermShow(e.target.value);
+                  handleSearchTermChange(e.target.value);
                   setOpenAutoComplete(true);
                 }}
               />
-              {searchTerm !== '' && (
+              {searchTermShow !== '' && (
                 <button
                   className='absolute right-2 opacity-20 hover:opacity-75'
-                  onClick={() => setSearchTerm('')}
+                  onClick={() => {
+                    setSearchTermShow('');
+                    setSearchTerm('');
+                  }}
                 >
                   <AiOutlineClose />
                 </button>
@@ -98,6 +112,7 @@ export const FindThatJob = () => {
                         className='flex items-center h-[30px] font-semibold pl-2 w-full cursor-pointer hover:bg-gray-100'
                         onClick={() => {
                           setSearchTerm(list);
+                          setSearchTermShow(list);
                           setOpenAutoComplete(false);
                         }}
                       >
@@ -288,6 +303,7 @@ export const FindThatJob = () => {
                       } rounded-xl py-[1px] px-[5px] text-[13px] hover:cursor-pointer`}
                       onClick={() => {
                         setSearchTerm(job);
+                        setSearchTermShow(job);
                         setCategory('');
                         setType('');
                         setMaxSalary('');

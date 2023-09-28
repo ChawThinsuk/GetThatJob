@@ -27,7 +27,7 @@ export function RadioJobPosting() {
           }}
           checked={jobPostingFilterState === "all"}
         />
-        <p className="pl-[5.33px] pr-[16px]">All</p>
+        <p className="pl-[3px] pr-[10px]">All</p>
         <input
           type="radio"
           name="status"
@@ -38,7 +38,7 @@ export function RadioJobPosting() {
           }}
           checked={jobPostingFilterState === "track"}
         />
-        <p className="pl-[5.33px] pr-[16px]">With candidates on track</p>
+        <p className="pl-[3px] pr-[10px]">With candidates on track</p>
         <input
           type="radio"
           name="status"
@@ -49,7 +49,7 @@ export function RadioJobPosting() {
           }}
           checked={jobPostingFilterState === "closed"}
         />
-        <p className="pl-[5.33px]">Closed</p>
+        <p className="pl-[3px]">Closed</p>
       </div>
     </div>
   );
@@ -148,7 +148,7 @@ export function RadioCandidate() {
           }}
           checked={candidateFilterState === "all"}
         />
-        <p className="pl-[5.33px] pr-[16px]">All</p>
+        <p className="pl-[3px] pr-[10px]">All</p>
         <input
           type="radio"
           name="status"
@@ -159,7 +159,7 @@ export function RadioCandidate() {
           }}
           checked={candidateFilterState === "waiting"}
         />
-        <p className="pl-[5.33px] pr-[16px]">Waiting</p>
+        <p className="pl-[3px] pr-[10px]">Waiting</p>
         <input
           type="radio"
           name="status"
@@ -170,7 +170,7 @@ export function RadioCandidate() {
           }}
           checked={candidateFilterState === "in_progress"}
         />
-        <p className="pl-[5.33px] pr-[16px]">In progress</p>
+        <p className="pl-[3px] pr-[10px]">In progress</p>
         <input
           type="radio"
           name="status"
@@ -181,7 +181,7 @@ export function RadioCandidate() {
           }}
           checked={candidateFilterState === "finished"}
         />
-        <p className="pl-[5.33px]">Finished</p>
+        <p className="pl-[3px]">Finished</p>
       </div>
     </div>
   );

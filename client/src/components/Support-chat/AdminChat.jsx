@@ -29,10 +29,11 @@ function AdminChat() {
         </div>
         <div>
           <ChatEngine
-            projectID={"a760508d-04d8-4331-84b7-781fc9371f90"}
+            projectID={import.meta.env.VITE_PROJECT_ID}
             userName="GetThatJobAdmin"
             userSecret="GetThatJobAdmin"
             height="calc(94.5vh - 12px)"
+            offset={7}
           />
         </div>
       </div>

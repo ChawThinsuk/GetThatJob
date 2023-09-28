@@ -33,7 +33,7 @@ function Register({ setUser, setChat, user_email }) {
     setLoading(true);
     let email = p_email || inputEmail.current.value;
     const callback_created = (user) => {
-      console.log(user.username);
+      console.log("test",user);
       getOrCreateChat((chat) => {
         setChat(chat);
         setUser(user);
@@ -75,10 +75,11 @@ function ChatView({ user, chat }) {
       <div className="flex flex-col w-[450px] h-[600px] fixed bottom-[130px] right-[35px]  border-[0.5px]">
         <ChatEngineWrapper>
           <ChatSocket
-            projectID={"a760508d-04d8-4331-84b7-781fc9371f90"}
+            projectID={import.meta.env.VITE_PROJECT_ID}
             chatID={chat?.id}
             chatAccessKey={chat?.access_key}
             senderUsername={user?.username}
+            offset={7}
           />
           <ChatFeed />
         </ChatEngineWrapper>
@@ -93,7 +94,7 @@ function getOrCreateChat(callback, email) {
       { usernames: [email, "GetThatJobAdmin"], is_direct_chat: true },
       {
         headers: {
-          "Project-ID": "a760508d-04d8-4331-84b7-781fc9371f90",
+          "Project-ID":import.meta.env.VITE_PROJECT_ID,
           "User-Name": "GetThatJobAdmin",
           "User-Secret": "GetThatJobAdmin",
         },
@@ -107,7 +108,7 @@ function getOrCreateUser(callback, email) {
     .put(
       "https://api.chatengine.io/users/",
       { username: email, secret: email },
-      { headers: { "Private-Key": "38a464c5-c7b3-4a89-8eff-b8b86b160452" } }
+      { headers: { "Private-Key": import.meta.env.VITE_PRIVATE_KEY } }
     )
     .then((r) => callback(r.data))
     .catch((e) => console.log("Get or create user error", e));

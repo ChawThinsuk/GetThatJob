@@ -22,9 +22,14 @@ export const FindThatJob = () => {
   useEffect(() => {
     getJobs({ searchTerm, category, type, minSalary, maxSalary, location });
     getPopularJob();
+    autoCompleteData();
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, [searchTerm, category, type, minSalary, maxSalary, location]);
 
-  // Calculate the indexes of jobs to display for the current page
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
   const jobsToDisplay = jobs.slice(indexOfFirstJob, indexOfLastJob);
@@ -44,6 +49,32 @@ export const FindThatJob = () => {
   const handlePrevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
+  
+  const autoCompleteData = () => {
+    const autocompleteList = [];
+    jobs.map((job) => {
+      if (
+        !autocompleteList.includes(job.job_title) &&
+        !autocompleteList.includes(job.job_category)
+      ) {
+        autocompleteList.push(job.job_title);
+        autocompleteList.push(job.job_category);
+      }
+    });
+    setAutoComplete(
+      autocompleteList
+        .filter((list) => list.toUpperCase().includes(searchTerm.toUpperCase()))
+        .sort()
+    );
+  };
+  const handleClickOutside = (event) => {
+    if (
+      autoCompleteRef.current &&
+      !autoCompleteRef.current.contains(event.target)
+    ) {
+      setOpenAutoComplete(false);
+
+    
     }
   };
 
@@ -65,7 +96,10 @@ export const FindThatJob = () => {
                 placeholder="manufacturing, sales, swim"
                 className="w-[500px] h-[27px] text-[18px] p-[8px] leading-6 outline-none font-[Inter] font-[400] text-[#8E8E8E]"
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                  setOpenAutoComplete(true);
+                }}
               />
               {searchTerm !== "" && (
                 <button
@@ -74,6 +108,27 @@ export const FindThatJob = () => {
                 >
                   <AiOutlineClose />
                 </button>
+              )}
+              {searchTerm && openAutoComplete && (
+                <div
+                  ref={autoCompleteRef}
+                  className='absolute z-50 top-[45px] pt-2 pb-1 max-h-[300px] overflow-auto  right-0 border-[1px] bg-white border-gray-300 shadow-xl w-full rounded-xl '
+                >
+                  {autoComplete.map((list, index) => {
+                    return (
+                      <p
+                        key={index}
+                        className='flex items-center h-[30px] font-semibold pl-2 w-full cursor-pointer hover:bg-gray-100'
+                        onClick={() => {
+                          setSearchTerm(list);
+                          setOpenAutoComplete(false);
+                        }}
+                      >
+                        {list}
+                      </p>
+                    );
+                  })}
+                </div>
               )}
             </div>
           </div>

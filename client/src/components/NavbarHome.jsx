@@ -27,6 +27,7 @@ export const NavbarHomepage = () => {
     { logo: bag, title: "Job Postings", url: "/" },
     { logo: doc, title: "Create New Job", url: "/createjob" },
     { logo: user, title: "Profile", url: "/recruitprofile" },
+    { logo: user, title: "Ads", url: "/ads" }
   ];
 
   return (

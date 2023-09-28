@@ -7,6 +7,9 @@ import EditJob from "../components/Recruiter/EditJob";
 import { RecruiterProfile } from "../components/Recruiter/RecruiterProfile";
 import ShowJobPosting from "../components/Recruiter/ShowJobPosting";
 import { RecruiterProvider } from "../contexts/recruiterPage1-2";
+import Ads from "../components/Recruiter/Advertisement/Ads";
+import Success from "../components/Recruiter/Advertisement/Success";
+import Cancel from "../components/Recruiter/Advertisement/Cancel";
 
 export const HomepageRecruiter = () => {
   const { state } = useAuth();
@@ -21,6 +24,9 @@ export const HomepageRecruiter = () => {
           <Route path="/editjob/:id" element={<EditJob />} />
           <Route path="/recruitprofile" element={<RecruiterProfile />} />
           <Route path="*" element={<JobPosting />} />
+          <Route path="/ads" element={<Ads />} />
+          <Route path="/ads/success" element={<Success />} />
+          <Route path="/ads/cancel" element={<Cancel />} />
         </Routes>
       </div>
 

@@ -23,13 +23,14 @@ function LoginPage() {
   const [userType, setUserType] = useState('PROFESSIONAL');
   const { login, loading, loginResult, setLoginResult } = useAuth();
   const [page, setPage] = useState('login');
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    login({
+    let loginResult = await login({
       email,
-      password,
+      password, 
       userType,
     });
+    loginResult && navigate("/")
   };
 
   useEffect(() => {

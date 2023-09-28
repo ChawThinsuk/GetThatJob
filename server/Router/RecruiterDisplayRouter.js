@@ -178,10 +178,9 @@ left join(select job_id, count (professional_id) candidate_on_track from jobs_pr
 on j.job_id = am.job_id 
 left join (select recruiter_id,user_id from recruiters group by recruiter_id) ri
 on j.recruiter_id = ri.recruiter_id
-left join (select user_id from users group by user_id) ui
+left join (select user_id from users group by user_id) ui 
 on ri.user_id = ui.user_id
-where ui.user_id = $1
-`;
+where ui.user_id = $1`;
   const queryJobWithStatus = `select j.*, COALESCE(pc.total_candidate,0) total_candidate,COALESCE(am.candidate_on_track,0) candidate_on_track from jobs j 
 left join (select job_id, count (professional_id) total_candidate from jobs_professional where job_user_mark = 'in_progress' or job_user_mark = 'waiting' or job_user_mark = 'finished' group by job_id) pc 
 on j.job_id = pc.job_id 
@@ -189,7 +188,7 @@ left join(select job_id, count (professional_id) candidate_on_track from jobs_pr
 on j.job_id = am.job_id 
 left join (select recruiter_id,user_id from recruiters group by recruiter_id) ri
 on j.recruiter_id = ri.recruiter_id
-left join (select user_id from users group by user_id) ui
+left join (select user_id from users group by user_id) ui 
 on ri.user_id = ui.user_id
 where ui.user_id = $1 and j.job_status = $2`;
 

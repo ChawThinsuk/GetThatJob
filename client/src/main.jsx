@@ -12,8 +12,7 @@ import { QueryClient, QueryClientProvider} from 'react-query';
 
 const queryClient = new QueryClient();
 jwtInterceptor();
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+ReactDOM.createRoot(document.getElementById('root')).render( 
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
@@ -24,6 +23,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           </ProProvider>
         </AuthProvider>
       </QueryClientProvider>
-    </BrowserRouter>
-  </React.StrictMode>
+    </BrowserRouter> 
 );

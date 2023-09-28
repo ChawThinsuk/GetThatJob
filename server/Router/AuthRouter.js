@@ -84,10 +84,11 @@ authRouter.post('/login', async (req, res) => {
   try {
     // query data from users record and check for existance of email
     let userData = await pool.query(
-      `SELECT * FROM users WHERE email = $1 AND user_type = $2`,
-      [email, userType]
+      `SELECT * FROM users WHERE email = $1`,
+      [email]
     );
     userData = userData.rows[0];
+    console.log(userData);
     if (!userData) {
       return res.json({ status: 404 });
     }
@@ -100,7 +101,8 @@ authRouter.post('/login', async (req, res) => {
     const token = jwt.sign(
       {
         userID: userData.user_id,
-        userType: userType,
+        userType: userData.user_type,
+        email: userData.email
       },
       process.env.SECRET_KEY,
       { expiresIn: '90000000' }

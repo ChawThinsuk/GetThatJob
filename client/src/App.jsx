@@ -7,6 +7,7 @@ import theme from "./components/theme.js";
 
 function App() {
   const auth = useAuth();
+
   return (
     <ChakraProvider theme={theme}>
       {auth.isAuthenticated ? <AuthenticatedApp /> : <UnauthenticatedApp />}

@@ -7,11 +7,13 @@ import { ProfessionalProfile } from "../components/Professional/ProfessionalProf
 import { YourApplication } from "../components/Professional/YourApplication";
 import { JobDetail } from "../components/Professional/JobDetail";
 import { ApplicationList } from "../components/Professional/ApplicationList";
+import HelpButton from "../components/Support-chat/HelpButton";
 
 export const HomepageProfessional = () => {
   const { state } = useAuth();
   return (
-    <div className="grid grid-cols-[15%_85%] w-screen min-h-screen ">
+    <>
+    <div className="grid grid-cols-[17.75%_81.25%] w-[1920px] min-h-screen ">
       <NavbarHomepage userType={state.userType} />
       <Routes>
         <Route path="/" element={<FindThatJob />} />
@@ -23,5 +25,7 @@ export const HomepageProfessional = () => {
         <Route path="*" element={<FindThatJob />} />
       </Routes>
     </div>
+    <HelpButton email={state.email}/>
+    </>
   );
 };

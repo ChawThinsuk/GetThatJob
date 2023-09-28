@@ -20,7 +20,6 @@ function Candidate(props) {
     let newActive = item.active === 1 ? 0 : 1;
     setItemm({ ...item, active: newActive });
   };
-  console.log(data.application_created_at);
 
   return (
     <>

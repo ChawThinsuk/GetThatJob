@@ -1,4 +1,4 @@
-import { pool } from '../../utils/db.js';
+import { pool } from "../../utils/db.js";
 const updateTimestamp = new Date();
 
 export class ProController {
@@ -8,15 +8,15 @@ export class ProController {
     try {
       const jobID = Number(id);
       const job = await pool.query(
-        'SELECT *,jobs.created_at AS job_created_at FROM jobs INNER JOIN recruiters ON recruiters.recruiter_id = jobs.recruiter_id WHERE jobs.job_id = $1',
+        "SELECT *,jobs.created_at AS job_created_at FROM jobs INNER JOIN recruiters ON recruiters.recruiter_id = jobs.recruiter_id WHERE jobs.job_id = $1",
         [jobID]
       );
       if (!job.rows[0]) {
-        return res.json({ message: 'Job not founded' });
+        return res.json({ message: "Job not founded" });
       }
       return res
         .status(200)
-        .json({ message: 'job query success', job: job.rows[0] });
+        .json({ message: "job query success", job: job.rows[0] });
     } catch (error) {
       return res.status(500).json({ message: error });
     }
@@ -25,12 +25,12 @@ export class ProController {
     const { userID } = req.query;
     try {
       const jobFollowedData = await pool.query(
-        'SELECT * FROM jobs_professional INNER JOIN jobs ON jobs.job_id = jobs_professional.job_id INNER JOIN recruiters ON jobs.recruiter_id = recruiters.recruiter_id INNER JOIN professionals ON professionals.professional_id = jobs_professional.professional_id WHERE professionals.user_id = $1 AND jobs_professional.job_user_following = true',
+        "SELECT * FROM jobs_professional INNER JOIN jobs ON jobs.job_id = jobs_professional.job_id INNER JOIN recruiters ON jobs.recruiter_id = recruiters.recruiter_id INNER JOIN professionals ON professionals.professional_id = jobs_professional.professional_id WHERE professionals.user_id = $1 AND jobs_professional.job_user_following = true",
         [userID]
       );
       return res
         .status(200)
-        .json({ message: 'Get data completed', data: jobFollowedData.rows });
+        .json({ message: "Get data completed", data: jobFollowedData.rows });
     } catch (error) {
       return res.status(500).json({ message: error });
     }
@@ -40,11 +40,11 @@ export class ProController {
     const jobID = req.query.job_id;
     try {
       const companyFollow = await pool.query(
-        'SELECT jobs_professional.job_professional_id, jobs_professional.job_user_following, jobs_professional.job_user_application FROM jobs_professional INNER JOIN professionals ON professionals.professional_id = jobs_professional.professional_id WHERE professionals.user_id = $1 AND jobs_professional.job_id = $2',
+        "SELECT jobs_professional.job_professional_id, jobs_professional.job_user_following, jobs_professional.job_user_application FROM jobs_professional INNER JOIN professionals ON professionals.professional_id = jobs_professional.professional_id WHERE professionals.user_id = $1 AND jobs_professional.job_id = $2",
         [userID, jobID]
       );
       return res.json({
-        message: 'get following status complete',
+        message: "get following status complete",
         data: companyFollow.rows[0],
       });
     } catch (error) {
@@ -54,20 +54,20 @@ export class ProController {
   async updateJobFollowStatus(req, res) {
     const { job_professional_id, job_professional_follow } = req.body.data;
     const updateFollow = await pool.query(
-      'UPDATE jobs_professional SET job_user_following = $1, updated_at = $2 WHERE job_professional_id = $3',
+      "UPDATE jobs_professional SET job_user_following = $1, updated_at = $2 WHERE job_professional_id = $3",
       [job_professional_follow, new Date(), job_professional_id]
     );
-    return res.status(200).json({ message: 'Update complete' });
+    return res.status(200).json({ message: "Update complete" });
   }
   async createJobFollowStatus(req, res) {
     const { userID, job_id } = req.body.data;
     try {
       const professionalID = await pool.query(
-        'SELECT professional_id FROM professionals WHERE user_id = $1',
+        "SELECT professional_id FROM professionals WHERE user_id = $1",
         [userID]
       );
       const addJobProfessional = await pool.query(
-        'INSERT INTO jobs_professional (job_user_following,job_user_application,professional_id,job_id,created_at,updated_at) VALUES ($1,$2,$3,$4,$5,$6)',
+        "INSERT INTO jobs_professional (job_user_following,job_user_application,professional_id,job_id,created_at,updated_at) VALUES ($1,$2,$3,$4,$5,$6)",
         [
           true,
           false,
@@ -77,7 +77,7 @@ export class ProController {
           new Date(),
         ]
       );
-      return res.status(200).json({ message: 'Update complete' });
+      return res.status(200).json({ message: "Update complete" });
     } catch (error) {
       console.log(error);
     }
@@ -92,43 +92,47 @@ export class ProController {
     const location = req.query.location;
     const queryParams = [];
     const queryParts = [
-      "SELECT jobs.job_id, jobs.job_title, jobs.job_category, jobs.salary_min, jobs.salary_max, jobs.job_type, jobs.job_position, jobs.job_mandatory, jobs.job_optional, jobs.created_at, jobs.job_location, jobs.job_status, recruiters.company_name, recruiters.logo FROM jobs INNER JOIN recruiters ON jobs.recruiter_id = recruiters.recruiter_id WHERE job_status = 'track'",
+      `SELECT jobs.job_id, jobs.job_title, jobs.job_category, jobs.salary_min, jobs.salary_max, jobs.job_type, jobs.job_position, jobs.job_mandatory, jobs.job_optional, jobs.created_at, jobs.job_location, jobs.job_status, recruiters.company_name, recruiters.logo FROM jobs INNER JOIN recruiters ON jobs.recruiter_id = recruiters.recruiter_id WHERE job_status = 'track'
+`,
     ];
 
     if (searchTerm) {
       queryParams.push(searchTerm);
       queryParts.push(
-        'AND (UPPER(job_title) ~ UPPER($1) OR UPPER(job_category) ~ UPPER($1) OR UPPER(company_name) ~ UPPER($1) OR UPPER(job_type) ~ UPPER($1) OR UPPER(job_location) ~ UPPER($1))'
+        "AND (UPPER(job_title) ~ UPPER($1) OR UPPER(job_category) ~ UPPER($1) OR UPPER(company_name) ~ UPPER($1) OR UPPER(job_type) ~ UPPER($1) OR UPPER(job_location) ~ UPPER($1))"
       );
     }
 
     if (category) {
       queryParams.push(category);
-      queryParts.push('AND job_category ~ $' + queryParams.length);
+      queryParts.push("AND job_category ~ $" + queryParams.length);
     }
 
     if (type) {
       queryParams.push(type);
-      queryParts.push('AND job_type ~ $' + queryParams.length);
+      queryParts.push("AND job_type ~ $" + queryParams.length);
     }
 
     if (minSalary) {
       queryParams.push(minSalary);
-      queryParts.push('AND salary_min >= $' + queryParams.length);
+      queryParts.push("AND salary_min >= $" + queryParams.length);
     }
 
     if (maxSalary) {
       queryParams.push(maxSalary);
-      queryParts.push('AND salary_max <= $' + queryParams.length);
+      queryParts.push("AND salary_max <= $" + queryParams.length);
     }
 
     if (location) {
       queryParams.push(location);
-      queryParts.push('AND job_location ~ $' + queryParams.length);
+      queryParts.push("AND job_location ~ $" + queryParams.length);
     }
+
+    queryParts.push(`ORDER BY 
+      jobs.job_payment_accumulation DESC`);
     // queryParts.push(`LIMIT $${queryParams.length + 1} OFFSET $${queryParams.length + 2}`);
     // queryParams.push(PAGE_SIZE, offset);
-    const query = queryParts.join(' ');
+    const query = queryParts.join(" ");
     // const totalQuery = 'SELECT COUNT(*) FROM jobs';
     try {
       const jobs = await pool.query(query, queryParams);
@@ -146,7 +150,7 @@ export class ProController {
         "   SELECT jobs.job_title,jobs.job_category FROM jobs_professional INNER JOIN jobs ON jobs_professional.job_id = jobs.job_id INNER JOIN recruiters ON recruiters.recruiter_id = jobs.recruiter_id WHERE jobs_professional.job_user_following = true AND jobs.job_status = 'track' GROUP BY jobs.job_id, recruiters.recruiter_id,jobs.job_category   ORDER BY count(jobs.job_id) desc limit 8"
       );
       return res.status(200).json({
-        message: 'get popular jobs complete',
+        message: "get popular jobs complete",
         popularJobs: popularJobs.rows,
       });
     } catch (error) {
@@ -159,17 +163,17 @@ export class ProController {
 
     try {
       const result = await pool.query(
-        'select * from professionals inner join users on professionals.user_id = users.user_id where users.user_id=$1',
+        "select * from professionals inner join users on professionals.user_id = users.user_id where users.user_id=$1",
         [user_id]
       );
       // console.log(result.rows[0]);
       return res.json({
         data: result.rows[0],
-        message: 'Get Professional profile successfully',
+        message: "Get Professional profile successfully",
       });
     } catch (error) {
       return res.status(500).json({
-        message: 'An error occurred',
+        message: "An error occurred",
         error: error.message,
       });
     }
@@ -181,7 +185,7 @@ export class ProController {
 
       try {
         // Start a transaction
-        await pool.query('BEGIN');
+        await pool.query("BEGIN");
 
         // Update the user's professional profile data
         await pool.query(
@@ -225,18 +229,18 @@ export class ProController {
         );
 
         // Commit the transaction
-        await pool.query('COMMIT');
+        await pool.query("COMMIT");
 
         return res.json({
-          message: 'Professional profile updated successfully',
+          message: "Professional profile updated successfully",
         });
       } catch (error) {
         // Rollback the transaction in case of an error
-        await pool.query('ROLLBACK');
+        await pool.query("ROLLBACK");
 
-        console.error('Error updating profile:', error);
+        console.error("Error updating profile:", error);
         return res.status(500).json({
-          message: 'An error occurred while updating the profile',
+          message: "An error occurred while updating the profile",
           error: error.message,
         });
       }
@@ -244,21 +248,21 @@ export class ProController {
   }
   //Ta
   async getExpData(req, res) {
-    console.log('ok');
+    console.log("ok");
     const { id } = req.params;
     const selcectQuery = `SELECT professionals.experience, professionals.cv FROM professionals INNER JOIN users ON professionals.user_id = users.user_id WHERE users.user_id = ${id}`;
 
     try {
       const data = await pool.query(selcectQuery);
       return res.json({
-        message: 'already get job professional',
+        message: "already get job professional",
         data: data.rows[0],
       });
     } catch (error) {
       console.log(error);
       return res
         .status(500)
-        .json({ message: 'An error occurred while fetching data' });
+        .json({ message: "An error occurred while fetching data" });
     }
   }
   async submitProfileData(req, res) {
@@ -294,7 +298,7 @@ export class ProController {
           data.rows[0].job_professional_id,
         ]);
 
-        return res.status(200).json({ message: 'Data has been updated' });
+        return res.status(200).json({ message: "Data has been updated" });
       } else {
         const professionalIdQuery = await pool.query(
           `SELECT professional_id FROM professionals WHERE user_id = $1`,
@@ -324,13 +328,13 @@ export class ProController {
           updateTimestamp,
         ]);
 
-        return res.status(200).json({ message: 'Data has been added' });
+        return res.status(200).json({ message: "Data has been added" });
       }
     } catch (error) {
       console.error(error);
       return res
         .status(500)
-        .json({ message: 'An error occurred while checking/inserting data' });
+        .json({ message: "An error occurred while checking/inserting data" });
     }
   }
   async getApplyJob(req, res) {
@@ -343,18 +347,26 @@ export class ProController {
                               INNER JOIN professionals ON jobs_professional.professional_id = professionals.professional_id
                               INNER JOIN jobs ON jobs_professional.job_id = jobs.job_id                            
                               LEFT OUTER JOIN recruiters ON jobs.recruiter_id = recruiters.recruiter_id  
-                              WHERE professionals.user_id = ${user_id} AND jobs_professional.job_user_mark IS NOT NULL `;
+                              WHERE professionals.user_id = ${user_id} AND jobs_professional.job_user_mark IS NOT NULL 
+                              ORDER BY
+                              CASE 
+                                  WHEN job_user_mark = 'waiting' THEN 1
+                                  WHEN job_user_mark = 'in_progress' THEN 2
+                                  WHEN job_user_mark = 'finished' THEN 3
+                                  WHEN job_user_mark = 'declined' THEN 4
+                                  ELSE 5 
+                              END `;
     try {
       const data = await pool.query(selcectQuery);
       return res.json({
-        message: 'already get job professional',
+        message: "already get job professional",
         data: data.rows,
       });
     } catch (error) {
       console.log(error);
       return res
         .status(500)
-        .json({ message: 'An error occurred while fetching data' });
+        .json({ message: "An error occurred while fetching data" });
     }
   }
   async handleDecline(req, res) {
@@ -378,13 +390,13 @@ export class ProController {
           job_professional_id = $1`;
 
         await pool.query(updateQuery, [data.rows[0].job_professional_id]);
-        return res.status(200).json({ message: 'Data has been Updated' });
+        return res.status(200).json({ message: "Data has been Updated" });
       }
     } catch (error) {
       console.error(error);
       return res
         .status(500)
-        .json({ message: 'An error occurred while checking/inserting data' });
+        .json({ message: "An error occurred while checking/inserting data" });
     }
   }
 }

@@ -13,7 +13,7 @@ export const FindThatJob = () => {
   const [minSalary, setMinSalary] = useState("");
   const [maxSalary, setMaxSalary] = useState("");
   const [location, setLocation] = useState("");
-  const { jobs, getJobs, getPopularJob, popularJobs } = usePro();
+  const { jobs, getJobs, getPopularJob, popularJobs,isLoading, setIsLoading } = usePro();
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -310,7 +310,8 @@ export const FindThatJob = () => {
             <JobCard job={job} key={job.job_id} index={index} page={currentPage} />
           ))}
         </div>
-        <div className="pagination-controls ml-[-5px] flex w-[1280px] justify-center">
+        
+        <div className={`${(isLoading)&&`hidden`} pagination-controls ml-[-5px] flex w-[1280px] justify-center`}>
           <button
             className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all 
 bg-pink-300 text-white px-6 py-2 rounded-lg

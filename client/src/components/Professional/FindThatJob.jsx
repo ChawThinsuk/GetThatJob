@@ -8,11 +8,15 @@ import JobCard from "./JobCard";
 
 export const FindThatJob = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchTermShow, setSearchTermShow] = useState('');
   const [category, setCategory] = useState("");
   const [type, setType] = useState("");
   const [minSalary, setMinSalary] = useState("");
   const [maxSalary, setMaxSalary] = useState("");
   const [location, setLocation] = useState("");
+  const [autoComplete, setAutoComplete] = useState([])
+  const [openAutoComplete, setOpenAutoComplete] = useState(false);
+  const autoCompleteRef = useRef("autoComplete");
   const { jobs, getJobs, getPopularJob, popularJobs,isLoading, setIsLoading } = usePro();
 
   // Pagination state
@@ -49,7 +53,7 @@ export const FindThatJob = () => {
   const handlePrevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
-  
+    }}
   const autoCompleteData = () => {
     const autocompleteList = [];
     jobs.map((job) => {
@@ -408,5 +412,6 @@ active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
+  

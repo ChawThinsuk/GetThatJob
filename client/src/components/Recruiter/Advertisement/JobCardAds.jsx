@@ -1,11 +1,11 @@
-import manufacturing from '../../assets/pro2/category.svg';
-import calendar from '../../assets/pro2/calendar.svg';
-import small from '../../assets/pro2/money.svg';
-import followOff from '../../assets/pro2/followOff.svg';
-import followOn from '../../assets/pro2/followOn.svg';
+import manufacturing from '../../../assets/pro2/category.svg';
+import calendar from '../../../assets/pro2/calendar.svg';
+import small from '../../../assets/pro2/money.svg';
+import followOff from '../../../assets/pro2/followOff.svg';
+import followOn from '../../../assets/pro2/followOn.svg';
 import { Link } from 'react-router-dom';
-import { usePro } from '../../contexts/Professional.jsx';
-import { useAuth } from '../../contexts/Authorization.jsx';
+import { usePro } from '../../../contexts/Professional.jsx';
+import { useAuth } from '../../../contexts/Authorization.jsx';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Spinner } from '@chakra-ui/react';

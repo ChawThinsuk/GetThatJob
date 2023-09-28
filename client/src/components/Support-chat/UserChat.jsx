@@ -9,7 +9,6 @@ function UserChat(props) {
   const [chat, setChat] = useState();
   return (
     <>
-      {console.log(user)}
       {user && chat ? (
         <ChatView user={user} chat={chat} />
       ) : (

@@ -339,7 +339,7 @@ export const FindThatJob = () => {
                     <p
                       className={`${
                         job === searchTerm ? "bg-[#fecbdb]" : "bg-gray-300"
-                      } rounded-xl py-[1px] px-[5px] text-[13px] hover:cursor-pointer`}
+                      } rounded-xl py-[3px] px-[7px] text-[13px] hover:cursor-pointer`}
                       onClick={() => {
                         setSearchTerm(job);
                         setSearchTermShow(job);

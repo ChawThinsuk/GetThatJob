@@ -15,6 +15,8 @@ import Cancel from "../components/Recruiter/Advertisement/Cancel";
 
 export const HomepageRecruiter = () => {
   const { state } = useAuth();
+  const test = import.meta.env.PROJECT_ID;
+  console.log(test);
   return (
     <>
     <RecruiterProvider>

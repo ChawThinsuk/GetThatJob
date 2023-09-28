@@ -92,7 +92,8 @@ export class ProController {
     const location = req.query.location;
     const queryParams = [];
     const queryParts = [
-      "SELECT jobs.job_id, jobs.job_title, jobs.job_category, jobs.salary_min, jobs.salary_max, jobs.job_type, jobs.job_position, jobs.job_mandatory, jobs.job_optional, jobs.created_at, jobs.job_location, jobs.job_status, recruiters.company_name, recruiters.logo FROM jobs INNER JOIN recruiters ON jobs.recruiter_id = recruiters.recruiter_id WHERE job_status = 'track'",
+      `SELECT jobs.job_id, jobs.job_title, jobs.job_category, jobs.salary_min, jobs.salary_max, jobs.job_type, jobs.job_position, jobs.job_mandatory, jobs.job_optional, jobs.created_at, jobs.job_location, jobs.job_status, recruiters.company_name, recruiters.logo FROM jobs INNER JOIN recruiters ON jobs.recruiter_id = recruiters.recruiter_id WHERE job_status = 'track'
+`,
     ];
 
     if (searchTerm) {
@@ -126,6 +127,9 @@ export class ProController {
       queryParams.push(location);
       queryParts.push("AND job_location ~ $" + queryParams.length);
     }
+
+    queryParts.push(`ORDER BY 
+      jobs.job_payment_accumulation DESC`);
     // queryParts.push(`LIMIT $${queryParams.length + 1} OFFSET $${queryParams.length + 2}`);
     // queryParams.push(PAGE_SIZE, offset);
     const query = queryParts.join(" ");

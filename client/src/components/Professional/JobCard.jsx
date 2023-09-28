@@ -80,39 +80,39 @@ const JobCard = (prop) => {
 </div>}</div>
           <div className='flex flex-row w-[345px] h-[110px] gap-[10px]'>
             <img src={job.logo} className='w-[100px] h-[100px]' />
-            <div className='flex flex-col w-[230px] h-[110px]'>
+            <div className='flex pl-2 flex-col w-[230px] h-[110px]'>
               <div className='flex flex-row gap-[5px]'>
                 <img src={manufacturing} className='w-[20px] h-[20px]' />
                 <p className='text-[16px] text-[#8E8E8E] min-w-[142px] h-[22px] font-[Inter] font-[400]'>
-                  {job.job_category}
+                {job.job_category.slice(0,18)}<span className={`${job.job_category.length < 19 && "hidden"}`}>...</span>
                 </p>
               </div>
               <div className='flex flex-col w-[230px] h-[86px]'>
-                <p className='text-[24px] text-[#373737] w-[270px] h-[32px] font-[Montserrat] font-[500]'>
+                <p className='text-[22px] text-[#373737] w-[270px] h-[32px] font-[Montserrat] font-[500]'>
                   {job.job_title}
                 </p>
-                <p className='text-[20px] text-[#616161] w-[230px] h-[24px] font-[Montserrat] font-[500]'>
+                <p className='text-[15px] text-[#616161] w-[230px] h-[24px] font-[Montserrat] font-[500]'>
                   {job.company_name}
                 </p>
-                <p className='text-[14px] text-[#616161] w-[230px] h-[24px] mt-[6px] font-[Montserrat] font-[500]'>
+                <p className='text-[15px] text-[#616161] w-[230px] h-[24px] mt-[3px] font-[Montserrat] font-[500]'>
                   {job.job_location}
                 </p>
               </div>
               <div className='flex flex-row justify-between items-center w-[230px] h-[27px] pt-[4px]'>
-                <div className='flex flex-row justify-center items-center gap-[5px] w-[106px] h-[27px] '>
+                <div className='flex flex-row justify-center items-center gap-[5px] w-[106px] h-[27px] mt-2 '>
                   <img src={calendar} className='w-[20-px] h-[20px]' />
-                  <p className='text-[16px] text-[#8E8E8E] w-[95px] h-[22px] font-[Inter] font-[400]'>
+                  <p className='text-[14px] text-[#8E8E8E] w-[95px] h-[22px] font-[Inter] font-[400]'>
                     {job.job_type}
                   </p>
                 </div>
-                <div className='flex flex-row justify-center items-center min-w-[112px] h-[27px] '>
+                <div className='flex flex-row justify-center items-center min-w-[112px] h-[27px] mt-2'>
                   <img src={small} className='w-[20px] h-[20px]' />
                   <div className='flex flex-row justify-center items-center min-w-[86px] h-[22px]'>
-                    <p className='text-[16px] text-[#8E8E8E] font-[Inter] font-[400]'>
+                    <p className='text-[14px] text-[#8E8E8E] font-[Inter] font-[400]'>
                       {(job.salary_min / 1000).toFixed(1)}k
                     </p>
                     <p>-</p>
-                    <p className='text-[16px] text-[#8E8E8E] font-[Inter] font-[400]'>
+                    <p className='text-[14px] text-[#8E8E8E] font-[Inter] font-[400]'>
                       {(job.salary_max / 1000).toFixed(1)}k
                     </p>
                   </div>
@@ -122,17 +122,17 @@ const JobCard = (prop) => {
           </div>
           <div className='flex flex-row justify-between w-[345px] h-[54px] pt-[5px]'>
             <div
-              className='w-[147px] h-[54px] flex flex-row justify-center items-center'
+              className='w-[147px] h-[54px] flex flex-row justify-start items-center'
               onClick={handleChangeStatus}
             >
-              <div className='w-[80%] h-[53px] flex flex-row justify-start items-center cursor-pointer gap-[5px] '>
+              <div className='w-[85%] h-[53px] flex flex-row justify-start items-center cursor-pointer gap-[5px] '>
                 <img
                   src={
                     follow && follow.job_user_following ? followOn : followOff
                   }
                   className='w-[32px] h-[32px]'
                 />
-                <button className=' text-[18px] text-[#616161] font-[Inter] font-[500] tracking-[1.25px] w-[92px] h-[54px] flex flex-row justify-center items-center'>
+                <button className=' text-[17px] text-[#616161] font-[Inter] font-[500] tracking-[1.25px] mw-[92px] h-[54px] flex flex-row justify-center items-center uppercase ml-[5px]'>
                   {follow && follow.job_user_following
                     ? ' Following'
                     : 'Follow'}
@@ -142,13 +142,13 @@ const JobCard = (prop) => {
             {follow && follow.job_user_application ? (
               <button
                 disabled
-                className='w-[147px] h-[54px] border-none bg-[#E1E2E1] rounded-3xl tracking-widest  text-[18px] text-[#616161] font-[Inter] font-[500]'
+                className='w-[147px] h-[54px] border-none bg-[#E1E2E1] rounded-3xl tracking-widest  text-[17px] text-[#616161] font-[Inter] font-[500]'
               >
                 APPLIED
               </button>
             ) : (
               <Link to={`/${job.job_id}`}>
-                <button className='w-[147px] h-[54px] border-[1px] border-[#F48FB1] tracking-wide  rounded-3xl hover:bg-[#F5F5F6] text-[18px] text-[#616161] font-[Inter] font-[500]'>
+                <button className='w-[147px] h-[54px] border-[1px] border-[#F48FB1] tracking-wide  rounded-3xl hover:bg-[#F5F5F6] text-[16px] text-[#616161] font-[Inter] font-[500]'>
                   SEE MORE
                 </button>
               </Link>

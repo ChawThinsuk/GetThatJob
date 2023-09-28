@@ -13,6 +13,7 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import { useGlobalContext } from "../../contexts/registerContext.jsx";
+import MobileInput from "./MobileInput.jsx";
 
 function TalentFormProgress2() {
   const {
@@ -92,7 +93,8 @@ function TalentFormProgress2() {
                 </FormControl>
                 <FormControl id="phone" isRequired>
                   <FormLabel sx={customTextStyle}>Phone</FormLabel>
-                  <InputGroup>
+                  <MobileInput  />
+                  {/* <InputGroup>
                     <InputLeftAddon children="+66" />
                     <Input
                       borderColor="#F48FB1"
@@ -105,7 +107,7 @@ function TalentFormProgress2() {
                       }}
                       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     />
-                  </InputGroup>
+                  </InputGroup> */}
                   <FormHelperText className="text-[#8E8E8E] text-[12px] lowercase">
                     +[country code][number]
                   </FormHelperText>

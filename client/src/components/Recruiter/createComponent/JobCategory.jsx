@@ -23,9 +23,10 @@ const jobCategories = [
   "Restaurant and hospitality",
 ];
 
-function JobCategorySelect({ setJobCategory }) {
+function JobCategorySelect({ setJobCategory,value }) {
   const { profFormStyle } = useGlobalContext();
-  const [job_category, setJobCategoryLocal] = useState("");
+  const [job_category, setJobCategoryLocal] = useState();
+  // console.log(value);
 
   const handleCategoryChange = (event) => {
     setJobCategoryLocal(event.target.value);
@@ -39,7 +40,7 @@ function JobCategorySelect({ setJobCategory }) {
           placeholder="Select a category"
           borderColor="#F48FB1"
           focusBorderColor="#F48FB1"
-          value={job_category}
+          value={value}
           onChange={handleCategoryChange}
         >
           {jobCategories.map((category) => (

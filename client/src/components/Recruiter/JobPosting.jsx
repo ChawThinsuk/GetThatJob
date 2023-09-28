@@ -10,7 +10,7 @@ function JobPosting(props) {
   const { jobPostingFilterState } = useRecruiterContext();
   const data = {
     job_status: jobPostingFilterState,
-    recruiter_id: 3,
+    user_id: props.id,
   };
   function sortByStatus(a, b) {
     if (a.job_status < b.job_status) {
@@ -56,7 +56,7 @@ function JobPosting(props) {
     return new Date(a.created_at) - new Date(b.created_at);
   });
   posts?.sort(sortByStatus);
-  console.log(posts);
+  // console.log(posts);
   return (
     <div className="w-[1259px] flex flex-col  items-start font-[Inter] ml-[160px] mr-[160px] pt-[32px]">
       <p className="font-[Montserrat] text-[35px] font-medium">Job Postings</p>

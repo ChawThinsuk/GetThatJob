@@ -21,7 +21,7 @@ RegisterRouter.post("/register-professional", async (req, res) => {
     let user_id = Number(results.rows[0].user_id);
     await pool.query(
       `INSERT INTO professionals (username,phone,birthdate,linkedin,title,experience,education,cv,created_at,updated_at,user_id) VALUES ($1, $2,
-          $3,$4,$5,$6,$7,$8,now(),null,$9)`,
+          $3,$4,$5,$6,$7,$8,now(),now(),$9)`,
       [
         data.username,
         data.phone,
@@ -58,15 +58,17 @@ RegisterRouter.post("/register-recruiter", async (req, res) => {
       [data.email, bcryptPassword, data.user_type]
     );
     let user_id = Number(results.rows[0].user_id);
-    console.log(user_id);
+    // console.log(user_id);
     await pool.query(
-      `INSERT INTO recruiters (company_name,company_website,company_description,logo,created_at,updated_at,user_id) VALUES ($1,$2,$3,$4,now(),NULL,$5)`,
+      `INSERT INTO recruiters (company_name,company_website,company_description,logo,created_at,updated_at,company_email,user_id) VALUES ($1,$2,$3,$4,now(),now(),$5,$6)`,
       [
         data.company_name,
         data.company_website,
         data.company_description,
         data.logo,
+        data.email,
         user_id,
+        
       ]
     );
     return res.json({

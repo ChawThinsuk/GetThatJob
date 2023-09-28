@@ -1,10 +1,11 @@
-import find from "../../assets/FindThatJob/find.svg";
-import money from "../../assets/FindThatJob/money.svg";
-import { useEffect, useState } from "react";
-import { usePro } from "../../contexts/Professional";
-import { AiOutlineClose } from "react-icons/ai";
-import { debounce } from "lodash";
-import JobCard from "./JobCard";
+import find from '../../assets/FindThatJob/find.svg';
+import money from '../../assets/FindThatJob/money.svg';
+import { useEffect, useState , useRef } from 'react';
+import { usePro } from '../../contexts/Professional';
+import { AiOutlineClose } from 'react-icons/ai';
+import { debounce } from 'lodash';
+import JobCard from './JobCard';
+
 
 export const FindThatJob = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -14,10 +15,38 @@ export const FindThatJob = () => {
   const [maxSalary, setMaxSalary] = useState("");
   const [location, setLocation] = useState("");
   const { jobs, getJobs, getPopularJob, popularJobs } = usePro();
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const jobsPerPage = 9; // Number of jobs to display per page
+
   useEffect(() => {
     getJobs({ searchTerm, category, type, minSalary, maxSalary, location });
     getPopularJob();
   }, [searchTerm, category, type, minSalary, maxSalary, location]);
+
+  // Calculate the indexes of jobs to display for the current page
+  const indexOfLastJob = currentPage * jobsPerPage;
+  const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+  const jobsToDisplay = jobs.slice(indexOfFirstJob, indexOfLastJob);
+
+  // Calculate total number of pages
+  const totalPages = Math.ceil(jobs.length / jobsPerPage);
+
+  // Handle next page click
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  // Handle previous page click
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
 
   return (
     <div className="flex flex-col justify-start items-center w-full min-h-srceen pr-[100px] pl-[100px] pt-[50px] font-[Inter] bg-[#F5F5F6]">
@@ -257,12 +286,29 @@ export const FindThatJob = () => {
             {jobs.length} jobs for you
           </p>
         </div>
-        <div className="flex flex-wrap justify-start gap-[16px] w-[1280px] h-srceen">
-          {jobs.map((job) => (
-            <JobCard job={job} key={job.job_id} />
-          ))}
-        </div>
+        <div className='flex flex-wrap justify-start gap-[16px] w-[1280px] h-srceen'>
+            {jobsToDisplay.map((job) => (
+              <JobCard job={job} key={job.job_id} />
+            ))}
+          </div>
+          <div className='pagination-controls'>
+            <button className='cursor-pointer mx-5 my-10 transition-all 
+bg-pink-300 text-white px-6 py-2 rounded-lg
+border-pink-400
+border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
+active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-pink-300 shadow-pink-300 active:shadow-none' onClick={handlePrevPage} disabled={currentPage === 1}>
+              Previous
+            </button>
+            <button className='cursor-pointer mx-5 transition-all 
+bg-pink-300 text-white px-6 py-2 rounded-lg
+border-pink-400
+border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
+active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-pink-300 shadow-pink-300 active:shadow-none' onClick={handleNextPage} disabled={currentPage === totalPages}>
+              Next
+            </button>
+          </div>
       </div>
     </div>
   );
 };
+        

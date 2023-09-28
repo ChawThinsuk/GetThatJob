@@ -12,6 +12,7 @@ import HelpButton from "../components/Support-chat/HelpButton";
 import Ads from "../components/Recruiter/Advertisement/Ads";
 import Success from "../components/Recruiter/Advertisement/Success";
 import Cancel from "../components/Recruiter/Advertisement/Cancel";
+import History from "../components/Recruiter/Advertisement/History";
 
 export const HomepageRecruiter = () => {
   const { state } = useAuth();
@@ -32,6 +33,7 @@ export const HomepageRecruiter = () => {
           <Route path="/ads" element={<Ads />} />
           <Route path="/ads/success" element={<Success />} />
           <Route path="/ads/cancel" element={<Cancel />} />
+          <Route path="/ads/history" element={<History />} />
         </Routes>
       </div>
     <HelpButton email={state.email}/>

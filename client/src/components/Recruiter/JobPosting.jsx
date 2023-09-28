@@ -47,7 +47,6 @@ function JobPosting(props) {
         <Spinner color="pink.200" size="lg" />
       </div>
     );
-
   }
   if (error) {
     return <div>Error Loading</div>;
@@ -56,9 +55,9 @@ function JobPosting(props) {
     return new Date(a.created_at) - new Date(b.created_at);
   });
   posts?.sort(sortByStatus);
-  
+
   return (
-    <div className="w-[1259px] flex flex-col  items-start font-[Inter] ml-[160px] mr-[160px] pt-[32px]">
+    <JobContainer>
       <p className="font-[Montserrat] text-[35px] font-medium">Job Postings</p>
       <RadioJobPosting />
 
@@ -73,11 +72,18 @@ function JobPosting(props) {
             refreshData={refetch}
             fetching={isFetching}
           />
-
         );
       })}
-    </div>
+    </JobContainer>
   );
 }
 
 export default JobPosting;
+
+function JobContainer({ children }) {
+  return (
+    <div className="w-[1259px] flex flex-col  items-start font-[Inter] ml-[160px] mr-[160px] pt-[32px]">
+      {children}
+    </div>
+  );
+}

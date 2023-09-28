@@ -8,6 +8,7 @@ import JobDetailBox from "./RecruiterComponent/JobDetailBox";
 import { Spinner, Skeleton } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { RadioCandidate } from "./RecruiterComponent/Recruiter-1-2-Component";
+import backArrow from "../../assets/recruiter-2/arrow-left-icon.svg";
 
 function ShowJobPosting() {
   const param = useParams();
@@ -30,7 +31,6 @@ function ShowJobPosting() {
     error: errorR,
     loading: loadingR,
     refetch: refetchR,
-
   } = useQuery({
     queryKey: ["jobs", data],
     queryFn: async (data) => {
@@ -76,26 +76,12 @@ function ShowJobPosting() {
   candidates?.sort(sortByStatus);
 
   return (
-    <div className="w-[1259px] flex flex-col  items-start font-[Inter] ml-[160px] mr-[160px] pt-[32px]">
+    <ShowJobContainer>
       <Link to={`/`}>
-        <button className="flex flex-row text-[#616161] text-[15px] font-medium">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g id="Group">
-              <path
-                id="Vector"
-                d="M10.828 12L15.778 16.95L14.364 18.364L8 12L14.364 5.63599L15.778 7.04999L10.828 12Z"
-                fill="#616161"
-              />
-            </g>
-          </svg>
+        <BackButton>
+          <img src={backArrow} />
           Back
-        </button>
+        </BackButton>
       </Link>
       <p className="text-[35px] font-[Montserrat] mt-[21.33]">
         Show Job Posting
@@ -117,8 +103,23 @@ function ShowJobPosting() {
           />
         );
       })}
-    </div>
+    </ShowJobContainer>
   );
 }
 
 export default ShowJobPosting;
+
+function ShowJobContainer({ children }) {
+  return (
+    <div className="w-[1259px] flex flex-col  items-start font-[Inter] ml-[160px] mr-[160px] pt-[32px]">
+      {children}
+    </div>
+  );
+}
+function BackButton({ children }) {
+  return (
+    <button className="flex flex-row text-[#616161] text-[15px] font-medium">
+      {children}
+    </button>
+  );
+}

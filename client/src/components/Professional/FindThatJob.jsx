@@ -1,11 +1,10 @@
-import find from '../../assets/FindThatJob/find.svg';
-import money from '../../assets/FindThatJob/money.svg';
-import { useEffect, useState , useRef } from 'react';
-import { usePro } from '../../contexts/Professional';
-import { AiOutlineClose } from 'react-icons/ai';
-import { debounce } from 'lodash';
-import JobCard from './JobCard';
-
+import find from "../../assets/FindThatJob/find.svg";
+import money from "../../assets/FindThatJob/money.svg";
+import { useEffect, useState, useRef } from "react";
+import { usePro } from "../../contexts/Professional";
+import { AiOutlineClose } from "react-icons/ai";
+import { debounce } from "lodash";
+import JobCard from "./JobCard";
 
 export const FindThatJob = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -18,7 +17,7 @@ export const FindThatJob = () => {
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const jobsPerPage = 9; // Number of jobs to display per page
+  const jobsPerPage = 12; // Number of jobs to display per page
 
   useEffect(() => {
     getJobs({ searchTerm, category, type, minSalary, maxSalary, location });
@@ -32,6 +31,7 @@ export const FindThatJob = () => {
 
   // Calculate total number of pages
   const totalPages = Math.ceil(jobs.length / jobsPerPage);
+  console.log(currentPage)
 
   // Handle next page click
   const handleNextPage = () => {
@@ -46,7 +46,6 @@ export const FindThatJob = () => {
       setCurrentPage(currentPage - 1);
     }
   };
-
 
   return (
     <div className="flex flex-col justify-start items-center w-full min-h-srceen pr-[100px] pl-[100px] pt-[50px] font-[Inter] bg-[#F5F5F6]">
@@ -255,8 +254,8 @@ export const FindThatJob = () => {
         </div>
       </div>
       <div className="flex flex-col justify-center items-start w-full  pt-[12px]">
-        <div className="mb-[16px]">
-          <div className="flex flex-row gap-3 mb-4 items-center w-screen">
+        <div className="mb-[16px] w-full">
+          <div className="flex flex-row gap-3 mt-2 mb-4 items-center w-full">
             <p className="font-[Inter] text-[14px] ">Popular searches:</p>
             {popularJobs.map((job, index) => {
               if (index <= 7) {
@@ -282,33 +281,76 @@ export const FindThatJob = () => {
               }
             })}
           </div>
-          <p className="text-[20px] text-start w-full font-[Montserrat] font-[500]">
-            {jobs.length} jobs for you
-          </p>
+          <div className="flex w-[1280px] justify-center">
+          <button
+            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all 
+          bg-pink-300 text-white px-6 py-2 rounded-lg
+          border-pink-400
+            border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
+            active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-pink-300 shadow-pink-300 active:shadow-none"
+            onClick={handlePrevPage}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <div className=" w-[144px] h-[43px] mx-5 my-10  
+          bg-gray-300 text-white px-6 py-2 rounded-lg
+          border-pink-400
+           
+            ">Page {currentPage} of {totalPages}</div>
+          <button
+            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all 
+            bg-pink-300 text-white px-6 py-2 rounded-lg
+            border-pink-400
+            border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
+            active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-pink-300 shadow-pink-300 active:shadow-none"
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
         </div>
-        <div className='flex flex-wrap justify-start gap-[16px] w-[1280px] h-srceen'>
-            {jobsToDisplay.map((job) => (
-              <JobCard job={job} key={job.job_id} />
-            ))}
-          </div>
-          <div className='pagination-controls'>
-            <button className='cursor-pointer mx-5 my-10 transition-all 
+          <div> <p className="text-[20px] text-start w-full font-[Montserrat] font-[500]">
+            {jobs.length} jobs for you
+          </p></div>
+          
+        </div>
+      
+        <div className="flex flex-wrap justify-start gap-[16px] w-[1280px] h-srceen">
+          {jobsToDisplay.map((job) => (
+            <JobCard job={job} key={job.job_id} />
+          ))}
+        </div>
+        <div className="pagination-controls flex w-[1280px] justify-center">
+          <button
+            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all 
 bg-pink-300 text-white px-6 py-2 rounded-lg
 border-pink-400
 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
-active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-pink-300 shadow-pink-300 active:shadow-none' onClick={handlePrevPage} disabled={currentPage === 1}>
-              Previous
-            </button>
-            <button className='cursor-pointer mx-5 transition-all 
-bg-pink-300 text-white px-6 py-2 rounded-lg
-border-pink-400
-border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
-active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-pink-300 shadow-pink-300 active:shadow-none' onClick={handleNextPage} disabled={currentPage === totalPages}>
-              Next
-            </button>
-          </div>
+active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-pink-300 shadow-pink-300 active:shadow-none"
+            onClick={handlePrevPage}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <div className=" w-[144px] h-[43px] mx-5 my-10  
+          bg-gray-300 text-white px-6 py-2 rounded-lg
+          border-pink-400
+           
+            ">Page {currentPage} of {totalPages}</div>
+          <button
+            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all 
+            bg-pink-300 text-white px-6 py-2 rounded-lg
+            border-pink-400
+            border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
+            active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-pink-300 shadow-pink-300 active:shadow-none"
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );
 };
-        

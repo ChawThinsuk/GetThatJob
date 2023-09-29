@@ -1,5 +1,5 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Box,
   Button,
@@ -13,6 +13,13 @@ import {
   InputLeftAddon,
   FormHelperText,
   useToast,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  useDisclosure 
 } from '@chakra-ui/react';
 import { createClient } from '@supabase/supabase-js';
 import { useGlobalContext } from '../../contexts/registerContext.jsx';
@@ -39,6 +46,8 @@ export function ProfessionalProfile() {
 
   const toast = useToast();
   const { state } = useAuth();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = useRef();
   // console.log(state.userID);
 
   const getProfProfile = async () => {
@@ -101,6 +110,7 @@ export function ProfessionalProfile() {
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
     const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    let testPDF = cv;
     try {
       if (newCv) {  const { data, error: professionalError } = await supabase.storage
       .from('files')
@@ -108,7 +118,8 @@ export function ProfessionalProfile() {
         cacheControl: '3600',
         upsert: false,
       });
-      setNewCv(data.path)
+      // setNewCv(data.path)
+      testPDF = data.path
     if (professionalError) {
       throw professionalError; // Throw the error to trigger the catch block
     }}
@@ -122,7 +133,7 @@ export function ProfessionalProfile() {
         title: title,
         experience: professionalExperience,
         education: educationalInfo,
-        cv: newCv || cv,
+        cv: testPDF,
       };
 
       // Make a PUT request to update the profile data
@@ -138,6 +149,10 @@ export function ProfessionalProfile() {
         duration: 5000,
         isClosable: true,
       });
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
       // Handle any errors that may occur during the update process
       console.error('Error updating profile:', error);
@@ -413,10 +428,43 @@ export function ProfessionalProfile() {
               fontSize='19px'
               color='white'
               borderRadius='19px'
-              onClick={handleSaveChanges}
+              onClick={onOpen}
             >
               SAVE CHANGES
             </Button>
+            <AlertDialog
+            isOpen={isOpen}
+            leastDestructiveRef={cancelRef}
+            onClose={onClose}
+          >
+            <AlertDialogOverlay>
+              <AlertDialogContent>
+                <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                  Confirm Update
+                </AlertDialogHeader>
+
+                <AlertDialogBody>
+                  Are you sure you want to update your profile?
+                </AlertDialogBody>
+
+                <AlertDialogFooter>
+                  <Button
+                    ref={cancelRef}
+                    onClick={onClose} // Close the dialog without updating
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    colorScheme="pink"
+                    onClick={handleSaveChanges} // Call handleSaveChanges when confirmed
+                    ml={3}
+                  >
+                    Update Profile
+                  </Button>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialogOverlay>
+          </AlertDialog>
           </div>
         </div>
       </div>

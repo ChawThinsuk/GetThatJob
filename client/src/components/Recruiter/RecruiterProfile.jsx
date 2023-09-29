@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   ChakraProvider,
   Box,
@@ -10,6 +10,13 @@ import {
   Stack,
   Textarea,
   useToast,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  useDisclosure 
 } from "@chakra-ui/react";
 import { createClient } from "@supabase/supabase-js";
 import { useGlobalContext } from "../../contexts/registerContext.jsx";
@@ -35,6 +42,9 @@ export function RecruiterProfile() {
 
   const { state } = useAuth();
   const toast = useToast();
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = useRef();
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -118,12 +128,70 @@ export function RecruiterProfile() {
     }
   };
 
+  // const handleSaveChanges = async () => {
+  //   const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+  //   const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+  //   const supabase = createClient(supabaseUrl, supabaseAnonKey);
+  //   let logoTest = logo;
+
+  //   try {
+  //     if (newLogo) {
+  //       const { data, error: recError } = await supabase.storage
+  //         .from("files")
+  //         .upload(`companyicon/${Date.now()}${newLogo.name}`, newLogo, {
+  //           cacheControl: "3600",
+  //           upsert: false,
+  //         });
+  //       const urlPath = await supabase.storage
+  //         .from("files")
+  //         .getPublicUrl(data.path);
+  //       logoTest = urlPath.data.publicUrl;
+
+  //       if (recError) {
+  //         throw recError; // Throw the error to trigger the catch block
+  //       }
+  //     }
+
+  //     const updatedRecData = {
+  //       logo: logoTest,
+  //       company_email: recruiterEmail,
+  //       company_name: companyName,
+  //       company_website: companyWebsite,
+  //       company_description: aboutCompany,
+  //     };
+
+  //     await axios.put(
+  //       `http://localhost:4000/recruiter/getrecruiter/${state.userID}`,
+  //       updatedRecData
+  //     );
+
+  //     // Display a success message to the user
+  //     toast({
+  //       title: "Profile updated successfully",
+  //       status: "success",
+  //       duration: 5000,
+  //       isClosable: true,
+  //     });
+  //   } catch (error) {
+  //     // Handle any errors that may occur during the update process
+  //     console.error("Error updating profile:", error);
+  //     toast({
+  //       title: "Error updating profile",
+  //       description:
+  //         "An error occurred while updating your profile. Please try again later.",
+  //       status: "error",
+  //       duration: 5000,
+  //       isClosable: true,
+  //     });
+  //   }
+  // };
+
   const handleSaveChanges = async () => {
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
     const supabase = createClient(supabaseUrl, supabaseAnonKey);
     let logoTest = logo;
-
+  
     try {
       if (newLogo) {
         const { data, error: recError } = await supabase.storage
@@ -136,12 +204,12 @@ export function RecruiterProfile() {
           .from("files")
           .getPublicUrl(data.path);
         logoTest = urlPath.data.publicUrl;
-
+  
         if (recError) {
           throw recError; // Throw the error to trigger the catch block
         }
       }
-
+  
       const updatedRecData = {
         logo: logoTest,
         company_email: recruiterEmail,
@@ -149,12 +217,12 @@ export function RecruiterProfile() {
         company_website: companyWebsite,
         company_description: aboutCompany,
       };
-
+  
       await axios.put(
         `http://localhost:4000/recruiter/getrecruiter/${state.userID}`,
         updatedRecData
       );
-
+  
       // Display a success message to the user
       toast({
         title: "Profile updated successfully",
@@ -162,6 +230,11 @@ export function RecruiterProfile() {
         duration: 5000,
         isClosable: true,
       });
+  
+      // Set a timeout before reloading the page
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000); // 2000 milliseconds = 2 seconds
     } catch (error) {
       // Handle any errors that may occur during the update process
       console.error("Error updating profile:", error);
@@ -175,7 +248,8 @@ export function RecruiterProfile() {
       });
     }
   };
-
+  
+  
   useEffect(() => {
     getRecfProfile();
   }, []);
@@ -329,7 +403,7 @@ export function RecruiterProfile() {
             <p className="mt-2 text-[#8E8E8E] text-[16px]">
               Last Updated: {formattedUpdatedTime}
             </p>
-            <Button
+            {/* <Button
               letterSpacing="2px"
               w="220px"
               h="53px"
@@ -345,7 +419,57 @@ export function RecruiterProfile() {
               onClick={handleSaveChanges}
             >
               UPDATE PROFILE
-            </Button>
+            </Button> */}
+            <Button
+            letterSpacing="2px"
+            w="220px"
+            h="53px"
+            mt={8}
+            mb={8}
+            type="button"
+            bg="#F48FB1"
+            variant="solid"
+            size="sm"
+            fontSize="19px"
+            color="white"
+            borderRadius="19px"
+            onClick={onOpen} // Open the confirmation dialog
+          >
+            UPDATE PROFILE
+          </Button>
+          <AlertDialog
+            isOpen={isOpen}
+            leastDestructiveRef={cancelRef}
+            onClose={onClose}
+          >
+            <AlertDialogOverlay>
+              <AlertDialogContent>
+                <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                  Confirm Update
+                </AlertDialogHeader>
+
+                <AlertDialogBody>
+                  Are you sure you want to update your profile?
+                </AlertDialogBody>
+
+                <AlertDialogFooter>
+                  <Button
+                    ref={cancelRef}
+                    onClick={onClose} // Close the dialog without updating
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    colorScheme="pink"
+                    onClick={handleSaveChanges} // Call handleSaveChanges when confirmed
+                    ml={3}
+                  >
+                    Update Profile
+                  </Button>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialogOverlay>
+          </AlertDialog>
           </form>
         </Box>
       </div>

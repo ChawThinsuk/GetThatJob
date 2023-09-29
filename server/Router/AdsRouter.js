@@ -13,6 +13,19 @@ const stripeClient = stripe(stripeSecretKey);
 const adsRouter = Router();
 const updateTimestamp = new Date();
 adsRouter.use(protect);
+adsRouter.get('/history', async (req, res) => {
+  const { userID } = req.query;
+  try {
+    const jobHistory = await pool.query(
+      'SELECT jobs.job_title, transactions.payment_status, transactions.created_at FROM transactions LEFT JOIN jobs ON transactions.job_id = jobs.job_id LEFT JOIN recruiters ON recruiters.recruiter_id = jobs.recruiter_id WHERE recruiters.user_id = $1 ORDER by transactions.created_at DESC',
+      [userID]
+    );
+    return res.json({ data: jobHistory.rows });
+  } catch (error) {
+    return res.json({ message: error });
+  }
+});
+
 adsRouter.get('/:user_id', async (req, res) => {
   const user_id = req.params.user_id;
   const queryParams = [user_id];
@@ -113,4 +126,5 @@ adsRouter.get('/success/jobs/:job_id', async (req, res) => {
       .json({ message: 'An error occurred while update data' });
   }
 });
+
 export default adsRouter;

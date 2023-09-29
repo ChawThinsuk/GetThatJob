@@ -40,7 +40,7 @@ function Success() {
         </div>
       ) : (
         <>
-          <section className='flex flex-col items-center w-[500px] h-[600px] bg-gray-100 rounded-lg border-[1px] border-gray-200 shadow-lg p-8'>
+          <section className='flex flex-col items-center w-[500px]  bg-gray-100 rounded-lg border-[1px] border-gray-200 shadow-lg p-8'>
             <img src={success} alt='' className='w-[100px] h-[100px]' />
             <p className='mt-3 text-[40px] font-[Inter] font-bold text-gray-600'>
               Payment success

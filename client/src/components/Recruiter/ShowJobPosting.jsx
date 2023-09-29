@@ -151,8 +151,8 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
             <li>
               <a
                 href="#"
-                className={`flex items-center justify-center px-3 h-10 w-25 ml-0 leading-tight text-white rounded-l-lg font-[Inter] text-[16px] ${
-                  currentPage === 1 ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100" : "bg-[#f190b1]"
+                className={`flex items-center justify-center px-3 h-10 w-25 ml-0 leading-tight  rounded-l-lg font-[Inter] text-[16px] ${
+                  currentPage === 1 ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100" : "bg-[#f190b1] text-white"
                 }`}
                 onClick={
                   currentPage === 1
@@ -182,10 +182,10 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
             <li>
               <a
                 href="#"
-                className={`flex items-center justify-center px-3 h-10 w-25 leading-tight text-white rounded-r-lg   font-[Inter] text-[16px] ${
+                className={`flex items-center justify-center px-3 h-10 w-25 leading-tight rounded-r-lg   font-[Inter] text-[16px] ${
                   currentPage === totalPages
                     ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100"
-                    : "bg-[#f190b1]"
+                    : "bg-[#f190b1] text-white"
                 }`}
                 onClick={
                   currentPage === totalPages

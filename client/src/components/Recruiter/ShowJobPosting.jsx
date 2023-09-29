@@ -151,8 +151,8 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
             <li>
               <a
                 href="#"
-                className={`flex items-center justify-center px-3 h-10 w-25 ml-0 leading-tight text-white bg-white rounded-l-lg  dark:bg-[#f190b1] dark:text-white font-[Inter] text-[16px] ${
-                  currentPage === 1 ? "cursor-not-allowed dark:bg-[#E1E2E1] dark:text-[#8E8E8E]" : ""
+                className={`flex items-center justify-center px-3 h-10 w-25 ml-0 leading-tight text-white rounded-l-lg font-[Inter] text-[16px] ${
+                  currentPage === 1 ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100" : "bg-[#f190b1]"
                 }`}
                 onClick={
                   currentPage === 1
@@ -168,10 +168,10 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
               <li key={index}>
                 <a
                   href="#"
-                  className={`flex items-center justify-center px-3 h-10 w-10 leading-tight text-[#616161] dark:bg-rose-200 dark:text-white dark:hover:bg-[#f190b1] font-[Inter] text-[16px] ${
+                  className={`flex items-center justify-center px-3 h-10 w-10 leading-tight text-white hover:bg-[#f190b1] font-[Inter] text-[16px] ${
                     currentPage === index + 1
-                      ? "dark:bg-[#f190b1] dark:text-white"
-                      : ""
+                      ? "bg-[#f38fb1]"
+                      : "bg-rose-200 "
                   }`}
                   onClick={() => handlePageChange(index + 1)}
                 >
@@ -182,10 +182,10 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
             <li>
               <a
                 href="#"
-                className={`flex items-center justify-center px-3 h-10 w-25 leading-tight text-white bg-white rounded-r-lg  dark:bg-[#f190b1]  dark:text-white font-[Inter] text-[16px] ${
+                className={`flex items-center justify-center px-3 h-10 w-25 leading-tight text-white rounded-r-lg   font-[Inter] text-[16px] ${
                   currentPage === totalPages
-                    ? "cursor-not-allowed dark:bg-[#E1E2E1] dark:text-[#8E8E8E]"
-                    : ""
+                    ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100"
+                    : "bg-[#f190b1]"
                 }`}
                 onClick={
                   currentPage === totalPages

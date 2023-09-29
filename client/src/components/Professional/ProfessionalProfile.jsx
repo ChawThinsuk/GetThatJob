@@ -172,7 +172,8 @@ export function ProfessionalProfile() {
                 <FormControl id='email' isRequired>
                   <FormLabel sx={profFormStyle}>Email</FormLabel>
                   <Input
-                    borderColor='#F48FB1'
+                    borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type='email'
                     placeholder='Enter your email address'
                     value={email}
@@ -210,7 +211,8 @@ export function ProfessionalProfile() {
                 <FormControl id='name' isRequired>
                   <FormLabel sx={profFormStyle}>NAME</FormLabel>
                   <Input
-                    borderColor='#F48FB1'
+                    borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type='text'
                     placeholder='Enter your name'
                     value={name}
@@ -222,9 +224,11 @@ export function ProfessionalProfile() {
                 <FormControl id='phone' isRequired>
                   <FormLabel sx={profFormStyle}>Phone</FormLabel>
                   <InputGroup>
-                    <InputLeftAddon children='+66' />
+                    <InputLeftAddon borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1" children='+66' />
                     <Input
-                      borderColor='#F48FB1'
+                      borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                       type='tel'
                       placeholder='Enter your phone number'
                       value={phone}
@@ -242,7 +246,8 @@ export function ProfessionalProfile() {
                 <FormControl id='birthDate' isRequired>
                   <FormLabel sx={profFormStyle}>BIRTHDATE</FormLabel>
                   <Input
-                    borderColor='#F48FB1'
+                    borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type='date'
                     placeholder='Enter your birthdate'
                     value={birthDate}
@@ -254,7 +259,8 @@ export function ProfessionalProfile() {
                 <FormControl id='linkedinUrl' isRequired>
                   <FormLabel sx={profFormStyle}>Linkedin URL</FormLabel>
                   <Input
-                    borderColor='#F48FB1'
+                    borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type='url'
                     placeholder='Enter Linkedin URL'
                     value={linkedinUrl}
@@ -276,7 +282,8 @@ export function ProfessionalProfile() {
                 <FormControl id='title' isRequired>
                   <FormLabel sx={profFormStyle}>TITLE</FormLabel>
                   <Input
-                    borderColor='#F48FB1'
+                    borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type='text'
                     placeholder='Enter your title'
                     value={title}
@@ -292,7 +299,8 @@ export function ProfessionalProfile() {
                   <Textarea
                     w='1013px'
                     h='341px'
-                    borderColor='#F48FB1'
+                    borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type='text'
                     placeholder='Enter your company info'
                     value={professionalExperience}
@@ -306,7 +314,8 @@ export function ProfessionalProfile() {
                   <Textarea
                     w='1013px'
                     h='154px'
-                    borderColor='#F48FB1'
+                    borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type='text'
                     placeholder='Enter your educational info'
                     value={educationalInfo}

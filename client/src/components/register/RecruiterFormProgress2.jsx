@@ -77,6 +77,7 @@ function RecruiterFormProgress2() {
                   <Input
                     w="70%"
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type="url"
                     placeholder="Enter your company url"
                     value={companyWebsite}
@@ -90,6 +91,7 @@ function RecruiterFormProgress2() {
                   <Textarea
                     h="80px"
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type="text"
                     placeholder="Enter your company info"
                     value={aboutCompany}
@@ -118,6 +120,7 @@ function RecruiterFormProgress2() {
                   py={5}
                   type="submit"
                   borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                   variant="outline"
                   size="sm"
                   fontSize="md"

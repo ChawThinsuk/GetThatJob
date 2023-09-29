@@ -9,10 +9,9 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 //Page 1
-export function RadioJobPosting() {
+export function RadioJobPosting(props) {
   const { jobPostingFilterState, setJobPostingFilterState } =
     useRecruiterContext();
-  const { handleDownloadClick } = useGlobalContext();  
   return (
     <div className="pt-[21.33px] text-[#616161] text-[15px] ">
       <p className="text-[11px]">FILTER YOUR JOB POSTINGS</p>
@@ -24,6 +23,7 @@ export function RadioJobPosting() {
           className="accent-[#BF5F82]"
           onChange={(e) => {
             setJobPostingFilterState(e.target.value);
+            props.page(1)
           }}
           checked={jobPostingFilterState === "all"}
         />
@@ -35,6 +35,7 @@ export function RadioJobPosting() {
           className="accent-[#BF5F82]"
           onChange={(e) => {
             setJobPostingFilterState(e.target.value);
+            props.page(1)
           }}
           checked={jobPostingFilterState === "track"}
         />
@@ -46,6 +47,7 @@ export function RadioJobPosting() {
           className="accent-[#BF5F82]"
           onChange={(e) => {
             setJobPostingFilterState(e.target.value);
+            props.page(1)
           }}
           checked={jobPostingFilterState === "closed"}
         />
@@ -132,7 +134,7 @@ export function ClosedJobButton() {
   );
 }
 //Page 2
-export function RadioCandidate() {
+export function RadioCandidate(props) {
   const { candidateFilterState, setCandidateFilterState } = useRecruiterContext();
   return (
     <div className="pt-[21.33px] text-[#616161] text-[15px] ">
@@ -145,6 +147,7 @@ export function RadioCandidate() {
           className="accent-[#BF5F82]"
           onChange={(e) => {
             setCandidateFilterState(e.target.value);
+            props.page(1)
           }}
           checked={candidateFilterState === "all"}
         />
@@ -156,6 +159,7 @@ export function RadioCandidate() {
           className="accent-[#BF5F82]"
           onChange={(e) => {
             setCandidateFilterState(e.target.value);
+            props.page(1)
           }}
           checked={candidateFilterState === "waiting"}
         />
@@ -167,6 +171,7 @@ export function RadioCandidate() {
           className="accent-[#BF5F82]"
           onChange={(e) => {
             setCandidateFilterState(e.target.value);
+            props.page(1)
           }}
           checked={candidateFilterState === "in_progress"}
         />
@@ -178,6 +183,7 @@ export function RadioCandidate() {
           className="accent-[#BF5F82]"
           onChange={(e) => {
             setCandidateFilterState(e.target.value);
+            props.page(1)
           }}
           checked={candidateFilterState === "finished"}
         />

@@ -82,6 +82,7 @@ function TalentFormProgress() {
                   <FormLabel sx={customTextStyle}>Email Address</FormLabel>
                   <Input
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type="email"
                     placeholder="Enter your email address"
                     value={email}
@@ -94,6 +95,7 @@ function TalentFormProgress() {
                   <FormLabel sx={customTextStyle}>Password</FormLabel>
                   <Input
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type="password"
                     placeholder="Enter your password"
                     value={password}
@@ -108,6 +110,7 @@ function TalentFormProgress() {
                   </FormLabel>
                   <Input
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type="password"
                     placeholder="Confirm your password"
                     value={passwordConfirmation}

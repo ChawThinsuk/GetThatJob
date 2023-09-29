@@ -184,7 +184,7 @@ export function ProfessionalProfile() {
                   <FormLabel sx={profFormStyle}>Email</FormLabel>
                   <Input
                     borderColor="#F48FB1"
-                    focusBorderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"     
                     type='email'
                     placeholder='Enter your email address'
                     value={email}

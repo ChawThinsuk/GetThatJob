@@ -83,6 +83,7 @@ function TalentFormProgress2() {
                   <FormLabel sx={customTextStyle}>NAME</FormLabel>
                   <Input
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type="text"
                     placeholder="Enter your name"
                     value={name}
@@ -98,6 +99,7 @@ function TalentFormProgress2() {
                     <InputLeftAddon children="+66" />
                     <Input
                       borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                       type="tel"
                       placeholder="Enter your phone number"
                       value={phone}
@@ -116,6 +118,7 @@ function TalentFormProgress2() {
                   <FormLabel sx={customTextStyle}>BIRTHDATE</FormLabel>
                   <Input
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type="date"
                     placeholder="Enter your birthdate"
                     value={birthDate}
@@ -128,6 +131,7 @@ function TalentFormProgress2() {
                   <FormLabel sx={customTextStyle}>Linkedin URL</FormLabel>
                   <Input
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type="url"
                     placeholder="Enter Linkedin URL"
                     value={linkedinUrl}
@@ -163,6 +167,7 @@ function TalentFormProgress2() {
                   py={5}
                   type="button"
                   borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                   variant="outline"
                   size="sm"
                   fontSize="md"

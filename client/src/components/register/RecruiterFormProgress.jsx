@@ -67,6 +67,7 @@ function RecruiterFormProgress() {
                   <FormLabel sx={customTextStyle}>Company Name</FormLabel>
                   <Input
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type="name"
                     placeholder="Enter your company name"
                     value={companyName}
@@ -79,6 +80,7 @@ function RecruiterFormProgress() {
                   <FormLabel sx={customTextStyle}>Email</FormLabel>
                   <Input
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type="email"
                     placeholder="Enter your email address"
                     value={recruiterEmail}
@@ -91,6 +93,7 @@ function RecruiterFormProgress() {
                   <FormLabel sx={customTextStyle}>Password</FormLabel>
                   <Input
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type="password"
                     placeholder="Enter your password"
                     value={recruiterPassword}
@@ -105,6 +108,7 @@ function RecruiterFormProgress() {
                   </FormLabel>
                   <Input
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type="password"
                     placeholder="Enter your password"
                     value={recruiterpasswordConfirmation}

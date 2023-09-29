@@ -247,6 +247,7 @@ export function RecruiterProfile() {
                 <FormLabel sx={profFormStyle}>COMPANY EMAIL</FormLabel>
                 <Input
                   borderColor="#F48FB1"
+                  focusBorderColor="#F48FB1"
                   type="email"
                   placeholder="Enter your email address"
                   value={recruiterEmail}
@@ -259,6 +260,7 @@ export function RecruiterProfile() {
                 <FormLabel sx={profFormStyle}>COMPANY NAME</FormLabel>
                 <Input
                   borderColor="#F48FB1"
+                  focusBorderColor="#F48FB1"
                   type="name"
                   placeholder="Enter your company name"
                   value={companyName}
@@ -297,6 +299,7 @@ export function RecruiterProfile() {
                 <FormLabel sx={profFormStyle}>Company Website</FormLabel>
                 <Input
                   borderColor="#F48FB1"
+                  focusBorderColor="#F48FB1"
                   type="url"
                   placeholder="Enter your company url"
                   value={companyWebsite}
@@ -311,6 +314,7 @@ export function RecruiterProfile() {
                   w="1013px"
                   h="229px"
                   borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                   type="text"
                   placeholder="Enter your company info"
                   value={aboutCompany}

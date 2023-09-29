@@ -83,7 +83,8 @@ export default function PhoneNumberInput({
         </Flex>
       </InputLeftElement>
       <Input
-
+        borderColor="#F48FB1"
+        focusBorderColor="#F48FB1"
         pl="5rem"
         type="tel"
         value={number}

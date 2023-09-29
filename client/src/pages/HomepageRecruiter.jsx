@@ -33,7 +33,7 @@ export const HomepageRecruiter = () => {
           <Route path="/ads" element={<Ads />} />
           <Route path="/ads/success" element={<Success />} />
           <Route path="/ads/cancel" element={<Cancel />} />
-          <Route path="/ads/history" element={<History />} />
+          <Route path="/history" element={<History />} />
         </Routes>
       </div>
     <HelpButton email={state.email}/>

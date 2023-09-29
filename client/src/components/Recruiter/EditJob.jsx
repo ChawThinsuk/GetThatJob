@@ -1,5 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect,useRef  } from "react";
 import {
   Box,
   Button,
@@ -17,7 +17,16 @@ import JobCategorySelect from "../Recruiter/createComponent/JobCategory.jsx";
 import JobType from "../Recruiter/createComponent/JobType.jsx";
 import { useAuth } from "../../contexts/Authorization.jsx";
 import axios from "axios";
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  useDisclosure,
+} from "@chakra-ui/react";
 
 function EditJob() {
   const { profFormStyle } = useGlobalContext();
@@ -33,6 +42,8 @@ function EditJob() {
   const toast = useToast();
   const navigate = useNavigate();
   const { id } = useParams();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = useRef();
   // console.log(state.userID);
   // console.log(id)
 
@@ -41,19 +52,20 @@ function EditJob() {
       const res = await axios.get(
         `http://localhost:4000/recruiter/${state.userID}/getjob/${id}`
       );
-      const data = res.data.data
+      const data = res.data.data;
       // setJobID(data.job_id)
       setJob_title(data.job_title);
-      setJobCategory(data.job_category)
-      setJobType(data.job_type)
-      setSalaryMin(data.salary_min)
-      setSalaryMax(data.salary_max)
-      setJobPosition(data.job_position)
-      setJobMandatory(data.job_mandatory)
-      setJobOptional(data.job_optional)
+      setJobCategory(data.job_category);
+      setJobType(data.job_type);
+      setSalaryMin(data.salary_min);
+      setSalaryMax(data.salary_max);
+      setJobPosition(data.job_position);
+      setJobMandatory(data.job_mandatory);
+      setJobOptional(data.job_optional);
     } catch (err) {
       console.log(err);
-    } return 
+    }
+    return;
   };
 
   const handleSubmit = async () => {
@@ -92,6 +104,11 @@ function EditJob() {
     }
   };
 
+  const handleConfirmSubmit = () => {
+    onClose(); // Close the confirmation dialog
+    handleSubmit(); // Call your handleSubmit function
+  };
+
   const handleMandatoryChange = (event) => {
     const value = event.target.value;
     if (event.key === "Enter" && !event.shiftKey) {
@@ -115,55 +132,6 @@ function EditJob() {
   useEffect(() => {
     getJobData();
   }, []);
-
-  // const handleSaveChanges = async () => {
-  //   try {
-  //     const { data, error: recError } = await supabase.storage
-  //       .from("files")
-  //       .upload(`companyicon/${Date.now()}${newLogo.name}`, newLogo, {
-  //         cacheControl: "3600",
-  //         upsert: false,
-  //       });
-
-  //     const urlPath = supabase.storage.from("files").getPublicUrl(data.path);
-
-  //     if (recError) {
-  //       throw recError; // Throw the error to trigger the catch block
-  //     }
-
-  //     const updatedRecData = {
-  //       company_email: recruiterEmail,
-  //       company_name: companyName,
-  //       company_website: companyWebsite,
-  //       company_description: aboutCompany,
-  //       logo: urlPath.data.publicUrl,
-  //     };
-
-  //     await axios.put(
-  //       `http://localhost:4000/recruiter/getrecruiter/${state.userID}`,
-  //       updatedRecData
-  //     );
-
-  //     // Display a success message to the user
-  //     toast({
-  //       title: "Profile updated successfully",
-  //       status: "success",
-  //       duration: 5000,
-  //       isClosable: true,
-  //     });
-  //   } catch (error) {
-  //     // Handle any errors that may occur during the update process
-  //     console.error("Error updating profile:", error);
-  //     toast({
-  //       title: "Error updating profile",
-  //       description:
-  //         "An error occurred while updating your profile. Please try again later.",
-  //       status: "error",
-  //       duration: 5000,
-  //       isClosable: true,
-  //     });
-  //   }
-  // };
 
   return (
     <ChakraProvider>
@@ -191,7 +159,10 @@ function EditJob() {
                 </FormControl>
                 <FormControl id="phone" isRequired>
                   <FormLabel sx={profFormStyle}>Job Category</FormLabel>
-                  <JobCategorySelect setJobCategory={setJobCategory} value={job_category} />
+                  <JobCategorySelect
+                    setJobCategory={setJobCategory}
+                    value={job_category}
+                  />
                 </FormControl>
                 <FormControl id="birthDate" isRequired>
                   <FormLabel sx={profFormStyle}>Type</FormLabel>
@@ -279,10 +250,43 @@ function EditJob() {
               fontSize="19px"
               color="white"
               borderRadius="19px"
-              onClick={handleSubmit}
+              onClick={onOpen} // Open the confirmation dialog
             >
               SAVE EDIT
             </Button>
+            <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              Confirmation
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              Are you sure you want to save the edits?
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button
+                ref={cancelRef}
+                onClick={onClose} // Close the dialog without submitting
+              >
+                Cancel
+              </Button>
+              <Button
+                colorScheme="pink"
+                onClick={handleConfirmSubmit} // Call handleSubmit when confirmed
+                ml={3}
+              >
+                Save Edits
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ export const HomepageRecruiter = () => {
   return (
     <>
     <RecruiterProvider>
-      <div className="grid grid-cols-[17.75%_81.25%]">
+      <div className="grid grid-cols-[17.75%_81.25%] min-w-[1840px] min-h-[940px]">
         <NavbarHomepage userType={state.userType} />
         <Routes>
           <Route path="/" element={<JobPosting id={state.userID} />} />

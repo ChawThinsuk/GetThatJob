@@ -220,7 +220,7 @@ function EditJob() {
                   <Textarea
                     w="992px"
                     h="89px"
-                    bborderColor="#F48FB1"
+                    borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
                     type="text"
                     placeholder="Describe the main functions and characteristics of your job position"
@@ -237,7 +237,7 @@ function EditJob() {
                   <Textarea
                     w="992px"
                     h="89px"
-                    bborderColor="#F48FB1"
+                    borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
                     type="text"
                     placeholder="List each mandatory requirement in a new line"
@@ -253,7 +253,7 @@ function EditJob() {
                   <Textarea
                     w="992px"
                     h="89px"
-                    bborderColor="#F48FB1"
+                    borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
                     type="text"
                     placeholder="List each optional requirement in a new line"

@@ -13,7 +13,7 @@ export const HomepageProfessional = () => {
   const { state } = useAuth();
   return (
     <>
-    <div className="grid grid-cols-[17.75%_81.25%] w-[1920px] min-h-screen ">
+    <div className="grid grid-cols-[17.75%_81.25%]">
       <NavbarHomepage userType={state.userType} />
       <Routes>
         <Route path="/" element={<FindThatJob />} />

@@ -115,10 +115,6 @@ export function RecruiterProfile() {
           isClosable: true,
         });
       }
-    } else {
-      // No file selected, clear the selected file and file name
-      setLogo(null);
-      setSelectedLogoFileName(null);
     }
   };
 
@@ -126,26 +122,32 @@ export function RecruiterProfile() {
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
     const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    let logoTest = logo;
+
     try {
-      const { data, error: recError } = await supabase.storage
-        .from("files")
-        .upload(`companyicon/${Date.now()}${newLogo.name}`, newLogo, {
-          cacheControl: "3600",
-          upsert: false,
-        });
+      if (newLogo) {
+        const { data, error: recError } = await supabase.storage
+          .from("files")
+          .upload(`companyicon/${Date.now()}${newLogo.name}`, newLogo, {
+            cacheControl: "3600",
+            upsert: false,
+          });
+        const urlPath = await supabase.storage
+          .from("files")
+          .getPublicUrl(data.path);
+        logoTest = urlPath.data.publicUrl;
 
-      const urlPath = supabase.storage.from("files").getPublicUrl(data.path);
-
-      if (recError) {
-        throw recError; // Throw the error to trigger the catch block
+        if (recError) {
+          throw recError; // Throw the error to trigger the catch block
+        }
       }
 
       const updatedRecData = {
+        logo: logoTest,
         company_email: recruiterEmail,
         company_name: companyName,
         company_website: companyWebsite,
         company_description: aboutCompany,
-        logo: urlPath.data.publicUrl,
       };
 
       await axios.put(
@@ -178,8 +180,8 @@ export function RecruiterProfile() {
     getRecfProfile();
   }, []);
   return (
-    <ChakraProvider>
-      <div className="flex pl-[160px] font-[Inter]">
+    <>
+      <div className="flex pl-[160px] font-[Inter] w-full h-full">
         <Box w="100%" maxW="lg" mt={10} borderRadius="md">
           <h1 className="text-[45px] font-[Montserrat] mb-4">Profile</h1>
           <div className="flex mb-[11px]">
@@ -314,7 +316,7 @@ export function RecruiterProfile() {
                   w="1013px"
                   h="229px"
                   borderColor="#F48FB1"
-                    focusBorderColor="#F48FB1"
+                  focusBorderColor="#F48FB1"
                   type="text"
                   placeholder="Enter your company info"
                   value={aboutCompany}
@@ -347,7 +349,7 @@ export function RecruiterProfile() {
           </form>
         </Box>
       </div>
-    </ChakraProvider>
+    </>
   );
 }
 /*  */

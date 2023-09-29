@@ -68,7 +68,7 @@ export default function PhoneNumberInput({
         >
           <option value="" />
           {options.map(option => (
-            <option value={option.value}>{option.label}</option>
+            <option key={option.value} value={option.value}>{option.label}</option>
           ))}
         </Select>
         <Flex p={3} pr={8}  width="100%" alignItems="center">

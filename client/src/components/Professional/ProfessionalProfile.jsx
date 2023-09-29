@@ -64,7 +64,7 @@ export function ProfessionalProfile() {
     setProfessionalExperience(response.data.data.experience);
     setEducationalInfo(response.data.data.education);
     setCv(response.data.data.cv);
-    console.log(response.data.data.cv);
+    // console.log(response.data.data.cv);
     setSelectedFileName(response.data.data.cv);
     setFormattedUpdatedTime(newFormattedUpdatedTime); // Define newFormattedUpdatedTime here
   };
@@ -81,7 +81,8 @@ export function ProfessionalProfile() {
           setNewCv(file);
           console.log(file);
           setSelectedNewFileName(file.name);
-        } else {
+          console.Console.log(file.name);
+        } else if (file) {
           setNewCv(null);
           setSelectedNewFileName(null);
           toast({
@@ -92,10 +93,6 @@ export function ProfessionalProfile() {
             isClosable: true,
           });
         }
-      } else {
-        // No file selected, clear the selected file and file name
-        setCv(null);
-        setSelectedFileName(null);
       }
     }
   };
@@ -104,17 +101,18 @@ export function ProfessionalProfile() {
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
     const supabase = createClient(supabaseUrl, supabaseAnonKey);
-    console.log(cv);
     try {
-      const { data, error: professionalError } = await supabase.storage
-        .from('files')
-        .upload(`professionalcv/${Date.now()}${newCv.name}`, newCv, {
-          cacheControl: '3600',
-          upsert: false,
-        });
-      if (professionalError) {
-        throw professionalError; // Throw the error to trigger the catch block
-      }
+      if (newCv) {  const { data, error: professionalError } = await supabase.storage
+      .from('files')
+      .upload(`professionalcv/${Date.now()}${newCv.name}`, newCv, {
+        cacheControl: '3600',
+        upsert: false,
+      });
+      setNewCv(data.path)
+    if (professionalError) {
+      throw professionalError; // Throw the error to trigger the catch block
+    }}
+    
       const updatedProfileData = {
         email: email,
         username: name,
@@ -124,10 +122,8 @@ export function ProfessionalProfile() {
         title: title,
         experience: professionalExperience,
         education: educationalInfo,
-        cv: data.path,
+        cv: newCv || cv,
       };
-
-      console.log(updatedProfileData.cv);
 
       // Make a PUT request to update the profile data
       await axios.put(
@@ -224,15 +220,15 @@ export function ProfessionalProfile() {
                 <FormControl id='phone' isRequired>
                   <FormLabel sx={profFormStyle}>Phone</FormLabel>
                   <InputGroup>
-                    <InputLeftAddon borderColor="#F48FB1"
-                    focusBorderColor="#F48FB1" children='+66' />
+                    {/* <InputLeftAddon borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1" children='+66' /> */}
                     <Input
                       borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
                       type='tel'
                       placeholder='Enter your phone number'
                       value={phone}
-                      maxLength={9}
+                      maxLength={10}
                       onChange={(event) => {
                         setPhone(event.target.value);
                       }}

@@ -15,12 +15,10 @@ import Cancel from "../components/Recruiter/Advertisement/Cancel";
 
 export const HomepageRecruiter = () => {
   const { state } = useAuth();
-  const test = import.meta.env.PROJECT_ID;
-  console.log(test);
   return (
     <>
     <RecruiterProvider>
-      <div className="grid grid-cols-[15%_85%] w-screen min-h-screen ">
+      <div className="grid grid-cols-[17.75%_81.25%]">
         <NavbarHomepage userType={state.userType} />
         <Routes>
           <Route path="/" element={<JobPosting id={state.userID} />} />

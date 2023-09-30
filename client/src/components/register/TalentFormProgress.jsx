@@ -8,6 +8,9 @@ import {
   Input,
   Stack,
   Text,
+  Alert,
+  AlertIcon,
+  CloseButton,
 } from "@chakra-ui/react";
 
 import { useGlobalContext } from "../../contexts/registerContext.jsx";
@@ -24,6 +27,21 @@ function TalentFormProgress() {
     passwordConfirmation,
     setPasswordConfirmation,
   } = useGlobalContext();
+
+  const [showPasswordMismatchAlert, setShowPasswordMismatchAlert] = useState(
+    false
+  );
+  const [showEmptyFieldAlert, setShowEmptyFieldAlert] = useState(false);
+
+  const handleSubmit = () => {
+    if (password !== passwordConfirmation) {
+      setShowPasswordMismatchAlert(true);
+    } else if (!email || !password || !passwordConfirmation) {
+      setShowEmptyFieldAlert(true);
+    } else {
+      setRegisterPage(registerPage + 1);
+    }
+  };
 
   return (
     <div className="flex w-full">
@@ -44,9 +62,7 @@ function TalentFormProgress() {
               <Text>Information</Text>
             </div>
             <div
-              onClick={() => {
-                setRegisterPage(registerPage + 1);
-              }}
+              onClick={handleSubmit}
               className="mr-4 w-[32px] h-[32px] bg-[#E1E2E1] rounded-full text-white text-center font-semibold flex items-center justify-center"
             >
               2
@@ -118,23 +134,45 @@ function TalentFormProgress() {
                       setPasswordConfirmation(event.target.value);
                     }}
                   />
+                  {showPasswordMismatchAlert && (
+                    <Alert status="error" borderRadius="md" mt={5}>
+                      <AlertIcon />
+                      The passwords do not match.
+                      <CloseButton
+                        onClick={() => setShowPasswordMismatchAlert(false)}
+                        position="absolute"
+                        right="8px"
+                        top="8px"
+                      />
+                    </Alert>
+                  )}
+                  {showEmptyFieldAlert && (
+                    <Alert status="warning" borderRadius="md" mt={5}>
+                      <AlertIcon />
+                      Please fill in all input fields.
+                      <CloseButton
+                        onClick={() => setShowEmptyFieldAlert(false)}
+                        position="absolute"
+                        right="8px"
+                        top="8px"
+                      />
+                    </Alert>
+                  )}
                 </FormControl>
               </Stack>
               <center>
                 <Button
+                  type="button"
                   px={5}
                   py={5}
                   mt={8}
-                  type="button"
                   bg="#F48FB1"
                   variant="solid"
                   size="sm"
                   fontSize="md"
                   color="white"
                   borderRadius="16px"
-                  onClick={() => {
-                    setRegisterPage(registerPage + 1);
-                  }}
+                  onClick={handleSubmit}
                 >
                   NEXT &gt;
                 </Button>

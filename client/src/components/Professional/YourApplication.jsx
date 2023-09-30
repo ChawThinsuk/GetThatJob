@@ -1,15 +1,23 @@
 import { JobHeader } from "./JobHeader";
-import { Textarea } from "@chakra-ui/react";
-import { Text, Box, useToast } from "@chakra-ui/react";
 import {
+  Textarea,
   Radio,
   RadioGroup,
   Stack,
   Button,
   Flex,
+  Text, Box, useToast,
   Spinner,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  AlertDialogCloseButton,
+  useDisclosure,
 } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { EmailIcon } from "@chakra-ui/icons";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
@@ -19,6 +27,7 @@ import { useAuth } from "../../contexts/Authorization";
 import axios from "axios";
 import leftArrow from "../../assets/pro2/leftArrow.svg";
 import { Link } from "react-router-dom";
+import uploadlogo from '../../assets/register-images/pdf-upload.svg';
 
 export const YourApplication = () => {
   const navigate = useNavigate();
@@ -32,6 +41,8 @@ export const YourApplication = () => {
   const { state } = useAuth();
   const [interestingData, setInterestingData] = useState("");
   const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = useRef();
 
   const handleSubmit = async () => {
     try {
@@ -181,7 +192,7 @@ export const YourApplication = () => {
       <Box
         display="flex"
         flexDirection="column"
-        gap="1.1rem"
+        gap="0.8rem"
         width="60.1rem"
         alignItems="flex-start"
       >
@@ -194,7 +205,7 @@ export const YourApplication = () => {
           gap="0.35rem"
           alignItems="flex-start"
         >
-          <Text className="w-[1013.384px] text-[21.334px] text-[#373737] font-[400] leading-[32.001px] tracking-[0.05px] font-[Montserrat]">
+          <Text className="w-[1013.384px] text-[14px] text-[#373737] font-[400] leading-[32.001px] tracking-[1.5px] font-[Inter] ">
             SEND YOUR CV UPDATED
           </Text>
           {/* ... */}
@@ -209,6 +220,7 @@ export const YourApplication = () => {
             letterSpacing="0.01rem"
             color="#616161"
             colorScheme="customRadio1"
+            mb={3}
           >
             <Stack direction="row">
               <Radio value="1">Use current CV</Radio>
@@ -233,6 +245,7 @@ export const YourApplication = () => {
             lineHeight="1.35rem"
             letterSpacing="0.1rem"
           >
+            
             <Button
               bg="#F48FB1"
               textColor="white"
@@ -240,24 +253,24 @@ export const YourApplication = () => {
               onClick={() => document.getElementById("cvInput").click()}
               isDisabled={value === "1"}
               color="white"
-              padding="2.5rem"
-              fontSize="1.3rem"
+              width="178px"
+              height="48px"
+              fontSize="16px"
               fontStyle="normal"
-              fontWeight="500"
+              fontWeight="400"
               lineHeight="1.6rem"
-              letterSpacing="0.01rem"
-              textTransform="uppercase"
-              borderRadius="10px"
-              className="font-[Montserrat]"
+              letterSpacing="0.25px"
+              borderRadius="10.6px"
+              className="font-[Inter]"
             >
-              Choose a File
+             <span><img className="w-[25px] h-[25px] mr-3" src={uploadlogo} alt='logo' /></span> Choose a File
             </Button>
             {value === "1" ? (
-              <Text color="#616161" className="font-[Montserrat]">
+              <Text letterSpacing="0.25px" color="#616161" className="font-[Inter]">
                 {cvData ? cvData : "You did not uploaded your CV"}
               </Text>
             ) : (
-              <Text color="#616161" className="font-[Montserrat]">
+              <Text letterSpacing="0.25px" color="#616161" className="font-[Inter]">
                 {cvChosen ? cvFileName : "No file chosen"}
               </Text>
             )}
@@ -277,19 +290,20 @@ export const YourApplication = () => {
             fontWeight="400"
             lineHeight="1.3rem"
             color="#8E8E8E"
+            mb={3}
           >
-            {" "}
             Only PDF. Max size 5MB
           </Text>
         </Box>
         <Box display="flex" flexDirection="column" width="47.7rem" gap="0.4rem">
           <Text
-            className="font-[Montserrat]"
-            fontSize="1.3rem"
+            className="font-[Inter]"
+            fontSize="12px"
             fontStyle="normal"
             fontWeight="400"
             lineHeight="normal"
             textTransform="uppercase"
+            letterSpacing="1.5px"
             color="#373737"
           >
             Professional experience (taken from your profile)
@@ -298,20 +312,21 @@ export const YourApplication = () => {
             placeholder="Professional experience"
             border="2px"
             borderColor="#F48FB1"
+            focusBorderColor="#F48FB1"
             display="flex"
             alignItems="flex-start"
             padding="0.6rem"
             alignSelf="stretch"
-            fontFamily="Montserrat"
-            fontSize="1rem"
+            fontFamily="Inter"
+            fontSize="15px"
             fontStyle="normal"
             fontWeight="400"
-            lineHeight="1.35rem"
-            letterSpacing="0.05rem"
-            textTransform="uppercase"
+            lineHeight="20px"
+            letterSpacing="0.25px"
+            borderRadius="8px"
             color="#373737"
-            height="30rem"
-            width="60rem"
+            height="314px"
+            width="1013px"
             value={experienceData}
             onChange={(e) => setExperienceData(e.target.value)}
           />
@@ -323,12 +338,13 @@ export const YourApplication = () => {
           gap="0.25rem"
         >
           <Text
-            className="font-[Montserrat]"
-            fontSize="1.3rem"
+            className="font-[Inter]"
+            fontSize="12px"
             fontStyle="normal"
             fontWeight="400"
             lineHeight="normal"
             textTransform="uppercase"
+            letterSpacing="1.5px"
             color="#373737"
           >
             Why are you interested in working at {data.data.job.company_name}
@@ -337,20 +353,21 @@ export const YourApplication = () => {
             placeholder="Mention things about The Company Name SA that excite you. Why would you be a good candidate?"
             border="2px"
             borderColor="#F48FB1"
+            focusBorderColor="#F48FB1"
             display="flex"
             alignItems="flex-start"
             padding="0.6rem"
             alignSelf="stretch"
-            fontFamily="Montserrat"
-            fontSize="1rem"
+            fontFamily="Inter"
+            fontSize="15px"
             fontStyle="normal"
             fontWeight="400"
-            lineHeight="1.35rem"
-            letterSpacing="0.05rem"
-            textTransform="uppercase"
+            lineHeight="20px"
+            letterSpacing="0.25px"
+            borderRadius="8px"
             color="#373737"
-            height="25rem"
-            width="60rem"
+            height="101px"
+            width="1013px"
             value={interestingData}
             onChange={(e) => setInterestingData(e.target.value)}
           />
@@ -380,14 +397,49 @@ export const YourApplication = () => {
           color="white"
           bg="#F48FB1"
           display="flex"
-          padding="2.5rem"
+          width="310px"
+          height="74px"
+          borderRadius="23px"
           gap="0.5rem"
           alignItems="center"
-          className="font-[Montserrat] tracking-[1.667px] rounded-[21.3344px]"
-          onClick={handleSubmit}
+          className="font-[Inter] tracking-[1.667px] rounded-[21.3344px]"
+          onClick={onOpen}
         >
           SEND APPLICATION
         </Button>
+        <AlertDialog
+          isOpen={isOpen}
+          leastDestructiveRef={cancelRef}
+          onClose={onClose}
+        >
+          <AlertDialogOverlay>
+            <AlertDialogContent>
+              <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                Confirm Application
+              </AlertDialogHeader>
+
+              <AlertDialogBody>
+                Are you sure you want to application?
+              </AlertDialogBody>
+
+              <AlertDialogFooter>
+                <Button
+                  ref={cancelRef}
+                  onClick={onClose} // Close the dialog without updating
+                >
+                  Cancel
+                </Button>
+                <Button
+                  colorScheme="pink"
+                  onClick={handleSubmit} // Call handleSaveChanges when confirmed
+                  ml={3}
+                >
+                  Confirm
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialogOverlay>
+        </AlertDialog>
       </Box>
     </Box>
   );

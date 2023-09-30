@@ -66,7 +66,7 @@ export const YourApplication = () => {
       }
       if (resume === null) {
         return toast({
-          title: "NULL",
+          title: "Please upload your resume.",
           status: "error",
           duration: 2000,
           isCloseable: true,

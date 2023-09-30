@@ -160,7 +160,7 @@ export const JobHeader = (props) => {
         </div>
         {/*boxes div*/}
         <div className="flex gap-[42.669px] mt-[20.668px]">
-          <div className="flex flex-col items-center justify-center min-w-[374.685px] h-[88px] border-[1.3334px] border-[#BF5F82] bg-white rounded-[10.667px] shadow-pro2">
+          <div className="flex flex-col items-center justify-center min-w-[374.685px] px-[32px] h-[88px] border-[1.3334px] border-[#BF5F82] bg-white rounded-[10.667px] shadow-pro2">
             <p className="text-[18px] text-[#616161] font-[400] font-[Montserrat] tracking-[0.2001px]">
               Category
             </p>
@@ -171,7 +171,7 @@ export const JobHeader = (props) => {
               </p>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-[277.347px] h-[88px] border-[1.3334px] border-[#BF5F82] bg-white rounded-[10.667px] shadow-pro2">
+          <div className="flex flex-col items-center justify-center w-[277.347px] h-[88px] px-[32px] border-[1.3334px] border-[#BF5F82] bg-white rounded-[10.667px] shadow-pro2">
             <p className="text-[18px] text-[#616161] font-[400] font-[Montserrat] tracking-[0.2001px]">
               Type
             </p>

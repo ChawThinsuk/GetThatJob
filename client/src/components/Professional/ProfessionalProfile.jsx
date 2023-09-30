@@ -74,6 +74,7 @@ export function ProfessionalProfile() {
     setEducationalInfo(response.data.data.education);
     setCv(response.data.data.cv);
     // console.log(response.data.data.cv);
+    // console.log(response.data.data.cv);
     setSelectedFileName(response.data.data.cv);
     setFormattedUpdatedTime(newFormattedUpdatedTime); // Define newFormattedUpdatedTime here
   };
@@ -123,7 +124,6 @@ export function ProfessionalProfile() {
     if (professionalError) {
       throw professionalError; // Throw the error to trigger the catch block
     }}
-    
       const updatedProfileData = {
         email: email,
         username: name,

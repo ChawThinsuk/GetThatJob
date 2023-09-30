@@ -62,34 +62,34 @@ export const JobHeader = (props) => {
     }
   };
   const toast = useToast();
-  const handleSubmit = async () => {
-    try {
-      const submitProfileData = {
-        job_user_cv: props.state.cvData,
-        job_user_experience: props.state.experienceData,
-        job_user_interesting: props.state.interestingData,
-      };
-      await axios.put(
-        `http://localhost:4000/pro/users/${state.userID}/jobs/${job_id}`,
-        submitProfileData
-      );
-      toast({
-        title: "Profile submitted successfully",
-        status: "success",
-        duration: 2000,
-        isCloseable: true,
-      });
-      navigate("/apply");
-    } catch (error) {
-      console.error("Error submit profile");
-      toast({
-        title: "An error occured while submit your profile, Please try again",
-        status: "error",
-        duration: 2000,
-        isCloseable: true,
-      });
-    }
-  };
+  // const handleSubmit = async () => {
+  //   try {
+  //     const submitProfileData = {
+  //       job_user_cv: props.state.cvData,
+  //       job_user_experience: props.state.experienceData,
+  //       job_user_interesting: props.state.interestingData,
+  //     };
+  //     await axios.put(
+  //       `http://localhost:4000/pro/users/${state.userID}/jobs/${job_id}`,
+  //       submitProfileData
+  //     );
+  //     toast({
+  //       title: "Profile submitted successfully",
+  //       status: "success",
+  //       duration: 2000,
+  //       isCloseable: true,
+  //     });
+  //     navigate("/apply");
+  //   } catch (error) {
+  //     console.error("Error submit profile");
+  //     toast({
+  //       title: "An error occured while submit your profile, Please try again",
+  //       status: "error",
+  //       duration: 2000,
+  //       isCloseable: true,
+  //     });
+  //   }
+  // };
 
   return (
     <div className="1280px">
@@ -141,7 +141,7 @@ export const JobHeader = (props) => {
             alignItems="center"
             rounded="23px"
             className="font-[Inter] tracking-[1.667px]"
-            onClick={handleSubmit}
+            onClick={props.handle}
           >
             SEND APPLICATION
           </Button>

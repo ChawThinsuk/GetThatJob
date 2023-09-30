@@ -219,6 +219,7 @@ export const YourApplication = () => {
         <JobHeader
           data={data.data.job}
           state={{ cvData, experienceData, interestingData }}
+          handle={handleSubmit}
         />
       </div>
       <Box
@@ -288,9 +289,9 @@ export const YourApplication = () => {
               <label
                 htmlFor="pdf-upload"
                 disabled={value === "1"} 
-                className={`cursor-pointer flex items-center justify-center w-[160px] h-auto p-[13px] rounded-xl transition duration-300 ${value === "1" ? "bg-ggrey-200 text-ggrey-100": "bg-[#F48FB1] text-white hover:bg-[#bf5f82]"} `}
+                className={`cursor-pointer flex items-center justify-center w-[200px] h-auto p-[13px] rounded-xl transition duration-300 ${value === "1" ? "bg-ggrey-200 text-ggrey-100": "bg-[#F48FB1] text-white hover:bg-[#bf5f82]"} `}
               >
-                Choose a file
+               <span><img src={uploadlogo} className="mr-3 w-[35px]" alt="" /></span> Choose a file
               </label>
             </div>
             {value === "1" ? (

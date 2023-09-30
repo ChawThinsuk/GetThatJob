@@ -399,11 +399,11 @@ export function ProfessionalProfile() {
                     <p>File selected: {cv.name}</p>
                   </div>
                 )} */}
-                {cv === null && userType === 'PROFESSIONAL' && (
+                {/* {cv === null && userType === 'PROFESSIONAL' && (
                   <div className='ml-4 mt-3'>
                     <p>No file chosen</p>
                   </div>
-                )}
+                )} */}
               </div>
             </div>
 

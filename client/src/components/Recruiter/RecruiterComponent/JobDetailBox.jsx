@@ -195,7 +195,7 @@ function JobDetailBox(props) {
             />
           )}
           {data.job_status === "closed" && <ClosedJobButton />}
-          <Link to={`/editjob/${data.job_id}`}><button className="flex flex-row items-center justify-center bg-[#F48FB1] w-[154.67px] h-[53.36px] gap-2 text-white rounded-[21.33px] text-[15px] hover:bg-rose-200 duration-200">
+          <Link to={`/editjob/${data.job_id}`}><button className="flex flex-row items-center justify-center bg-[#F48FB1] w-[154.67px] h-[53.36px] gap-2 text-white rounded-[21.33px] text-[15px] hover:bg-[#bf5f82] duration-200">
             EDIT
           </button></Link>
         

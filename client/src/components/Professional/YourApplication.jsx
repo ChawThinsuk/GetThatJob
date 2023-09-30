@@ -19,24 +19,50 @@ import { useAuth } from "../../contexts/Authorization";
 import axios from "axios";
 import leftArrow from "../../assets/pro2/leftArrow.svg";
 import { Link } from "react-router-dom";
+import { createClient } from "@supabase/supabase-js";
 
 export const YourApplication = () => {
   const navigate = useNavigate();
   const [value, setValue] = useState("1");
-  const [cvChosen, setCvChosen] = useState(false);
-  const [cvFileName, setCvFileName] = useState("No file chosen");
+  const [cvFileName, setCvFileName] = useState("");
+  const [newcvFileName, setNewcvFileName] = useState("");
   const { job_id } = useParams();
   const { getSingleJob } = usePro();
   const [experienceData, setExperienceData] = useState("");
-  const [cvData, setCvData] = useState("You did not uploaded your CV");
+  const [cvData, setCvData] = useState(null);
+  const [newCvData, setNewCvData] = useState(null);
   const { state } = useAuth();
   const [interestingData, setInterestingData] = useState("");
   const toast = useToast();
 
   const handleSubmit = async () => {
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    let resume = cvData;
     try {
+      if (newCvData) {
+        const { data, error: professionalError } = await supabase.storage
+          .from("files")
+          .upload(`professionalcv/${Date.now()}${newCvData.name}`, newCvData, {
+            cacheControl: "3600",
+            upsert: false,
+          });
+        resume = data.path;
+        if (professionalError) {
+          throw professionalError; // Throw the error to trigger the catch block
+        }
+      }
+      if (resume === null) {
+        return toast({
+          title: "NULL",
+          status: "error",
+          duration: 2000,
+          isCloseable: true,
+        });
+      }
       const submitProfileData = {
-        job_user_cv: cvData,
+        job_user_cv: resume,
         job_user_experience: experienceData,
         job_user_interesting: interestingData,
       };
@@ -71,7 +97,6 @@ export const YourApplication = () => {
       .then((res) => {
         const { experience } = res.data.data;
         const { cv } = res.data.data;
-        console.log(res.data.data);
         setExperienceData(experience);
         setCvData(cv);
       })
@@ -83,7 +108,6 @@ export const YourApplication = () => {
   const { data, isLoading, error } = useQuery(["job", job_id], () =>
     getSingleJob(job_id)
   );
-  console.log(experienceData);
   if (isLoading) {
     return (
       <div className="w-screen h-screen opacity-80 bg-white flex justify-center items-center">
@@ -141,18 +165,26 @@ export const YourApplication = () => {
       </div>
     );
   }
-  const handleFileChange = (event) => {
-    const selectedFile = event.target.files[0];
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
     if (selectedFile) {
-      setCvFileName(selectedFile.name);
-      setCvChosen(true);
-    } else {
-      setCvFileName("No file chosen");
-
-      setCvChosen(false);
+      if (
+        selectedFile.type === "application/pdf" &&
+        selectedFile.size <= 5 * 1024 * 1024
+      ) {
+        setCvFileName(selectedFile.name);
+        setNewCvData(selectedFile);
+      } else {
+        toast({
+          title: "Wrong file type or size",
+          description: "Please upload a PDF file under 5MB.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     }
   };
-
   return (
     <Box
       display="flex"
@@ -233,32 +265,29 @@ export const YourApplication = () => {
             lineHeight="1.35rem"
             letterSpacing="0.1rem"
           >
-            <Button
-              bg="#F48FB1"
-              textColor="white"
-              _hover={{ bg: "#de7b9c" }}
-              onClick={() => document.getElementById("cvInput").click()}
-              isDisabled={value === "1"}
-              color="white"
-              padding="2.5rem"
-              fontSize="1.3rem"
-              fontStyle="normal"
-              fontWeight="500"
-              lineHeight="1.6rem"
-              letterSpacing="0.01rem"
-              textTransform="uppercase"
-              borderRadius="10px"
-              className="font-[Montserrat]"
-            >
-              Choose a File
-            </Button>
+            <div className="mx-auto bg-white rounded-lg flex">
+              <input
+                type="file"
+                id="pdf-upload"
+                className={"hidden"}         
+                onChange={handleFileChange}   
+                disabled = {value === "1"}                          
+              />
+              <label
+                htmlFor="pdf-upload"
+                disabled={value === "1"} 
+                className={`cursor-pointer flex items-center justify-center w-[160px] h-auto p-[13px] rounded-xl transition duration-300 ${value === "1" ? "bg-ggrey-200 text-ggrey-100": "bg-[#F48FB1] text-white hover:bg-[#bf5f82]"} `}
+              >
+                Choose a file
+              </label>
+            </div>
             {value === "1" ? (
               <Text color="#616161" className="font-[Montserrat]">
                 {cvData ? cvData : "You did not uploaded your CV"}
               </Text>
             ) : (
               <Text color="#616161" className="font-[Montserrat]">
-                {cvChosen ? cvFileName : "No file chosen"}
+                {cvFileName ? cvFileName : "No file chosen"}
               </Text>
             )}
           </Flex>

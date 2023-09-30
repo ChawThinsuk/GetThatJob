@@ -142,13 +142,13 @@ const JobCard = (prop) => {
             {follow && follow.job_user_application ? (
               <button
                 disabled
-                className='w-[147px] h-[54px] border-none bg-[#E1E2E1] rounded-3xl tracking-widest  text-[17px] text-[#616161] font-[Inter] font-[500]'
+                className='w-[142px] h-[49px] border-none bg-[#E1E2E1] rounded-3xl tracking-widest  text-[17px] text-[#616161] font-[Inter] font-[500]'
               >
                 APPLIED
               </button>
             ) : (
               <Link to={`/${job.job_id}`}>
-                <button className='w-[147px] h-[54px] border-[1px] border-[#F48FB1] tracking-wide  rounded-3xl hover:bg-[#F5F5F6] text-[16px] text-[#616161] font-[Inter] font-[500]'>
+                <button className='w-[142px] h-[49px] border-[1px] border-[#F48FB1] tracking-wide  rounded-3xl hover:bg-[#F48FB126] text-[16px] text-[#616161] font-[Inter] font-[500]'>
                   SEE MORE
                 </button>
               </Link>

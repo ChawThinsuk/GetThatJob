@@ -84,7 +84,7 @@ export function CloseJobButton(props) {
         </div>
       ) : (
         <button
-          className="flex flex-row items-center justify-center bg-[#F48FB1] w-[154.67px] h-[53.36px] gap-2 text-white rounded-[21.33px] text-[15px] duration-200 hover:bg-rose-200"
+          className="flex flex-row items-center justify-center bg-[#F48FB1] w-[154.67px] h-[53.36px] gap-2 text-white rounded-[21.33px] text-[15px] duration-200 hover:bg-[#bf5f82]"
           onClick={() => {
             handleClickCloseJob(updateClick);
           }}
@@ -298,7 +298,7 @@ export function MarKAsStartedButton(props) {
         </div>
       ) : (
         <button
-          className="text-[#616161] text-[15px] w-[240px] h-[53.33px] border-[1px] border-[#F48FB1] rounded-[21.33px] duration-200 hover:bg-rose-50"
+          className="text-[#616161] text-[15px] w-[240px] h-[53.33px] border-[1px] border-[#F48FB1] rounded-[21.33px] duration-200 hover:bg-[#F48FB126]"
           onClick={() => {
             handleClickMarkStatus(updateClick);
           }}
@@ -337,7 +337,7 @@ export function MarKAsFinishedButton(props) {
         </div>
       ) : (
         <button
-          className="text-[#616161] text-[15px] w-[240px] h-[53.33px] border-[1px] border-[#F48FB1] rounded-[21.33px] duration-500 hover:bg-rose-50"
+          className="text-[#616161] text-[15px] w-[240px] h-[53.33px] border-[1px] border-[#F48FB1] rounded-[21.33px] duration-500 hover:bg-[#F48FB126]"
           onClick={() => {
             handleClickMarkStatus(updateClick);
           }}
@@ -407,7 +407,7 @@ export function DownloadResumeButton(props) {
       ) : (
         <div className="flex justify-center items-center mt-[21.33px] mb-[21.33px]">
           <button
-            className="flex flex-row gap-2 w-[244px] h-[53.33px] items-center justify-center border-[1px] border-[#F48FB1] rounded-[21.33px] text-[#616161] hover:bg-rose-50"
+            className="flex flex-row gap-2 w-[244px] h-[53.33px] items-center justify-center border-[1px] border-[#F48FB1] rounded-[21.33px] text-[#616161] hover:bg-[#F48FB126]"
             onClick={() => {
               handleDownloadClick(props.linkPdf);
             }}

@@ -331,15 +331,15 @@ export const FindThatJob = () => {
       <div className="flex flex-col justify-center items-start w-full  pt-[12px]">
         <div className="mb-[16px] w-full">
           <div className="flex flex-row gap-3 mt-2  items-center w-full">
-            <p className="font-[Inter] text-[14px] ">Popular searches:</p>
+            <p className="font-[Inter] text-[15px] ">Popular searches:</p>
             {popularJobs.map((job, index) => {
               if (index <= 7) {
                 return (
                   <div key={index} className="flex flex-row gap-3">
                     <p
                       className={`${
-                        job === searchTerm ? "bg-[#fecbdb]" : "bg-gray-300"
-                      } rounded-xl py-[3px] px-[7px] text-[13px] hover:cursor-pointer`}
+                        job === searchTerm ? "bg-[#F48FB1] text-white" : "bg-gray-300 text-[#616161]"
+                      } rounded-xl py-[5px] px-[15px] text-[12px] hover:cursor-pointer`}
                       onClick={() => {
                         setSearchTerm(job);
                         setSearchTermShow(job);
@@ -359,27 +359,17 @@ export const FindThatJob = () => {
           </div>
           <div className="ml-[-5px] flex w-[1280px] justify-center h-[80px]">
           <button
-            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all 
-          bg-pink-300 text-white px-6 py-2 rounded-lg
-          border-pink-400
-            border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
-            active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-pink-300 shadow-pink-300 active:shadow-none"
+            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all bg-[#F48FB1] text-white rounded-lg hover:bg-[#bf5f82] duration-100"
             onClick={handlePrevPage}
             disabled={currentPage === 1}
           >
             Previous
           </button>
-          <div className=" w-[144px] h-[43px] mx-5 my-10  
-          bg-gray-300 text-white px-6 py-2 rounded-lg
-          border-pink-400
-           
+          <div className=" w-[144px] h-[43px] mx-5 my-10  text-center
+          bg-gray-300 text-[#616161] px-6 py-2 rounded-lg           
             ">Page {currentPage} of {totalPages}</div>
           <button
-            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all 
-            bg-pink-300 text-white px-6 py-2 rounded-lg
-            border-pink-400
-            border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
-            active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-pink-300 shadow-pink-300 active:shadow-none"
+            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all bg-[#F48FB1] text-white rounded-lg hover:bg-[#bf5f82] duration-100"
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
           >
@@ -400,27 +390,18 @@ export const FindThatJob = () => {
         
         <div className={`${(isLoading)&&`hidden`} pagination-controls ml-[-5px] flex w-[1280px] justify-center`}>
           <button
-            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all 
-bg-pink-300 text-white px-6 py-2 rounded-lg
-border-pink-400
-border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
-active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-pink-300 shadow-pink-300 active:shadow-none"
+            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all bg-[#F48FB1] text-white rounded-lg hover:bg-[#bf5f82] duration-100"
             onClick={handlePrevPage}
             disabled={currentPage === 1}
           >
             Previous
           </button>
-          <div className=" w-[144px] h-[43px] mx-5 my-10  
-          bg-gray-300 text-white px-6 py-2 rounded-lg
-          border-pink-400
+          <div className=" w-[144px] h-[43px] mx-5 my-10  text-center
+          bg-gray-300 text-[#616161] px-6 py-2 rounded-lg
            
             ">Page {currentPage} of {totalPages}</div>
           <button
-            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all 
-            bg-pink-300 text-white px-6 py-2 rounded-lg
-            border-pink-400
-            border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
-            active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-pink-300 shadow-pink-300 active:shadow-none"
+            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all bg-[#F48FB1] text-white rounded-lg hover:bg-[#bf5f82] duration-100"
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
           >

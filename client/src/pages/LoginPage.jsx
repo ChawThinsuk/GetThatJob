@@ -83,7 +83,7 @@ function LoginPage() {
       {page === 'changePass' && <ChangePass email={email} setPage={setPage} />}
       {page === 'resetSuccess' && <ResetSuccess setPage={setPage} />}
       {page === 'login' && (
-        <div className='flex flex-row justify-center items-start bg-[#F5F5F6] w-srceen h-screen gap-[60px] pt-[80px]'>
+        <div className='flex flex-row justify-center items-start bg-[#F5F5F6] w-srceen h-screen gap-[60px] pt-[132px]'>
           <form className='ml-[150px] mr-[60px]' onSubmit={handleSubmit}>
             <h1 className='text-[48px] font-[Montserrat] font-[400] text-[#373737] mb-2'>
               Welcome back

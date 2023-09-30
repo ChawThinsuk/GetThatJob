@@ -224,7 +224,7 @@ export const ApplicationList = () => {
                     className="absolute peer opacity-0"
                   />
                   <div className=" flex w-full justify-between items-center ">
-                    <div className=" flex w-[5rem] items-center gap-[1.1rem]">
+                    <div className=" flex w-[] items-center gap-[1.1rem]">
                       <img
                         src={item.logo}
                         alt={item.logo}
@@ -264,7 +264,7 @@ export const ApplicationList = () => {
                           Sent {dayAgo(item.jobs_professional_updated_at)}
                         </div>
                       </div>
-                      <div className=" flex flex-col w-[5.1rem] items-center font-inter text-xs text-[#F48FB1] text-center font-normal leading-[1.1rem] tracking-[0.125rem]  ">
+                      <div className=" flex flex-col w-[5.1rem] items-center font-inter text-xs text-[#F48FB1] text-center font-normal leading-[1.1rem] tracking-[0.125rem] ">
                         {item.job_user_mark === "waiting" && (
                           <>
                             <img src={waitingIcn} alt="Waiting" />
@@ -292,7 +292,7 @@ export const ApplicationList = () => {
                       </div>
                     </div>
                   </div>
-                  <div className=" flex flex-col items-start gap-[1.1rem] max-h-0 overflow-hidden peer-checked:max-h-full   ">
+                  <div className=" flex flex-col items-start gap-[1.1rem] max-h-0 overflow-hidden peer-checked:max-h-full w-full">
                     <div className=" w-[47.6rem] flex flex-col items-start gap-[0.3rem] ">
                       <h2 className="text-[1.1rem] text-[#c7668a] font-normal leading-normal tracking-[0.10938rem]">
                         Professional experience
@@ -325,7 +325,7 @@ export const ApplicationList = () => {
                         </p>
                       )}
                     </div>
-                    <div className=" flex w-[55.6rem] p-[0rem_1rem] justify-center items-start gap-[1.1rem]">
+                    <div className=" flex p-[0rem_1rem] justify-center items-start gap-[1.1rem] w-full">
                       <Button
                         display="flex"
                         alignItems="center"

@@ -86,22 +86,22 @@ async function validateProfessional(data) {
     `SELECT email FROM users WHERE email = $1`,
     [data.email]
   );
-  const isUniqueUsername = await pool.query(
-    `SELECT username FROM professionals WHERE username = $1`,
-    [data.username]
-  );
+  // const isUniqueUsername = await pool.query(
+  //   `SELECT username FROM professionals WHERE username = $1`,
+  //   [data.username]
+  // );
   if (
     !data.email ||
     !data.password ||
     !data.user_type ||
-    !data.username ||
-    !data.phone ||
-    !data.birthdate ||
-    !data.linkedin ||
-    !data.title ||
-    !data.experience ||
-    !data.education ||
-    !data.cv
+    (!data.username) ||
+    (!data.phone) ||
+    (!data.birthdate) ||
+    (!data.linkedin) ||
+    (!data.title && data.title !== null) ||
+    (!data.experience && data.experience !== null) ||
+    (!data.education && data.education !== null) ||
+    (!data.cv && data.cv !== null)
   ) {
     return "please check your body of API";
   }
@@ -114,9 +114,9 @@ async function validateProfessional(data) {
   if (!checkDate) {
     return "Invalid Date of birth";
   }
-  if (isUniqueUsername.rows[0]) {
-    return "This username already exists.";
-  }
+  // if (isUniqueUsername.rows[0]) {
+  //   return "This username already exists.";
+  // }
 }
 async function validateRecruiter(data) {
   const isUniqueEmail = await pool.query(

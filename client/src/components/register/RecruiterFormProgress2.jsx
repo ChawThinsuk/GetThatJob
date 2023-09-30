@@ -8,6 +8,9 @@ import {
   Input,
   Stack,
   Textarea,
+  Alert,
+  AlertIcon,
+  CloseButton,
 } from "@chakra-ui/react";
 import UploadPdf from "./UploadPdf";
 import { useGlobalContext } from "../../contexts/registerContext";
@@ -24,8 +27,27 @@ function RecruiterFormProgress2() {
     handleSubmit,
   } = useGlobalContext();
 
-  let handleRegister = (e) => {
+  const [showEmptyFieldAlert, setShowEmptyFieldAlert] = useState(false);
+  const [showCharacterCountAlert, setShowCharacterCountAlert] = useState(false);
+
+  const handleRegister = (e) => {
     e.preventDefault();
+
+    // Check for empty fields
+    if (!companyWebsite || !aboutCompany) {
+      setShowEmptyFieldAlert(true);
+      return; // Stop form submission if any field is empty
+    }
+
+    // Check character count for "About the company" textarea
+    const minCharacters = 100;
+    const maxCharacters = 2000;
+
+    if (aboutCompany.length < minCharacters || aboutCompany.length > maxCharacters) {
+      setShowCharacterCountAlert(true);
+      return; // Stop form submission if character count is not within the specified range
+    }
+
     handleSubmit();
   };
 
@@ -112,15 +134,39 @@ function RecruiterFormProgress2() {
                 Only JPG,JPEG,PNG. Max size 5MB
               </p>
               <center>
-                <Button
+              {showEmptyFieldAlert && (
+                  <Alert status="warning" borderRadius="md" mt={2}>
+                    <AlertIcon />
+                    Please fill in all required fields.
+                    <CloseButton
+                      onClick={() => setShowEmptyFieldAlert(false)}
+                      position="absolute"
+                      right="8px"
+                      top="8px"
+                    />
+                  </Alert>
+                )}
+                {showCharacterCountAlert && (
+                  <Alert status="warning" borderRadius="md" mt={2}>
+                    <AlertIcon />
+                    About the company should be between 100 and 2000 characters.
+                    <CloseButton
+                      onClick={() => setShowCharacterCountAlert(false)}
+                      position="absolute"
+                      right="8px"
+                      top="8px"
+                    />
+                  </Alert>
+                )}
+               <Button
                   mt={8}
                   mr={5}
                   mb={8}
                   px={5}
                   py={5}
-                  type="submit"
+                  type="button"
                   borderColor="#F48FB1"
-                    focusBorderColor="#F48FB1"
+                  focusBorderColor="#F48FB1"
                   variant="outline"
                   size="sm"
                   fontSize="md"
@@ -134,7 +180,7 @@ function RecruiterFormProgress2() {
                   py={5}
                   mt={8}
                   mb={8}
-                  type="submit"
+                  type="button"
                   bg="#F48FB1"
                   variant="solid"
                   size="sm"

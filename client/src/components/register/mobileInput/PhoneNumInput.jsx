@@ -12,7 +12,7 @@ import Flag from "react-world-flags";
 import { AsYouType } from "libphonenumber-js";
 import { getCountryTelCode } from "./countries";
 import { PhoneIcon } from "@chakra-ui/icons";
-import CCIcon from "../../../assets/phone-line.svg"
+import CCIcon from "../../../assets/phone-call-svgrepo-com.svg"
 
 export default function PhoneNumberInput({
   size,
@@ -61,6 +61,8 @@ export default function PhoneNumberInput({
           zIndex={1}
           bottom={0}
           opacity={0}
+          p={2}
+          ml={-0.5}
           height="100%"
           position="absolute"
           value={selectedCountry}
@@ -77,7 +79,7 @@ export default function PhoneNumberInput({
               <Flag height="35px" width="35px"  code={selectedCountry || ""} />
             </Box>
           ) : (
-           <img src={CCIcon} alt="" width={30} />
+           <img src={CCIcon} alt="" width={21} />
           )}
           
         </Flex>
@@ -85,7 +87,7 @@ export default function PhoneNumberInput({
       <Input
         borderColor="#F48FB1"
         focusBorderColor="#F48FB1"
-        pl="5rem"
+        pl="77px"
         type="tel"
         value={number}
         pattern="[0-9]"

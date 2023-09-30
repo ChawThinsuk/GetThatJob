@@ -18,7 +18,7 @@ function MobileInput() {
   return (
     <ChakraProvider>
       <Box>
-        <Text pb="8px">Value: {phone}</Text>
+        {/* <Text pb="8px">Value: {phone}</Text> */}
         <PhoneNumberInput
         borderColor="#F48FB1"
         focusBorderColor="#F48FB1"

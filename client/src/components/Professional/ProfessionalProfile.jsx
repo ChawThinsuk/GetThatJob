@@ -74,6 +74,7 @@ export function ProfessionalProfile() {
     setEducationalInfo(response.data.data.education);
     setCv(response.data.data.cv);
     // console.log(response.data.data.cv);
+    // console.log(response.data.data.cv);
     setSelectedFileName(response.data.data.cv);
     setFormattedUpdatedTime(newFormattedUpdatedTime); // Define newFormattedUpdatedTime here
   };
@@ -123,7 +124,6 @@ export function ProfessionalProfile() {
     if (professionalError) {
       throw professionalError; // Throw the error to trigger the catch block
     }}
-    
       const updatedProfileData = {
         email: email,
         username: name,
@@ -184,7 +184,7 @@ export function ProfessionalProfile() {
                   <FormLabel sx={profFormStyle}>Email</FormLabel>
                   <Input
                     borderColor="#F48FB1"
-                    focusBorderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"     
                     type='email'
                     placeholder='Enter your email address'
                     value={email}
@@ -399,11 +399,11 @@ export function ProfessionalProfile() {
                     <p>File selected: {cv.name}</p>
                   </div>
                 )} */}
-                {cv === null && userType === 'PROFESSIONAL' && (
+                {/* {cv === null && userType === 'PROFESSIONAL' && (
                   <div className='ml-4 mt-3'>
                     <p>No file chosen</p>
                   </div>
-                )}
+                )} */}
               </div>
             </div>
 

@@ -123,8 +123,8 @@ export function CreateNewJob() {
                   <FormLabel sx={profFormStyle}>Type</FormLabel>
                   <JobType setJobType={setJobType} />
                 </FormControl>
-                <FormControl id="name" isRequired>
-                  <FormLabel sx={profFormStyle}>Salary Range</FormLabel>
+                <FormControl  id="name" isRequired>
+                  <FormLabel  sx={profFormStyle}>Salary Range</FormLabel>
                   <SalaryRangeInput
                     setSalaryMin={setSalaryMin}
                     setSalaryMax={setSalaryMax}
@@ -145,6 +145,7 @@ export function CreateNewJob() {
                     w="992px"
                     h="89px"
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type="text"
                     placeholder="Describe the main functions and characteristics of your job position"
                     value={job_position}
@@ -161,6 +162,7 @@ export function CreateNewJob() {
                     w="992px"
                     h="89px"
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type="text"
                     placeholder="List each mandatory requirement in a new line"
                     value={job_mandatory}
@@ -176,6 +178,7 @@ export function CreateNewJob() {
                     w="992px"
                     h="89px"
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                     type="text"
                     placeholder="List each optional requirement in a new line"
                     value={job_optional}

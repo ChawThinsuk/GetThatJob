@@ -62,43 +62,43 @@ export const JobHeader = (props) => {
     }
   };
   const toast = useToast();
-  const handleSubmit = async () => {
-    try {
-      const submitProfileData = {
-        job_user_cv: props.state.cvData,
-        job_user_experience: props.state.experienceData,
-        job_user_interesting: props.state.interestingData,
-      };
-      await axios.put(
-        `http://localhost:4000/pro/users/${state.userID}/jobs/${job_id}`,
-        submitProfileData
-      );
-      toast({
-        title: "Profile submitted successfully",
-        status: "success",
-        duration: 2000,
-        isCloseable: true,
-      });
-      navigate("/apply");
-    } catch (error) {
-      console.error("Error submit profile");
-      toast({
-        title: "An error occured while submit your profile, Please try again",
-        status: "error",
-        duration: 2000,
-        isCloseable: true,
-      });
-    }
-  };
+  // const handleSubmit = async () => {
+  //   try {
+  //     const submitProfileData = {
+  //       job_user_cv: props.state.cvData,
+  //       job_user_experience: props.state.experienceData,
+  //       job_user_interesting: props.state.interestingData,
+  //     };
+  //     await axios.put(
+  //       `http://localhost:4000/pro/users/${state.userID}/jobs/${job_id}`,
+  //       submitProfileData
+  //     );
+  //     toast({
+  //       title: "Profile submitted successfully",
+  //       status: "success",
+  //       duration: 2000,
+  //       isCloseable: true,
+  //     });
+  //     navigate("/apply");
+  //   } catch (error) {
+  //     console.error("Error submit profile");
+  //     toast({
+  //       title: "An error occured while submit your profile, Please try again",
+  //       status: "error",
+  //       duration: 2000,
+  //       isCloseable: true,
+  //     });
+  //   }
+  // };
 
   return (
     <div className="1280px">
       {/*---------------------------------------------------------Company Logo Section-------------------------------------------*/}
       <section className="flex justify-between mt-[21.3344px]">
         <div className="flex  gap-[21.3344px]">
-          <img src={logo} className="w-[106.672px] h-[106.672px]" />
+          <img src={logo} className="w-[98px] h-[98px]" />
           <div>
-            <p className="text-[32.0016px] font-[Montserrat]">{company_name}</p>
+            <p className="text-[26px] font-[Montserrat]">{company_name}</p>
             <div
               className="flex items-center gap-[5.334px] w-[160.008px] hover:cursor-pointer "
               onClick={handleChangeStatus}
@@ -123,7 +123,7 @@ export const JobHeader = (props) => {
           <Link to={`/apply/${job_id}`}>
             <button className="flex items-center justify-center gap-[10.667px] bg-[#F48FB1] hover:bg-[#de7b9c] w-[230.678px] h-[74.67px] py-[21.3344px] px-[26.668px] rounded-[21.3344px] transition-all duration-300">
               <img src={applyicon} className="w-[32.0016px] h-[32.0016px]" />
-              <p className="text-[18.668px] text-white font-[Inter] tracking-[1.667px] ">
+              <p className="text-[16.668px] text-white font-[Inter] tracking-[1.667px] ">
                 APPLY NOW
               </p>
             </button>
@@ -139,10 +139,10 @@ export const JobHeader = (props) => {
             padding="2.5rem"
             gap="0.5rem"
             alignItems="center"
-            className="font-[Montserrat] tracking-[1.667px] rounded-[21.3344px]"
-            onClick={handleSubmit}
+            rounded="23px"
+            className="font-[Inter] tracking-[1.667px]"
+            onClick={props.handle}
           >
-            {" "}
             SEND APPLICATION
           </Button>
         )}
@@ -150,45 +150,45 @@ export const JobHeader = (props) => {
       {/*------------------------------------------------------Job Title Section-----------------------------------------------*/}
       <section className="flex flex-col items-center mt-[13.334px]">
         <h1 className="text-[48px] text-[#373737] font-[400] font-[Montserrat] ">
-          {job_title.toUpperCase()}
+          {job_title}
         </h1>
         <div className="flex gap-[5.334px]">
           <img src={time} className="w-[20.001px] h-[20.001px]" />
-          <p className="text-[13.334px] font-[Inter] tracking-[2.001px]">
+          <p className="text-[12.334px] font-[Inter] tracking-[2.001px] uppercase">
             posted {dayAgo(job_created_at)}
           </p>
         </div>
         {/*boxes div*/}
-        <div className="flex gap-[42.669px] mt-[26.668px]">
-          <div className="flex flex-col items-center min-w-[374.685px] h-[102.672px] pt-[10.667px] pb-[21.3344px] px-[42.669px] border-[1.3334px] border-[#BF5F82] bg-white rounded-[10.667px] shadow-pro2">
-            <p className="text-[21.3344px] text-[#616161] font-[400] font-[Montserrat] tracking-[0.2001px]">
+        <div className="flex gap-[42.669px] mt-[20.668px]">
+          <div className="flex flex-col items-center justify-center min-w-[374.685px] h-[88px] border-[1.3334px] border-[#BF5F82] bg-white rounded-[10.667px] shadow-pro2">
+            <p className="text-[18px] text-[#616161] font-[400] font-[Montserrat] tracking-[0.2001px]">
               Category
             </p>
             <div className="flex items-center gap-2 ">
-              <img src={category} className="w-[38.669px] h-[38.669px]" />
-              <p className="text-[32.0016px] text-[#373737] font-[400] font-[Montserrat]">
+              <img src={category} className="w-[32px] h-[32px]" />
+              <p className="text-[26.0016px] text-[#373737] font-[400] font-[Montserrat] tracking-[0.15px]">
                 {job_category}
               </p>
             </div>
           </div>
-          <div className="flex flex-col items-center w-[277.347px] h-[102.671px] pt-[10.667px] pb-[21.3344px] px-[37.335px] border-[1.3334px] border-[#BF5F82] bg-white rounded-[10.667px] shadow-pro2">
-            <p className="text-[21.3344px] text-[#616161] font-[400] font-[Montserrat] tracking-[0.2001px]">
+          <div className="flex flex-col items-center justify-center w-[277.347px] h-[88px] border-[1.3334px] border-[#BF5F82] bg-white rounded-[10.667px] shadow-pro2">
+            <p className="text-[18px] text-[#616161] font-[400] font-[Montserrat] tracking-[0.2001px]">
               Type
             </p>
             <div className="flex items-center gap-2 ">
-              <img src={calendar} className="w-[38.669px] h-[38.669px]" />
-              <p className="text-[32.0016px] text-[#373737] font-[400] font-[Montserrat]">
+              <img src={calendar} className="w-[32px] h-[32px]" />
+              <p className="text-[26.0016px] text-[#373737] font-[400] font-[Montserrat] tracking-[0.15px]">
                 {job_type}
               </p>
             </div>
           </div>
-          <div className="flex flex-col items-center min-w-[106.672px] h-[102.671px] pt-[10.667px] pb-[21.3344px] px-[42.669px] border-[1.3334px] border-[#BF5F82] bg-white rounded-[10.667px] shadow-pro2">
-            <p className="text-[21.3344px] text-[#616161] font-[400] font-[Montserrat] tracking-[0.2001px]">
+          <div className="flex flex-col items-center justify-center min-w-[106.672px] h-[88px] w-auto px-[32px] border-[1.3334px] border-[#BF5F82] bg-white rounded-[10.667px] shadow-pro2">
+            <p className="text-[18px] text-[#616161] font-[400] font-[Montserrat] tracking-[0.2001px]">
               Salary
             </p>
             <div className="flex items-center gap-2 ">
-              <img src={money} className="w-[38.669px] h-[38.669px]" />
-              <p className="text-[32.0016px] text-[#373737] font-[400] font-[Montserrat]">
+              <img src={money} className="w-[32px] h-[32px]" />
+              <p className="text-[26.0016px] text-[#373737] font-[400] font-[Montserrat] tracking-[0.15px]">
                 {salary_min} - {salary_max}
               </p>
             </div>

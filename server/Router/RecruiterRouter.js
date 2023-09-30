@@ -144,7 +144,7 @@ RecruiterRouter.put("/getrecruiter/:id", async (req, res) => {
   const company_website = req.body.company_website;
   const company_description = req.body.company_description;
   const logo = req.body.logo;
-
+  console.log(logo)
   try {
     // Update the recruiter's profile data in the database
     await pool.query(

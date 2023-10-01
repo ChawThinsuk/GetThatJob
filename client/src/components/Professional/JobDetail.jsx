@@ -114,7 +114,7 @@ export const JobDetail = () => {
             </h1>
             {job_mandatory &&
               job_mandatory
-                .split('- ')
+                .split(',')
                 .filter(Boolean)
                 .map((text, index) => {
                   return (
@@ -122,12 +122,12 @@ export const JobDetail = () => {
                       className='w-[1013.384px] text-[18px] text-[#373737] font-[400] font-[Inter]  tracking-[0.668px]'
                       key={index}
                     >
-                      - {text}
+                      - {text[0].toUpperCase() + text.slice(1)}
                     </p>
                   );
                 })}
           </div>{' '}
-          <div className='flex flex-col gap-[4.0002px]'>
+          <div className='flex flex-col gap-[4.0002px] mt-2'>
             <h1 className='text-[26px] text-[#BF5F82] font-[400] font-[Montserrat] mb-[6.667px]'>
               Optional Requirements
             </h1>
@@ -141,7 +141,7 @@ export const JobDetail = () => {
                       className='w-[1013.384px] text-[18px] text-[#373737] font-[400] font-[Inter] tracking-[0.668px]'
                       key={index}
                     >
-                      - {text}
+                      - {text[0].toUpperCase() + text.slice(1)}
                     </p>
                   );
                 })}
@@ -150,7 +150,7 @@ export const JobDetail = () => {
             <Link to={`/apply/${job_id}`}>
               <button className='flex items-center justify-center gap-[10.667px] bg-[#F48FB1] hover:bg-[#de7b9c] w-[230.678px] h-[74.670px] py-[21.334px] px-[26.668px] rounded-[21.334px] transition-all duration-300'>
                 <img src={applyicon} className='w-[32.001px] h-[32.001px]' />
-                <p className='text-[18.667px] text-white font-[Inter] tracking-[1.668px] '>
+                <p className='text-[16px] text-white font-[Inter] tracking-[1.668px] '>
                   APPLY NOW
                 </p>
               </button>

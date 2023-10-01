@@ -66,7 +66,7 @@ function TalentFormProgress() {
         <div className="flex flex-col w-[80%] ">
           <div className="flex cursor-pointer">
             <div
-              className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] rounded-full
+              className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] hover:bg-[#BF5F82] rounded-full
            text-white text-center font-semibold flex items-center justify-center "
             >
               1
@@ -88,9 +88,7 @@ function TalentFormProgress() {
               <Text>Information</Text>
             </div>
             <div
-              onClick={() => {
-                setRegisterPage(registerPage + 2);
-              }}
+              onClick={handleSubmit}
               className="mr-4 w-[32px] h-[32px] bg-[#E1E2E1] rounded-full text-white text-center font-semibold flex items-center justify-center"
             >
               3
@@ -189,6 +187,7 @@ function TalentFormProgress() {
                   py={5}
                   mt={8}
                   bg="#F48FB1"
+                  _hover={{ bg: "#BF5F82" }}
                   variant="solid"
                   size="sm"
                   fontSize="md"

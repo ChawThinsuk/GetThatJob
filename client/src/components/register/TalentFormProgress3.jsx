@@ -144,6 +144,7 @@ function TalentFormProgress3() {
                   mb={10}
                   type="button"
                   bg="#F48FB1"
+                  _hover={{ bg: "#BF5F82" }}
                   variant="solid"
                   size="sm"
                   fontSize="md"
@@ -163,6 +164,7 @@ function TalentFormProgress3() {
                   py={5}
                   type="button"
                   borderColor="#F48FB1"
+                  _hover={{ bg: "rgba(244, 143, 177, 0.15)" }}
                     focusBorderColor="#F48FB1"
                   variant="outline"
                   size="sm"
@@ -179,6 +181,7 @@ function TalentFormProgress3() {
                   mb={10}
                   type="submit"
                   bg="#F48FB1"
+                  _hover={{ bg: "#BF5F82" }}
                   variant="solid"
                   size="sm"
                   fontSize="md"

@@ -89,9 +89,9 @@ export function ProfessionalProfile() {
       if (file) {
         if (file.type === 'application/pdf' && file.size <= 5 * 1024 * 1024) {
           setNewCv(file);
-          console.log(file);
+          // console.log(file);
           setSelectedNewFileName(file.name);
-          console.Console.log(file.name);
+          // console.Console.log(file.name);
         } else if (file) {
           setNewCv(null);
           setSelectedNewFileName(null);
@@ -352,7 +352,7 @@ export function ProfessionalProfile() {
             </p>
             <div>
               {/* <UploadPdf /> */}
-              <div className='mx-auto bg-white rounded-lg flex'>
+              <div className='mx-auto rounded-lg flex'>
                 <input
                   type='file'
                   id='pdf-upload'
@@ -368,7 +368,7 @@ export function ProfessionalProfile() {
                 />
                 <label
                   htmlFor='pdf-upload'
-                  className='cursor-pointer flex items-center justify-center w-[160px] h-auto p-[13px] rounded-xl bg-[#F48FB1] text-white hover:bg-pink-600 transition duration-300'
+                  className='cursor-pointer flex items-center justify-center w-[160px] h-auto p-[13px] rounded-xl bg-[#F48FB1] text-white hover:bg-[#BF5F82] transition duration-300'
                 >
                   <img src={uploadlogo} className='pr-2' alt='logo' />
                   {userType === 'PROFESSIONAL'
@@ -431,6 +431,7 @@ export function ProfessionalProfile() {
               mb={8}
               type='button'
               bg='#F48FB1'
+              _hover={{ bg: "#BF5F82" }}
               variant='solid'
               size='sm'
               fontSize='19px'

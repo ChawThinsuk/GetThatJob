@@ -69,7 +69,7 @@ function JobPosting(props) {
     setCurrentPage(newPage);
   };
   return (
-    <div className="bg-[#F5F5F6] h-[980px] w-[1565px]">
+    <div className="bg-[#F5F5F6] w-[1565px]">
     <JobContainer>
       <p className="font-[Montserrat] text-[35px] font-medium">Job Postings</p>
       <RadioJobPosting page={setCurrentPage}/>

@@ -268,7 +268,7 @@ export function RecruiterProfile() {
               </p>
               {/* <UploadPdf /> */}
               <div>
-                <div className="mx-auto bg-white rounded-lg flex">
+                <div className="mx-auto rounded-lg flex">
                   <input
                     type="file"
                     id="pdf-upload"
@@ -278,7 +278,7 @@ export function RecruiterProfile() {
                   />
                   <label
                     htmlFor="pdf-upload"
-                    className="cursor-pointer flex items-center justify-center w-[160px] h-auto p-[13px] rounded-xl bg-[#F48FB1] text-white hover:bg-pink-600 transition duration-300"
+                    className="cursor-pointer flex items-center justify-center w-[160px] h-auto p-[13px] rounded-xl bg-[#F48FB1] text-white hover:bg-[#BF5F82] transition duration-300"
                   >
                     <img src={uploadlogo} className="pr-2" alt="logo" />
                     Choose a file
@@ -300,14 +300,12 @@ export function RecruiterProfile() {
 
                   {selectedLogoFileName || selectedFileName ? (
                     <div className="m-2 ml-4">
-                      <p>
                         Selected:
                         {selectedLogoFileName || selectedFileName.slice(-10)}
-                      </p>
                     </div>
                   ) : (
                     <div className="ml-4 mt-3">
-                      <p>No logo chosen</p>
+                      No logo chosen
                     </div>
                   )}
                 </div>
@@ -432,6 +430,7 @@ export function RecruiterProfile() {
             mb={8}
             type="button"
             bg="#F48FB1"
+            _hover={{ bg: "#BF5F82" }}
             variant="solid"
             size="sm"
             fontSize="19px"

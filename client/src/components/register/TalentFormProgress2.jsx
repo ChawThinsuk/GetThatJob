@@ -185,6 +185,7 @@ function TalentFormProgress2() {
                   mr={5}
                   type="button"
                   bg="#F48FB1"
+                  _hover={{ bg: "#BF5F82" }}
                   variant="solid"
                   size="sm"
                   fontSize="md"
@@ -219,6 +220,7 @@ function TalentFormProgress2() {
                   mt={8}
                   type="button"
                   bg="#F48FB1"
+                  _hover={{ bg: "#BF5F82" }}
                   variant="solid"
                   size="sm"
                   fontSize="md"

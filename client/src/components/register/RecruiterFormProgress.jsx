@@ -78,7 +78,7 @@ function RecruiterFormProgress() {
         <div className="flex flex-col w-[80%] ">
           <div className="flex cursor-pointer">
             <div
-              className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] rounded-full
+              className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] hover:bg-[#BF5F82] rounded-full
              text-white text-center font-semibold flex items-center justify-center"
             >
               1
@@ -194,6 +194,7 @@ function RecruiterFormProgress() {
                   mb={8}
                   type="button"
                   bg="#F48FB1"
+                  _hover={{ bg: "#BF5F82" }}
                   variant="solid"
                   size="sm"
                   fontSize="md"

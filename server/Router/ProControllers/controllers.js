@@ -248,7 +248,7 @@ export class ProController {
   }
   //Ta
   async getExpData(req, res) {
-    console.log("ok");
+    // console.log("ok");
     const { id } = req.params;
     const selcectQuery = `SELECT professionals.experience, professionals.cv FROM professionals INNER JOIN users ON professionals.user_id = users.user_id WHERE users.user_id = ${id}`;
 
@@ -275,7 +275,7 @@ export class ProController {
 
     try {
       const data = await pool.query(checkingQuery, [user_id, job_id]);
-      console.log(req.body);
+      // console.log(req.body);
       if (data.rows[0]) {
         const updateQuery = `
           UPDATE jobs_professional

@@ -257,7 +257,6 @@ export const FindThatJob = () => {
               className="border-[1px] border-[#F48FB1] rounded-[8px] w-full h-[42px] flex flex-row justify-center items-center text-[18px] p-[8px] font-[Inter] font-[400] text-[#8E8E8E]"
             >
               <option value={""}>Select a category</option>
-              <option>Software Developer</option>
               <option>Sales</option>
               <option>Graphic Designer</option>
               <option>Digital Marketing</option>
@@ -322,7 +321,7 @@ export const FindThatJob = () => {
       <div className="flex flex-col justify-center items-start w-full  pt-[12px]">
         <div className="mb-[16px] w-full">
           <div className="flex flex-row gap-3 mt-2  items-center w-full">
-            <p className="font-[Inter] text-[15px] ">Popular searches:</p>
+            <p className="font-[Inter] text-[15px]">Popular searches:</p>
             {popularJobs.map((job, index) => {
               if (index <= 7) {
                 return (
@@ -330,7 +329,7 @@ export const FindThatJob = () => {
                     <p
                       className={`${
                         job === searchTerm ? "bg-[#F48FB1] text-white" : "bg-gray-300 text-[#616161]"
-                      } rounded-xl py-[5px] px-[15px] text-[12px] hover:cursor-pointer`}
+                      } rounded-xl py-[5px] px-[15px] text-[11px] hover:cursor-pointer`}
                       onClick={() => {
                         setSearchTerm(job);
                         setSearchTermShow(job);
@@ -374,7 +373,7 @@ export const FindThatJob = () => {
 function PaginationControls({ totalPages, currentPage, handlePageChange }) {
   return (
     <>
-    {console.log(currentPage)}
+    {/* {console.log(currentPage)} */}
       <div className="flex justify-start">
         <nav aria-label="Page navigation example">
           <ul className="inline-flex -space-x-px text-sm">

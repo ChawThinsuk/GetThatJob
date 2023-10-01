@@ -33,7 +33,7 @@ function Register({ setUser, setChat, user_email }) {
     setLoading(true);
     let email = p_email || inputEmail.current.value;
     const callback_created = (user) => {
-      console.log("test",user);
+      // console.log("test",user);
       getOrCreateChat((chat) => {
         setChat(chat);
         setUser(user);

@@ -55,7 +55,7 @@ export function CreateNewJob() {
         jobData
       );
 
-      console.log(response.data);
+      // console.log(response.data);
 
       toast({
         title: "Job Posted",
@@ -304,7 +304,7 @@ export function CreateNewJob() {
               mb={8}
               type="button"
               bg="#F48FB1"
-              _hover={{ bg: "#F48FB1" }}
+              _hover={{ bg: "#BF5F82" }}
               variant="solid"
               size="sm"
               fontSize="19px"

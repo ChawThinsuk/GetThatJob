@@ -25,7 +25,7 @@ RecruiterRouter.get("/:id", async (req, res) => {
 
 RecruiterRouter.post("/getrecruiter", async (req, res) => {
   const recruiter_id = req.body.id;
-  console.log(recruiter_id);
+  // console.log(recruiter_id);
 
   if (!recruiter_id) {
     return res.status(400).json({
@@ -144,7 +144,7 @@ RecruiterRouter.put("/getrecruiter/:id", async (req, res) => {
   const company_website = req.body.company_website;
   const company_description = req.body.company_description;
   const logo = req.body.logo;
-  console.log(logo)
+  // console.log(logo)
   try {
     // Update the recruiter's profile data in the database
     await pool.query(
@@ -253,8 +253,8 @@ RecruiterRouter.post("/:id/createjob", async (req, res) => {
 RecruiterRouter.get("/:id/getjob/:jobid", async (req, res) => {
   const recruiter_id = req.params.id;
   const job_id = req.params.jobid;
-  console.log(recruiter_id);
-  console.log(job_id);
+  // console.log(recruiter_id);
+  // console.log(job_id);
 
   if (!recruiter_id) {
     return res.status(400).json({

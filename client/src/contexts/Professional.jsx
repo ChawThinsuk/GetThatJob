@@ -53,7 +53,7 @@ function ProProvider(props) {
         `http://localhost:4000/pro?${params.toString()}`
       );
       setJobs(result.data.data.rows);
-      console.log(input);
+      // console.log(input);
       setIsLoading(false);
     } catch (error) {
       console.log('error', error);

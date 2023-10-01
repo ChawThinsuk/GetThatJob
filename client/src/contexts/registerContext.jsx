@@ -98,14 +98,14 @@ const ContextProvider = ({ children }) => {
           education: educationalInfo,
           cv: data.path,
         };
-        console.log(professionalData);
+        // console.log(professionalData);
 
         const response = await axios.post(
           "http://localhost:4000/users/register-professional",
           professionalData
         );
 
-        console.log(response.data);
+        // console.log(response.data);
 
         toast({
           title: "Account created.",
@@ -145,7 +145,7 @@ const ContextProvider = ({ children }) => {
           logo: urlPath.data.publicUrl,
         };
 
-        console.log(recruiterData);
+        // console.log(recruiterData);
 
         const response = await axios.post(
           "http://localhost:4000/users/register-recruiter",

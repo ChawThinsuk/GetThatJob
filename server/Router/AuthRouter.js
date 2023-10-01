@@ -88,7 +88,7 @@ authRouter.post('/login', async (req, res) => {
       [email,userType]
     );
     userData = userData.rows[0];
-    console.log(userData);
+    // console.log(userData);
     if (!userData) {
       return res.json({ status: 404 });
     }

@@ -108,8 +108,8 @@ export const ApplicationList = () => {
   };
 
   const handleDeclined = async (jobId) => {
-    console.log(state.userID);
-    console.log(jobId);
+    // console.log(state.userID);
+    // console.log(jobId);
     try {
       await axios.put(
         `http://localhost:4000/pro/users/applist/${state.userID}/jobs/${jobId}`
@@ -269,7 +269,7 @@ export const ApplicationList = () => {
                         )}{" "}
                         <img src={calendarImg} /> Posted{" "}
                         {dayAgo(item.job_created_at)}
-                        {console.log(item.jobs_professional_updated_at)}
+                        {/* {console.log(item.jobs_professional_updated_at)} */}
                       </div>
                     </div>
                     <div className="flex w-[442px] justify-end items-start gap-[0.35rem] relative mr-8">

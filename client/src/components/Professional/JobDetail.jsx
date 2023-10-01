@@ -94,7 +94,7 @@ export const JobDetail = () => {
         <section className='flex flex-col mt-[72.003px] px-[21.334px] gap-[21.334px]'>
           <div className='flex flex-col gap-[10.667px]'>
             <h1 className='text-[26px] text-[#BF5F82] font-[400] font-[Montserrat]'>
-              About The company name SA
+              About The company name {data.data.job.company_name}
             </h1>
             <p className='w-[1013.384px] text-[18px] text-[#373737] font-[400] font-[Inter] leading-[32.001px] tracking-[0.668px]'>
               {company_description}

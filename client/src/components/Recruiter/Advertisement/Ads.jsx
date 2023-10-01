@@ -65,42 +65,42 @@ function Ads() {
                 onClick={() => setBudget(100)}
                 type="button"
               >
-                100฿
+                100$
               </button>
               <button
                 className={`border-[1px] border-[#F48FB1] rounded-[8px] w-[60px] h-[24px] text-[14px] font-[Inter] font-[400] text-center shadow-pro1 ${budget === 300 ? "bg-[#E1E2E1]" : "bg-[#FFFFFF]"}`}
                 onClick={() => setBudget(300)}
                 type="button"
               >
-                300฿
+                300$
               </button>
               <button
                 className={`border-[1px] border-[#F48FB1] rounded-[8px] w-[60px] h-[24px] text-[14px] font-[Inter] font-[400] text-center shadow-pro1 ${budget === 500 ? "bg-[#E1E2E1]" : "bg-[#FFFFFF]"}`}
                 onClick={() => setBudget(500)}
                 type="button"
               >
-                500฿
+                500$
               </button>
               <button
                 className={`border-[1px] border-[#F48FB1] rounded-[8px] w-[60px] h-[24px] text-[14px] font-[Inter] font-[400] text-center shadow-pro1 ${budget === 1000 ? "bg-[#E1E2E1]" : "bg-[#FFFFFF]"}`}
                 onClick={() => setBudget(1000)}
                 type="button"
               >
-                1000฿
+                1000$
               </button>
               <button
                 className={`border-[1px] border-[#F48FB1] rounded-[8px] w-[60px] h-[24px] text-[14px] font-[Inter] font-[400] text-center shadow-pro1 ${budget === 1500 ? "bg-[#E1E2E1]" : "bg-[#FFFFFF]"}`}
                 onClick={() => setBudget(1500)}
                 type="button"
               >
-                1500฿
+                1500$
               </button>
               <button
                 className={`border-[1px] border-[#F48FB1] rounded-[8px] w-[60px] h-[24px] text-[14px] font-[Inter] font-[400] text-center shadow-pro1 ${budget === 3000 ? "bg-[#E1E2E1]" : "bg-[#FFFFFF]"}`}
                 onClick={() => setBudget(3000)}
                 type="button"
               >
-                3000฿
+                3000$
               </button>
             </div>
             <input
@@ -109,13 +109,13 @@ function Ads() {
               value={budget}
               min={10}
               placeholder="Enter the amount"
-              className="mt-4 w-[200px] h-[40px] outline-none border-[1px] border-[#F48FB1] rounded-[8px] text-[18px] font-[Inter] font-[400] pl-2 shadow-pro1 bg-[#FFFFFF]"
+              className="mt-4 w-[200px] h-[40px] outline-none border-[1px] border-[#F48FB1]  rounded-[8px] text-[18px] font-[Inter] font-[400] pl-2 shadow-pro1 bg-[#FFFFFF]"
             ></input>
             <p className="text-left w-[200px] text-[10px] text-gray-500 font-[Inter] font-[500] pl-2 mt-1">
               Payment Minimun Budget 10 ฿
             </p>
             <button
-              className={`m-4 w-[147px] h-[54px] border-[2px] border-[#F48FB1] tracking-wide  rounded-3xl hover:bg-[#F5F5F6] text-[20px] text-[#616161] font-[Inter] font-[600] shadow-pro1 bg-[#FFFFFF]`}
+              className={`m-4 w-[147px] h-[54px] border-[2px] border-[#F48FB1] hover:bg-[rgba(244, 143, 177, 0.15)] tracking-wide  rounded-3xl hover:bg-[#F5F5F6] text-[20px] text-[#616161] font-[Inter] font-[600] shadow-pro1 bg-[#FFFFFF]`}
               type="button"
               onClick={handleFormSubmit}
             >

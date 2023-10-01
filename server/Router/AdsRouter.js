@@ -34,7 +34,7 @@ adsRouter.get('/:user_id', async (req, res) => {
 
   try {
     const jobs = await pool.query(query, queryParams);
-    console.log(jobs);
+    // console.log(jobs);
     return res.json({
       data: jobs,
     });

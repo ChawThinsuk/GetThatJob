@@ -90,7 +90,7 @@ function EditJob() {
         jobData
       );
 
-      console.log(response.data);
+      // console.log(response.data);
 
       toast({
         title: "Job Posted",
@@ -303,6 +303,7 @@ function EditJob() {
                     h="89px"
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="text"
                     placeholder="Describe the main functions and characteristics of your job position"
                     value={job_position}
@@ -320,6 +321,7 @@ function EditJob() {
                     h="89px"
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="text"
                     placeholder="List each mandatory requirement in a new line"
                     value={job_mandatory}
@@ -336,6 +338,7 @@ function EditJob() {
                     h="89px"
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="text"
                     placeholder="List each optional requirement in a new line"
                     value={job_optional}

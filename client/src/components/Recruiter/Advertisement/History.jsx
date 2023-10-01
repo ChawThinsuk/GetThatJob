@@ -45,7 +45,7 @@ function History() {
 
   
       setHistory(result.data.data);
-      console.log(result.data.data);
+      // console.log(result.data.data);
       setLoading(false);
     } catch (error) {
       setLoading(false);

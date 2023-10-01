@@ -5,7 +5,7 @@ import { HomepageAdmin } from "./HomepageAdmin";
 
 function AuthenticatedApp() {
   const { state } = useAuth();
-  console.log(state);
+  // console.log(state);
 
   return (
     <div className="App flex flex-col relative">

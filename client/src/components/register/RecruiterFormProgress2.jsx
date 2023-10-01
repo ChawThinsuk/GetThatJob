@@ -96,7 +96,7 @@ function RecruiterFormProgress2() {
               onClick={() => {
                 setRegisterPage(registerPage - 1);
               }}
-              className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] rounded-full
+              className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] hover:bg-[#BF5F82] rounded-full
                text-white text-center font-semibold flex items-center justify-center"
             >
               2
@@ -190,6 +190,7 @@ function RecruiterFormProgress2() {
                   type="button"
                   borderColor="#F48FB1"
                   focusBorderColor="#F48FB1"
+                  _hover={{ bg: "rgba(244, 143, 177, 0.15)" }}
                   variant="outline"
                   size="sm"
                   fontSize="md"
@@ -205,6 +206,7 @@ function RecruiterFormProgress2() {
                   mb={8}
                   type="button"
                   bg="#F48FB1"
+                  _hover={{ bg: "#BF5F82" }}
                   variant="solid"
                   size="sm"
                   fontSize="md"

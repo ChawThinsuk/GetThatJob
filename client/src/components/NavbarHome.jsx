@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 export const NavbarHomepage = () => {
   const urlArray = []
   urlArray.push(window.location.href.split('/')[3]);
-  console.log(window.location.href);
+  // console.log(window.location.href);
   const navigate = useNavigate();
   const [selectNav, setSelectNav] = useState(`/${urlArray[0]}`);
   const { logout, state } = useAuth();

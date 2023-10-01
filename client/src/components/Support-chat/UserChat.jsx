@@ -61,7 +61,7 @@ function Register({ setUser, setChat, user_email }) {
         <input
           placeholder="Your email 💬"
           ref={inputEmail}
-          className="rounded-md text-center w-[350px] h-[50px] font-medium text-[#3f3f46] border-none outline-none"
+          className="rounded-md text-center w-[350px] h-[50px] font-medium text-[#3f3f46] borde r-none outline-none"
         />
         <button onClick={() => handleRegister()} className="border-[1px] w-[70px] h-[30px] rounded-md hover:bg-[#d0cde0] opacity-90">Help</button>
         <p>Enter your email to get started</p>

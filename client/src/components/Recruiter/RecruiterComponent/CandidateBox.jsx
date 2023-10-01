@@ -148,7 +148,7 @@ function Candidate(props) {
           </div>
           {/* text */}
           <div className="flex flex-row items-between w-full">
-            <div className="overflow-hidden max-h-0 w-full group-[.is-active]:max-h-[600px] duration-1000 ml-[30px] mr-[30px] mb-[10px]">
+            <div className="overflow-hidden max-h-0 w-full group-[.is-active]:max-h-[600px] duration-500 ml-[30px] mr-[30px] mb-[10px]">
               <div className="text-[14px]">
                 <p className="text-[#BF5F82] text-[17px] font-[Montserrat] mt-[21.33px]">
                   Professional experience
@@ -168,7 +168,7 @@ function Candidate(props) {
             </div>
             <div className="flex items-end h-full relative">
               <div
-                className="flex flex-col justify-end items-end cursor-pointer group-[.is-active]:rotate-[180deg] duration-500 mr-[21.33px] absolute bottom-6 right-1"
+                className="flex flex-col justify-end items-end cursor-pointer group-[.is-active]:rotate-[180deg] duration-300 mr-[21.33px] absolute bottom-6 right-1"
                 onClick={handleToggleActive}
               >
                 <svg

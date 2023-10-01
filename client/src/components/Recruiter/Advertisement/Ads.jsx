@@ -42,13 +42,13 @@ function Ads() {
   };
 
   return (
-    <div className="flex flex-col justify-start items-center w-full min-h-srceen pr-[100px] pl-[100px] pt-[50px] font-[Inter] bg-[#F5F5F6]">
+    <div className="flex flex-col justify-start items-center w-full min-h-srceen pr-[100px] pl-[100px] pt-[50px] font-[Inter]">
       <div className="flex flex-row justify-center items-start w-full">
         <div>
-          <p className="text-[46px] text-start w-full font-[Montserrat] font-[400] text-[#373737]">
+          <p className="text-[45px] text-start w-full font-[Montserrat] font-[400] text-[#373737]">
             Advertising
           </p>
-          <p className="text-[24px] pt-2 font-[Inter] font-[400] text-[#373737]">
+          <p className="text-[20px] pt-2 font-[Inter] font-[400] text-[#373737]">
             Select your job
           </p>
           <div>
@@ -56,7 +56,7 @@ function Ads() {
           </div>
         </div>
         <div className="flex flex-col justify-start items-center h-[800px] mt-[113px]">
-          <div className="ml-12 flex flex-col justify-center items-center w-[330px] h-[380px] rounded-[8px] border-[1px] border-[#E1E2E1] bg-[#ffc1e367] shadow-pro1 ">
+          <div className="ml-12 flex flex-col justify-center items-center w-[330px] h-[380px] rounded-[8px] border-[1px] border-[#E1E2E1] bg-[#fafafa] shadow-pro1 ">
             <p className="text-center text-[28px] font-[Inter] font-[600] text-gray-700">
               Advertising<br></br> budget
             </p>

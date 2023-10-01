@@ -107,33 +107,33 @@ function History() {
   }, [sortTitle, sortDate, sortStatus]);
 
   return (
-    <div className="flex flex-col justify-start items-center w-full min-h-srceen pr-[100px] pl-[100px] pt-[50px] font-[Inter] bg-[#F5F5F6]">
+    <div className="flex flex-col justify-start items-center w-full min-h-srceen pr-[100px] pl-[100px] pt-[50px] font-[Inter]">
       <div className="w-full flex flex-row justify-center items-center">
         <p className="text-[40px] text-start font-[Montserrat] font-[400] text-[#373737] w-[90%] flex flex-row justify-start items-center pl-2">
           Advertising History
         </p>
       </div>
       <div className="w-full h-fit flex flex-col justify-center items-center pt-6 pb-14">
-        <div className="w-[90%] h-fit border-[4px] border-[#F48FB1] rounded-[8px] shadow-pro1">
+        <div className="w-[90%] h-fit border-[2px] border-[#F48FB1] rounded-[5px] shadow-pro1">
           <div className="w-full h-[50px] flex flex-row justify-start items-center bg-[#F48FB1] text-[#FFFFFF]">
-            <p className="text-[24px] font-[600] font-[Inter] w-[60%] text-center hover:cursor-pointer"
+            <p className="text-[20px] font-[500] font-[Montserrat] w-[60%] text-center hover:cursor-pointer"
             onClick={toggleSortTitle}>
               Job
             </p>
             <p
-              className="text-[24px] font-[600] font-[Inter] w-[25%] text-center hover:cursor-pointer"
+              className="text-[20px] font-[500] font-[Montserrat] w-[25%] text-center hover:cursor-pointer"
               onClick={toggleSortDate}
             >
               Date
             </p>
             <p
-              className="text-[24px] font-[600] font-[Inter] w-[15%] text-center hover:cursor-pointer"
+              className="text-[20px] font-[500] font-[Montserrat] w-[15%] text-center hover:cursor-pointer"
               onClick={toggleSortStatus}
             >
               Status
             </p>
           </div>
-          <div className="w-full mt-2 mb-2 flex justify-center items-center">
+          <div className="w-full mb-2 flex justify-center items-center ">
             {loading ? (
               <Spinner
                 thickness="4px"
@@ -148,20 +148,20 @@ function History() {
                   return (
                     <div
                       key={index}
-                      className="flex flex-row justify-start items-center w-full h-[60px]  border-b-2"
+                      className="flex flex-row justify-start items-center w-full h-[60px]  border-b-[1px] hover:bg-[#fafafa]"
                     >
-                      <p className="text-[18px] font-[600] font-[Inter] w-[60%] pl-14">
+                      <p className="text-[18px] font-[Inter] w-[60%] pl-14">
                         {job.job_title}
                       </p>
-                      <p className="text-[18px] font-[400] font-[Inter] w-[25%] text-start pl-6">
+                      <p className="text-[18px]font-[Inter] w-[25%] text-start pl-6">
                         {formatDateTime(job.created_at)}
                       </p>
-                      <div className="text-[18px] font-[400] font-[Inter] w-[15%] flex justify-center">
+                      <div className="text-[18px] font-[Inter] w-[15%] flex justify-center">
                         <p
-                          className={`w-[80px] border-[1px] text-[#FFFFFF] text-center rounded-2xl ${
+                          className={`w-[80px] text-center rounded-2xl ${
                             job.payment_status === "paid"
-                              ? "border-[#f297c9] bg-[#f297c9]"
-                              : "border-gray-300 bg-gray-300"
+                              ? "bg-[#F48FB1] text-[#FFFFFF]"
+                              : "bg-gray-300 text-[#8E8E8E]"
                           }`}
                         >
                           {job.payment_status}

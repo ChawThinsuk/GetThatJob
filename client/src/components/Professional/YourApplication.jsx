@@ -302,7 +302,7 @@ export const YourApplication = () => {
               <label
                 htmlFor="pdf-upload"
                 disabled={value === "1"} 
-                className={`cursor-pointer flex items-center justify-center w-[200px] h-auto p-[13px] rounded-xl transition duration-300 ${value === "1" ? "bg-ggrey-200 text-ggrey-100": "bg-[#F48FB1] text-white hover:bg-[#bf5f82]"} `}
+                className={`flex items-center justify-center w-[200px] h-auto p-[13px] rounded-xl transition duration-300 ${value === "1" ? "bg-ggrey-200 text-ggrey-100 cursor-not-allowed": "bg-[#F48FB1] text-white hover:bg-[#bf5f82] cursor-pointer"} `}
               >
                <span><img src={uploadlogo} className="mr-3 w-[35px]" alt="" /></span> Choose a file
               </label>

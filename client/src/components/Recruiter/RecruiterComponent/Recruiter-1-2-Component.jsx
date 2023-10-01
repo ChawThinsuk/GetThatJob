@@ -113,7 +113,7 @@ export function CloseJobButton(props) {
 }
 export function ClosedJobButton() {
   return (
-    <button className="flex flex-row items-center justify-center bg-[#E1E2E1] w-[169.34px] h-[53.36px] gap-2 text-[#8E8E8E] rounded-[21.33px] text-[15px] duration-1000" disabled>
+    <button className="flex flex-row items-center justify-center bg-[#E1E2E1] w-[154.67px] h-[53.36px] gap-2 text-[#8E8E8E] rounded-[21.33px] text-[15px] duration-1000" disabled>
       <svg
         width="24"
         height="24"

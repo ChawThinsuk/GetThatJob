@@ -79,7 +79,7 @@ const JobCard = (prop) => {
   <span class="text-sm text-pink-300 font-bold pr-1">Recommend</span>
 </div>}</div>
           <div className='flex flex-row w-[345px] h-[110px] gap-[10px]'>
-            <img src={job.logo} className='w-[100px] h-[100px]' />
+            <img src={job.logo} className='w-[100px] h-[100px] pt-[7px]' />
             <div className='flex pl-2 flex-col w-[230px] h-[110px]'>
               <div className='flex flex-row gap-[5px]'>
                 <img src={manufacturing} className='w-[20px] h-[20px]' />
@@ -89,7 +89,7 @@ const JobCard = (prop) => {
               </div>
               <div className='flex flex-col w-[230px] h-[86px]'>
                 <p className='text-[22px] text-[#373737] w-[270px] h-[32px] font-[Montserrat] font-[500]'>
-                  {job.job_title}
+                  {job.job_title.slice(0,18)}<span className={`${job.job_title.length < 19 && "hidden"}`}>...</span>
                 </p>
                 <p className='text-[15px] text-[#616161] w-[230px] h-[24px] font-[Montserrat] font-[500]'>
                   {job.company_name}

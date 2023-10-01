@@ -51,35 +51,35 @@ const JobCardAds = ({prop}) => {
             <div className="w-[95%] h-[120px] flex flex-col justify-center items-center">
               <div className="flex flex-row justify-center items-center w-[90%] h-[90%]">
                 <div className="flex flex-col w-full h-full">
-                  <div className="flex flex-row gap-[5px] w-full h-[24px]">
+                  <div className="flex flex-row gap-[5px] w-full h-[24px] pt-[1px]">
                     <img src={manufacturing} className="w-[20px] h-[20px]" />
                     <p className="text-[16px] text-[#8E8E8E] min-w-[142px] h-[22px] font-[Inter] font-[400]">
-                      {job.job_category}
+                    {job.job_category.slice(0,18)}<span className={`${job.job_category.length < 19 && "hidden"}`}>...</span>
                     </p>
                   </div>
                   <div className="flex flex-col w-full h-[56px]">
-                    <p className="text-[24px] text-[#373737] w-full h-[32px] font-[Montserrat] font-[500]">
-                      {job.job_title}
+                    <p className="text-[22px] text-[#373737] w-full h-[32px] font-[Montserrat] font-[500]">
+                    {job.job_title.slice(0,20)}<span className={`${job.job_title.length < 21 && "hidden"}`}>...</span>
                     </p>
-                    <p className="text-[14px] text-[#616161] w-full h-[24px] mt-[6px] font-[Montserrat] font-[500]">
+                    <p className="text-[15px] text-[#616161] w-full h-[24px] font-[Montserrat] font-[500]">
                       {job.job_location}
                     </p>
                   </div>
-                  <div className="flex flex-row justify-between items-center w-full h-[27px] pt-[4px]">
+                  <div className="flex flex-row justify-between items-center w-full h-[27px] pt-[3px]">
                     <div className="flex flex-row justify-center items-center gap-[5px] w-[106px] h-[27px] ">
                       <img src={calendar} className="w-[20-px] h-[20px]" />
-                      <p className="text-[16px] text-[#8E8E8E] w-[95px] h-[22px] font-[Inter] font-[400]">
+                      <p className="text-[14px] text-[#8E8E8E] w-[95px] h-[22px] font-[Inter] font-[400]">
                         {job.job_type}
                       </p>
                     </div>
                     <div className="flex flex-row justify-center items-center min-w-[112px] h-[27px] ">
                       <img src={small} className="w-[20px] h-[20px]" />
                       <div className="flex flex-row justify-center items-center min-w-[86px] h-[22px]">
-                        <p className="text-[16px] text-[#8E8E8E] font-[Inter] font-[400]">
+                        <p className="text-[14px] text-[#8E8E8E] font-[Inter] font-[400]">
                           {(job.salary_min / 1000).toFixed(1)}k
                         </p>
                         <p>-</p>
-                        <p className="text-[16px] text-[#8E8E8E] font-[Inter] font-[400]">
+                        <p className="text-[14px] text-[#8E8E8E] font-[Inter] font-[400]">
                           {(job.salary_max / 1000).toFixed(1)}k
                         </p>
                       </div>

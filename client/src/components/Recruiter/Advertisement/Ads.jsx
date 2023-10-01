@@ -40,9 +40,8 @@ function Ads() {
         });
     }
   };
-
   return (
-    <div className="flex flex-col justify-start items-center w-full min-h-srceen pr-[100px] pl-[100px] pt-[50px] font-[Inter]">
+    <div className="flex flex-col justify-start items-center h-[973px] w-[1565px] pr-[100px] pl-[100px] pt-[50px] font-[Inter] bg-[#F5F5F6]">
       <div className="flex flex-row justify-center items-start w-full">
         <div>
           <p className="text-[45px] text-start w-full font-[Montserrat] font-[400] text-[#373737]">

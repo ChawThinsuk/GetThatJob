@@ -24,7 +24,7 @@ function JobDetailBox(props) {
   return (
     <div
       className={`flex flex-col w-[1258.72px] mt-[21.33px] justify-between items-start rounded-[8px] shadow-md group ${
-        item.active === 1 ? `is-active bg-white` : ` duration-500`
+        item.active === 1 ? `is-active bg-white` : `  bg-white duration-500`
       }`}
     >
       <div

@@ -25,7 +25,7 @@ function Candidate(props) {
       {/* {data.job_user_mark !== "declined" && ( */}
         <div
           className={`flex flex-col justify-between  w-[1258.72px] rounded-[8px] mt-[21.33px] shadow-md group ${
-            item.active === 1 ? `is-active bg-white` : ` duration-1000`
+            item.active === 1 ? `is-active bg-white` : `  bg-white`
           }`}
         >
           <div className="flex flex-row w-full h-[100px] justify-between items-center duration-1000 rounded-lg">

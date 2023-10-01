@@ -10,6 +10,8 @@ function History() {
   const [sortTitle, setSortTitle] = useState(null);
   const [sortDate, setSortDate] = useState(null);
   const [sortStatus, setSortStatus] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
 
   const getHistory = async () => {
     setLoading(true);
@@ -106,8 +108,18 @@ function History() {
     getHistory();
   }, [sortTitle, sortDate, sortStatus]);
 
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = history?.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil((history?.length || 0) / itemsPerPage);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
   return (
-    <div className="flex flex-col justify-start items-center w-full min-h-srceen pr-[100px] pl-[100px] pt-[50px] font-[Inter]">
+    <div className="flex flex-col justify-start items-center pr-[100px] pl-[100px] pt-[50px] font-[Inter] bg-[#F5F5F6] h-[973px] w-[1565px]">
       <div className="w-full flex flex-row justify-center items-center">
         <p className="text-[40px] text-start font-[Montserrat] font-[400] text-[#373737] w-[90%] flex flex-row justify-start items-center pl-2">
           Advertising History
@@ -144,7 +156,7 @@ function History() {
               />
             ) : (
               <div className="w-full m-h-[100px] flex flex-col justify-center items-start">
-                {history.map((job, index) => {
+                {currentItems.map((job, index) => {
                   return (
                     <div
                       key={index}
@@ -175,7 +187,74 @@ function History() {
           </div>
         </div>
       </div>
+      <PaginationControls
+        totalPages={totalPages}
+        currentPage={currentPage}
+        handlePageChange={handlePageChange}
+      />
     </div>
   );
 }
 export default History;
+function PaginationControls({ totalPages, currentPage, handlePageChange }) {
+  return (
+    <>
+      <div className="flex justify-start">
+        <nav aria-label="Page navigation example">
+          <ul className="inline-flex -space-x-px text-sm">
+            <li>
+              <a
+                href="#"
+                className={`flex items-center justify-center px-3 h-10 w-25 ml-0 leading-tight  rounded-l-lg font-[Inter] text-[16px] ${
+                  currentPage === 1 ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100" : "bg-[#f190b1] text-white"
+                }`}
+                onClick={
+                  currentPage === 1
+                    ? null
+                    : () => handlePageChange(currentPage - 1)
+                }
+                disabled={currentPage === 1}
+              >
+                Previous
+              </a>
+            </li>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <li key={index}>
+                <a
+                  href="#"
+                  className={`flex items-center justify-center px-3 h-10 w-10 leading-tight text-white hover:bg-[#f190b1] font-[Inter] text-[16px] ${
+                    currentPage === index + 1
+                      ? "bg-[#f38fb1]"
+                      : "bg-rose-200 "
+                  }`}
+                  onClick={() => handlePageChange(index + 1)}
+                >
+                  {index + 1}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a
+                href="#"
+                className={`flex items-center justify-center px-3 h-10 w-25 leading-tight rounded-r-lg   font-[Inter] text-[16px] ${
+                  currentPage === totalPages
+                    ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100"
+                    : "bg-[#f190b1] text-white"
+                }`}
+                onClick={
+                  currentPage === totalPages
+                    ? null
+                    : () => handlePageChange(currentPage + 1)
+                }
+                
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </>
+  );
+}

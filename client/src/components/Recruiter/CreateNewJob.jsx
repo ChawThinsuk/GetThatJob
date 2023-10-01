@@ -95,7 +95,7 @@ export function CreateNewJob() {
 
   return (
     <ChakraProvider>
-      <div className="flex flex-col pl-[160px] font-[Inter]">
+      <div className="flex flex-col pl-[160px] font-[Inter] bg-[#F5F5F6]">
         <h1 className="text-[45px] font-[Montserrat] mb-4 mt-[43px]">
           Create new job posting
         </h1>

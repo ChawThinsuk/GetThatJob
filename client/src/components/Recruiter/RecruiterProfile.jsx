@@ -255,7 +255,7 @@ export function RecruiterProfile() {
   }, []);
   return (
     <>
-      <div className="flex pl-[160px] font-[Inter] w-full h-full">
+      <div className="flex pl-[160px] font-[Inter] h-[973px] w-[1565px] bg-[#F5F5F6]">
         <Box w="100%" maxW="lg" mt={10} borderRadius="md">
           <h1 className="text-[45px] font-[Montserrat] mb-4">Profile</h1>
           <div className="flex mb-[11px]">

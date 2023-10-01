@@ -17,11 +17,9 @@ export const FindThatJob = () => {
   const [autoComplete, setAutoComplete] = useState([])
   const [openAutoComplete, setOpenAutoComplete] = useState(false);
   const autoCompleteRef = useRef("autoComplete");
-  const { jobs, getJobs, getPopularJob, popularJobs,isLoading, setIsLoading } = usePro();
-
-  // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const jobsPerPage = 12; // Number of jobs to display per page
+  const [itemsPerPage] = useState(12);
+  const { jobs, getJobs, getPopularJob, popularJobs,isLoading, setIsLoading } = usePro();
 
 
   useEffect(() => {
@@ -41,26 +39,6 @@ export const FindThatJob = () => {
     };
   }, [searchTerm, category, type, minSalary, maxSalary, location]);
 
-  const indexOfLastJob = currentPage * jobsPerPage;
-  const indexOfFirstJob = indexOfLastJob - jobsPerPage;
-  const jobsToDisplay = jobs.slice(indexOfFirstJob, indexOfLastJob);
-
-  // Calculate total number of pages
-  const totalPages = Math.ceil(jobs.length / jobsPerPage);
-  console.log(currentPage)
-
-  // Handle next page click
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  // Handle previous page click
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }}
   const autoCompleteData = () => {
     const autocompleteList = [];
     jobs.map((job) => {
@@ -93,6 +71,16 @@ export const FindThatJob = () => {
   const handleSearchTermChange = debounce((search) => {
     setSearchTerm(search);
   }, 500);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = jobs?.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPagesz = Math.ceil((jobs?.length || 0) / itemsPerPage);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
   return (
     <div className="flex flex-col justify-start items-center w-full min-h-[1080px] pr-[100px] pl-[100px] pt-[50px] font-[Inter] bg-[#F5F5F6]">
       <div className="flex flex-col justify-center items-start w-full">
@@ -360,59 +348,89 @@ export const FindThatJob = () => {
               }
             })}
           </div>
-          <div className="ml-[-5px] flex w-[1280px] justify-center h-[80px]">
-          <button
-            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all bg-[#F48FB1] text-white rounded-lg hover:bg-[#bf5f82] duration-100"
-            onClick={handlePrevPage}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-          <div className=" w-[144px] h-[43px] mx-5 my-10  text-center
-          bg-gray-300 text-[#616161] px-6 py-2 rounded-lg           
-            ">Page {currentPage} of {totalPages}</div>
-          <button
-            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all bg-[#F48FB1] text-white rounded-lg hover:bg-[#bf5f82] duration-100"
-            onClick={handleNextPage}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
-        </div>
-          <div> <p className="text-[30px] text-start w-full font-[Montserrat] font-[500]">
+          <div> <p className="text-[30px] text-start w-full font-[Montserrat] font-[500] mt-[20px]">
             {jobs.length} jobs for you
           </p></div>
           
         </div>
       
-        <div className="flex flex-wrap justify-start gap-[16px] w-[1280px] h-srceen">
-          {jobsToDisplay.map((job,index) => (
+        <div className="flex flex-wrap justify-start gap-[16px] w-[1280px] h-srceen mt-[10px]">
+          {currentItems.map((job,index) => (
             <JobCard job={job} key={job.job_id} index={index} page={currentPage} />
           ))}
+          <div className="flex justify-center w-full mt-[40px] mb-[40px] mr-3">
+        <PaginationControls
+        totalPages={totalPagesz}
+        currentPage={currentPage}
+        handlePageChange={handlePageChange}
+      />
         </div>
-        
-        <div className={`${(isLoading)&&`hidden`} pagination-controls ml-[-5px] flex w-[1280px] justify-center`}>
-          <button
-            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all bg-[#F48FB1] text-white rounded-lg hover:bg-[#bf5f82] duration-100"
-            onClick={handlePrevPage}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-          <div className=" w-[144px] h-[43px] mx-5 my-10  text-center
-          bg-gray-300 text-[#616161] px-6 py-2 rounded-lg
-           
-            ">Page {currentPage} of {totalPages}</div>
-          <button
-            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all bg-[#F48FB1] text-white rounded-lg hover:bg-[#bf5f82] duration-100"
-            onClick={handleNextPage}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
         </div>
       </div>
     </div>
   )
 }
-  
+
+function PaginationControls({ totalPages, currentPage, handlePageChange }) {
+  return (
+    <>
+    {console.log(currentPage)}
+      <div className="flex justify-start">
+        <nav aria-label="Page navigation example">
+          <ul className="inline-flex -space-x-px text-sm">
+            <li>
+              <a
+                href="#"
+                className={`flex items-center justify-center px-3 h-10 w-25 ml-0 leading-tight  rounded-l-lg font-[Inter] text-[16px] ${
+                  currentPage === 1 ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100" : "bg-[#f190b1] text-white"
+                }`}
+                onClick={
+                  currentPage === 1
+                    ? null
+                    : () => handlePageChange(currentPage - 1)
+                }
+                disabled={currentPage === 1}
+              >
+                Previous
+              </a>
+            </li>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <li key={index}>
+                <a
+                  href="#"
+                  className={`flex items-center justify-center px-3 h-10 w-10 leading-tight text-white hover:bg-[#f190b1] font-[Inter] text-[16px] ${
+                    currentPage === index + 1
+                      ? "bg-[#f38fb1]"
+                      : "bg-rose-200 "
+                  }`}
+                  onClick={() => handlePageChange(index + 1)}
+                >
+                  {index + 1}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a
+                href="#"
+                className={`flex items-center justify-center px-3 h-10 w-25 leading-tight rounded-r-lg   font-[Inter] text-[16px] ${
+                  currentPage === totalPages
+                    ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100"
+                    : "bg-[#f190b1] text-white"
+                }`}
+                onClick={
+                  currentPage === totalPages
+                    ? null
+                    : () => handlePageChange(currentPage + 1)
+                }
+                
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </>
+  );
+}

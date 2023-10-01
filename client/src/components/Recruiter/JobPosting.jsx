@@ -68,8 +68,8 @@ function JobPosting(props) {
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
-  console.log(currentPage)
   return (
+    <div className="bg-[#F5F5F6] h-[980px] w-[1565px]">
     <JobContainer>
       <p className="font-[Montserrat] text-[35px] font-medium">Job Postings</p>
       <RadioJobPosting page={setCurrentPage}/>
@@ -86,7 +86,7 @@ function JobPosting(props) {
           />
         );
       })}
-      <div className="w-full flex justify-center items-center mt-[50px]">
+      <div className="w-full flex justify-center items-center mt-[50px] mb-[30px]">
       <PaginationControls
         totalPages={totalPages}
         currentPage={currentPage}
@@ -94,6 +94,7 @@ function JobPosting(props) {
       />
       </div>
     </JobContainer>
+    </div>
   );
 }
 

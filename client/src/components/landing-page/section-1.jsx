@@ -72,7 +72,7 @@ function Section1() {
       </Box>
       <Box
         textAlign="center"
-        fontSize="1.5rem"
+        fontSize="24px"
         fontStyle="normal"
         fontWeight="400"
         lineHeight="normal"
@@ -86,13 +86,16 @@ function Section1() {
           bg="#F48FB1"
           textAlign="center"
           textColor="white"
-          fontSize="0.875rem"
+          fontSize="14px"
           fontStyle="normal"
           fontWeight="500"
           lineHeight="1.5rem"
           letterSpacing="0.07813rem"
-          padding="1rem 1.5rem"
+          width="264px"
+          height="56px"
           borderRadius="1rem"
+          fontFamily="Inter"
+          _hover={{background: "#bf5f82"}}
         >
           CREATE AN ACCOUNT NOW
         </Button>

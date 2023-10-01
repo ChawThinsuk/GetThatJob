@@ -88,6 +88,7 @@ function ShowJobPosting() {
   };
 
   return (
+    <div className="bg-[#F5F5F6] h-[973px] w-[1565px]">
     <ShowJobContainer>
       <Link to={`/`}>
         <BackButton>
@@ -123,6 +124,7 @@ function ShowJobPosting() {
       />
       </div>
     </ShowJobContainer>
+    </div>
   );
 }
 

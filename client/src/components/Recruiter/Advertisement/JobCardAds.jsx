@@ -11,6 +11,8 @@ const JobCardAds = ({ prop }) => {
   const { state } = useAuth();
   const [jobs, setJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(9);
   const getJobs = async () => {
     setIsLoading(true);
     try {
@@ -31,10 +33,19 @@ const JobCardAds = ({ prop }) => {
   const handleCardClick = (job) => {
     setSelectedJobs(job.job_id);
   };
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = jobs?.slice(indexOfFirstItem, indexOfLastItem);
 
+  const totalPages = Math.ceil((jobs?.length || 0) / itemsPerPage);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
   return (
+    <>
     <div className="flex flex-wrap justify-start gap-[16px] w-[950px] mt-[30px] mb-[30px]">
-      {jobs.map((job) => {
+      {currentItems.map((job) => {
         return (
           <div
             key={job.job_id}
@@ -108,10 +119,80 @@ const JobCardAds = ({ prop }) => {
                 </div>
               </div>
             )}
-          </div>
+          </div>         
         );
-      })}
+      })}     
     </div>
+    <div className="flex justify-start ml-[10px] mt-[15px]">
+    <PaginationControls
+        totalPages={totalPages}
+        currentPage={currentPage}
+        handlePageChange={handlePageChange}
+      />
+    </div>
+    </>
   );
 };
 export default JobCardAds;
+function PaginationControls({ totalPages, currentPage, handlePageChange }) {
+  return (
+    <>
+      <div className="flex justify-start">
+        <nav aria-label="Page navigation example">
+          <ul className="inline-flex -space-x-px text-sm">
+            <li>
+              <a
+                href="#"
+                className={`flex items-center justify-center px-3 h-10 w-25 ml-0 leading-tight  rounded-l-lg font-[Inter] text-[16px] ${
+                  currentPage === 1 ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100" : "bg-[#f190b1] text-white"
+                }`}
+                onClick={
+                  currentPage === 1
+                    ? null
+                    : () => handlePageChange(currentPage - 1)
+                }
+                disabled={currentPage === 1}
+              >
+                Previous
+              </a>
+            </li>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <li key={index}>
+                <a
+                  href="#"
+                  className={`flex items-center justify-center px-3 h-10 w-10 leading-tight text-white hover:bg-[#f190b1] font-[Inter] text-[16px] ${
+                    currentPage === index + 1
+                      ? "bg-[#f38fb1]"
+                      : "bg-rose-200 "
+                  }`}
+                  onClick={() => handlePageChange(index + 1)}
+                >
+                  {index + 1}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a
+                href="#"
+                className={`flex items-center justify-center px-3 h-10 w-25 leading-tight rounded-r-lg   font-[Inter] text-[16px] ${
+                  currentPage === totalPages
+                    ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100"
+                    : "bg-[#f190b1] text-white"
+                }`}
+                onClick={
+                  currentPage === totalPages
+                    ? null
+                    : () => handlePageChange(currentPage + 1)
+                }
+                
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </>
+  );
+}

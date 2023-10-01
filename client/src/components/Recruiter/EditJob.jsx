@@ -17,7 +17,8 @@ import JobCategorySelect from "../Recruiter/createComponent/JobCategory.jsx";
 import JobType from "../Recruiter/createComponent/JobType.jsx";
 import { useAuth } from "../../contexts/Authorization.jsx";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import leftArrow from '../../assets/pro2/leftArrow.svg';
+import { useNavigate, useParams,Link } from "react-router-dom";
 import {
   AlertDialog,
   AlertDialogBody,
@@ -113,7 +114,7 @@ function EditJob() {
     const value = event.target.value;
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
-      setJobMandatory(value + ",\n");
+      setJobMandatory(value + "`\n");
     } else {
       setJobMandatory(value);
     }
@@ -123,7 +124,7 @@ function EditJob() {
     const value = event.target.value;
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
-      setJobOptional(value + ",\n");
+      setJobOptional(value + "`\n");
     } else {
       setJobOptional(value);
     }
@@ -136,6 +137,12 @@ function EditJob() {
   return (
     <ChakraProvider>
       <div className="flex flex-col pl-[160px] font-[Inter]">
+      <Link to='/'>
+        <button className='flex items-center h-[32.001px]'>
+          <img src={leftArrow} className='w-[32.001px] h-[32.001px]' />
+          <p className=' font-[Inter] text-[15px] text-[#616161]'>BACK</p>
+        </button>
+      </Link>
         <h1 className="text-[45px] font-[Montserrat] mb-4 mt-[43px]">
           Edit Job
         </h1>

@@ -11,8 +11,8 @@ import {
   Alert,
   AlertIcon,
   CloseButton,
+  useToast,
 } from "@chakra-ui/react";
-
 import { useGlobalContext } from "../../contexts/registerContext.jsx";
 
 function TalentFormProgress() {
@@ -28,16 +28,31 @@ function TalentFormProgress() {
     setPasswordConfirmation,
   } = useGlobalContext();
 
-  const [showPasswordMismatchAlert, setShowPasswordMismatchAlert] = useState(
-    false
-  );
+  const toast = useToast();
+
+  const [showPasswordMismatchAlert, setShowPasswordMismatchAlert] =
+    useState(false);
   const [showEmptyFieldAlert, setShowEmptyFieldAlert] = useState(false);
 
   const handleSubmit = () => {
     if (password !== passwordConfirmation) {
-      setShowPasswordMismatchAlert(true);
+      toast({
+        title: "Password Mismatch",
+        description: "The passwords do not match.",
+        status: "error",
+        position: "bottom",
+        duration: 5000, // Toast duration in milliseconds
+        isClosable: true,
+      });
     } else if (!email || !password || !passwordConfirmation) {
-      setShowEmptyFieldAlert(true);
+      toast({
+        title: "Empty Fields",
+        description: "Please fill in all input fields.",
+        status: "warning",
+        position: "bottom",
+        duration: 5000, // Toast duration in milliseconds
+        isClosable: true,
+      });
     } else {
       setRegisterPage(registerPage + 1);
     }
@@ -97,6 +112,7 @@ function TalentFormProgress() {
                 <FormControl id="email" isRequired>
                   <FormLabel sx={customTextStyle}>Email Address</FormLabel>
                   <Input
+                    _hover={{ borderColor: "#F48FB1" }}
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
                     type="email"
@@ -110,6 +126,7 @@ function TalentFormProgress() {
                 <FormControl id="password" isRequired>
                   <FormLabel sx={customTextStyle}>Password</FormLabel>
                   <Input
+                    _hover={{ borderColor: "#F48FB1" }}
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
                     type="password"
@@ -120,13 +137,18 @@ function TalentFormProgress() {
                     }}
                   />
                 </FormControl>
-                <FormControl id="passwordConfirm" isRequired>
+                <FormControl
+                  hoverBorderColor="#F48FB1"
+                  id="passwordConfirm"
+                  isRequired
+                >
                   <FormLabel sx={customTextStyle}>
                     Password Confirmation
                   </FormLabel>
                   <Input
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="password"
                     placeholder="Confirm your password"
                     value={passwordConfirmation}

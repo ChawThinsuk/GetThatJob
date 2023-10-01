@@ -84,8 +84,8 @@ authRouter.post('/login', async (req, res) => {
   try {
     // query data from users record and check for existance of email
     let userData = await pool.query(
-      `SELECT * FROM users WHERE email = $1`,
-      [email]
+      `SELECT * FROM users WHERE email = $1 and user_type = $2`,
+      [email,userType]
     );
     userData = userData.rows[0];
     console.log(userData);

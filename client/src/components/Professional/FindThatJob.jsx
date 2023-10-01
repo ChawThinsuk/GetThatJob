@@ -94,16 +94,16 @@ export const FindThatJob = () => {
     setSearchTerm(search);
   }, 500);
   return (
-    <div className="flex flex-col justify-start items-center w-full min-h-srceen pr-[100px] pl-[100px] pt-[50px] font-[Inter] bg-[#F5F5F6]">
+    <div className="flex flex-col justify-start items-center w-full min-h-[1080px] pr-[100px] pl-[100px] pt-[50px] font-[Inter] bg-[#F5F5F6]">
       <div className="flex flex-col justify-center items-start w-full">
         <p className="text-[46px] text-start w-full font-[Montserrat] font-[400] text-[#373737]">
           Find That Job
         </p>
         <div className="flex flex-row">
           <div className="flex flex-col pr-[16px]">
-            <p className="text-[14px] pt-[16px] font-[Inter] font-[400] text-[#616161]">
+            <label className="text-[14px] pt-[16px] font-[Inter] font-[400] text-[#616161]">
               SEARCH BY JOB TITLE OR COMPANY NAME
-            </p>
+            </label>
             <div className="relative border-[1px] border-[#F48FB1] rounded-[8px] w-[560px] h-[42px] flex flex-row justify-start items-center bg-[#FFFFFF]">
               <img src={find} className="w-[22] h-[22] pl-2" />
               <input
@@ -158,6 +158,7 @@ export const FindThatJob = () => {
             </p>
             <select
               value={location}
+              style={{ outlineColor: "#F48FB1" }}
               onChange={(e) => setLocation(e.target.value)}
               className="border-[1px] border-[#F48FB1] rounded-[8px] w-full h-[42px] flex flex-row justify-center items-center text-[18px] p-[8px] font-[Inter] font-[400] text-[#8E8E8E]"
             >
@@ -263,6 +264,7 @@ export const FindThatJob = () => {
             </p>
             <select
               value={category}
+              style={{ outlineColor: "#F48FB1" }}
               onChange={(e) => setCategory(e.target.value)}
               className="border-[1px] border-[#F48FB1] rounded-[8px] w-full h-[42px] flex flex-row justify-center items-center text-[18px] p-[8px] font-[Inter] font-[400] text-[#8E8E8E]"
             >
@@ -289,6 +291,7 @@ export const FindThatJob = () => {
             </p>
             <select
               value={type}
+              style={{ outlineColor: "#F48FB1" }}
               onChange={(e) => setType(e.target.value)}
               className="border-[1px] border-[#F48FB1] rounded-[8px] w-full h-[42px] flex flex-row justify-center items-center text-[18px] p-[8px] font-[Inter] font-[400] text-[#8E8E8E]"
             >

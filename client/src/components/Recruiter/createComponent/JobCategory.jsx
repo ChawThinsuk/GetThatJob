@@ -40,6 +40,7 @@ function JobCategorySelect({ setJobCategory,value }) {
           placeholder="Select a category"
           borderColor="#F48FB1"
           focusBorderColor="#F48FB1"
+          _hover={{ borderColor: "#F48FB1" }}
           value={value}
           onChange={handleCategoryChange}
         >

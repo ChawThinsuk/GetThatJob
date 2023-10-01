@@ -324,6 +324,7 @@ export function RecruiterProfile() {
                 <Input
                   borderColor="#F48FB1"
                   focusBorderColor="#F48FB1"
+                  _hover={{ borderColor: "#F48FB1" }}
                   type="email"
                   placeholder="Enter your email address"
                   value={recruiterEmail}
@@ -337,6 +338,7 @@ export function RecruiterProfile() {
                 <Input
                   borderColor="#F48FB1"
                   focusBorderColor="#F48FB1"
+                  _hover={{ borderColor: "#F48FB1" }}
                   type="name"
                   placeholder="Enter your company name"
                   value={companyName}
@@ -376,6 +378,7 @@ export function RecruiterProfile() {
                 <Input
                   borderColor="#F48FB1"
                   focusBorderColor="#F48FB1"
+                  _hover={{ borderColor: "#F48FB1" }}
                   type="url"
                   placeholder="Enter your company url"
                   value={companyWebsite}
@@ -391,6 +394,7 @@ export function RecruiterProfile() {
                   h="229px"
                   borderColor="#F48FB1"
                   focusBorderColor="#F48FB1"
+                  _hover={{ borderColor: "#F48FB1" }}
                   type="text"
                   placeholder="Enter your company info"
                   value={aboutCompany}

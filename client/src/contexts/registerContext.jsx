@@ -19,8 +19,8 @@ const ContextProvider = ({ children }) => {
     lineHeight: "normal",
     letterSpacing: "1.5px",
     textTransform: "uppercase",
-    borderColor:"#F48FB1",
-    focusBorderColor:"#F48FB1"
+    // borderColor:"#F48FB1",
+    // focusBorderColor:"#F48FB1"
   };
   const profFormStyle = {
     fontFamily: "Inter",
@@ -31,8 +31,8 @@ const ContextProvider = ({ children }) => {
     letterSpacing: "1.5px",
     textTransform: "uppercase",
     color: "#373737",
-    borderColor:"#F48FB1",
-    focusBorderColor:"#F48FB1"
+    // borderColor:"#F48FB1",
+    // focusBorderColor:"#F48FB1"
   };
 
   // register page context

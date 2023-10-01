@@ -10,6 +10,7 @@ import {
   Alert,
   AlertIcon,
   CloseButton,
+  useToast,
 } from "@chakra-ui/react";
 import { useGlobalContext } from "../../contexts/registerContext";
 
@@ -28,20 +29,42 @@ function RecruiterFormProgress() {
     setRecruiterPasswordConfirmation,
   } = useGlobalContext();
 
-  const [showPasswordMismatchAlert, setShowPasswordMismatchAlert] = useState(false)
+  const toast = useToast();
+
+  const [showPasswordMismatchAlert, setShowPasswordMismatchAlert] =
+    useState(false);
   const [showEmptyFieldAlert, setShowEmptyFieldAlert] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     // Check for empty fields
-    if (!companyName || !recruiterEmail || !recruiterPassword || !recruiterpasswordConfirmation) {
-      setShowEmptyFieldAlert(true);
+    if (
+      !companyName ||
+      !recruiterEmail ||
+      !recruiterPassword ||
+      !recruiterpasswordConfirmation
+    ) {
+      toast({
+        title: "Empty Fields",
+        description: "Please fill in all required fields.",
+        status: "warning",
+        position: "bottom",
+        duration: 5000, // Toast duration in milliseconds
+        isClosable: true,
+      });
       return; // Stop form submission if any field is empty
     }
 
     if (recruiterPassword !== recruiterpasswordConfirmation) {
-      setShowPasswordMismatchAlert(true);
+      toast({
+        title: "Password Mismatch",
+        description: "The passwords do not match.",
+        status: "error",
+        position: "bottom",
+        duration: 5000, // Toast duration in milliseconds
+        isClosable: true,
+      });
     } else {
       setRecruiterRegisterPage(recruiterRegisterPage + 1);
     }
@@ -85,6 +108,7 @@ function RecruiterFormProgress() {
                   <Input
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="name"
                     placeholder="Enter your company name"
                     value={companyName}
@@ -98,6 +122,7 @@ function RecruiterFormProgress() {
                   <Input
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="email"
                     placeholder="Enter your email address"
                     value={recruiterEmail}
@@ -111,6 +136,7 @@ function RecruiterFormProgress() {
                   <Input
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="password"
                     placeholder="Enter your password"
                     value={recruiterPassword}
@@ -126,6 +152,7 @@ function RecruiterFormProgress() {
                   <Input
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="password"
                     placeholder="Enter your password"
                     value={recruiterpasswordConfirmation}
@@ -136,7 +163,7 @@ function RecruiterFormProgress() {
                 </FormControl>
               </Stack>
               <center>
-              {showEmptyFieldAlert && (
+                {showEmptyFieldAlert && (
                   <Alert status="warning" borderRadius="md" mt={2}>
                     <AlertIcon />
                     Please fill in all required fields.
@@ -148,18 +175,18 @@ function RecruiterFormProgress() {
                     />
                   </Alert>
                 )}
-              {showPasswordMismatchAlert && (
-                    <Alert status="error" borderRadius="md" mt={2}>
-                      <AlertIcon />
-                      The passwords do not match.
-                      <CloseButton
-                        onClick={() => setShowPasswordMismatchAlert(false)}
-                        position="absolute"
-                        right="8px"
-                        top="8px"
-                      />
-                    </Alert>
-                  )}
+                {showPasswordMismatchAlert && (
+                  <Alert status="error" borderRadius="md" mt={2}>
+                    <AlertIcon />
+                    The passwords do not match.
+                    <CloseButton
+                      onClick={() => setShowPasswordMismatchAlert(false)}
+                      position="absolute"
+                      right="8px"
+                      top="8px"
+                    />
+                  </Alert>
+                )}
                 <Button
                   px={5}
                   py={5}

@@ -215,7 +215,7 @@ export const ApplicationList = () => {
               fillteredData.map((item) => (
                 <label
                   key={item.job_professional_id}
-                  className="flex w-full p-[1.1rem] shadow-md flex-col items-start rounded-[0.6rem] border-2px-solid bg-white gap-[1.1rem] hover:bg-[#efeded] cursor-pointer relative "
+                  className="flex w-[1266px] p-[22px] shadow-md flex-col items-start rounded-[0.6rem] border-2px-solid bg-white  hover:bg-[#efeded] cursor-pointer relative "
                   htmlFor={`checkbox-${item.job_professional_id}`}
                 >
                   <input
@@ -224,7 +224,7 @@ export const ApplicationList = () => {
                     className="absolute peer opacity-0"
                   />
                   <div className=" flex w-full justify-between items-center ">
-                    <div className=" flex w-[] items-center gap-[1.1rem]">
+                    <div className=" flex w-[442px] items-center gap-[1.1rem] ">
                       <img
                         src={item.logo}
                         alt={item.logo}
@@ -239,7 +239,7 @@ export const ApplicationList = () => {
                         </p>
                       </div>
                     </div>
-                    <div className=" flex flex-col items-start gap-[0.6rem] text-[#8E8E8E]">
+                    <div className=" flex flex-col w-[442px] ml-[220px]  items-start gap-[0.6rem] text-[#8E8E8E]">
                       <div className=" flex font-inter text-xs font-normal leading-[0.5rem] tracking-[0.05rem] gap-[0.35rem] items-center">
                         <img src={buildingImg} />
                         {item.job_category} <img src={clockImg} />{" "}
@@ -257,7 +257,7 @@ export const ApplicationList = () => {
                         {console.log(item.jobs_professional_updated_at)}
                       </div>
                     </div>
-                    <div className="flex items-start gap-[0.35rem] relative ">
+                    <div className="flex w-[442px] justify-end items-start gap-[0.35rem] relative mr-8">
                       <div className=" flex flex-col w-[5.1rem] items-center  ">
                         <img src={sentIcn} />
                         <div className="text-center font-inter text-xs text-[#616161] font-normal leading-[1.1rem] tracking-[0.05rem] items-center">
@@ -293,12 +293,12 @@ export const ApplicationList = () => {
                     </div>
                   </div>
                   <div className=" flex flex-col items-start gap-[1.1rem] max-h-0 overflow-hidden peer-checked:max-h-full w-full">
-                    <div className=" w-[47.6rem] flex flex-col items-start gap-[0.3rem] ">
+                    <div className=" w-[47.6rem] mt-[30px] flex flex-col items-start gap-[0.3rem] ">
                       <h2 className="text-[1.1rem] text-[#c7668a] font-normal leading-normal tracking-[0.10938rem]">
                         Professional experience
                       </h2>
                       {item.job_user_experience != null ? (
-                        <p className="text-[0.975rem] text-[#373737] font-normal leading-[1.35rem] tracking-[0.11563rem]">
+                        <p className="text-[0.975rem] mb-3 text-[#373737] font-normal leading-[1.35rem] tracking-[0.11563rem]">
                           {item.job_user_experience}
                         </p>
                       ) : (
@@ -325,7 +325,7 @@ export const ApplicationList = () => {
                         </p>
                       )}
                     </div>
-                    <div className=" flex p-[0rem_1rem] justify-center items-start gap-[1.1rem] w-full">
+                    <div className="mt-[15px] flex p-[0rem_1rem] justify-center items-start gap-[1.1rem] w-full">
                       <Button
                         display="flex"
                         alignItems="center"

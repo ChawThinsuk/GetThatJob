@@ -11,6 +11,7 @@ import {
   Alert,
   AlertIcon,
   CloseButton,
+  useToast,
 } from "@chakra-ui/react";
 import UploadPdf from "./UploadPdf";
 import { useGlobalContext } from "../../contexts/registerContext";
@@ -27,6 +28,7 @@ function RecruiterFormProgress2() {
     handleSubmit,
   } = useGlobalContext();
 
+  const toast = useToast();
   const [showEmptyFieldAlert, setShowEmptyFieldAlert] = useState(false);
   const [showCharacterCountAlert, setShowCharacterCountAlert] = useState(false);
 
@@ -35,7 +37,14 @@ function RecruiterFormProgress2() {
 
     // Check for empty fields
     if (!companyWebsite || !aboutCompany) {
-      setShowEmptyFieldAlert(true);
+      toast({
+        title: "Empty Fields",
+        description: "Please fill in all required fields.",
+        status: "warning",
+        position: "bottom",
+        duration: 5000, // Toast duration in milliseconds
+        isClosable: true,
+      });
       return; // Stop form submission if any field is empty
     }
 
@@ -43,8 +52,19 @@ function RecruiterFormProgress2() {
     const minCharacters = 100;
     const maxCharacters = 2000;
 
-    if (aboutCompany.length < minCharacters || aboutCompany.length > maxCharacters) {
-      setShowCharacterCountAlert(true);
+    if (
+      aboutCompany.length < minCharacters ||
+      aboutCompany.length > maxCharacters
+    ) {
+      toast({
+        title: "Character Count Error",
+        description:
+          "About the company should be between 100 and 2000 characters.",
+        status: "warning",
+        position: "bottom",
+        duration: 5000, // Toast duration in milliseconds
+        isClosable: true,
+      });
       return; // Stop form submission if character count is not within the specified range
     }
 
@@ -100,6 +120,7 @@ function RecruiterFormProgress2() {
                     w="70%"
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="url"
                     placeholder="Enter your company url"
                     value={companyWebsite}
@@ -114,6 +135,7 @@ function RecruiterFormProgress2() {
                     h="80px"
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="text"
                     placeholder="Enter your company info"
                     value={aboutCompany}
@@ -134,7 +156,7 @@ function RecruiterFormProgress2() {
                 Only JPG,JPEG,PNG. Max size 5MB
               </p>
               <center>
-              {showEmptyFieldAlert && (
+                {showEmptyFieldAlert && (
                   <Alert status="warning" borderRadius="md" mt={2}>
                     <AlertIcon />
                     Please fill in all required fields.
@@ -158,7 +180,8 @@ function RecruiterFormProgress2() {
                     />
                   </Alert>
                 )}
-               <Button
+
+                <Button
                   mt={8}
                   mr={5}
                   mb={8}

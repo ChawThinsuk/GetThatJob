@@ -51,7 +51,20 @@ export const YourApplication = () => {
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
     const supabase = createClient(supabaseUrl, supabaseAnonKey);
     let resume = cvData;
+    const minCharacters = 100;
+    const maxCharacters = 2000;
     try {
+      if (interestingData.length < minCharacters || interestingData.length > maxCharacters) {
+        toast({
+          title: "Character Count Error",
+          description: "About the company should be between 100 and 2000 characters.",
+          status: "warning",
+          position: "bottom",
+          duration: 5000, // Toast duration in milliseconds
+          isClosable: true,
+        });
+        return; // Stop form submission if character count is not within the specified range
+      }
       if (newCvData) {
         const { data, error: professionalError } = await supabase.storage
           .from("files")
@@ -342,6 +355,7 @@ export const YourApplication = () => {
             border="2px"
             borderColor="#F48FB1"
             focusBorderColor="#F48FB1"
+            _hover={{ borderColor: "#F48FB1" }}
             display="flex"
             alignItems="flex-start"
             padding="0.6rem"
@@ -379,10 +393,11 @@ export const YourApplication = () => {
             Why are you interested in working at {data.data.job.company_name}
           </Text>
           <Textarea
-            placeholder="Mention things about The Company Name SA that excite you. Why would you be a good candidate?"
-            border="2px"
+           placeholder={`Mention things about ${data.data.job.company_name} that excite you. Why would you be a good candidate?`}
+           border="2px"
             borderColor="#F48FB1"
             focusBorderColor="#F48FB1"
+            _hover={{ borderColor: "#F48FB1" }}
             display="flex"
             alignItems="flex-start"
             padding="0.6rem"

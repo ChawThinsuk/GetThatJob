@@ -85,6 +85,7 @@ function TalentFormProgress3() {
                   <Input
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="text"
                     placeholder="Enter your title"
                     value={title}
@@ -101,6 +102,7 @@ function TalentFormProgress3() {
                     h="80px"
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="text"
                     placeholder="Enter your company info"
                     value={professionalExperience}
@@ -118,6 +120,7 @@ function TalentFormProgress3() {
                     h="80px"
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="text"
                     placeholder="Enter your educational info"
                     value={educationalInfo}

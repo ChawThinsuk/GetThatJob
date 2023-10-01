@@ -87,6 +87,7 @@ export default function PhoneNumberInput({
       <Input
         borderColor="#F48FB1"
         focusBorderColor="#F48FB1"
+        _hover={{ borderColor: "#F48FB1" }}
         pl="77px"
         type="tel"
         value={number}

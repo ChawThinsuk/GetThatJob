@@ -75,7 +75,7 @@ export function CreateNewJob() {
     const value = event.target.value;
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
-      setJobMandatory(value + ",\n");
+      setJobMandatory(value + "`\n");
     } else {
       setJobMandatory(value);
     }
@@ -85,7 +85,7 @@ export function CreateNewJob() {
     const value = event.target.value;
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
-      setJobOptional(value + ",\n");
+      setJobOptional(value + "`\n");
     } else {
       setJobOptional(value);
     }
@@ -107,6 +107,7 @@ export function CreateNewJob() {
                   <Input
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="text"
                     placeholder="Enter job title"
                     value={job_title}
@@ -146,6 +147,7 @@ export function CreateNewJob() {
                     h="89px"
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="text"
                     placeholder="Describe the main functions and characteristics of your job position"
                     value={job_position}
@@ -163,6 +165,7 @@ export function CreateNewJob() {
                     h="89px"
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="text"
                     placeholder="List each mandatory requirement in a new line"
                     value={job_mandatory}
@@ -179,6 +182,7 @@ export function CreateNewJob() {
                     h="89px"
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="text"
                     placeholder="List each optional requirement in a new line"
                     value={job_optional}
@@ -198,6 +202,7 @@ export function CreateNewJob() {
               mb={8}
               type="button"
               bg="#F48FB1"
+              _hover={{ bg: "#F48FB1" }}
               variant="solid"
               size="sm"
               fontSize="19px"

@@ -184,7 +184,8 @@ export function ProfessionalProfile() {
                   <FormLabel sx={profFormStyle}>Email</FormLabel>
                   <Input
                     borderColor="#F48FB1"
-                    focusBorderColor="#F48FB1"     
+                    focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type='email'
                     placeholder='Enter your email address'
                     value={email}
@@ -224,6 +225,7 @@ export function ProfessionalProfile() {
                   <Input
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type='text'
                     placeholder='Enter your name'
                     value={name}
@@ -239,7 +241,8 @@ export function ProfessionalProfile() {
                     focusBorderColor="#F48FB1" children='+66' /> */}
                     <Input
                       borderColor="#F48FB1"
-                    focusBorderColor="#F48FB1"
+                      focusBorderColor="#F48FB1"
+                      _hover={{ borderColor: "#F48FB1" }}
                       type='tel'
                       placeholder='Enter your phone number'
                       value={phone}
@@ -259,6 +262,7 @@ export function ProfessionalProfile() {
                   <Input
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type='date'
                     placeholder='Enter your birthdate'
                     value={birthDate}
@@ -272,6 +276,7 @@ export function ProfessionalProfile() {
                   <Input
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type='url'
                     placeholder='Enter Linkedin URL'
                     value={linkedinUrl}
@@ -295,6 +300,7 @@ export function ProfessionalProfile() {
                   <Input
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type='text'
                     placeholder='Enter your title'
                     value={title}
@@ -312,6 +318,7 @@ export function ProfessionalProfile() {
                     h='341px'
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type='text'
                     placeholder='Enter your company info'
                     value={professionalExperience}
@@ -327,6 +334,7 @@ export function ProfessionalProfile() {
                     h='154px'
                     borderColor="#F48FB1"
                     focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type='text'
                     placeholder='Enter your educational info'
                     value={educationalInfo}

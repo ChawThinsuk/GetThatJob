@@ -22,6 +22,7 @@ function MobileInput() {
         <PhoneNumberInput
         borderColor="#F48FB1"
         focusBorderColor="#F48FB1"
+        _hover={{ borderColor: "#F48FB1" }}
           mr={8}
           value={phone}
           options={countryOptions}

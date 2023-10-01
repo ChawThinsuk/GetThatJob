@@ -20,7 +20,6 @@ function Candidate(props) {
     let newActive = item.active === 1 ? 0 : 1;
     setItemm({ ...item, active: newActive });
   };
-
   return (
     <>
       {/* {data.job_user_mark !== "declined" && ( */}
@@ -149,18 +148,18 @@ function Candidate(props) {
           </div>
           {/* text */}
           <div className="flex flex-row items-between w-full">
-            <div className="overflow-hidden max-h-0 w-full group-[.is-active]:max-h-[600px] duration-1000 ml-[21.33px]">
+            <div className="overflow-hidden max-h-0 w-full group-[.is-active]:max-h-[600px] duration-1000 ml-[30px] mr-[30px] mb-[10px]">
               <div className="text-[14px]">
                 <p className="text-[#BF5F82] text-[17px] font-[Montserrat] mt-[21.33px]">
                   Professional experience
                 </p>
-                <p className="mt-[10.66px]">{item.experience}</p>
+                <p className="mt-[10.66px]">{item.job_user_experience}</p>
               </div>
               <div className="text-[14px]">
                 <p className="text-[#BF5F82] text-[17px] font-[Montserrat] mt-[21.33px]">
                   Why are you interested in working at The company name SA
                 </p>
-                <p className="mt-[10.66px]">{item.interested}</p>
+                <p className="mt-[10.66px]">{item.job_user_interesting}</p>
               </div>
               <DownloadResumeButton
                 linkPdf={data.job_user_cv}

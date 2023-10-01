@@ -55,7 +55,7 @@ function JobPosting(props) {
     return <div>Error Loading</div>;
   }
   posts?.sort((a, b) => {
-    return new Date(a.created_at) - new Date(b.created_at);
+    return new Date(b.created_at) - new Date(a.created_at);
   });
   posts?.sort(sortByStatus);
 

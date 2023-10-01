@@ -197,6 +197,7 @@ RecruiterRouter.post("/:id/createjob", async (req, res) => {
     job_type,
     salary_min,
     salary_max,
+    job_location
   } = req.body;
 
   // const job_title = req.body.job_title;
@@ -217,10 +218,11 @@ RecruiterRouter.post("/:id/createjob", async (req, res) => {
     job_type,
     salary_min,
     salary_max,
+    job_location
   };
   const jobStatus = "track";
-  let insertData = `INSERT INTO jobs (recruiter_id, job_title, job_category, salary_min, salary_max, job_type, job_position, job_mandatory, job_optional,job_status, created_at)
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NOW())`;
+  let insertData = `INSERT INTO jobs (recruiter_id, job_title, job_category, salary_min, salary_max, job_type, job_position, job_mandatory, job_optional, job_location, job_status, created_at)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, NOW())`;
 
   try {
     await pool.query(insertData, [
@@ -233,6 +235,7 @@ RecruiterRouter.post("/:id/createjob", async (req, res) => {
       newJob.job_position,
       newJob.job_mandatory,
       newJob.job_optional,
+      newJob.job_location,
       jobStatus,
     ]);
 
@@ -305,6 +308,7 @@ RecruiterRouter.put("/editjob/:id", async (req, res) => {
     job_type,
     salary_min,
     salary_max,
+    job_location,
   } = req.body;
 
   // const job_title = req.body.job_title;
@@ -325,6 +329,7 @@ RecruiterRouter.put("/editjob/:id", async (req, res) => {
     job_type,
     salary_min,
     salary_max,
+    job_location
   };
   const jobStatus = "track";
   let updateData = `UPDATE jobs
@@ -337,7 +342,8 @@ RecruiterRouter.put("/editjob/:id", async (req, res) => {
     job_position = $7,
     job_mandatory = $8,
     job_optional = $9,
-    job_status = $10,
+    job_location = $10,
+    job_status = $11,
     updated_at = NOW()
   WHERE
     job_id = $1
@@ -354,6 +360,7 @@ RecruiterRouter.put("/editjob/:id", async (req, res) => {
       newJob.job_position,
       newJob.job_mandatory,
       newJob.job_optional,
+      newJob.job_location,
       jobStatus,
     ]);
 

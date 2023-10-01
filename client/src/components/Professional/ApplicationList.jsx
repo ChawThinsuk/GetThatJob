@@ -148,6 +148,7 @@ export const ApplicationList = () => {
           letterSpacing="0.11563rem"
           color="#373737"
           marginBottom="1.1rem"
+          fontFamily={Montserrat}
         >
           Your applications
         </Text>

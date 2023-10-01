@@ -6,6 +6,8 @@ import follow from "../assets/NavbarHome/follow.svg";
 import user from "../assets/NavbarHome/profile.svg";
 import bag from "../assets/NavbarHome/bag.svg";
 import doc from "../assets/NavbarHome/doc.svg";
+import money from "../assets/FindThatJob/money2.svg";
+import time from "../assets/FindThatJob/time.svg";
 import logoutlogo from "../assets/NavbarHome/logout.svg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -27,7 +29,8 @@ export const NavbarHomepage = () => {
     { logo: bag, title: "Job Postings", url: "/" },
     { logo: doc, title: "Create New Job", url: "/createjob" },
     { logo: user, title: "Profile", url: "/recruitprofile" },
-    { logo: user, title: "Ads", url: "/ads" }
+    { logo: money, title: "Ads", url: "/ads" },
+    { logo: time, title: "Ads History", url: "/history" }
   ];
 
   return (

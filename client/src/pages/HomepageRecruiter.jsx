@@ -12,15 +12,14 @@ import HelpButton from "../components/Support-chat/HelpButton";
 import Ads from "../components/Recruiter/Advertisement/Ads";
 import Success from "../components/Recruiter/Advertisement/Success";
 import Cancel from "../components/Recruiter/Advertisement/Cancel";
+import History from "../components/Recruiter/Advertisement/History";
 
 export const HomepageRecruiter = () => {
   const { state } = useAuth();
-  const test = import.meta.env.PROJECT_ID;
-  console.log(test);
   return (
     <>
     <RecruiterProvider>
-      <div className="grid grid-cols-[15%_85%] w-screen min-h-screen ">
+      <div className="grid grid-cols-[17.75%_81.25%] min-w-[1840px] min-h-[940px]">
         <NavbarHomepage userType={state.userType} />
         <Routes>
           <Route path="/" element={<JobPosting id={state.userID} />} />
@@ -32,6 +31,7 @@ export const HomepageRecruiter = () => {
           <Route path="/ads" element={<Ads />} />
           <Route path="/ads/success" element={<Success />} />
           <Route path="/ads/cancel" element={<Cancel />} />
+          <Route path="/history" element={<History />} />
         </Routes>
       </div>
     <HelpButton email={state.email}/>

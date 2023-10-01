@@ -13,6 +13,8 @@ import backArrow from "../../assets/recruiter-2/arrow-left-icon.svg";
 function ShowJobPosting() {
   const param = useParams();
   const { candidateFilterState } = useRecruiterContext();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
   let data = {
     job_id: param.id,
     job_user_mark: candidateFilterState,
@@ -75,6 +77,16 @@ function ShowJobPosting() {
   });
   candidates?.sort(sortByStatus);
 
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = candidates?.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil((candidates?.length || 0) / itemsPerPage);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
   return (
     <ShowJobContainer>
       <Link to={`/`}>
@@ -89,7 +101,7 @@ function ShowJobPosting() {
       {job?.map((item, key) => {
         return <JobDetailBox key={key} datas={item} refreshData={refetchR} />;
       })}
-      <RadioCandidate />
+      <RadioCandidate page={setCurrentPage}/>
       <p className="text-[21px] font-[Montserrat] font-medium mt-[16px]">
         {candidates?.length} candidates found
       </p>
@@ -103,6 +115,13 @@ function ShowJobPosting() {
           />
         );
       })}
+      <div className="w-full flex justify-center items-center mt-[50px]">
+      <PaginationControls
+        totalPages={totalPages}
+        currentPage={currentPage}
+        handlePageChange={handlePageChange}
+      />
+      </div>
     </ShowJobContainer>
   );
 }
@@ -121,5 +140,67 @@ function BackButton({ children }) {
     <button className="flex flex-row text-[#616161] text-[15px] font-medium">
       {children}
     </button>
+  );
+}
+function PaginationControls({ totalPages, currentPage, handlePageChange }) {
+  return (
+    <>
+      <div className="flex justify-start">
+        <nav aria-label="Page navigation example">
+          <ul className="inline-flex -space-x-px text-sm">
+            <li>
+              <a
+                href="#"
+                className={`flex items-center justify-center px-3 h-10 w-25 ml-0 leading-tight  rounded-l-lg font-[Inter] text-[16px] ${
+                  currentPage === 1 ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100" : "bg-[#f190b1] text-white"
+                }`}
+                onClick={
+                  currentPage === 1
+                    ? null
+                    : () => handlePageChange(currentPage - 1)
+                }
+                disabled={currentPage === 1}
+              >
+                Previous
+              </a>
+            </li>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <li key={index}>
+                <a
+                  href="#"
+                  className={`flex items-center justify-center px-3 h-10 w-10 leading-tight text-white hover:bg-[#f190b1] font-[Inter] text-[16px] ${
+                    currentPage === index + 1
+                      ? "bg-[#f38fb1]"
+                      : "bg-rose-200 "
+                  }`}
+                  onClick={() => handlePageChange(index + 1)}
+                >
+                  {index + 1}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a
+                href="#"
+                className={`flex items-center justify-center px-3 h-10 w-25 leading-tight rounded-r-lg   font-[Inter] text-[16px] ${
+                  currentPage === totalPages
+                    ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100"
+                    : "bg-[#f190b1] text-white"
+                }`}
+                onClick={
+                  currentPage === totalPages
+                    ? null
+                    : () => handlePageChange(currentPage + 1)
+                }
+                
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </>
   );
 }

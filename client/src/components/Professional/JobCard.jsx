@@ -79,7 +79,7 @@ const JobCard = (prop) => {
   <span class="text-sm text-pink-300 font-bold pr-1">Recommend</span>
 </div>}</div>
           <div className='flex flex-row w-[345px] h-[110px] gap-[10px]'>
-            <img src={job.logo} className='w-[100px] h-[100px]' />
+            <img src={job.logo} className='w-[100px] h-[100px] pt-[7px]' />
             <div className='flex pl-2 flex-col w-[230px] h-[110px]'>
               <div className='flex flex-row gap-[5px]'>
                 <img src={manufacturing} className='w-[20px] h-[20px]' />
@@ -89,7 +89,7 @@ const JobCard = (prop) => {
               </div>
               <div className='flex flex-col w-[230px] h-[86px]'>
                 <p className='text-[22px] text-[#373737] w-[270px] h-[32px] font-[Montserrat] font-[500]'>
-                  {job.job_title}
+                  {job.job_title.slice(0,18)}<span className={`${job.job_title.length < 19 && "hidden"}`}>...</span>
                 </p>
                 <p className='text-[15px] text-[#616161] w-[230px] h-[24px] font-[Montserrat] font-[500]'>
                   {job.company_name}
@@ -142,13 +142,13 @@ const JobCard = (prop) => {
             {follow && follow.job_user_application ? (
               <button
                 disabled
-                className='w-[147px] h-[54px] border-none bg-[#E1E2E1] rounded-3xl tracking-widest  text-[17px] text-[#616161] font-[Inter] font-[500]'
+                className='w-[142px] h-[49px] border-none bg-[#E1E2E1] rounded-3xl tracking-widest  text-[17px] text-[#616161] font-[Inter] font-[500]'
               >
                 APPLIED
               </button>
             ) : (
               <Link to={`/${job.job_id}`}>
-                <button className='w-[147px] h-[54px] border-[1px] border-[#F48FB1] tracking-wide  rounded-3xl hover:bg-[#F5F5F6] text-[16px] text-[#616161] font-[Inter] font-[500]'>
+                <button className='w-[142px] h-[49px] border-[1px] border-[#F48FB1] tracking-wide  rounded-3xl hover:bg-[#F48FB126] text-[16px] text-[#616161] font-[Inter] font-[500]'>
                   SEE MORE
                 </button>
               </Link>

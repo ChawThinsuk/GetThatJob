@@ -19,8 +19,8 @@ function JobDetailBox(props) {
     setItem({ ...item, active: newActive });
   };
 
-  let mandatory = data.job_mandatory.split(",");
-  let optional = data.job_optional.split(",");
+  let mandatory = data.job_mandatory.split("`");
+  let optional = data.job_optional.split("`");
   return (
     <div
       className={`flex flex-col w-[1258.72px] mt-[21.33px] justify-between items-start rounded-[8px] shadow-md group ${
@@ -195,14 +195,14 @@ function JobDetailBox(props) {
             />
           )}
           {data.job_status === "closed" && <ClosedJobButton />}
-          <Link to={`/editjob/${data.job_id}`}><button className="flex flex-row items-center justify-center bg-[#F48FB1] w-[154.67px] h-[53.36px] gap-2 text-white rounded-[21.33px] text-[15px] hover:bg-rose-200 duration-200">
+          <Link to={`/editjob/${data.job_id}`}><button className="flex flex-row items-center justify-center bg-[#F48FB1] w-[154.67px] h-[53.36px] gap-2 text-white rounded-[21.33px] text-[15px] hover:bg-[#bf5f82] duration-200">
             EDIT
           </button></Link>
         
         </div>
       </div>
       <div className="flex flex-row items-between w-full">
-        <div className="overflow-hidden max-h-0 w-full group-[.is-active]:max-h-[600px] duration-500 ml-[21.33px] text-[14px]">
+        <div className="overflow-hidden max-h-0 w-full group-[.is-active]:max-h-[600px] duration-500 ml-[30px] mr-[30px] mb-[10px] text-[14px]">
           <div className="mt-[16px]">
             <p className="text-[#BF5F82] text-[14px] font-[Montserrat]">
               About the job position

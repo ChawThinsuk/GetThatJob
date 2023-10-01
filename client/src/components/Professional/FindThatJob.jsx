@@ -94,16 +94,16 @@ export const FindThatJob = () => {
     setSearchTerm(search);
   }, 500);
   return (
-    <div className="flex flex-col justify-start items-center w-full min-h-srceen pr-[100px] pl-[100px] pt-[50px] font-[Inter] bg-[#F5F5F6]">
+    <div className="flex flex-col justify-start items-center w-full min-h-[1080px] pr-[100px] pl-[100px] pt-[50px] font-[Inter] bg-[#F5F5F6]">
       <div className="flex flex-col justify-center items-start w-full">
         <p className="text-[46px] text-start w-full font-[Montserrat] font-[400] text-[#373737]">
           Find That Job
         </p>
         <div className="flex flex-row">
           <div className="flex flex-col pr-[16px]">
-            <p className="text-[14px] pt-[16px] font-[Inter] font-[400] text-[#616161]">
+            <label className="text-[14px] pt-[16px] font-[Inter] font-[400] text-[#616161]">
               SEARCH BY JOB TITLE OR COMPANY NAME
-            </p>
+            </label>
             <div className="relative border-[1px] border-[#F48FB1] rounded-[8px] w-[560px] h-[42px] flex flex-row justify-start items-center bg-[#FFFFFF]">
               <img src={find} className="w-[22] h-[22] pl-2" />
               <input
@@ -158,6 +158,7 @@ export const FindThatJob = () => {
             </p>
             <select
               value={location}
+              style={{ outlineColor: "#F48FB1" }}
               onChange={(e) => setLocation(e.target.value)}
               className="border-[1px] border-[#F48FB1] rounded-[8px] w-full h-[42px] flex flex-row justify-center items-center text-[18px] p-[8px] font-[Inter] font-[400] text-[#8E8E8E]"
             >
@@ -263,6 +264,7 @@ export const FindThatJob = () => {
             </p>
             <select
               value={category}
+              style={{ outlineColor: "#F48FB1" }}
               onChange={(e) => setCategory(e.target.value)}
               className="border-[1px] border-[#F48FB1] rounded-[8px] w-full h-[42px] flex flex-row justify-center items-center text-[18px] p-[8px] font-[Inter] font-[400] text-[#8E8E8E]"
             >
@@ -289,6 +291,7 @@ export const FindThatJob = () => {
             </p>
             <select
               value={type}
+              style={{ outlineColor: "#F48FB1" }}
               onChange={(e) => setType(e.target.value)}
               className="border-[1px] border-[#F48FB1] rounded-[8px] w-full h-[42px] flex flex-row justify-center items-center text-[18px] p-[8px] font-[Inter] font-[400] text-[#8E8E8E]"
             >
@@ -331,15 +334,15 @@ export const FindThatJob = () => {
       <div className="flex flex-col justify-center items-start w-full  pt-[12px]">
         <div className="mb-[16px] w-full">
           <div className="flex flex-row gap-3 mt-2  items-center w-full">
-            <p className="font-[Inter] text-[14px] ">Popular searches:</p>
+            <p className="font-[Inter] text-[15px] ">Popular searches:</p>
             {popularJobs.map((job, index) => {
               if (index <= 7) {
                 return (
                   <div key={index} className="flex flex-row gap-3">
                     <p
                       className={`${
-                        job === searchTerm ? "bg-[#fecbdb]" : "bg-gray-300"
-                      } rounded-xl py-[3px] px-[7px] text-[13px] hover:cursor-pointer`}
+                        job === searchTerm ? "bg-[#F48FB1] text-white" : "bg-gray-300 text-[#616161]"
+                      } rounded-xl py-[5px] px-[15px] text-[12px] hover:cursor-pointer`}
                       onClick={() => {
                         setSearchTerm(job);
                         setSearchTermShow(job);
@@ -359,27 +362,17 @@ export const FindThatJob = () => {
           </div>
           <div className="ml-[-5px] flex w-[1280px] justify-center h-[80px]">
           <button
-            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all 
-          bg-pink-300 text-white px-6 py-2 rounded-lg
-          border-pink-400
-            border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
-            active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-pink-300 shadow-pink-300 active:shadow-none"
+            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all bg-[#F48FB1] text-white rounded-lg hover:bg-[#bf5f82] duration-100"
             onClick={handlePrevPage}
             disabled={currentPage === 1}
           >
             Previous
           </button>
-          <div className=" w-[144px] h-[43px] mx-5 my-10  
-          bg-gray-300 text-white px-6 py-2 rounded-lg
-          border-pink-400
-           
+          <div className=" w-[144px] h-[43px] mx-5 my-10  text-center
+          bg-gray-300 text-[#616161] px-6 py-2 rounded-lg           
             ">Page {currentPage} of {totalPages}</div>
           <button
-            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all 
-            bg-pink-300 text-white px-6 py-2 rounded-lg
-            border-pink-400
-            border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
-            active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-pink-300 shadow-pink-300 active:shadow-none"
+            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all bg-[#F48FB1] text-white rounded-lg hover:bg-[#bf5f82] duration-100"
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
           >
@@ -400,27 +393,18 @@ export const FindThatJob = () => {
         
         <div className={`${(isLoading)&&`hidden`} pagination-controls ml-[-5px] flex w-[1280px] justify-center`}>
           <button
-            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all 
-bg-pink-300 text-white px-6 py-2 rounded-lg
-border-pink-400
-border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
-active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-pink-300 shadow-pink-300 active:shadow-none"
+            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all bg-[#F48FB1] text-white rounded-lg hover:bg-[#bf5f82] duration-100"
             onClick={handlePrevPage}
             disabled={currentPage === 1}
           >
             Previous
           </button>
-          <div className=" w-[144px] h-[43px] mx-5 my-10  
-          bg-gray-300 text-white px-6 py-2 rounded-lg
-          border-pink-400
+          <div className=" w-[144px] h-[43px] mx-5 my-10  text-center
+          bg-gray-300 text-[#616161] px-6 py-2 rounded-lg
            
             ">Page {currentPage} of {totalPages}</div>
           <button
-            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all 
-            bg-pink-300 text-white px-6 py-2 rounded-lg
-            border-pink-400
-            border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
-            active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-pink-300 shadow-pink-300 active:shadow-none"
+            className="cursor-pointer w-[113px] h-[43px] mx-5 my-10 transition-all bg-[#F48FB1] text-white rounded-lg hover:bg-[#bf5f82] duration-100"
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
           >

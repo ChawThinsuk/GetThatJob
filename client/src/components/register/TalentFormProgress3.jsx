@@ -84,6 +84,8 @@ function TalentFormProgress3() {
                   <FormLabel sx={customTextStyle}>TITLE</FormLabel>
                   <Input
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="text"
                     placeholder="Enter your title"
                     value={title}
@@ -99,6 +101,8 @@ function TalentFormProgress3() {
                   <Textarea
                     h="80px"
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="text"
                     placeholder="Enter your company info"
                     value={professionalExperience}
@@ -115,6 +119,8 @@ function TalentFormProgress3() {
                   <Textarea
                     h="80px"
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="text"
                     placeholder="Enter your educational info"
                     value={educationalInfo}
@@ -157,6 +163,7 @@ function TalentFormProgress3() {
                   py={5}
                   type="button"
                   borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
                   variant="outline"
                   size="sm"
                   fontSize="md"

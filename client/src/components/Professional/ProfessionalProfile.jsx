@@ -1,5 +1,5 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Box,
   Button,
@@ -13,6 +13,13 @@ import {
   InputLeftAddon,
   FormHelperText,
   useToast,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  useDisclosure 
 } from '@chakra-ui/react';
 import { createClient } from '@supabase/supabase-js';
 import { useGlobalContext } from '../../contexts/registerContext.jsx';
@@ -39,6 +46,8 @@ export function ProfessionalProfile() {
 
   const toast = useToast();
   const { state } = useAuth();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = useRef();
   // console.log(state.userID);
 
   const getProfProfile = async () => {
@@ -64,7 +73,8 @@ export function ProfessionalProfile() {
     setProfessionalExperience(response.data.data.experience);
     setEducationalInfo(response.data.data.education);
     setCv(response.data.data.cv);
-    console.log(response.data.data.cv);
+    // console.log(response.data.data.cv);
+    // console.log(response.data.data.cv);
     setSelectedFileName(response.data.data.cv);
     setFormattedUpdatedTime(newFormattedUpdatedTime); // Define newFormattedUpdatedTime here
   };
@@ -81,7 +91,8 @@ export function ProfessionalProfile() {
           setNewCv(file);
           console.log(file);
           setSelectedNewFileName(file.name);
-        } else {
+          console.Console.log(file.name);
+        } else if (file) {
           setNewCv(null);
           setSelectedNewFileName(null);
           toast({
@@ -92,10 +103,6 @@ export function ProfessionalProfile() {
             isClosable: true,
           });
         }
-      } else {
-        // No file selected, clear the selected file and file name
-        setCv(null);
-        setSelectedFileName(null);
       }
     }
   };
@@ -104,17 +111,19 @@ export function ProfessionalProfile() {
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
     const supabase = createClient(supabaseUrl, supabaseAnonKey);
-    console.log(cv);
+    let testPDF = cv;
     try {
-      const { data, error: professionalError } = await supabase.storage
-        .from('files')
-        .upload(`professionalcv/${Date.now()}${newCv.name}`, newCv, {
-          cacheControl: '3600',
-          upsert: false,
-        });
-      if (professionalError) {
-        throw professionalError; // Throw the error to trigger the catch block
-      }
+      if (newCv) {  const { data, error: professionalError } = await supabase.storage
+      .from('files')
+      .upload(`professionalcv/${Date.now()}${newCv.name}`, newCv, {
+        cacheControl: '3600',
+        upsert: false,
+      });
+      // setNewCv(data.path)
+      testPDF = data.path
+    if (professionalError) {
+      throw professionalError; // Throw the error to trigger the catch block
+    }}
       const updatedProfileData = {
         email: email,
         username: name,
@@ -124,10 +133,8 @@ export function ProfessionalProfile() {
         title: title,
         experience: professionalExperience,
         education: educationalInfo,
-        cv: data.path,
+        cv: testPDF,
       };
-
-      console.log(updatedProfileData.cv);
 
       // Make a PUT request to update the profile data
       await axios.put(
@@ -142,6 +149,10 @@ export function ProfessionalProfile() {
         duration: 5000,
         isClosable: true,
       });
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
       // Handle any errors that may occur during the update process
       console.error('Error updating profile:', error);
@@ -172,7 +183,9 @@ export function ProfessionalProfile() {
                 <FormControl id='email' isRequired>
                   <FormLabel sx={profFormStyle}>Email</FormLabel>
                   <Input
-                    borderColor='#F48FB1'
+                    borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type='email'
                     placeholder='Enter your email address'
                     value={email}
@@ -210,7 +223,9 @@ export function ProfessionalProfile() {
                 <FormControl id='name' isRequired>
                   <FormLabel sx={profFormStyle}>NAME</FormLabel>
                   <Input
-                    borderColor='#F48FB1'
+                    borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type='text'
                     placeholder='Enter your name'
                     value={name}
@@ -222,13 +237,16 @@ export function ProfessionalProfile() {
                 <FormControl id='phone' isRequired>
                   <FormLabel sx={profFormStyle}>Phone</FormLabel>
                   <InputGroup>
-                    <InputLeftAddon children='+66' />
+                    {/* <InputLeftAddon borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1" children='+66' /> */}
                     <Input
-                      borderColor='#F48FB1'
+                      borderColor="#F48FB1"
+                      focusBorderColor="#F48FB1"
+                      _hover={{ borderColor: "#F48FB1" }}
                       type='tel'
                       placeholder='Enter your phone number'
                       value={phone}
-                      maxLength={9}
+                      maxLength={10}
                       onChange={(event) => {
                         setPhone(event.target.value);
                       }}
@@ -242,7 +260,9 @@ export function ProfessionalProfile() {
                 <FormControl id='birthDate' isRequired>
                   <FormLabel sx={profFormStyle}>BIRTHDATE</FormLabel>
                   <Input
-                    borderColor='#F48FB1'
+                    borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type='date'
                     placeholder='Enter your birthdate'
                     value={birthDate}
@@ -254,7 +274,9 @@ export function ProfessionalProfile() {
                 <FormControl id='linkedinUrl' isRequired>
                   <FormLabel sx={profFormStyle}>Linkedin URL</FormLabel>
                   <Input
-                    borderColor='#F48FB1'
+                    borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type='url'
                     placeholder='Enter Linkedin URL'
                     value={linkedinUrl}
@@ -276,7 +298,9 @@ export function ProfessionalProfile() {
                 <FormControl id='title' isRequired>
                   <FormLabel sx={profFormStyle}>TITLE</FormLabel>
                   <Input
-                    borderColor='#F48FB1'
+                    borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type='text'
                     placeholder='Enter your title'
                     value={title}
@@ -292,7 +316,9 @@ export function ProfessionalProfile() {
                   <Textarea
                     w='1013px'
                     h='341px'
-                    borderColor='#F48FB1'
+                    borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type='text'
                     placeholder='Enter your company info'
                     value={professionalExperience}
@@ -306,7 +332,9 @@ export function ProfessionalProfile() {
                   <Textarea
                     w='1013px'
                     h='154px'
-                    borderColor='#F48FB1'
+                    borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type='text'
                     placeholder='Enter your educational info'
                     value={educationalInfo}
@@ -379,11 +407,11 @@ export function ProfessionalProfile() {
                     <p>File selected: {cv.name}</p>
                   </div>
                 )} */}
-                {cv === null && userType === 'PROFESSIONAL' && (
+                {/* {cv === null && userType === 'PROFESSIONAL' && (
                   <div className='ml-4 mt-3'>
                     <p>No file chosen</p>
                   </div>
-                )}
+                )} */}
               </div>
             </div>
 
@@ -408,10 +436,43 @@ export function ProfessionalProfile() {
               fontSize='19px'
               color='white'
               borderRadius='19px'
-              onClick={handleSaveChanges}
+              onClick={onOpen}
             >
               SAVE CHANGES
             </Button>
+            <AlertDialog
+            isOpen={isOpen}
+            leastDestructiveRef={cancelRef}
+            onClose={onClose}
+          >
+            <AlertDialogOverlay>
+              <AlertDialogContent>
+                <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                  Confirm Update
+                </AlertDialogHeader>
+
+                <AlertDialogBody>
+                  Are you sure you want to update your profile?
+                </AlertDialogBody>
+
+                <AlertDialogFooter>
+                  <Button
+                    ref={cancelRef}
+                    onClick={onClose} // Close the dialog without updating
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    colorScheme="pink"
+                    onClick={handleSaveChanges} // Call handleSaveChanges when confirmed
+                    ml={3}
+                  >
+                    Update Profile
+                  </Button>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialogOverlay>
+          </AlertDialog>
           </div>
         </div>
       </div>

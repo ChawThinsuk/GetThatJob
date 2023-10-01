@@ -9,10 +9,9 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 //Page 1
-export function RadioJobPosting() {
+export function RadioJobPosting(props) {
   const { jobPostingFilterState, setJobPostingFilterState } =
     useRecruiterContext();
-  const { handleDownloadClick } = useGlobalContext();  
   return (
     <div className="pt-[21.33px] text-[#616161] text-[15px] ">
       <p className="text-[11px]">FILTER YOUR JOB POSTINGS</p>
@@ -24,6 +23,7 @@ export function RadioJobPosting() {
           className="accent-[#BF5F82]"
           onChange={(e) => {
             setJobPostingFilterState(e.target.value);
+            props.page(1)
           }}
           checked={jobPostingFilterState === "all"}
         />
@@ -35,6 +35,7 @@ export function RadioJobPosting() {
           className="accent-[#BF5F82]"
           onChange={(e) => {
             setJobPostingFilterState(e.target.value);
+            props.page(1)
           }}
           checked={jobPostingFilterState === "track"}
         />
@@ -46,6 +47,7 @@ export function RadioJobPosting() {
           className="accent-[#BF5F82]"
           onChange={(e) => {
             setJobPostingFilterState(e.target.value);
+            props.page(1)
           }}
           checked={jobPostingFilterState === "closed"}
         />
@@ -82,7 +84,7 @@ export function CloseJobButton(props) {
         </div>
       ) : (
         <button
-          className="flex flex-row items-center justify-center bg-[#F48FB1] w-[154.67px] h-[53.36px] gap-2 text-white rounded-[21.33px] text-[15px] duration-200 hover:bg-rose-200"
+          className="flex flex-row items-center justify-center bg-[#F48FB1] w-[154.67px] h-[53.36px] gap-2 text-white rounded-[21.33px] text-[15px] duration-200 hover:bg-[#bf5f82]"
           onClick={() => {
             handleClickCloseJob(updateClick);
           }}
@@ -111,7 +113,7 @@ export function CloseJobButton(props) {
 }
 export function ClosedJobButton() {
   return (
-    <button className="flex flex-row items-center justify-center bg-[#E1E2E1] w-[169.34px] h-[53.36px] gap-2 text-[#8E8E8E] rounded-[21.33px] text-[15px] duration-1000" disabled>
+    <button className="flex flex-row items-center justify-center bg-[#E1E2E1] w-[154.67px] h-[53.36px] gap-2 text-[#8E8E8E] rounded-[21.33px] text-[15px] duration-1000" disabled>
       <svg
         width="24"
         height="24"
@@ -132,7 +134,7 @@ export function ClosedJobButton() {
   );
 }
 //Page 2
-export function RadioCandidate() {
+export function RadioCandidate(props) {
   const { candidateFilterState, setCandidateFilterState } = useRecruiterContext();
   return (
     <div className="pt-[21.33px] text-[#616161] text-[15px] ">
@@ -145,6 +147,7 @@ export function RadioCandidate() {
           className="accent-[#BF5F82]"
           onChange={(e) => {
             setCandidateFilterState(e.target.value);
+            props.page(1)
           }}
           checked={candidateFilterState === "all"}
         />
@@ -156,6 +159,7 @@ export function RadioCandidate() {
           className="accent-[#BF5F82]"
           onChange={(e) => {
             setCandidateFilterState(e.target.value);
+            props.page(1)
           }}
           checked={candidateFilterState === "waiting"}
         />
@@ -167,6 +171,7 @@ export function RadioCandidate() {
           className="accent-[#BF5F82]"
           onChange={(e) => {
             setCandidateFilterState(e.target.value);
+            props.page(1)
           }}
           checked={candidateFilterState === "in_progress"}
         />
@@ -178,6 +183,7 @@ export function RadioCandidate() {
           className="accent-[#BF5F82]"
           onChange={(e) => {
             setCandidateFilterState(e.target.value);
+            props.page(1)
           }}
           checked={candidateFilterState === "finished"}
         />
@@ -292,7 +298,7 @@ export function MarKAsStartedButton(props) {
         </div>
       ) : (
         <button
-          className="text-[#616161] text-[15px] w-[240px] h-[53.33px] border-[1px] border-[#F48FB1] rounded-[21.33px] duration-200 hover:bg-rose-50"
+          className="text-[#616161] text-[15px] w-[240px] h-[53.33px] border-[1px] border-[#F48FB1] rounded-[21.33px] duration-200 hover:bg-[#F48FB126]"
           onClick={() => {
             handleClickMarkStatus(updateClick);
           }}
@@ -331,7 +337,7 @@ export function MarKAsFinishedButton(props) {
         </div>
       ) : (
         <button
-          className="text-[#616161] text-[15px] w-[240px] h-[53.33px] border-[1px] border-[#F48FB1] rounded-[21.33px] duration-500 hover:bg-rose-50"
+          className="text-[#616161] text-[15px] w-[240px] h-[53.33px] border-[1px] border-[#F48FB1] rounded-[21.33px] duration-500 hover:bg-[#F48FB126]"
           onClick={() => {
             handleClickMarkStatus(updateClick);
           }}
@@ -401,7 +407,7 @@ export function DownloadResumeButton(props) {
       ) : (
         <div className="flex justify-center items-center mt-[21.33px] mb-[21.33px]">
           <button
-            className="flex flex-row gap-2 w-[244px] h-[53.33px] items-center justify-center border-[1px] border-[#F48FB1] rounded-[21.33px] text-[#616161] hover:bg-rose-50"
+            className="flex flex-row gap-2 w-[244px] h-[53.33px] items-center justify-center border-[1px] border-[#F48FB1] rounded-[21.33px] text-[#616161] hover:bg-[#F48FB126]"
             onClick={() => {
               handleDownloadClick(props.linkPdf);
             }}

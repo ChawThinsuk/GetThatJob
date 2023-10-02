@@ -59,14 +59,14 @@ function Success() {
             <AiFillHeart className='mt-3 text-red-400 w-[80px] h-[80px]' />
           </section>
           <div>
-            <Link to='/'>
+            <a href='/history'>
               <button
                 type='button'
-                className='mt-5 bg-[#f6a6c1] hover:bg-[#fa93b5] rounded-xl w-[200px] h-[50px] font-[Inter] text-[18px] font-semibold text-white'
+                className='mt-5 bg-[#f6a6c1] hover:bg-[#fa93b5] rounded-xl w-[350px] h-[50px] font-[Inter] text-[18px] font-semibold text-white'
               >
-                Back to home page
+                Go to Payment history page
               </button>
-            </Link>
+            </a>
           </div>
         </>
       )}

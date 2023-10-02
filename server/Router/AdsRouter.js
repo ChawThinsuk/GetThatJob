@@ -50,7 +50,7 @@ adsRouter.post('/create-checkout-session/:job_id/:budget', async (req, res) => {
       line_items: [
         {
           price_data: {
-            currency: 'thb', // Set the currency as per your requirements
+            currency: 'usd', // Set the currency as per your requirements
             unit_amount: budget * 100, // Convert the price to cents
             product_data: {
               name: 'GTJ Advertisement', // Set a name for your product

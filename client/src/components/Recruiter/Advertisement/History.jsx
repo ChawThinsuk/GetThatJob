@@ -19,31 +19,28 @@ function History() {
       const result = await axios.get(`http://localhost:4000/ads/history`, {
         params: { userID: state.userID },
       });
-      
+
       result.data.data?.sort((a, b) => {
         if (sortDate === "asc")
           return new Date(a.created_at) - new Date(b.created_at);
-        else
-          return new Date(b.created_at) - new Date(a.created_at);
+        else return new Date(b.created_at) - new Date(a.created_at);
       });
 
       result.data.data?.sort((a, b) => {
-        if (sortTitle === "asc")
-          return a.job_title.localeCompare(b.job_title);
+        if (sortTitle === "asc") return a.job_title.localeCompare(b.job_title);
         else if (sortTitle === "desc")
           return b.job_title.localeCompare(a.job_title);
         return 0;
       });
-  
+
       result.data.data?.sort((a, b) => {
         if (sortStatus === "paid")
           return a.payment_status.localeCompare(b.payment_status);
         else if (sortStatus === "unpaid")
           return b.payment_status.localeCompare(a.payment_status);
-        return 0; 
+        return 0;
       });
 
-  
       setHistory(result.data.data);
       // console.log(result.data.data);
       setLoading(false);
@@ -90,7 +87,7 @@ function History() {
       (seconds < 10 ? "0" : "") +
       seconds;
     return formattedDateTime;
-  };
+  }
 
   const toggleSortTitle = () => {
     setSortTitle(sortTitle === "asc" ? "desc" : "asc");
@@ -128,8 +125,10 @@ function History() {
       <div className="w-full h-fit flex flex-col justify-center items-center pt-6 pb-14">
         <div className="w-[90%] h-fit border-[2px] border-[#F48FB1] rounded-[5px] shadow-pro1">
           <div className="w-full h-[50px] flex flex-row justify-start items-center bg-[#F48FB1] text-[#FFFFFF]">
-            <p className="text-[20px] font-[500] font-[Montserrat] w-[60%] text-center hover:cursor-pointer"
-            onClick={toggleSortTitle}>
+            <p
+              className="text-[20px] font-[500] font-[Montserrat] w-[60%] text-center hover:cursor-pointer"
+              onClick={toggleSortTitle}
+            >
               Job
             </p>
             <p
@@ -176,7 +175,7 @@ function History() {
                               : "bg-gray-300 text-[#8E8E8E]"
                           }`}
                         >
-                          {job.payment_status}
+                          {job.payment_status === "paid" ? "paid" : "unpaid"}
                         </p>
                       </div>
                     </div>
@@ -206,7 +205,9 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
               <a
                 href="#"
                 className={`flex items-center justify-center px-3 h-10 w-25 ml-0 leading-tight  rounded-l-lg font-[Inter] text-[16px] ${
-                  currentPage === 1 ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100" : "bg-[#f190b1] text-white"
+                  currentPage === 1
+                    ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100"
+                    : "bg-[#f190b1] text-white"
                 }`}
                 onClick={
                   currentPage === 1
@@ -223,9 +224,7 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
                 <a
                   href="#"
                   className={`flex items-center justify-center px-3 h-10 w-10 leading-tight text-white hover:bg-[#f190b1] font-[Inter] text-[16px] ${
-                    currentPage === index + 1
-                      ? "bg-[#f38fb1]"
-                      : "bg-rose-200 "
+                    currentPage === index + 1 ? "bg-[#f38fb1]" : "bg-rose-200 "
                   }`}
                   onClick={() => handlePageChange(index + 1)}
                 >
@@ -246,7 +245,6 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
                     ? null
                     : () => handlePageChange(currentPage + 1)
                 }
-                
                 disabled={currentPage === totalPages}
               >
                 Next

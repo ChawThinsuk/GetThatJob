@@ -49,8 +49,14 @@ adsRouter.post('/create-checkout-session/:job_id/:budget', async (req, res) => {
     const session = await stripeClient.checkout.sessions.create({
       line_items: [
         {
-          price: 'price_1Nu6nKJsRypturIHBgIPSzF6',
-          quantity: Number(budget),
+          price_data: {
+            currency: 'thb', // Set the currency as per your requirements
+            unit_amount: budget * 100, // Convert the price to cents
+            product_data: {
+              name: 'GTJ Advertisement', // Set a name for your product
+            },
+          },
+          quantity: 1, // You can adjust the quantity as needed
         },
       ],
       mode: 'payment',
@@ -58,7 +64,7 @@ adsRouter.post('/create-checkout-session/:job_id/:budget', async (req, res) => {
       cancel_url: `${YOUR_DOMAIN}/ads/cancel?job_id=${job_id}`,
     });
     await pool.query(
-      'INSERT INTO transactions (job_id, session_id, created_at, payment_amount) values ($1, $2, $3, $4)',
+      "INSERT INTO transactions (job_id, session_id, created_at, payment_amount, payment_status) values ($1, $2, $3, $4, 'unpaid')",
       [job_id, session.id, new Date(), budget]
     );
     res.json({ url: session.url });

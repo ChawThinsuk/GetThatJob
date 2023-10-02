@@ -18,6 +18,7 @@ function Section2() {
         gap="1.5rem"
         alignItems="flex-start"
         fontFamily="Montserrat"
+        marginLeft="-16"
       >
         <Text
           color="white"
@@ -54,7 +55,7 @@ function Section2() {
       </Box>
       <Image
         src={targetImg}
-        width="746.70px"
+        width="684.7px"
         height="472px"
         padding=" 7.1875rem 7.0625rem 7.1875rem 7rem"
         justifyContent="center"

@@ -40,9 +40,9 @@ function Professional() {
         )}
       </div>
       {/* Right */}
-      <div className="flex w-[50%]  justify-center items-end">
-        <img src={pointingGirl} alt="" width="50%" />
-      </div>
+      <div className="flex w-[50%] justify-center items-end relative">
+<img src={pointingGirl} alt="women pointing" width="50%" className="absolute bottom-[-107px]" />
+</div>
     </div>
   );
 }

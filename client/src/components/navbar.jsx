@@ -19,7 +19,7 @@ const navItem = [
 
 function Navbar() {
   return (
-    <nav className="flex w-[100%] h-[3.5rem] justify-center items-center shrink-0 p-[0.75rem_7.5rem] shadow-2xl    ">
+    <nav className="flex w-[100%] h-[3.5rem] justify-center items-center shrink-0 p-[0.75rem_7.5rem] shadow-lg">
       <div className="flex w-[100%] h-[2rem] p-[0rem_0rem;] justify-between items-center self-stretch shrink-0">
         <Link to="/">
           <div id="logo" className=" flex items-center">

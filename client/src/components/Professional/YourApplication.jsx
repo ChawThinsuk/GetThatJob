@@ -295,7 +295,6 @@ export const YourApplication = () => {
             fontStyle="normal"
             fontWeight="400"
             lineHeight="1.35rem"
-            letterSpacing="0.1rem"
           >
             <div className="mx-auto bg-white rounded-lg flex">
               <input

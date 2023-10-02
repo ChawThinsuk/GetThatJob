@@ -106,7 +106,7 @@ function ShowJobPosting() {
       <p className="text-[21px] font-[Montserrat] font-medium mt-[16px]">
         {candidates?.length} candidates found
       </p>
-      {candidates?.map((item, key) => {
+      {currentItems?.map((item, key) => {
         return (
           <Candidate
             key={key}
@@ -116,7 +116,7 @@ function ShowJobPosting() {
           />
         );
       })}
-      <div className="w-full flex justify-center items-center mt-[50px]">
+      <div className="w-full flex justify-center items-center mt-[30px] mb-[30px]">
       <PaginationControls
         totalPages={totalPages}
         currentPage={currentPage}

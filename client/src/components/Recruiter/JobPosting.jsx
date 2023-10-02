@@ -88,7 +88,7 @@ function JobPosting(props) {
             />
           );
         })}
-        <div className="w-full flex justify-center items-center mt-[50px] mb-[30px]">
+        <div className="w-full flex justify-center items-center mt-[30px] mb-[30px]">
           <PaginationControls
             totalPages={totalPages}
             currentPage={currentPage}

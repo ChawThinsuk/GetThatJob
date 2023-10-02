@@ -37,7 +37,8 @@ export const NavbarHomepage = () => {
     <div className="bg-[#E1E2E1] w-full">
       <div
         id="logo"
-        className="flex items-center pt-[32px] pl-[32px] my-[16px]"
+        className="flex items-center pt-[32px] pl-[32px] my-[16px] hover:cursor-pointer"
+        onClick={() => window.location.replace("/")}
       >
         <img className="object-contain w-[181px] " src={icon} alt="logos" />
       </div>

@@ -234,11 +234,11 @@ export const ApplicationList = () => {
                         alt={item.logo}
                         className=" flex content-center items-center w-[4.1rem] h-[4rem] p-[0.23331rem] "
                       />
-                      <div style={{ whiteSpace: "nowrap" }}>
+                      <div style={{ whiteSpace: "nowrap" }} className="w-[240px]">
                         <h1 className="text-[21px] leading-[1.85rem] font-[Montserrat] font-medium">
                           {item.job_title}
                         </h1>
-                        <p className="text-[15px] text-[#616161] leading-[1.225rem] font-[Montserrat]  font-medium">
+                        <p className="text-[15px] text-[#616161] leading-[1.225rem] font-[Montserrat] font-medium">
                           {item.company_name}
                         </p>
                       </div>

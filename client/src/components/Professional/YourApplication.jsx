@@ -53,7 +53,7 @@ export const YourApplication = () => {
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
     const supabase = createClient(supabaseUrl, supabaseAnonKey);
     let resume = cvData;
-    const minCharacters = 100;
+    const minCharacters = 50;
     const maxCharacters = 2000;
     try {
       if (
@@ -63,7 +63,7 @@ export const YourApplication = () => {
         toast({
           title: "Character Count Error",
           description:
-            "About the company should be between 100 and 2000 characters.",
+            "About the company should be between 50 and 2000 characters.",
           status: "warning",
           position: "bottom",
           duration: 5000, // Toast duration in milliseconds
@@ -108,7 +108,7 @@ export const YourApplication = () => {
         duration: 2000,
         isCloseable: true,
       });
-      navigate("/apply");
+      window.location.replace("/apply");
     } catch (error) {
       console.error("Error submit profile");
       toast({
@@ -466,7 +466,7 @@ export const YourApplication = () => {
           gap="0.5rem"
           alignItems="center"
           className="font-[Inter] tracking-[1.667px] rounded-[21.3344px]"
-          onClick={onOpen}
+          onClick={() => onOpen()}
         >
           SEND APPLICATION
         </Button>

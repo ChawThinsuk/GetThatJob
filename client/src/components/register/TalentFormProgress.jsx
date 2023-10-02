@@ -136,7 +136,6 @@ function TalentFormProgress() {
                   />
                 </FormControl>
                 <FormControl
-                  hoverBorderColor="#F48FB1"
                   id="passwordConfirm"
                   isRequired
                 >

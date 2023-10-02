@@ -48,9 +48,9 @@ const ContextProvider = ({ children }) => {
   const [phone, setPhone] = useState("");
   const [birthDate, setBirthDate] = useState("");
   const [linkedinUrl, setLinkedinUrl] = useState("");
-  const [title, setTitle] = useState("");
-  const [professionalExperience, setProfessionalExperience] = useState("");
-  const [educationalInfo, setEducationalInfo] = useState("");
+  const [title, setTitle] = useState(null);
+  const [professionalExperience, setProfessionalExperience] = useState(null);
+  const [educationalInfo, setEducationalInfo] = useState(null);
   const [cv, setCv] = useState({});
 
   // recruiter context
@@ -73,6 +73,7 @@ const ContextProvider = ({ children }) => {
     let error; // Declare error variable here
 
     try {
+    if (cv) {
       if (userType === "PROFESSIONAL") {
         const { data, error: professionalError } = await supabase.storage
           .from("files")
@@ -120,6 +121,7 @@ const ContextProvider = ({ children }) => {
           navigate("/login");
         }, 3500); // 3500 milliseconds = 3.5 seconds
       }
+    }
 
       if (userType === "RECRUITER") {
         const { data, error: recruiterError } = await supabase.storage

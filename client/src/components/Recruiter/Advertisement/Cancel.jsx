@@ -48,22 +48,22 @@ function Cancel() {
               Your transaction has been canceled.
             </p>
             <div className='flex gap-5'>
-              <Link to='/'>
+              <a href='/'>
                 <button
                   type='button'
                   className='mt-5 bg-[#f6a6c1] hover:bg-[#fa93b5] rounded-xl w-[200px] h-[50px] font-[Inter] text-[18px] font-semibold text-white'
                 >
                   Back to home page
                 </button>
-              </Link>
-              <Link to='/ads'>
+              </a>
+              <a href='/ads'>
                 <button
                   type='button'
                   className='mt-5 bg-[#f6a6c1] hover:bg-[#fa93b5] rounded-xl min-w-[200px] pr-2 pl-2 h-[50px] font-[Inter] text-[18px] font-semibold text-white'
                 >
                   Back to Advertisement page
                 </button>
-              </Link>
+              </a>
             </div>
           </section>
         </>

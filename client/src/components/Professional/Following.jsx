@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/Authorization';
 import JobCard from './JobCard';
 import axios from 'axios';
+import { Spinner } from "@chakra-ui/react";
 
 export const Following = () => {
   const [followedJobs, setFollowedJobs] = useState([]);
@@ -36,11 +37,17 @@ export const Following = () => {
       </h1>
 
       <div className='flex flex-col gap-[10.6667px] p-[10.6672] w-full min-h-screen'>
-        {isLoading ? (
-          <p className='font-[Montserrat] font-[500] text-[26.668px]'>
-            Loading...
-          </p>
-        ) : (
+      {isLoading ? (
+        <div className='flex flex-row justify-center items-center h-[50%]'>
+        <Spinner
+          thickness="4px"
+          speed="2s"
+          emptyColor="gray.200"
+          color="#F48FB1"
+          size="xl"
+        />
+        </div>
+      ) : (
           <p className='font-[Montserrat] font-[500] text-[26.668px]'>
             You are following {followedJobs.length} jobs
           </p>

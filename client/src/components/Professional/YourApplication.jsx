@@ -6,7 +6,9 @@ import {
   Stack,
   Button,
   Flex,
-  Text, Box, useToast,
+  Text,
+  Box,
+  useToast,
   Spinner,
   AlertDialog,
   AlertDialogBody,
@@ -28,7 +30,7 @@ import axios from "axios";
 import leftArrow from "../../assets/pro2/leftArrow.svg";
 import { Link } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
-import uploadlogo from '../../assets/register-images/pdf-upload.svg';
+import uploadlogo from "../../assets/register-images/pdf-upload.svg";
 
 export const YourApplication = () => {
   const navigate = useNavigate();
@@ -54,10 +56,14 @@ export const YourApplication = () => {
     const minCharacters = 100;
     const maxCharacters = 2000;
     try {
-      if (interestingData.length < minCharacters || interestingData.length > maxCharacters) {
+      if (
+        interestingData.length < minCharacters ||
+        interestingData.length > maxCharacters
+      ) {
         toast({
           title: "Character Count Error",
-          description: "About the company should be between 100 and 2000 characters.",
+          description:
+            "About the company should be between 100 and 2000 characters.",
           status: "warning",
           position: "bottom",
           duration: 5000, // Toast duration in milliseconds
@@ -295,20 +301,31 @@ export const YourApplication = () => {
               <input
                 type="file"
                 id="pdf-upload"
-                className={"hidden"}         
-                onChange={handleFileChange}   
-                disabled = {value === "1"}                          
+                className={"hidden"}
+                onChange={handleFileChange}
+                disabled={value === "1"}
               />
               <label
                 htmlFor="pdf-upload"
-                disabled={value === "1"} 
-                className={`flex items-center justify-center w-[200px] h-auto p-[13px] rounded-xl transition duration-300 ${value === "1" ? "bg-ggrey-200 text-ggrey-100 cursor-not-allowed": "bg-[#F48FB1] text-white hover:bg-[#bf5f82] cursor-pointer"} `}
+                disabled={value === "1"}
+                className={`flex items-center justify-center w-[200px] h-auto p-[13px] rounded-xl transition duration-300 ${
+                  value === "1"
+                    ? "bg-ggrey-200 text-ggrey-100 cursor-not-allowed"
+                    : "bg-[#F48FB1] text-white hover:bg-[#bf5f82] cursor-pointer"
+                } `}
               >
-               <span><img src={uploadlogo} className="mr-3 w-[35px]" alt="" /></span> Choose a file
+                <span>
+                  <img src={uploadlogo} className="mr-3 w-[35px]" alt="" />
+                </span>{" "}
+                Choose a file
               </label>
             </div>
             {value === "1" ? (
-              <Text letterSpacing="0.25px" color="#616161" className="font-[Inter]">
+              <Text
+                letterSpacing="0.25px"
+                color="#616161"
+                className="font-[Inter]"
+              >
                 {cvData ? cvData : "You did not uploaded your CV"}
               </Text>
             ) : (
@@ -351,6 +368,7 @@ export const YourApplication = () => {
             Professional experience (taken from your profile)
           </Text>
           <Textarea
+            background="#FFFFFF"
             placeholder="Professional experience"
             border="2px"
             borderColor="#F48FB1"
@@ -393,8 +411,9 @@ export const YourApplication = () => {
             Why are you interested in working at {data.data.job.company_name}
           </Text>
           <Textarea
-           placeholder={`Mention things about ${data.data.job.company_name} that excite you. Why would you be a good candidate?`}
-           border="2px"
+            background="#FFFFFF"
+            placeholder={`Mention things about ${data.data.job.company_name} that excite you. Why would you be a good candidate?`}
+            border="2px"
             borderColor="#F48FB1"
             focusBorderColor="#F48FB1"
             _hover={{ borderColor: "#F48FB1" }}

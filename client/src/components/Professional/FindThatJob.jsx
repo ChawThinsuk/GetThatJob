@@ -8,19 +8,19 @@ import JobCard from "./JobCard";
 
 export const FindThatJob = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchTermShow, setSearchTermShow] = useState('');
+  const [searchTermShow, setSearchTermShow] = useState("");
   const [category, setCategory] = useState("");
   const [type, setType] = useState("");
   const [minSalary, setMinSalary] = useState("");
   const [maxSalary, setMaxSalary] = useState("");
   const [location, setLocation] = useState("");
-  const [autoComplete, setAutoComplete] = useState([])
+  const [autoComplete, setAutoComplete] = useState([]);
   const [openAutoComplete, setOpenAutoComplete] = useState(false);
-  const autoCompleteRef = useRef("autoComplete");
+  const autoCompleteRef = useRef();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(12);
-  const { jobs, getJobs, getPopularJob, popularJobs,isLoading, setIsLoading } = usePro();
-
+  const { jobs, getJobs, getPopularJob, popularJobs, isLoading, setIsLoading } =
+    usePro();
 
   useEffect(() => {
     getJobs({
@@ -33,9 +33,9 @@ export const FindThatJob = () => {
     }),
       getPopularJob();
     autoCompleteData();
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [searchTerm, category, type, minSalary, maxSalary, location]);
 
@@ -64,8 +64,6 @@ export const FindThatJob = () => {
       !autoCompleteRef.current.contains(event.target)
     ) {
       setOpenAutoComplete(false);
-
-    
     }
   };
   const handleSearchTermChange = debounce((search) => {
@@ -82,7 +80,7 @@ export const FindThatJob = () => {
     setCurrentPage(newPage);
   };
   return (
-    <div className="flex flex-col justify-start items-center w-full min-h-[1080px] pr-[100px] pl-[100px] pt-[50px] font-[Inter] bg-[#F5F5F6]">
+    <div className="flex flex-col justify-start items-center w-full pr-[100px] pl-[100px] pt-[50px] font-[Inter] bg-[#F5F5F6]">
       <div className="flex flex-col justify-center items-start w-full">
         <p className="text-[46px] text-start w-full font-[Montserrat] font-[400] text-[#373737]">
           Find That Job
@@ -95,9 +93,9 @@ export const FindThatJob = () => {
             <div className="relative border-[1px] border-[#F48FB1] rounded-[8px] w-[560px] h-[42px] flex flex-row justify-start items-center bg-[#FFFFFF]">
               <img src={find} className="w-[22] h-[22] pl-2" />
               <input
-                type='text'
-                placeholder='manufacturing, sales, swim'
-                className='w-[500px] h-[27px] text-[18px] p-[8px] leading-6 outline-none font-[Inter] font-[400] text-[#8E8E8E]'
+                type="text"
+                placeholder="manufacturing, sales, swim"
+                className="w-[500px] h-[27px] text-[18px] p-[8px] leading-6 outline-none font-[Inter] font-[400] text-[#8E8E8E]"
                 value={searchTermShow}
                 onChange={(e) => {
                   setSearchTermShow(e.target.value);
@@ -105,12 +103,12 @@ export const FindThatJob = () => {
                   setOpenAutoComplete(true);
                 }}
               />
-              {searchTermShow !== '' && (
+              {searchTermShow !== "" && (
                 <button
-                  className='absolute right-2 opacity-20 hover:opacity-75'
+                  className="absolute right-2 opacity-20 hover:opacity-75"
                   onClick={() => {
-                    setSearchTermShow('');
-                    setSearchTerm('');
+                    setSearchTermShow("");
+                    setSearchTerm("");
                   }}
                 >
                   <AiOutlineClose />
@@ -119,13 +117,13 @@ export const FindThatJob = () => {
               {searchTerm && openAutoComplete && (
                 <div
                   ref={autoCompleteRef}
-                  className='absolute z-50 top-[45px] pt-2 pb-1 max-h-[300px] overflow-auto  right-0 border-[1px] bg-white border-gray-300 shadow-xl w-full rounded-xl '
+                  className="absolute z-50 top-[45px] pt-2 pb-1 max-h-[300px] overflow-auto  right-0 border-[1px] bg-white border-gray-300 shadow-xl w-full rounded-xl "
                 >
                   {autoComplete.map((list, index) => {
                     return (
                       <p
                         key={index}
-                        className='flex items-center h-[30px] font-semibold pl-2 w-full cursor-pointer hover:bg-gray-100'
+                        className="flex items-center h-[30px] font-semibold pl-2 w-full cursor-pointer hover:bg-gray-100"
                         onClick={() => {
                           setSearchTerm(list);
                           setSearchTermShow(list);
@@ -328,16 +326,18 @@ export const FindThatJob = () => {
                   <div key={index} className="flex flex-row gap-3">
                     <p
                       className={`${
-                        job === searchTerm ? "bg-[#F48FB1] text-white" : "bg-gray-300 text-[#616161]"
+                        job === searchTerm
+                          ? "bg-[#F48FB1] text-white"
+                          : "bg-gray-300 text-[#616161]"
                       } rounded-xl py-[5px] px-[15px] text-[11px] hover:cursor-pointer`}
                       onClick={() => {
                         setSearchTerm(job);
                         setSearchTermShow(job);
-                        setCategory('');
-                        setType('');
-                        setMaxSalary('');
-                        setMinSalary('');
-                        setLocation('');
+                        setCategory("");
+                        setType("");
+                        setMaxSalary("");
+                        setMinSalary("");
+                        setLocation("");
                       }}
                     >
                       {job}
@@ -347,33 +347,40 @@ export const FindThatJob = () => {
               }
             })}
           </div>
-          <div> <p className="text-[30px] text-start w-full font-[Montserrat] font-[500] mt-[20px]">
-            {jobs.length} jobs for you
-          </p></div>
-          
+          <div>
+            {" "}
+            <p className="text-[30px] text-start w-full font-[Montserrat] font-[500] mt-[20px]">
+              {jobs.length} jobs for you
+            </p>
+          </div>
         </div>
-      
+
         <div className="flex flex-wrap justify-start gap-[16px] w-[1280px] h-srceen mt-[10px]">
-          {currentItems.map((job,index) => (
-            <JobCard job={job} key={job.job_id} index={index} page={currentPage} />
+          {currentItems.map((job, index) => (
+            <JobCard
+              job={job}
+              key={job.job_id}
+              index={index}
+              page={currentPage}
+            />
           ))}
           <div className="flex justify-center w-full mt-[40px] mb-[40px] mr-3">
-        <PaginationControls
-        totalPages={totalPagesz}
-        currentPage={currentPage}
-        handlePageChange={handlePageChange}
-      />
-        </div>
+            <PaginationControls
+              totalPages={totalPagesz}
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
+            />
+          </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 function PaginationControls({ totalPages, currentPage, handlePageChange }) {
   return (
     <>
-    {/* {console.log(currentPage)} */}
+      {/* {console.log(currentPage)} */}
       <div className="flex justify-start">
         <nav aria-label="Page navigation example">
           <ul className="inline-flex -space-x-px text-sm">
@@ -381,7 +388,9 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
               <a
                 href="#"
                 className={`flex items-center justify-center px-3 h-10 w-25 ml-0 leading-tight  rounded-l-lg font-[Inter] text-[16px] ${
-                  currentPage === 1 ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100" : "bg-[#f190b1] text-white"
+                  currentPage === 1
+                    ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100"
+                    : "bg-[#f190b1] text-white"
                 }`}
                 onClick={
                   currentPage === 1
@@ -398,9 +407,7 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
                 <a
                   href="#"
                   className={`flex items-center justify-center px-3 h-10 w-10 leading-tight text-white hover:bg-[#f190b1] font-[Inter] text-[16px] ${
-                    currentPage === index + 1
-                      ? "bg-[#f38fb1]"
-                      : "bg-rose-200 "
+                    currentPage === index + 1 ? "bg-[#f38fb1]" : "bg-rose-200 "
                   }`}
                   onClick={() => handlePageChange(index + 1)}
                 >
@@ -421,7 +428,6 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
                     ? null
                     : () => handlePageChange(currentPage + 1)
                 }
-                
                 disabled={currentPage === totalPages}
               >
                 Next

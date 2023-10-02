@@ -12,7 +12,7 @@ import { useGlobalContext } from "../../../contexts/registerContext.jsx";
 
 const jobType = ["Full-Time", "Part-Time", "Freelance"];
 
-function JobType({ setJobType,value }) {
+function JobType({ setJobType, value }) {
   const { profFormStyle } = useGlobalContext();
   const [job_type, setJobTypeLocal] = useState();
 
@@ -25,6 +25,9 @@ function JobType({ setJobType,value }) {
     <Stack spacing={4}>
       <FormControl id="jobCategory">
         <Select
+          fontWeight="400"
+          color="#8E8E8E"
+          background="#FFFFFF"
           placeholder="Select a type"
           borderColor="#F48FB1"
           focusBorderColor="#F48FB1"

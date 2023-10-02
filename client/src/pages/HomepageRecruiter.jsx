@@ -18,24 +18,24 @@ export const HomepageRecruiter = () => {
   const { state } = useAuth();
   return (
     <>
-    <RecruiterProvider>
-      <div className="grid grid-cols-[17.75%_81.25%] min-w-[1840px] min-h-[940px]">
-        <NavbarHomepage userType={state.userType} />
-        <Routes>
-          <Route path="/" element={<JobPosting id={state.userID} />} />
-          <Route path="/showjobposting/:id" element={<ShowJobPosting />} />
-          <Route path="/createjob" element={<CreateNewJob />} />
-          <Route path="/editjob/:id" element={<EditJob />} />
-          <Route path="/recruitprofile" element={<RecruiterProfile />} />
-          <Route path="*" element={<JobPosting />} />
-          <Route path="/ads" element={<Ads />} />
-          <Route path="/ads/success" element={<Success />} />
-          <Route path="/ads/cancel" element={<Cancel />} />
-          <Route path="/history" element={<History />} />
-        </Routes>
-      </div>
-    <HelpButton email={state.email}/>
-    </RecruiterProvider>
+      <RecruiterProvider>
+        <div className="grid grid-cols-[17.75%_82.25%] min-w-[1840px] min-h-[970px]">
+          <NavbarHomepage userType={state.userType} />
+          <Routes>
+            <Route path="/" element={<JobPosting id={state.userID} />} />
+            <Route path="/showjobposting/:id" element={<ShowJobPosting />} />
+            <Route path="/createjob" element={<CreateNewJob />} />
+            <Route path="/editjob/:id" element={<EditJob />} />
+            <Route path="/recruitprofile" element={<RecruiterProfile />} />
+            <Route path="*" element={<JobPosting />} />
+            <Route path="/ads" element={<Ads />} />
+            <Route path="/ads/success" element={<Success />} />
+            <Route path="/ads/cancel" element={<Cancel />} />
+            <Route path="/history" element={<History />} />
+          </Routes>
+        </div>
+        <HelpButton email={state.email} />
+      </RecruiterProvider>
     </>
   );
 };

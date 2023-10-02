@@ -23,7 +23,7 @@ const jobCategories = [
   "Restaurant and hospitality",
 ];
 
-function JobCategorySelect({ setJobCategory,value }) {
+function JobCategorySelect({ setJobCategory, value }) {
   const { profFormStyle } = useGlobalContext();
   const [job_category, setJobCategoryLocal] = useState();
   // console.log(value);
@@ -37,6 +37,9 @@ function JobCategorySelect({ setJobCategory,value }) {
     <Stack spacing={4}>
       <FormControl id="jobCategory">
         <Select
+          fontWeight="400"
+          color="#8E8E8E"
+          background="#FFFFFF"
           placeholder="Select a category"
           borderColor="#F48FB1"
           focusBorderColor="#F48FB1"

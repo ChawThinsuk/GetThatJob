@@ -171,6 +171,7 @@ function TalentFormProgress3() {
                   fontSize="md"
                   textColor="#616161"
                   borderRadius="16px"
+                  onClick={handleRegister}
                 >
                   SKIP THIS!
                 </Button>

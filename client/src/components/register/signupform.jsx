@@ -40,9 +40,14 @@ function Professional() {
         )}
       </div>
       {/* Right */}
-      <div className="flex w-[50%] justify-center items-end relative">
-<img src={pointingGirl} alt="women pointing" width="50%" className="absolute bottom-[-107px]" />
-</div>
+      <div className="flex w-[50%]  justify-center items-end relative">
+      <img
+  src={pointingGirl}
+  alt="women pointing"
+  width="55%"
+  className={`absolute ${registerPage === 2 ? 'bottom-[-77px]' : registerPage === 3 ? 'bottom-[-107px]' : 'bottom-[-77px]'}`}
+/>
+      </div>
     </div>
   );
 }

@@ -290,7 +290,8 @@ export const ApplicationList = () => {
                         {item.job_user_mark === "declined" && (
                           <>
                             <img src={declinedIcn} alt="Declined" />
-                            Declined
+                            <p className="text-[#BF5F82]">Declined</p>
+                            <p className="text-[#BF5F82]">{formatDate(item.jobs_professional_updated_at)}</p>
                           </>
                         )}
                       </div>
@@ -431,3 +432,10 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
     </>
   );
 }
+function formatDate(inputDate) {
+  const date = new Date(inputDate);
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear().toString().slice(-2);
+  return `${day}/${month}/${year}`;
+} 

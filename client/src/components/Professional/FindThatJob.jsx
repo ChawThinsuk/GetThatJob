@@ -16,7 +16,7 @@ export const FindThatJob = () => {
   const [location, setLocation] = useState("");
   const [autoComplete, setAutoComplete] = useState([]);
   const [openAutoComplete, setOpenAutoComplete] = useState(false);
-  const autoCompleteRef = useRef("autoComplete");
+  const autoCompleteRef = useRef();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(12);
   const { jobs, getJobs, getPopularJob, popularJobs, isLoading, setIsLoading } =

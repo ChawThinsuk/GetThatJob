@@ -5,6 +5,7 @@ import { useAuth } from "../../../contexts/Authorization.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Spinner } from "@chakra-ui/react";
+import { BsFillGeoFill } from "react-icons/bs";
 
 const JobCardAds = ({ prop }) => {
   const { selectedJobs, setSelectedJobs } = prop;
@@ -44,92 +45,104 @@ const JobCardAds = ({ prop }) => {
   };
   return (
     <>
-    <div className="flex flex-wrap justify-start gap-[16px] w-[950px] mt-[30px] mb-[30px]">
-      {currentItems.map((job) => {
-        return (
-          <div
-            key={job.job_id}
-            onClick={() => handleCardClick(job)}
-            className={`w-[290px] h-[180px] rounded-[8px] bg-[#FFFFFF] flex justify-center items-center mr-[5px] ml-[5px] shadow-pro1 hover:cursor-pointer mb-[20px] ${
-              selectedJobs === job.job_id ? "border-[#F48FB1] border-[2px]" : ""
-            } `}
-          >
-            {isLoading ? (
-              <Spinner
-                thickness="4px"
-                speed="2s"
-                emptyColor="gray.200"
-                color="#F48FB1"
-                size="xl"
-              />
-            ) : (
-              <div className="w-full h-full flex flex-col justify-center items-center mt-[20px]">
-                <div className="flex flex-row justify-center items-center w-[90%] h-[90%] ">
-                  <div className="flex flex-col w-full h-full">
-                    <div className="flex flex-col w-full h-[56px]">
-                      <p className="text-[20px] text-[#373737] w-full h-[32px] font-[Montserrat] font-[500] mt-[10px]">
-                        {job.job_title.slice(0, 20)}
-                        <span
-                          className={`${job.job_title.length < 21 && "hidden"}`}
-                        >
-                          ...
-                        </span>
-                      </p>
-                      <div className="flex flex-row gap-[5px] w-full h-[24px] mt-[5px]">
-                        <img
-                          src={manufacturing}
-                          className="w-[20px] h-[20px]"
-                        />
-                        <p className="text-[12px] text-[#8E8E8E] min-w-[142px] h-[22px] font-[Inter] font-[400]">
-                          {job.job_category.slice(0, 18)}
+      <div className="flex flex-wrap justify-start gap-[16px] w-[950px] mt-[30px] mb-[30px]">
+        {currentItems.map((job) => {
+          return (
+            <div
+              key={job.job_id}
+              onClick={() => handleCardClick(job)}
+              className={`w-[290px] h-[150px] rounded-[8px] bg-[#FFFFFF]  flex justify-center items-center mr-[5px] ml-[5px] shadow-pro1 hover:cursor-pointer mb-[20px] ${
+                selectedJobs === job.job_id
+                  ? "border-[#F48FB1] border-[2px]"
+                  : "border-[#FFFFFF] border-[2px]"
+              } `}
+            >
+              {isLoading ? (
+                <Spinner
+                  thickness="4px"
+                  speed="2s"
+                  emptyColor="gray.200"
+                  color="#F48FB1"
+                  size="xl"
+                />
+              ) : (
+                <div className="w-full h-full flex flex-col justify-center items-center">
+                  <div className="flex flex-row justify-center items-center w-[90%] h-[90%] ">
+                    <div className="flex flex-col w-full h-full">
+                      <div className="flex flex-col w-full h-[56px]">
+                        <p className="text-[20px] text-[#373737] w-full h-[32px] font-[Montserrat] font-[500] mt-[10px]">
+                          {job.job_title.slice(0, 20)}
                           <span
                             className={`${
-                              job.job_category.length < 19 && "hidden"
+                              job.job_title.length < 21 && "hidden"
                             }`}
                           >
                             ...
                           </span>
                         </p>
-                      </div>
-                      <p className="text-[14px] text-[#616161] w-full h-[24px] font-[Montserrat] font-[500] mt-[5px]">
-                        {job.job_location}
-                      </p>
-                      <div className="flex flex-row justify-between items-center w-full h-[27px] mt-[5px]">
-                        <div className="flex flex-row justify-center items-center gap-[5px] w-[106px] h-[27px] ">
-                          <img src={calendar} className="w-[20-px] h-[20px]" />
-                          <p className="text-[12px] text-[#8E8E8E] w-[95px] h-[22px] font-[Inter] font-[400]">
-                            {job.job_type}
+                        <div className="flex flex-row gap-[5px] w-full h-[24px] mt-[5px]">
+                          <img
+                            src={manufacturing}
+                            className="w-[20px] h-[20px]"
+                          />
+                          <p className="text-[15px] text-[#8E8E8E] min-w-[142px] h-[22px] font-[Inter] font-[400]">
+                            {job.job_category.slice(0, 20)}
+                            <span
+                              className={`${
+                                job.job_category.length < 21 && "hidden"
+                              }`}
+                            >
+                              ...
+                            </span>
                           </p>
                         </div>
-                        <div className="flex flex-row justify-center items-center min-w-[112px] h-[27px] ">
-                          <img src={small} className="w-[20px] h-[20px]" />
-                          <div className="flex flex-row justify-center items-center min-w-[86px] h-[22px]">
-                            <p className="text-[12px] text-[#8E8E8E] font-[Inter] font-[400]">
-                              {(job.salary_min / 1000).toFixed(1)}k
+                        <div className="flex flex-row justify-center items-center gap-[7px] mt-[5px]">
+                          <BsFillGeoFill className="w-[20px] h-[20px] text-[#616161]" />
+                          <p className="text-[15px] text-[#8E8E8E] font-[Inter] font-[400] w-full h-[20px]">
+                            {job.job_location}
+                          </p>
+                        </div>
+                        <div className="flex flex-row justify-between items-center w-full h-[27px] mt-[5px]">
+                          <div className="flex flex-row justify-center items-center gap-[5px] w-[106px] h-[27px] ">
+                            <img
+                              src={calendar}
+                              className="w-[20-px] h-[20px]"
+                            />
+                            <p className="text-[15px] text-[#8E8E8E] w-[95px] h-[22px] font-[Inter] font-[400]">
+                              {job.job_type}
                             </p>
-                            <p>-</p>
-                            <p className="text-[12px] text-[#8E8E8E] font-[Inter] font-[400]">
-                              {(job.salary_max / 1000).toFixed(1)}k
-                            </p>
+                          </div>
+                          <div className="flex flex-row justify-center items-center min-w-[112px] h-[27px] ">
+                            <img src={small} className="w-[20px] h-[20px]" />
+                            <div className="flex flex-row justify-center items-center min-w-[86px] h-[22px] gap-1">
+                              <p className="text-[15px] text-[#8E8E8E] font-[Inter] font-[400]">
+                                {(job.salary_min / 1000).toFixed(1)}k
+                              </p>
+                              <p className="text-[15px] text-[#8E8E8E] font-[Inter] font-[400]">
+                                -
+                              </p>
+                              <p className="text-[15px] text-[#8E8E8E] font-[Inter] font-[400]">
+                                {(job.salary_max / 1000).toFixed(1)}k
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
-          </div>         
-        );
-      })}     
-    </div>
-    <div className="flex justify-start ml-[10px] mt-[15px]">
-    <PaginationControls
-        totalPages={totalPages}
-        currentPage={currentPage}
-        handlePageChange={handlePageChange}
-      />
-    </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+      <div className="flex justify-start ml-[10px] mt-[15px]">
+        <PaginationControls
+          totalPages={totalPages}
+          currentPage={currentPage}
+          handlePageChange={handlePageChange}
+        />
+      </div>
     </>
   );
 };
@@ -144,7 +157,9 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
               <a
                 href="#"
                 className={`flex items-center justify-center px-3 h-10 w-25 ml-0 leading-tight  rounded-l-lg font-[Inter] text-[16px] ${
-                  currentPage === 1 ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100" : "bg-[#f190b1] text-white"
+                  currentPage === 1
+                    ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100"
+                    : "bg-[#f190b1] text-white"
                 }`}
                 onClick={
                   currentPage === 1
@@ -161,9 +176,7 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
                 <a
                   href="#"
                   className={`flex items-center justify-center px-3 h-10 w-10 leading-tight text-white hover:bg-[#f190b1] font-[Inter] text-[16px] ${
-                    currentPage === index + 1
-                      ? "bg-[#f38fb1]"
-                      : "bg-rose-200 "
+                    currentPage === index + 1 ? "bg-[#f38fb1]" : "bg-rose-200 "
                   }`}
                   onClick={() => handlePageChange(index + 1)}
                 >
@@ -184,7 +197,6 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
                     ? null
                     : () => handlePageChange(currentPage + 1)
                 }
-                
                 disabled={currentPage === totalPages}
               >
                 Next

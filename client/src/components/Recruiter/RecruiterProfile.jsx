@@ -16,7 +16,7 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
-  useDisclosure 
+  useDisclosure,
 } from "@chakra-ui/react";
 import { createClient } from "@supabase/supabase-js";
 import { useGlobalContext } from "../../contexts/registerContext.jsx";
@@ -191,7 +191,7 @@ export function RecruiterProfile() {
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
     const supabase = createClient(supabaseUrl, supabaseAnonKey);
     let logoTest = logo;
-  
+
     try {
       if (newLogo) {
         const { data, error: recError } = await supabase.storage
@@ -204,12 +204,12 @@ export function RecruiterProfile() {
           .from("files")
           .getPublicUrl(data.path);
         logoTest = urlPath.data.publicUrl;
-  
+
         if (recError) {
           throw recError; // Throw the error to trigger the catch block
         }
       }
-  
+
       const updatedRecData = {
         logo: logoTest,
         company_email: recruiterEmail,
@@ -217,12 +217,12 @@ export function RecruiterProfile() {
         company_website: companyWebsite,
         company_description: aboutCompany,
       };
-  
+
       await axios.put(
         `http://localhost:4000/recruiter/getrecruiter/${state.userID}`,
         updatedRecData
       );
-  
+
       // Display a success message to the user
       toast({
         title: "Profile updated successfully",
@@ -230,7 +230,7 @@ export function RecruiterProfile() {
         duration: 5000,
         isClosable: true,
       });
-  
+
       // Set a timeout before reloading the page
       setTimeout(() => {
         window.location.reload();
@@ -248,8 +248,7 @@ export function RecruiterProfile() {
       });
     }
   };
-  
-  
+
   useEffect(() => {
     getRecfProfile();
   }, []);
@@ -300,13 +299,11 @@ export function RecruiterProfile() {
 
                   {selectedLogoFileName || selectedFileName ? (
                     <div className="m-2 ml-4">
-                        Selected:
-                        {selectedLogoFileName || selectedFileName.slice(-10)}
+                      Selected:
+                      {selectedLogoFileName || selectedFileName.slice(-10)}
                     </div>
                   ) : (
-                    <div className="ml-4 mt-3">
-                      No logo chosen
-                    </div>
+                    <div className="ml-4 mt-3">No logo chosen</div>
                   )}
                 </div>
               </div>
@@ -320,6 +317,8 @@ export function RecruiterProfile() {
               <FormControl id="recruiterEmail" isRequired>
                 <FormLabel sx={profFormStyle}>COMPANY EMAIL</FormLabel>
                 <Input
+                  fontWeight="400"
+                  background="#FFFFFF"
                   borderColor="#F48FB1"
                   focusBorderColor="#F48FB1"
                   _hover={{ borderColor: "#F48FB1" }}
@@ -334,6 +333,8 @@ export function RecruiterProfile() {
               <FormControl id="companyName" isRequired>
                 <FormLabel sx={profFormStyle}>COMPANY NAME</FormLabel>
                 <Input
+                  fontWeight="400"
+                  background="#FFFFFF"
                   borderColor="#F48FB1"
                   focusBorderColor="#F48FB1"
                   _hover={{ borderColor: "#F48FB1" }}
@@ -374,6 +375,8 @@ export function RecruiterProfile() {
               <FormControl id="companyWebsite" isRequired>
                 <FormLabel sx={profFormStyle}>Company Website</FormLabel>
                 <Input
+                  fontWeight="400"
+                  background="#FFFFFF"
                   borderColor="#F48FB1"
                   focusBorderColor="#F48FB1"
                   _hover={{ borderColor: "#F48FB1" }}
@@ -390,6 +393,8 @@ export function RecruiterProfile() {
                 <Textarea
                   w="1013px"
                   h="229px"
+                  fontWeight="400"
+                  background="#FFFFFF"
                   borderColor="#F48FB1"
                   focusBorderColor="#F48FB1"
                   _hover={{ borderColor: "#F48FB1" }}
@@ -423,56 +428,56 @@ export function RecruiterProfile() {
               UPDATE PROFILE
             </Button> */}
             <Button
-            letterSpacing="2px"
-            w="220px"
-            h="53px"
-            mt={8}
-            mb={8}
-            type="button"
-            bg="#F48FB1"
-            _hover={{ bg: "#BF5F82" }}
-            variant="solid"
-            size="sm"
-            fontSize="19px"
-            color="white"
-            borderRadius="19px"
-            onClick={onOpen} // Open the confirmation dialog
-          >
-            UPDATE PROFILE
-          </Button>
-          <AlertDialog
-            isOpen={isOpen}
-            leastDestructiveRef={cancelRef}
-            onClose={onClose}
-          >
-            <AlertDialogOverlay>
-              <AlertDialogContent>
-                <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                  Confirm Update
-                </AlertDialogHeader>
+              letterSpacing="2px"
+              w="220px"
+              h="53px"
+              mt={8}
+              mb={8}
+              type="button"
+              bg="#F48FB1"
+              _hover={{ bg: "#BF5F82" }}
+              variant="solid"
+              size="sm"
+              fontSize="19px"
+              color="white"
+              borderRadius="19px"
+              onClick={onOpen} // Open the confirmation dialog
+            >
+              UPDATE PROFILE
+            </Button>
+            <AlertDialog
+              isOpen={isOpen}
+              leastDestructiveRef={cancelRef}
+              onClose={onClose}
+            >
+              <AlertDialogOverlay>
+                <AlertDialogContent>
+                  <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                    Confirm Update
+                  </AlertDialogHeader>
 
-                <AlertDialogBody>
-                  Are you sure you want to update your profile?
-                </AlertDialogBody>
+                  <AlertDialogBody>
+                    Are you sure you want to update your profile?
+                  </AlertDialogBody>
 
-                <AlertDialogFooter>
-                  <Button
-                    ref={cancelRef}
-                    onClick={onClose} // Close the dialog without updating
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    colorScheme="pink"
-                    onClick={handleSaveChanges} // Call handleSaveChanges when confirmed
-                    ml={3}
-                  >
-                    Update Profile
-                  </Button>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialogOverlay>
-          </AlertDialog>
+                  <AlertDialogFooter>
+                    <Button
+                      ref={cancelRef}
+                      onClick={onClose} // Close the dialog without updating
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      colorScheme="pink"
+                      onClick={handleSaveChanges} // Call handleSaveChanges when confirmed
+                      ml={3}
+                    >
+                      Update Profile
+                    </Button>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialogOverlay>
+            </AlertDialog>
           </form>
         </Box>
       </div>

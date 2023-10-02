@@ -69,31 +69,33 @@ function JobPosting(props) {
     setCurrentPage(newPage);
   };
   return (
-    <div className="bg-[#F5F5F6] w-[1565px]">
-    <JobContainer>
-      <p className="font-[Montserrat] text-[35px] font-medium">Job Postings</p>
-      <RadioJobPosting page={setCurrentPage}/>
-      <p className="font-[Montserrat] text-[21px] font-medium pt-[21.33px]">
-        {posts?.length} jobs postings found
-      </p>      
-      {currentItems?.map((item, key) => {
-        return (
-          <JobDetailBox
-            key={key}
-            datas={item}
-            refreshData={refetch}
-            fetching={isFetching}
+    <div className="bg-[#F5F5F6] w-full">
+      <JobContainer>
+        <p className="font-[Montserrat] text-[35px] font-medium">
+          Job Postings
+        </p>
+        <RadioJobPosting page={setCurrentPage} />
+        <p className="font-[Montserrat] text-[21px] font-medium pt-[21.33px]">
+          {posts?.length} jobs postings found
+        </p>
+        {currentItems?.map((item, key) => {
+          return (
+            <JobDetailBox
+              key={key}
+              datas={item}
+              refreshData={refetch}
+              fetching={isFetching}
+            />
+          );
+        })}
+        <div className="w-full flex justify-center items-center mt-[50px] mb-[30px]">
+          <PaginationControls
+            totalPages={totalPages}
+            currentPage={currentPage}
+            handlePageChange={handlePageChange}
           />
-        );
-      })}
-      <div className="w-full flex justify-center items-center mt-[50px] mb-[30px]">
-      <PaginationControls
-        totalPages={totalPages}
-        currentPage={currentPage}
-        handlePageChange={handlePageChange}
-      />
-      </div>
-    </JobContainer>
+        </div>
+      </JobContainer>
     </div>
   );
 }
@@ -117,7 +119,9 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
               <a
                 href="#"
                 className={`flex items-center justify-center px-3 h-10 w-25 ml-0 leading-tight  rounded-l-lg font-[Inter] text-[16px] ${
-                  currentPage === 1 ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100" : "bg-[#f190b1] text-white"
+                  currentPage === 1
+                    ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100"
+                    : "bg-[#f190b1] text-white"
                 }`}
                 onClick={
                   currentPage === 1
@@ -134,9 +138,7 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
                 <a
                   href="#"
                   className={`flex items-center justify-center px-3 h-10 w-10 leading-tight text-white hover:bg-[#f190b1] font-[Inter] text-[16px] ${
-                    currentPage === index + 1
-                      ? "bg-[#f38fb1]"
-                      : "bg-rose-200 "
+                    currentPage === index + 1 ? "bg-[#f38fb1]" : "bg-rose-200 "
                   }`}
                   onClick={() => handlePageChange(index + 1)}
                 >
@@ -157,7 +159,6 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
                     ? null
                     : () => handlePageChange(currentPage + 1)
                 }
-                
                 disabled={currentPage === totalPages}
               >
                 Next

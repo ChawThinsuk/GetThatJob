@@ -131,7 +131,7 @@ export const ApplicationList = () => {
         isCloseable: true,
       });
     }
-  };  
+  };
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = fillteredData?.slice(indexOfFirstItem, indexOfLastItem);
@@ -145,23 +145,16 @@ export const ApplicationList = () => {
   return (
     <div className="font-[Inter]">
       <Box
+        minHeight="1000px"
         display="flex"
         flexDirection="column"
         padding="2.1rem 7.6rem"
         gap="1.1rem"
         backgroundColor="#F5F5F6"
       >
-        <Text
-          fontSize="2.225rem"
-          fontStyle="nornal"
-          fontWeight="400"
-          lineHeight="1.35rem"
-          color="#373737"
-          marginBottom="1.1rem"
-          fontFamily="Montserrat"
-        >
+        <p className="text-[46px] text-start w-full font-[Montserrat] font-[400] text-[#373737]">
           Your applications
-        </Text>
+        </p>
         <Box gap="1rem">
           <Text
             fontSize="11px"
@@ -197,11 +190,7 @@ export const ApplicationList = () => {
           </RadioGroup>
         </Box>
         <Box display="flex" flexDirection="column" gap="1.1rem">
-          <Text
-          fontSize="20px"
-          fontWeight="500"
-          fontFamily="Montserrat"
-          >{`${fillteredData.length} application found`}</Text>
+        <p className="text-[30px] text-start w-full font-[Montserrat] font-[500] mt-[20px]">{`${fillteredData.length} application found`}</p>
           <Accordion
             display="flex"
             flexDirection="column"
@@ -370,12 +359,12 @@ export const ApplicationList = () => {
             )}
           </Accordion>
           <div className="w-[1266px] flex justify-center items-center mt-[50px]">
-      <PaginationControls
-        totalPages={totalPages}
-        currentPage={currentPage}
-        handlePageChange={handlePageChange}
-      />
-      </div>
+            <PaginationControls
+              totalPages={totalPages}
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
+            />
+          </div>
         </Box>
       </Box>
     </div>
@@ -391,7 +380,9 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
               <a
                 href="#"
                 className={`flex items-center justify-center px-3 h-10 w-25 ml-0 leading-tight  rounded-l-lg font-[Inter] text-[16px] ${
-                  currentPage === 1 ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100" : "bg-[#f190b1] text-white"
+                  currentPage === 1
+                    ? "cursor-not-allowed bg-ggrey-200 text-ggrey-100"
+                    : "bg-[#f190b1] text-white"
                 }`}
                 onClick={
                   currentPage === 1
@@ -408,9 +399,7 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
                 <a
                   href="#"
                   className={`flex items-center justify-center px-3 h-10 w-10 leading-tight text-white hover:bg-[#f190b1] font-[Inter] text-[16px] ${
-                    currentPage === index + 1
-                      ? "bg-[#f38fb1]"
-                      : "bg-rose-200 "
+                    currentPage === index + 1 ? "bg-[#f38fb1]" : "bg-rose-200 "
                   }`}
                   onClick={() => handlePageChange(index + 1)}
                 >
@@ -431,14 +420,13 @@ function PaginationControls({ totalPages, currentPage, handlePageChange }) {
                     ? null
                     : () => handlePageChange(currentPage + 1)
                 }
-                
                 disabled={currentPage === totalPages}
               >
                 Next
               </a>
             </li>
           </ul>
-        </nav>       
+        </nav>
       </div>
     </>
   );

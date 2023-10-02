@@ -58,7 +58,7 @@ adsRouter.post('/create-checkout-session/:job_id/:budget', async (req, res) => {
       cancel_url: `${YOUR_DOMAIN}/ads/cancel?job_id=${job_id}`,
     });
     await pool.query(
-      'INSERT INTO transactions (job_id, session_id, created_at, payment_amount) values ($1, $2, $3, $4)',
+      "INSERT INTO transactions (job_id, session_id, created_at, payment_amount, payment_status) values ($1, $2, $3, $4, 'unpaid')",
       [job_id, session.id, new Date(), budget]
     );
     res.json({ url: session.url });

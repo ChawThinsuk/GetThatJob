@@ -29,7 +29,7 @@ function Candidate(props) {
           }`}
         >
           <div className="flex flex-row w-full h-[100px] justify-between items-center duration-1000 rounded-lg">
-            <div className="ml-[24.33px]">
+            <div className="ml-[24.33px] w-[260px]">
               <p className="text-[21px] font-[Montserrat] font-medium">
                 {data.username}
               </p>
@@ -53,7 +53,7 @@ function Candidate(props) {
               </div>
             </div>
             {/* email */}
-            <div className="flex flex-col justify-center items-start">
+            <div className="flex flex-col justify-center items-start w-[240px]">
               <div className="flex flex-row items-center text-center gap-2 text-[#8E8E8E] text-[13px]">
                 <svg
                   width="16"
@@ -91,8 +91,8 @@ function Candidate(props) {
                 <p>{data.phone}</p>
               </div>
             </div>
-            <div className="flex flex-row gap-14">
-              <div className="flex flex-col items-center text-[#8E8E8E] text-[13px]  text-center">
+            <div className="flex flex-row gap-6 w-[200px]">
+              <div className="flex flex-col items-center text-[#8E8E8E] text-[13px]  text-center w-[60px]">
                 <svg
                   width="16"
                   height="15"
@@ -121,9 +121,11 @@ function Candidate(props) {
                   </p>
                 )}
               </div>
+              <div className="w-[80px] flex flex-row justify-center">
               {data.job_user_mark === "waiting" && <WaitingReview />}
               {data.job_user_mark === "in_progress" && <ReviewInProgress />}
               {data.job_user_mark === "finished" && <ReviewFinished />}
+              </div>
             </div>
             {/* button */}
             <div className="flex flex-row items-center gap-2 mr-[74.67px]">

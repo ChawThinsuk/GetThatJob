@@ -79,6 +79,98 @@ export const FindThatJob = () => {
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
+  let north = [
+    "Chiang Mai",
+    "Chiang Rai",
+    "Lampang",
+    "Lamphun",
+    "Mae Hong Son",
+    "Nan",
+    "Phayao",
+    "Phrae",
+    "Uttaradit",
+  ];
+  let northeast = [
+    "Amnat Charoen",
+    "Bueng Kan",
+    "Buri Ram",
+    "Chaiyaphum",
+    "Kalasin",
+    "Khon Kaen",
+    "Loei",
+    "Maha Sarakham",
+    "Mukdahan",
+    "Nakhon Phanom",
+    "Nakhon Ratchasima",
+    "Nong Bua Lamphu",
+    "Nong Khai",
+    "Roi Et",
+    "Sakon Nakhon",
+    "Si Sa Ket",
+    "Surin",
+    "Yasothon",
+    "Ubon Ratchathani",
+    "Udon Thani",
+  ];
+  let center = [
+    "Bangkok",
+    "Nakhon Pathom",
+    "Nonthaburi",
+    "Pathum Thani",
+    "Samut Prakan",
+    "Samut Sakhon",
+  ];
+  let central = [
+    "Ang Thong",
+    "Chai Nat",
+    "Lopburi",
+    "Kamphaeng Phet",
+    "Nakhon Nayok",
+    "Nakhon Sawan",
+    "Phichit",
+    "Phitsanulok",
+    "Phetchabun",
+    "Phra Nakhon Si Ayutthaya",
+    "Samut Songkhram",
+    "Sara buri",
+    "Sing Buri",
+    "Sukhothai",
+    "Suphan Buri",
+    "Uthai Thani",
+  ];
+  let east = [
+    "Chachoengsao",
+    "Chanthaburi",
+    "Chon Buri",
+    "Prachinburi",
+    "Rayong",
+    "Sa Kaeo",
+    "Trat",
+  ];
+  let west = [
+    "Kanchanaburi",
+    "Prachuap Khiri Khan",
+    "Phetchaburi",
+    "Ratchaburi",
+    "Tak",
+  ];
+  let south = [
+    "Chumphon",
+    "Krabi",
+    "Nakhon Si Thammarat",
+    "Narathiwat",
+    "Pattani",
+    "Phangnga",
+    "Phatthalung",
+    "Phuket",
+    "Ranong",
+    "Satun",
+    "Songkhla",
+    "Trang",
+    "Yala",
+    "Surat Thani",
+  ];
+
   return (
     <div className="flex flex-col justify-start items-center w-full pr-[100px] pl-[100px] pt-[50px] font-[Inter] bg-[#F5F5F6]">
       <div className="flex flex-col justify-center items-start w-full">
@@ -150,95 +242,39 @@ export const FindThatJob = () => {
             >
               <option value={""}>Select a location</option>
               <optgroup label="North">
-                <option>Chiang Mai</option>
-                <option>Chiang Rai</option>
-                <option>Lampang</option>
-                <option>Lamphun</option>
-                <option>Mae Hong Son</option>
-                <option>Nan</option>
-                <option>Phayao</option>
-                <option>Phrae</option>
-                <option>Uttaradit</option>
+                {north.map((provinces, index) => {
+                  return <option key={index}>{provinces}</option>;
+                })}
               </optgroup>
               <optgroup label="Northeast">
-                <option>Amnat Charoen</option>
-                <option>Bueng Kan</option>
-                <option>Buri Ram</option>
-                <option>Chaiyaphum</option>
-                <option>Kalasin</option>
-                <option>Khon Kaen</option>
-                <option>Loei</option>
-                <option>Maha Sarakham</option>
-                <option>Mukdahan</option>
-                <option>Nakhon Phanom</option>
-                <option>Nakhon Ratchasima</option>
-                <option>Nong Bua Lamphu</option>
-                <option>Nong Khai</option>
-                <option>Roi Et</option>
-                <option>Sakon Nakhon</option>
-                <option>Si Sa Ket</option>
-                <option>Surin</option>
-                <option>Yasothon</option>
-                <option>Ubon Ratchathani</option>
-                <option>Udon Thani</option>
+                {northeast.map((provinces, index) => {
+                  return <option key={index}>{provinces}</option>;
+                })}
               </optgroup>
               <optgroup label="Bangkok and surrounding areas">
-                <option>Bangkok</option>
-                <option>Nakhon Pathom</option>
-                <option>Nonthaburi</option>
-                <option>Pathum Thani</option>
-                <option>Samut Prakan</option>
-                <option>Samut Sakhon</option>
+                {center.map((provinces, index) => {
+                  return <option key={index}>{provinces}</option>;
+                })}
               </optgroup>
               <optgroup label="Central">
-                <option>Ang Thong</option>
-                <option>Chai Nat</option>
-                <option>Lopburi</option>
-                <option>Kamphaeng Phet</option>
-                <option>Nakhon Nayok</option>
-                <option>Nakhon Sawan</option>
-                <option>Phichit</option>
-                <option>Phitsanulok</option>
-                <option>Phetchabun</option>
-                <option>Phra Nakhon Si Ayutthaya</option>
-                <option>Samut Songkhram</option>
-                <option>Sara buri</option>
-                <option>Sing Buri</option>
-                <option>Sukhothai</option>
-                <option>Suphan Buri</option>
-                <option>Uthai Thani</option>
+                {central.map((provinces, index) => {
+                  return <option key={index}>{provinces}</option>;
+                })}
               </optgroup>
               <optgroup label="East">
-                <option>Chachoengsao</option>
-                <option>Chanthaburi</option>
-                <option>Chon Buri</option>
-                <option>Prachinburi</option>
-                <option>Rayong</option>
-                <option>Sa Kaeo</option>
-                <option>Trat</option>
+                {east.map((provinces, index) => {
+                  return <option key={index}>{provinces}</option>;
+                })}
               </optgroup>
               <optgroup label="West">
-                <option>Kanchanaburi</option>
-                <option>Prachuap Khiri Khan</option>
-                <option>Phetchaburi</option>
-                <option>Ratchaburi</option>
-                <option>Tak</option>
+                {west.map((provinces, index) => {
+                  return <option key={index}>{provinces}</option>;
+                })}
               </optgroup>
               <optgroup label="South">
-                <option>Chumphon</option>
-                <option>Krabi</option>
-                <option>Nakhon Si Thammarat</option>
-                <option>Narathiwat</option>
-                <option>Pattani</option>
-                <option>Phangnga</option>
-                <option>Phatthalung</option>
-                <option>Phuket</option>
-                <option>Ranong</option>
-                <option>Satun</option>
-                <option>Songkhla</option>
-                <option>Trang</option>
-                <option>Yala</option>
-                <option>Surat Thani</option>
+                {south.map((provinces, index) => {
+                  return <option key={index}>{provinces}</option>;
+                })}
               </optgroup>
             </select>
           </div>

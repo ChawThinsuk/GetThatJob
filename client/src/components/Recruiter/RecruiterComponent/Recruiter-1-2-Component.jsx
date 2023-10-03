@@ -350,7 +350,7 @@ export function MarKAsFinishedButton(props) {
 }
 export function FinishedButton() {
   return (
-    <button className="text-[#8E8E8E] text-[15px] w-[140px] h-[53.33px] border-[1px] bg-[#E1E2E1] rounded-[21.33px] duration-300" disabled>
+    <button className="text-[#8E8E8E] text-[15px] w-[240px] h-[53.33px] border-[1px] bg-[#E1E2E1] rounded-[21.33px] duration-300" disabled>
       FINISHED
     </button>
   );

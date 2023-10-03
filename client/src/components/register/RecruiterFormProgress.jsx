@@ -6,6 +6,11 @@ import {
   FormLabel,
   Input,
   Stack,
+  Text,
+  Alert,
+  AlertIcon,
+  CloseButton,
+  useToast,
 } from "@chakra-ui/react";
 import { useGlobalContext } from "../../contexts/registerContext";
 
@@ -24,8 +29,45 @@ function RecruiterFormProgress() {
     setRecruiterPasswordConfirmation,
   } = useGlobalContext();
 
-  const handleSubmit = () => {
-    setRecruiterRegisterPage(recruiterRegisterPage + 1);
+  const toast = useToast();
+
+  const [showPasswordMismatchAlert, setShowPasswordMismatchAlert] =
+    useState(false);
+  const [showEmptyFieldAlert, setShowEmptyFieldAlert] = useState(false);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Check for empty fields
+    if (
+      !companyName ||
+      !recruiterEmail ||
+      !recruiterPassword ||
+      !recruiterpasswordConfirmation
+    ) {
+      toast({
+        title: "Empty Fields",
+        description: "Please fill in all required fields.",
+        status: "warning",
+        position: "bottom",
+        duration: 5000, // Toast duration in milliseconds
+        isClosable: true,
+      });
+      return; // Stop form submission if any field is empty
+    }
+
+    if (recruiterPassword !== recruiterpasswordConfirmation) {
+      toast({
+        title: "Password Mismatch",
+        description: "The passwords do not match.",
+        status: "error",
+        position: "bottom",
+        duration: 5000, // Toast duration in milliseconds
+        isClosable: true,
+      });
+    } else {
+      setRecruiterRegisterPage(recruiterRegisterPage + 1);
+    }
   };
 
   return (
@@ -36,7 +78,7 @@ function RecruiterFormProgress() {
         <div className="flex flex-col w-[80%] ">
           <div className="flex cursor-pointer">
             <div
-              className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] rounded-full
+              className="mr-4 w-[32px] h-[32px] bg-[#F48FB1] hover:bg-[#BF5F82] rounded-full
              text-white text-center font-semibold flex items-center justify-center"
             >
               1
@@ -47,9 +89,7 @@ function RecruiterFormProgress() {
               <p>Information</p>
             </div>
             <div
-              onClick={() => {
-                setRecruiterRegisterPage(recruiterRegisterPage + 1);
-              }}
+              onClick={handleSubmit}
               className="mr-4 w-[32px] h-[32px] bg-[#E1E2E1] rounded-full text-white text-center font-semibold flex items-center justify-center"
             >
               2
@@ -61,12 +101,14 @@ function RecruiterFormProgress() {
             </div>
           </div>
           <Box w="100%" maxW="lg" mt={10} borderRadius="md">
-            <form onSubmit={handleSubmit}>
+            <form>
               <Stack spacing={4}>
                 <FormControl id="companyName" isRequired>
                   <FormLabel sx={customTextStyle}>Company Name</FormLabel>
                   <Input
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="name"
                     placeholder="Enter your company name"
                     value={companyName}
@@ -79,6 +121,8 @@ function RecruiterFormProgress() {
                   <FormLabel sx={customTextStyle}>Email</FormLabel>
                   <Input
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="email"
                     placeholder="Enter your email address"
                     value={recruiterEmail}
@@ -91,6 +135,8 @@ function RecruiterFormProgress() {
                   <FormLabel sx={customTextStyle}>Password</FormLabel>
                   <Input
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="password"
                     placeholder="Enter your password"
                     value={recruiterPassword}
@@ -105,6 +151,8 @@ function RecruiterFormProgress() {
                   </FormLabel>
                   <Input
                     borderColor="#F48FB1"
+                    focusBorderColor="#F48FB1"
+                    _hover={{ borderColor: "#F48FB1" }}
                     type="password"
                     placeholder="Enter your password"
                     value={recruiterpasswordConfirmation}
@@ -115,18 +163,44 @@ function RecruiterFormProgress() {
                 </FormControl>
               </Stack>
               <center>
+                {showEmptyFieldAlert && (
+                  <Alert status="warning" borderRadius="md" mt={2}>
+                    <AlertIcon />
+                    Please fill in all required fields.
+                    <CloseButton
+                      onClick={() => setShowEmptyFieldAlert(false)}
+                      position="absolute"
+                      right="8px"
+                      top="8px"
+                    />
+                  </Alert>
+                )}
+                {showPasswordMismatchAlert && (
+                  <Alert status="error" borderRadius="md" mt={2}>
+                    <AlertIcon />
+                    The passwords do not match.
+                    <CloseButton
+                      onClick={() => setShowPasswordMismatchAlert(false)}
+                      position="absolute"
+                      right="8px"
+                      top="8px"
+                    />
+                  </Alert>
+                )}
                 <Button
                   px={5}
                   py={5}
                   mt={8}
                   mb={8}
-                  type="submit"
+                  type="button"
                   bg="#F48FB1"
+                  _hover={{ bg: "#BF5F82" }}
                   variant="solid"
                   size="sm"
                   fontSize="md"
                   color="white"
                   borderRadius="16px"
+                  onClick={handleSubmit}
                 >
                   NEXT &gt;
                 </Button>

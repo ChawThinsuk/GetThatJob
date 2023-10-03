@@ -10,17 +10,19 @@ function Section2() {
         display="flex"
         flexDirection="column"
         backgroundColor="#BF5F82"
-        width="71rem"
+        width="1173.39px"
         height="29.5rem"
         padding="4rem 7.5rem"
         justifyContent="center"
         flexShrink="0"
         gap="1.5rem"
         alignItems="flex-start"
+        fontFamily="Montserrat"
+        marginLeft="-16"
       >
         <Text
           color="white"
-          fontSize="3rem"
+          fontSize="48px"
           fontStyle="normal"
           fontWeight="400"
           lineHeight="normal"
@@ -29,7 +31,7 @@ function Section2() {
         </Text>
         <Text
           color="white"
-          fontSize="1.5rem"
+          fontSize="24px"
           fontStyle="normal"
           fontWeight="400"
           lineHeight="normal"
@@ -53,8 +55,8 @@ function Section2() {
       </Box>
       <Image
         src={targetImg}
-        width="35rem"
-        height="29.5rem"
+        width="684.7px"
+        height="472px"
         padding=" 7.1875rem 7.0625rem 7.1875rem 7rem"
         justifyContent="center"
         alignItems="center"

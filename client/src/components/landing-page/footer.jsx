@@ -20,7 +20,7 @@ function Footer() {
           alignItems="center"
           fontSize="0.875rem"
           fontStyle="normal"
-        >
+          fontFamily="Montserrat"        >
           © 2021 - Get That Job
         </Text>
       </Box>

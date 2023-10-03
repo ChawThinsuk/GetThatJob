@@ -12,9 +12,9 @@ import { useGlobalContext } from "../../../contexts/registerContext.jsx";
 
 const jobType = ["Full-Time", "Part-Time", "Freelance"];
 
-function JobType({ setJobType }) {
+function JobType({ setJobType, value }) {
   const { profFormStyle } = useGlobalContext();
-  const [job_type, setJobTypeLocal] = useState("");
+  const [job_type, setJobTypeLocal] = useState();
 
   const handleCategoryChange = (e) => {
     setJobTypeLocal(e.target.value);
@@ -25,10 +25,14 @@ function JobType({ setJobType }) {
     <Stack spacing={4}>
       <FormControl id="jobCategory">
         <Select
+          fontWeight="400"
+          color="#8E8E8E"
+          background="#FFFFFF"
           placeholder="Select a type"
           borderColor="#F48FB1"
           focusBorderColor="#F48FB1"
-          value={job_type}
+          _hover={{ borderColor: "#F48FB1" }}
+          value={value}
           onChange={handleCategoryChange}
         >
           {jobType.map((type) => (

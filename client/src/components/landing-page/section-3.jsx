@@ -59,6 +59,7 @@ function Section3() {
         fontWeight="400"
         lineHeight="normal"
         color="#BF5F82"
+        fontFamily="Montserrat"
       >
         Meet the team
       </Text>
@@ -71,6 +72,7 @@ function Section3() {
             width="14rem"
             alignItems="center"
             gap="1rem"
+            fontFamily="Montserrat"
           >
             <Image
               width="10rem"

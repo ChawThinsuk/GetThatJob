@@ -19,6 +19,8 @@ const ContextProvider = ({ children }) => {
     lineHeight: "normal",
     letterSpacing: "1.5px",
     textTransform: "uppercase",
+    // borderColor:"#F48FB1",
+    // focusBorderColor:"#F48FB1"
   };
   const profFormStyle = {
     fontFamily: "Inter",
@@ -29,6 +31,8 @@ const ContextProvider = ({ children }) => {
     letterSpacing: "1.5px",
     textTransform: "uppercase",
     color: "#373737",
+    // borderColor:"#F48FB1",
+    // focusBorderColor:"#F48FB1"
   };
 
   // register page context
@@ -44,9 +48,9 @@ const ContextProvider = ({ children }) => {
   const [phone, setPhone] = useState("");
   const [birthDate, setBirthDate] = useState("");
   const [linkedinUrl, setLinkedinUrl] = useState("");
-  const [title, setTitle] = useState("");
-  const [professionalExperience, setProfessionalExperience] = useState("");
-  const [educationalInfo, setEducationalInfo] = useState("");
+  const [title, setTitle] = useState(null);
+  const [professionalExperience, setProfessionalExperience] = useState(null);
+  const [educationalInfo, setEducationalInfo] = useState(null);
   const [cv, setCv] = useState({});
 
   // recruiter context
@@ -69,6 +73,7 @@ const ContextProvider = ({ children }) => {
     let error; // Declare error variable here
 
     try {
+    if (cv) {
       if (userType === "PROFESSIONAL") {
         const { data, error: professionalError } = await supabase.storage
           .from("files")
@@ -94,14 +99,14 @@ const ContextProvider = ({ children }) => {
           education: educationalInfo,
           cv: data.path,
         };
-        console.log(professionalData);
+        // console.log(professionalData);
 
         const response = await axios.post(
           "http://localhost:4000/users/register-professional",
           professionalData
         );
 
-        console.log(response.data);
+        // console.log(response.data);
 
         toast({
           title: "Account created.",
@@ -116,6 +121,7 @@ const ContextProvider = ({ children }) => {
           navigate("/login");
         }, 3500); // 3500 milliseconds = 3.5 seconds
       }
+    }
 
       if (userType === "RECRUITER") {
         const { data, error: recruiterError } = await supabase.storage
@@ -141,7 +147,7 @@ const ContextProvider = ({ children }) => {
           logo: urlPath.data.publicUrl,
         };
 
-        console.log(recruiterData);
+        // console.log(recruiterData);
 
         const response = await axios.post(
           "http://localhost:4000/users/register-recruiter",

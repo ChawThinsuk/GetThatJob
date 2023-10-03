@@ -20,7 +20,7 @@ const ContextProvider = ({ children }) => {
         "http://localhost:4000/chaw/getcandidate",
         data
       );
-      console.log(response);
+      // console.log(response);
       setCandidate(response);
     } catch (error) {
       console.log(error);

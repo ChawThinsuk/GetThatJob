@@ -1,3 +1,89 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 
+---------------------------------------------
+Loader Style
+--------------------------------------------- 
+*/
+
+.js-preloader {
+  /* You must change postion:relative; for position:fixed;  */
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  opacity: 1;
+  visibility: visible;
+  z-index: 9999;
+  -webkit-transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease;
+}
+
+.js-preloader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@keyframes dot8567 {
+  50% {
+    -webkit-transform: translateX(48px);
+    transform: translateX(48px);
+  }
+}
+
+@keyframes dots723423 {
+  50% {
+    -webkit-transform: translateX(-15.5px);
+    transform: translateX(-15.5px);
+  }
+}
+
+.preloader-inner {
+  position: relative;
+  width: 71px; /* Reduced by half */
+  height: 20px; /* Reduced by half */
+  background: transparent;
+}
+
+.preloader-inner .dot {
+  position: absolute;
+  width: 8px; /* Reduced by half */
+  height: 8px; /* Reduced by half */
+  top: 6px; /* Reduced by half */
+  left: 7.5px; /* Reduced by half */
+  background: #e75e8d;
+  border-radius: 50%;
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  -webkit-animation: dot8567 1.4s infinite; /* Reduced by half */
+  animation: dot8567 1.4s infinite; /* Reduced by half */
+}
+
+.preloader-inner .dots {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  margin-top: 6px; /* Reduced by half */
+  margin-left: 15.5px; /* Reduced by half */
+  -webkit-animation: dots723423 1.4s infinite; /* Reduced by half */
+  animation: dots723423 1.4s infinite; /* Reduced by half */
+}
+
+.preloader-inner .dots span {
+  display: block;
+  float: left;
+  width: 8px; /* Reduced by half */
+  height: 8px; /* Reduced by half */
+  margin-left: 8px; /* Reduced by half */
+  background: #e75e8d;
+  border-radius: 50%;
+}

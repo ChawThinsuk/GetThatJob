@@ -15,7 +15,7 @@ const UploadPdf = () => {
         if (file.type === "application/pdf" && file.size <= 5 * 1024 * 1024) {
           setCv(file);
           setSelectedFileName(file.name);
-          console.log(file.name);
+          // console.log(file.name);
         } else {
           setCv(null);
           setSelectedFileName(null);
@@ -78,7 +78,7 @@ const UploadPdf = () => {
       />
       <label
         htmlFor="pdf-upload"
-        className="cursor-pointer flex items-center justify-center w-[160px] h-auto p-[13px] rounded-xl bg-[#F48FB1] text-white hover:bg-pink-600 transition duration-300"
+        className="cursor-pointer flex items-center justify-center w-[160px] h-auto p-[13px] rounded-xl bg-[#F48FB1] hover:bg-[#BF5F82] text-white transition duration-300"
       >
         <img src={uploadlogo} className="pr-2" alt="logo" />
         {userType === "PROFESSIONAL"

@@ -20,18 +20,16 @@ function Candidate(props) {
     let newActive = item.active === 1 ? 0 : 1;
     setItemm({ ...item, active: newActive });
   };
-  console.log(data.application_created_at);
-
   return (
     <>
-      {data.job_user_mark !== "declined" && (
+      {/* {data.job_user_mark !== "declined" && ( */}
         <div
           className={`flex flex-col justify-between  w-[1258.72px] rounded-[8px] mt-[21.33px] shadow-md group ${
-            item.active === 1 ? `is-active bg-white` : ` duration-1000`
+            item.active === 1 ? `is-active bg-white` : `  bg-white`
           }`}
         >
           <div className="flex flex-row w-full h-[100px] justify-between items-center duration-1000 rounded-lg">
-            <div className="ml-[24.33px]">
+            <div className="ml-[24.33px] w-[260px]">
               <p className="text-[21px] font-[Montserrat] font-medium">
                 {data.username}
               </p>
@@ -55,7 +53,7 @@ function Candidate(props) {
               </div>
             </div>
             {/* email */}
-            <div className="flex flex-col justify-center items-start">
+            <div className="flex flex-col justify-center items-start w-[240px]">
               <div className="flex flex-row items-center text-center gap-2 text-[#8E8E8E] text-[13px]">
                 <svg
                   width="16"
@@ -93,8 +91,8 @@ function Candidate(props) {
                 <p>{data.phone}</p>
               </div>
             </div>
-            <div className="flex flex-row gap-14">
-              <div className="flex flex-col items-center text-[#8E8E8E] text-[13px]  text-center">
+            <div className="flex flex-row gap-6 w-[200px]">
+              <div className="flex flex-col items-center text-[#8E8E8E] text-[13px]  text-center w-[60px]">
                 <svg
                   width="16"
                   height="15"
@@ -123,9 +121,11 @@ function Candidate(props) {
                   </p>
                 )}
               </div>
+              <div className="w-[80px] flex flex-row justify-center">
               {data.job_user_mark === "waiting" && <WaitingReview />}
               {data.job_user_mark === "in_progress" && <ReviewInProgress />}
               {data.job_user_mark === "finished" && <ReviewFinished />}
+              </div>
             </div>
             {/* button */}
             <div className="flex flex-row items-center gap-2 mr-[74.67px]">
@@ -150,18 +150,18 @@ function Candidate(props) {
           </div>
           {/* text */}
           <div className="flex flex-row items-between w-full">
-            <div className="overflow-hidden max-h-0 w-full group-[.is-active]:max-h-[600px] duration-1000 ml-[21.33px]">
+            <div className="overflow-hidden max-h-0 w-full group-[.is-active]:max-h-[600px] duration-500 ml-[30px] mr-[30px] mb-[10px]">
               <div className="text-[14px]">
                 <p className="text-[#BF5F82] text-[17px] font-[Montserrat] mt-[21.33px]">
                   Professional experience
                 </p>
-                <p className="mt-[10.66px]">{item.experience}</p>
+                <p className="mt-[10.66px]">{item.job_user_experience}</p>
               </div>
               <div className="text-[14px]">
                 <p className="text-[#BF5F82] text-[17px] font-[Montserrat] mt-[21.33px]">
                   Why are you interested in working at The company name SA
                 </p>
-                <p className="mt-[10.66px]">{item.interested}</p>
+                <p className="mt-[10.66px]">{item.job_user_interesting}</p>
               </div>
               <DownloadResumeButton
                 linkPdf={data.job_user_cv}
@@ -170,7 +170,7 @@ function Candidate(props) {
             </div>
             <div className="flex items-end h-full relative">
               <div
-                className="flex flex-col justify-end items-end cursor-pointer group-[.is-active]:rotate-[180deg] duration-500 mr-[21.33px] absolute bottom-6 right-1"
+                className="flex flex-col justify-end items-end cursor-pointer group-[.is-active]:rotate-[180deg] duration-300 mr-[21.33px] absolute bottom-6 right-1"
                 onClick={handleToggleActive}
               >
                 <svg
@@ -192,7 +192,7 @@ function Candidate(props) {
             </div>
           </div>
         </div>
-      )}
+      {/* )} */}
     </>
   );
 }

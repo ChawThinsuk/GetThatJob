@@ -6,14 +6,16 @@ import follow from "../assets/NavbarHome/follow.svg";
 import user from "../assets/NavbarHome/profile.svg";
 import bag from "../assets/NavbarHome/bag.svg";
 import doc from "../assets/NavbarHome/doc.svg";
+import money from "../assets/FindThatJob/money2.svg";
+import time from "../assets/FindThatJob/time.svg";
 import logoutlogo from "../assets/NavbarHome/logout.svg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 export const NavbarHomepage = () => {
-  const urlArray = []
-  urlArray.push(window.location.href.split('/')[3]);
-  console.log(window.location.href);
+  const urlArray = [];
+  urlArray.push(window.location.href.split("/")[3]);
+  // console.log(window.location.href);
   const navigate = useNavigate();
   const [selectNav, setSelectNav] = useState(`/${urlArray[0]}`);
   const { logout, state } = useAuth();
@@ -27,13 +29,16 @@ export const NavbarHomepage = () => {
     { logo: bag, title: "Job Postings", url: "/" },
     { logo: doc, title: "Create New Job", url: "/createjob" },
     { logo: user, title: "Profile", url: "/recruitprofile" },
+    { logo: money, title: "Ads", url: "/ads" },
+    { logo: time, title: "Ads History", url: "/history" },
   ];
 
   return (
-    <div className="bg-[#E1E2E1] ">
+    <div className="bg-[#E1E2E1] w-full">
       <div
         id="logo"
-        className="flex items-center pt-[32px] pl-[32px] my-[16px]"
+        className="flex items-center pt-[32px] pl-[32px] my-[16px] hover:cursor-pointer"
+        onClick={() => window.location.replace("/")}
       >
         <img className="object-contain w-[181px] " src={icon} alt="logos" />
       </div>
@@ -70,7 +75,6 @@ export const NavbarHomepage = () => {
         >
           <img src={logoutlogo} className="p-2" />
           <p className="font-[Inter] text-[21.33px] text-[#616161] ">Log out</p>
-
         </div>
       </div>
     </div>

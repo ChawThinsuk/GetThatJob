@@ -1,23 +1,18 @@
 import "./App.css";
 import { ChakraProvider } from "@chakra-ui/react";
-import React from "react";
-
 import AuthenticatedApp from "./pages/AuthenticatedApp.jsx";
 import UnauthenticatedApp from "./pages/UnauthenticatedApp.jsx";
-import { useAuth } from "./contexts/authentication";
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
-
-const queryClient = new QueryClient()
+import { useAuth } from "./contexts/Authorization";
+import theme from "./components/theme.js";
 
 function App() {
   const auth = useAuth();
+
   return (
-  <ChakraProvider>
-    <QueryClientProvider client={queryClient}>
+    <ChakraProvider theme={theme}>
       {auth.isAuthenticated ? <AuthenticatedApp /> : <UnauthenticatedApp />}
-    </QueryClientProvider>
-  </ChakraProvider>
-  )
+    </ChakraProvider>
+  );
 }
 
 export default App;

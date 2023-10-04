@@ -1,19 +1,27 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import { ContextProvider } from './utils/context.jsx'
-import { BrowserRouter } from "react-router-dom";
-import { AuthProvider } from './contexts/authentication.jsx'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+import './index.css';
+import { ContextProvider } from '../src/contexts/registerContext.jsx';
+import { BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from './contexts/Authorization.jsx';
+import { ProProvider } from './contexts/Professional.jsx';
+import jwtInterceptor from './utils/jwtIntercepter.jsx';
+import { QueryClient, QueryClientProvider} from 'react-query';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+
+const queryClient = new QueryClient();
+jwtInterceptor();
+ReactDOM.createRoot(document.getElementById('root')).render( 
     <BrowserRouter>
-      <AuthProvider>
-        <ContextProvider>
-          <App />
-        </ContextProvider>
-      </AuthProvider>
-    </BrowserRouter>
-  </React.StrictMode>,
-)
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <ProProvider>
+            <ContextProvider>
+              <App />
+            </ContextProvider>
+          </ProProvider>
+        </AuthProvider>
+      </QueryClientProvider>
+    </BrowserRouter> 
+);

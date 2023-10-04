@@ -98,7 +98,7 @@ export const YourApplication = () => {
       };
 
       await axios.put(
-        `http://localhost:4000/pro/users/${state.userID}/jobs/${job_id}`,
+        `https://gtj-server.onrender.com/pro/users/${state.userID}/jobs/${job_id}`,
         submitProfileData
       );
 
@@ -121,7 +121,7 @@ export const YourApplication = () => {
   };
 
   useEffect(() => {
-    const apiUrl = `http://localhost:4000/pro/users/${state.userID}`;
+    const apiUrl = `https://gtj-server.onrender.com/pro/users/${state.userID}`;
 
     Axios.get(apiUrl)
       .then((res) => {

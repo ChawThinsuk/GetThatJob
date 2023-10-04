@@ -51,7 +51,7 @@ export function CreateNewJob() {
 
     try {
       const response = await axios.post(
-        `http://localhost:4000/recruiter/${userID}/createjob`,
+        `https://gtj-server.onrender.com/recruiter/${userID}/createjob`,
         jobData
       );
 

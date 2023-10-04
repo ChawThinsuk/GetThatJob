@@ -66,7 +66,7 @@ export function CloseJobButton(props) {
     try {
       setIsLoading(true);
       const response = await axios.put(
-        "http://localhost:4000/recruiter-display/job-status",
+        "https://gtj-server.onrender.com/recruiter-display/job-status",
         data
       );
       await props.refreshData();
@@ -280,7 +280,7 @@ export function MarKAsStartedButton(props) {
     try {
       setIsLoading(true);
       const response = await axios.put(
-        "http://localhost:4000/recruiter-display/candidate-status",
+        "https://gtj-server.onrender.com/recruiter-display/candidate-status",
         data
       );
       await props.refreshData();
@@ -319,7 +319,7 @@ export function MarKAsFinishedButton(props) {
     try {
       setIsLoading(true);
       const response = await axios.put(
-        "http://localhost:4000/recruiter-display/candidate-status",
+        "https://gtj-server.onrender.com/recruiter-display/candidate-status",
         data
       );
       await props.refreshData();

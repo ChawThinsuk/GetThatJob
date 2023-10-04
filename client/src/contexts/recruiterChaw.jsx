@@ -17,7 +17,7 @@ const ContextProvider = ({ children }) => {
         job_id: 2,
       };
       const response = await axios.post(
-        "http://localhost:4000/chaw/getcandidate",
+        "https://gtj-server.onrender.com/chaw/getcandidate",
         data
       );
       // console.log(response);

@@ -52,7 +52,7 @@ function EditJob() {
   const getJobData = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:4000/recruiter/${state.userID}/getjob/${id}`
+        `https://gtj-server.onrender.com/recruiter/${state.userID}/getjob/${id}`
       );
       const data = res.data.data;
       // setJobID(data.job_id)
@@ -86,7 +86,7 @@ function EditJob() {
 
     try {
       const response = await axios.put(
-        `http://localhost:4000/recruiter/editjob/${id}`,
+        `https://gtj-server.onrender.com/recruiter/editjob/${id}`,
         jobData
       );
 

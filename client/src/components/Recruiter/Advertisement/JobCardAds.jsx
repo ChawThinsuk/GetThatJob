@@ -18,7 +18,7 @@ const JobCardAds = ({ prop }) => {
     setIsLoading(true);
     try {
       const result = await axios.get(
-        `http://localhost:4000/ads/${state.userID}`
+        `https://gtj-server.onrender.com/ads/${state.userID}`
       );
       setJobs(result.data.data.rows);
       setIsLoading(false);

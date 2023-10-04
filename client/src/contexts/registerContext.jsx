@@ -102,7 +102,7 @@ const ContextProvider = ({ children }) => {
         // console.log(professionalData);
 
         const response = await axios.post(
-          "http://localhost:4000/users/register-professional",
+          "https://gtj-server.onrender.com/users/register-professional",
           professionalData
         );
 
@@ -150,7 +150,7 @@ const ContextProvider = ({ children }) => {
         // console.log(recruiterData);
 
         const response = await axios.post(
-          "http://localhost:4000/users/register-recruiter",
+          "https://gtj-server.onrender.com/users/register-recruiter",
           recruiterData
         );
 

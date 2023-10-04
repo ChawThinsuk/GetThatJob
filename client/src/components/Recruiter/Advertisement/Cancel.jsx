@@ -13,7 +13,7 @@ function Cancel() {
         'job_id'
       );
       const paymentStatus = await axios(
-        `http://localhost:4000/ads/success/jobs/${urlParams}`
+        `https://gtj-server.onrender.com/ads/success/jobs/${urlParams}`
       );
       setIsloading(false);
     } catch (error) {

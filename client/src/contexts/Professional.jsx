@@ -50,7 +50,7 @@ function ProProvider(props) {
       params.append('location', location);
       setIsLoading(true);
       const result = await axios.get(
-        `http://localhost:4000/pro?${params.toString()}`
+        `https://gtj-server.onrender.com/pro?${params.toString()}`
       );
       setJobs(result.data.data.rows);
       // console.log(input);
@@ -62,7 +62,7 @@ function ProProvider(props) {
   const getPopularJob = async () => {
     try {
       const popularJob = await axios.get(
-        `http://localhost:4000/pro/job/popular`
+        `https://gtj-server.onrender.com/pro/job/popular`
       );
       let popularSearch = [];
       popularJob.data.popularJobs.map((job) => {
@@ -79,13 +79,13 @@ function ProProvider(props) {
   };
   //Pro2
   const getSingleJob = async (id) => {
-    return axios.get(`http://localhost:4000/pro/job/${id}`);
+    return axios.get(`https://gtj-server.onrender.com/pro/job/${id}`);
   };
   //JobHeader,JobCard
   const getJobFollowStatus = async (userID, job_id) => {
     try {
       const jobFollowStatus = await axios.get(
-        `http://localhost:4000/pro/follow/job`,
+        `https://gtj-server.onrender.com/pro/follow/job`,
         {
           params: { userID: userID, job_id: job_id },
         }
@@ -98,14 +98,14 @@ function ProProvider(props) {
   const updateJobFollowStatus = async (data) => {
     // data need 2 keys job_professional_id and job_professional_follow
     try {
-      axios.put(`http://localhost:4000/pro/follow/job`, { data });
+      axios.put(`https://gtj-server.onrender.com/pro/follow/job`, { data });
     } catch (error) {
       console.log(error);
     }
   };
   const addJobProfessionalData = async (data) => {
     try {
-      await axios.post(`http://localhost:4000/pro/follow/job`, { data });
+      await axios.post(`https://gtj-server.onrender.com/pro/follow/job`, { data });
     } catch (error) {
       console.log(error);
     }

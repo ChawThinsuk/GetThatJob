@@ -48,7 +48,7 @@ export const ApplicationList = () => {
   }, []);
 
   const getApplyJob = () => {
-    const apiUrl = `http://localhost:4000/pro/users/applist/${state.userID}`;
+    const apiUrl = `https://gtj-server.onrender.com/pro/users/applist/${state.userID}`;
 
     Axios.get(apiUrl)
       .then((res) => {
@@ -112,7 +112,7 @@ export const ApplicationList = () => {
     // console.log(jobId);
     try {
       await axios.put(
-        `http://localhost:4000/pro/users/applist/${state.userID}/jobs/${jobId}`
+        `https://gtj-server.onrender.com/pro/users/applist/${state.userID}/jobs/${jobId}`
       );
       getApplyJob();
       toast({

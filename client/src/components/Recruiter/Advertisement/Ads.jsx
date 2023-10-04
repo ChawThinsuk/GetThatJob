@@ -30,7 +30,7 @@ function Ads() {
     } else {
       axios
         .post(
-          `http://localhost:4000/ads/create-checkout-session/${selectedJobs}/${budget}`
+          `https://gtj-server.onrender.com/ads/create-checkout-session/${selectedJobs}/${budget}`
         )
         .then((response) => {
           window.location.replace(response.data.url);

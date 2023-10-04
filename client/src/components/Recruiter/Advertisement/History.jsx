@@ -16,7 +16,7 @@ function History() {
   const getHistory = async () => {
     setLoading(true);
     try {
-      const result = await axios.get(`http://localhost:4000/ads/history`, {
+      const result = await axios.get(`https://gtj-server.onrender.com/ads/history`, {
         params: { userID: state.userID },
       });
 

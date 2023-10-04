@@ -21,7 +21,7 @@ const JobCard = (prop) => {
     setIsloading(true);
     try {
       const jobFollowStatus = await axios.get(
-        `http://localhost:4000/pro/follow/job`,
+        `https://gtj-server.onrender.com/pro/follow/job`,
         {
           params: { userID: state.userID, job_id: job.job_id },
         }

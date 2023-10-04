@@ -26,7 +26,7 @@ function JobPosting(props) {
   }
   async function getJopPosting(data) {
     const response = await axios.post(
-      "http://localhost:4000/recruiter-display/get-job-posting",
+      "https://gtj-server.onrender.com/recruiter-display/get-job-posting",
       data.queryKey[1]
     );
     return response.data;

@@ -21,7 +21,7 @@ function AuthProvider(props) {
     try {
       setLoading(true);
       const response = await axios.post(
-        'http://localhost:4000/auth/login',
+        'https://gtj-server.onrender.com/auth/login',
         data
       );
       const token = response.data.token;

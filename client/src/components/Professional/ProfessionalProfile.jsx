@@ -52,7 +52,7 @@ export function ProfessionalProfile() {
 
   const getProfProfile = async () => {
     const response = await axios.get(
-      `http://localhost:4000/pro/${state.userID}`
+      `https://gtj-server.onrender.com/pro/${state.userID}`
     );
     // console.log(state.userID);
     const isoDate = response.data.data.birthdate;
@@ -140,7 +140,7 @@ export function ProfessionalProfile() {
 
       // Make a PUT request to update the profile data
       await axios.put(
-        `http://localhost:4000/pro/${state.userID}`,
+        `https://gtj-server.onrender.com/pro/${state.userID}`,
         updatedProfileData
       );
 

@@ -34,7 +34,7 @@ const ChangePass = ({ email, setPage }) => {
     }
     if (newPassword === confirmPassword) {
       try {
-        await axios.put('http://localhost:4000/auth/password', {
+        await axios.put('https://gtj-server.onrender.com/auth/password', {
           newPassword,
           email,
         });

@@ -15,7 +15,7 @@ export const Following = () => {
     setIsLoading(true);
     try {
       const followedJobFetched = await axios.get(
-        'http://localhost:4000/pro/followedJobs',
+        'https://gtj-server.onrender.com/pro/followedJobs',
         {
           params: { userID: userID },
         }

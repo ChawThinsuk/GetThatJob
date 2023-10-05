@@ -8,7 +8,7 @@ export const HomepageAdmin = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<AdminChat />} />
+        {/* <Route path="/" element={<AdminChat />} /> */}
       </Routes>
     </>
   );

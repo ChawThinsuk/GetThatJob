@@ -34,7 +34,7 @@ export const HomepageRecruiter = () => {
             <Route path="/history" element={<History />} />
           </Routes>
         </div>
-        <HelpButton email={state.email} />
+        {/* <HelpButton email={state.email} /> */}
       </RecruiterProvider>
     </>
   );

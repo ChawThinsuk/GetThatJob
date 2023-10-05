@@ -25,7 +25,7 @@ export const HomepageProfessional = () => {
           <Route path="*" element={<FindThatJob />} />
         </Routes>
       </div>
-      <HelpButton email={state.email} />
+      {/* <HelpButton email={state.email} /> */}
     </>
   );
 };

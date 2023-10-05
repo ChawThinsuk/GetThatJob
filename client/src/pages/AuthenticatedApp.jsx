@@ -11,7 +11,7 @@ function AuthenticatedApp() {
     <div className="App flex flex-col relative">
       {state.userType === "PROFESSIONAL" && <HomepageProfessional />}
       {state.userType === "RECRUITER" && <HomepageRecruiter />}
-      {state.userType === "ADMIN" && <HomepageAdmin />}
+      {/* {state.userType === "ADMIN" && <HomepageAdmin />} */}
     </div>
   );
 }

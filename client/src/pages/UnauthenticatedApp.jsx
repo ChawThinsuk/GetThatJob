@@ -17,7 +17,7 @@ function UnauthenticatedApp() {
         <Route path='/admin' element={<AdminLoginPage />} />
         <Route path='*' element={<LoginPage />} />
       </Routes>
-      <HelpButton/>
+      {/* <HelpButton/> */}
     </div>
   );
 }
